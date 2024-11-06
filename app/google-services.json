@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "169083784363",
+    "project_id": "azalea-fde19",
+    "storage_bucket": "azalea-fde19.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169083784363:android:00770520eb74f1776f7bee",
+        "android_client_info": {
+          "package_name": "es.ucm.fdi.azalea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbtJmOgU9aJS_O4LMgyjirEGPv9kzj8mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
