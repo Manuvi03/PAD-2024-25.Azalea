@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="Seashell">#FFE4E1</color>
+    <color name="Misty_Rose">#F3D2D2</color>
+    <color name="Orchid_Pink">#EFBBC3</color>
+    <color name="Tickle_me_Pink">#E68DA4</color>
+    <color name="Cyclomen">#E86B94</color>
+    <color name="French_Rose">#E94984</color>
+    <color name="Dogwood_Rose">#C22E66</color>
+    <color name="Amaranth_Purple">#9B1347</color>
+    <color name="Tyrian_Purple">#6D1638</color>
+    <color name="Dark_Purple">#3E1929</color>
 </resources>
