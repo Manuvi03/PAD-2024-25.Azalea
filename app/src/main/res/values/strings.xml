@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Azalea</string>
+    <!-- separacion entre los distintos strings de las clases-->
 </resources>
