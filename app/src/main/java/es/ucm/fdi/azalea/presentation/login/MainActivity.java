@@ -1,4 +1,4 @@
- package es.ucm.fdi.azalea.view;
+ package es.ucm.fdi.azalea.presentation.login;
 
 import android.os.Bundle;
 
