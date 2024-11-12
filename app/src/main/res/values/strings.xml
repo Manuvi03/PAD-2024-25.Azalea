@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Azalea</string>
-    <string name="username_hint">Correo</string>
+    <string name="app_name_mayus" translatable="false">AZALEA</string>
+    <string name="username_hint">Correo electrónico</string>
     <string name="password_hint">Contraseña</string>
     <string name="button_login_text">Iniciar sesión</string>
+    <string name="recover_password"><u>¿Has olvidado tu contraseña?</u></string>
+    <string name="create_teacher_text">¿No tienes cuenta de profesor?</string>
+    <string name="create_button">Crear</string>
     <!-- separacion entre los distintos strings de las clases-->
 </resources>
