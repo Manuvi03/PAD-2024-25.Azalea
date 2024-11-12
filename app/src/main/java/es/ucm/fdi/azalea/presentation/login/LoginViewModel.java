@@ -1,4 +1,6 @@
 package es.ucm.fdi.azalea.presentation.login;
 
-public class LoginViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class LoginViewModel extends ViewModel {
 }

@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.integration.model;
+package es.ucm.fdi.azalea.business.Repositories;
 
 import android.util.Log;
 
@@ -10,10 +10,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import es.ucm.fdi.azalea.business.Subject;
+import es.ucm.fdi.azalea.business.model.Subject;
 
 // estoy probando el firebase database (ESPECIE DE DAO)
-public class SubjectModel {
+public class SubjectRepository {
 
     //(esta primera parte que genera la conexion a la BD habria que hacerla en otro lado)
     // puesto que la BD no es la predeterminada por Firebase (esta se encuentra en Belgica), hay que pasar la URL
@@ -33,18 +33,18 @@ public class SubjectModel {
             // hay que imaginarse el JSON como un arbol de rutas y atributos(?)
             subjectReference.child(key).setValue(subject);
         }
-        Log.d("SubjectModel", "Subject created with key: " + key);
+        Log.d("SubjectRepository", "Subject created with key: " + key);
         return key;
     }
 
     public void delete(String subjectId){
         subjectReference.child(subjectId).removeValue();
-        Log.d("SubjectModel", "Subject removed");
+        Log.d("SubjectRepository", "Subject removed");
     }
 
     public void update(String subjectId, Subject updatedSubject){
         subjectReference.child(subjectId).setValue(updatedSubject);
-        Log.d("SubjectModel", "Subject updated");
+        Log.d("SubjectRepository", "Subject updated");
     }
 
     public void readAll(){
@@ -54,13 +54,13 @@ public class SubjectModel {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 Subject value = dataSnapshot.getValue(Subject.class);
-                Log.d("SubjectModel", "Value is: " + value); // no consigo transformar en info legible
+                Log.d("SubjectRepository", "Value is: " + value); // no consigo transformar en info legible
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
-                Log.w("SubjectModel", "Failed to read value.", error.toException());
+                Log.w("SubjectRepository", "Failed to read value.", error.toException());
             }
         });
     }

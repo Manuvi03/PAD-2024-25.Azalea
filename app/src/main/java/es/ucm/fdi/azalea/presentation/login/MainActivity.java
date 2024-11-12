@@ -9,8 +9,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import es.ucm.fdi.azalea.R;
-import es.ucm.fdi.azalea.business.Subject;
-import es.ucm.fdi.azalea.integration.model.SubjectModel;
+import es.ucm.fdi.azalea.business.model.Subject;
+import es.ucm.fdi.azalea.business.Repositories.SubjectRepository;
 
  public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ import es.ucm.fdi.azalea.integration.model.SubjectModel;
         Subject subject2 = new Subject("PE");
         Subject modifiedSubject = new Subject("English");
 
-        SubjectModel sm = new SubjectModel();
+        SubjectRepository sm = new SubjectRepository();
 
         String key1 = sm.create(subject1);
         String key2 = sm.create(subject2);

@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.business;
+package es.ucm.fdi.azalea.business.model;
 
 // estoy probando el firebase database (REALMENTE ESTO ES UN TRANSFER)
 public class Subject {
