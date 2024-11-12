@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+
+    // anyade el plugin de Gradle para los servicios de Google
     id("com.google.gms.google-services")
 }
 
