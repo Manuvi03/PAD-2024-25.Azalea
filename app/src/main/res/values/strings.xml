@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Azalea</string>
+    <string name="username_hint">Correo</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="button_login_text">Iniciar sesión</string>
     <!-- separacion entre los distintos strings de las clases-->
 </resources>
