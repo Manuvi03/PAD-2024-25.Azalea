@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.presentation.passwordRecovery;
+package es.ucm.fdi.azalea.presentation.passwordrecovery;
 
 import androidx.appcompat.app.AppCompatActivity;
 
