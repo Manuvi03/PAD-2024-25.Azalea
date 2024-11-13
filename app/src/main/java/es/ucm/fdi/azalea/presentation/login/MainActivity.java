@@ -33,6 +33,7 @@ import es.ucm.fdi.azalea.business.Repositories.SubjectRepository;
 
         start_animations();
 
+        /*
         // estoy probando el firebase database
         Subject subject1 = new Subject("Maths");
         Subject subject2 = new Subject("PE");
@@ -54,7 +55,7 @@ import es.ucm.fdi.azalea.business.Repositories.SubjectRepository;
         sm.delete(key2);
 
         // todos estos mensajes salen por consola
-        sm.readAll();
+        sm.readAll();*/
 
 
     }
