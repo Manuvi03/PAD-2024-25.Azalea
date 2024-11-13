@@ -8,7 +8,7 @@
     android:background="@color/Misty_Rose"
     tools:context=".presentation.login.MainActivity">
 
-    <EditText
+     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
