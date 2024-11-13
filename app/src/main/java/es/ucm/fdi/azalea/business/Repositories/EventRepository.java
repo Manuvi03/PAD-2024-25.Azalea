@@ -1,5 +1,40 @@
 package es.ucm.fdi.azalea.business.Repositories;
 
+import java.util.Collections;
+import java.util.List;
+
+import es.ucm.fdi.azalea.business.model.EventModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
+
+public class EventRepository implements Repository<EventModel>{
+    @Override
+    public String create(EventModel item) {
+        return "";
+    }
+
+    @Override
+    public EventModel findById(int id) {
+        return null;
+    }
+
+    @Override
+    public String update(EventModel item) {
+        return "";
+    }
+
+    @Override
+    public String delete(int id) {
+        return "";
+    }
+
+    @Override
+    public List<EventModel> readAll() {
+        return Collections.emptyList();
+    }
+}
+/*
+package es.ucm.fdi.azalea.business.Repositories;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,8 +44,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import es.ucm.fdi.azalea.business.model.Subject;
 
 // estoy probando el firebase database (ESPECIE DE DAO)
 public class SubjectRepository {
@@ -23,7 +56,7 @@ public class SubjectRepository {
     private DatabaseReference subjectReference = database.getReference("subject");
 
     //(CRUD como si fuera un DAO)
-    public String create(Subject subject){
+    public String create(SubjectModel subject){
         // el push crea el hijo con una key automatica
         String key = subjectReference.push().getKey();
         if(key != null){
@@ -42,7 +75,7 @@ public class SubjectRepository {
         Log.d("SubjectRepository", "Subject removed");
     }
 
-    public void update(String subjectId, Subject updatedSubject){
+    public void update(String subjectId, SubjectModel updatedSubject){
         subjectReference.child(subjectId).setValue(updatedSubject);
         Log.d("SubjectRepository", "Subject updated");
     }
@@ -53,7 +86,7 @@ public class SubjectRepository {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                Subject value = dataSnapshot.getValue(Subject.class);
+                SubjectModel value = dataSnapshot.getValue(SubjectModel.class);
                 Log.d("SubjectRepository", "Value is: " + value); // no consigo transformar en info legible
             }
 
@@ -65,3 +98,6 @@ public class SubjectRepository {
         });
     }
 }
+
+
+ */

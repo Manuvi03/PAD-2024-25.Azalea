@@ -15,8 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import es.ucm.fdi.azalea.R;
-import es.ucm.fdi.azalea.business.model.Subject;
-import es.ucm.fdi.azalea.business.Repositories.SubjectRepository;
 
  public class MainActivity extends AppCompatActivity {
 
