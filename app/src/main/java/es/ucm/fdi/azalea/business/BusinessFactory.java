@@ -20,7 +20,6 @@ public abstract class BusinessFactory {
     }
 
     public abstract Repository<StudentModel> getStudentRepository();
-    public abstract Repository<UserModel> getAuthRepository();
     public abstract Repository<EventModel> EventRepository();
     public abstract Repository<MessageModel> getMessageRepository();
     public abstract Repository<ChatModel> getChatRepository();

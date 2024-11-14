@@ -7,5 +7,6 @@
     <string name="recover_password"><u>¿Has olvidado tu contraseña?</u></string>
     <string name="create_teacher_text">¿No tienes cuenta de profesor?</string>
     <string name="create_button">Crear</string>
+    <string name="login_error">No se ha podido iniciar sesión, mail o constraseña erróneos</string>
     <!-- separacion entre los distintos strings de las clases-->
 </resources>

@@ -7,4 +7,5 @@
     <string name="recover_password"><u>Do you forget your password?</u></string>
     <string name="create_teacher_text">Don\'t have a teacher account?</string>
     <string name="create_button">Create</string>
+    <string name="login_error">Log In failed, Incorrect username or password</string>
 </resources>

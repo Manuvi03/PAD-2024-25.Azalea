@@ -3,31 +3,24 @@ package es.ucm.fdi.azalea.business.Repositories;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import es.ucm.fdi.azalea.business.model.UserModel;
 
-public class AuthRepository implements Repository<UserModel> {
-    @Override
-    public String create(UserModel item) {
-        return "";
+public class AuthRepository  {
+
+
+    public Task<AuthResult> login(String mail, String password){
+       return  FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password);
     }
 
-    @Override
-    public UserModel findById(int id) {
-        return null;
+    public Task<AuthResult> register(String mail, String password){
+        return  FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail,password);
     }
 
-    @Override
-    public String update(UserModel item) {
-        return "";
-    }
-
-    @Override
-    public String delete(int id) {
-        return "";
-    }
-
-    @Override
-    public List<UserModel> readAll() {
-        return Collections.emptyList();
+    public void logout(){
+        FirebaseAuth.getInstance().signOut();
     }
 }

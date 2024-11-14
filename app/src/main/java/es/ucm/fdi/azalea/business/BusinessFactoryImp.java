@@ -21,11 +21,6 @@ public class BusinessFactoryImp extends BusinessFactory{
     }
 
     @Override
-    public Repository<UserModel> getAuthRepository() {
-        return new AuthRepository();
-    }
-
-    @Override
     public Repository<EventModel> EventRepository() {
         return new EventRepository();
     }
