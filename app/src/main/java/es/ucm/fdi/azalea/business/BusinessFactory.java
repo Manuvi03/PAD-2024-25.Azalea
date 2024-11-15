@@ -24,4 +24,5 @@ public abstract class BusinessFactory {
     public abstract Repository<MessageModel> getMessageRepository();
     public abstract Repository<ChatModel> getChatRepository();
     public abstract Repository<ClassRoomModel> getClassRoomRepository();
+    public abstract Repository<UserModel> getUserRepository();
 }

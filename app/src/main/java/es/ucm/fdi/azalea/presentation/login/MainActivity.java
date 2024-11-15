@@ -2,6 +2,7 @@
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
@@ -19,9 +20,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import es.ucm.fdi.azalea.R;
+import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
 
  public class MainActivity extends AppCompatActivity {
+
+     private final static String TAG = "MainActivity";
 
      private LoginViewModel loginViewModel;
      private EditText mailEditText;
@@ -90,6 +94,15 @@ import es.ucm.fdi.azalea.integration.Event;
             }else if(event instanceof Event.Success){
                 //TODO logica de cambiar de vista, dependiendo de si el usuario es profesor o padre tendra que cambiar de vista, para hacer
                 //TODO esto deberia leer el usuario de la base de datos con el uid de la clase user de Firebase y leer el booleano de la bd
+                Log.d(TAG,"el usuario ha iniciado sesion correctamente");
+                UserModel userdata = ((Event.Success<UserModel>) event).getData();
+                if(userdata.getParent()){
+                    Log.d(TAG, "el usuario es padre");
+                }
+                else{
+                    Log.d(TAG, "el usuario es profesor");
+                }
+
             }else if(event instanceof Event.Error){
                 //muestra un toast de error (se puede cambiar en un futuro)
                 Toast.makeText(this,R.string.login_error,Toast.LENGTH_LONG).show();

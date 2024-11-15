@@ -13,7 +13,7 @@ import es.ucm.fdi.azalea.integration.loginUseCase;
 public class LoginViewModel extends ViewModel {
     private final loginUseCase login_integration;
     //En este caso el evento solo trae un booleano que indica si se ha podido iniciar sesion o no
-    private final MutableLiveData<Event<Boolean>> loginEvent;
+    private final MutableLiveData<Event<UserModel>> loginEvent;
 
     public LoginViewModel(){
         //inicializo el caso de uso en el propio viewModel pero tambien lo podemos hacer con factorías y reducimos las dependencias
@@ -21,7 +21,7 @@ public class LoginViewModel extends ViewModel {
         loginEvent = new MutableLiveData<>();
     }
     //el mutableLiveData se devuelve bajo la interfaz LiveData
-    public LiveData<Event<Boolean>> getLoginEvent(){
+    public LiveData<Event<UserModel>> getLoginEvent(){
         return loginEvent;
     }
 
@@ -29,7 +29,7 @@ public class LoginViewModel extends ViewModel {
         loginEvent.setValue(new Event.Loading<>());
 
 
-        Event<Boolean> result = login_integration.logIn(mail,password);
+        Event<UserModel> result = login_integration.logIn(mail,password);
         loginEvent.postValue(result);
     }
 
