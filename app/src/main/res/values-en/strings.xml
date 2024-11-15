@@ -28,6 +28,10 @@
     <string name="login_recover_password"><u>Do you forget your password?</u></string>
     <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
     <string name="login_create_button">Create</string>
+    <string name="teacher_navbar_home_text">Home</string>
+    <string name="teacher_navbar_students_text">Students</string>
+    <string name="teacher_navbar_chat_text">Chat</string>
+    <string name="teacher_navbar_reminders_text">Reminders</string>
 
     <!--Parent-->
     <!--PasswordRecovery-->

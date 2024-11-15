@@ -37,4 +37,9 @@
     <!--ShowGrades-->
     <!--Student-->
     <!--Teacher-->
+    <string name="teacher_navbar_home_text">Inicio</string>
+    <string name="teacher_navbar_students_text">Alumnos</string>
+    <string name="teacher_navbar_chat_text">Mensajes</string>
+    <string name="teacher_navbar_reminders_text">Recordatorios</string>
+
 </resources>
