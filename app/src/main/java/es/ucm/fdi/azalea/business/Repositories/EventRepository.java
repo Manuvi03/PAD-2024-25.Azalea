@@ -13,7 +13,7 @@ public class EventRepository implements Repository<EventModel>{
     }
 
     @Override
-    public EventModel findById(int id) {
+    public EventModel findById(String id) {
         return null;
     }
 
@@ -23,7 +23,7 @@ public class EventRepository implements Repository<EventModel>{
     }
 
     @Override
-    public String delete(int id) {
+    public String delete(String id) {
         return "";
     }
 

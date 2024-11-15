@@ -12,7 +12,7 @@ public class StudentRepository implements Repository<StudentModel> {
     }
 
     @Override
-    public StudentModel findById(int id) {
+    public StudentModel findById(String id) {
         return null;
     }
 
@@ -22,7 +22,7 @@ public class StudentRepository implements Repository<StudentModel> {
     }
 
     @Override
-    public String delete(int id) {
+    public String delete(String id) {
         return "";
     }
 

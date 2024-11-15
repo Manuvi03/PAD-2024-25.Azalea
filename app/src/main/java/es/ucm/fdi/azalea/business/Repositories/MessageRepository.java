@@ -12,7 +12,7 @@ public class MessageRepository implements Repository<MessageModel> {
     }
 
     @Override
-    public MessageModel findById(int id) {
+    public MessageModel findById(String id) {
         return null;
     }
 
@@ -22,7 +22,7 @@ public class MessageRepository implements Repository<MessageModel> {
     }
 
     @Override
-    public String delete(int id) {
+    public String delete(String id) {
         return "";
     }
 
