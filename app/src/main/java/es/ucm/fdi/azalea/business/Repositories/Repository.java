@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface Repository<T> {
     public String create(T item);
-    public T findById(int id);
+    public T findById(String id);
     public String update(T item);
-    public String delete(int id);
+    public String delete(String id);
     public List<T> readAll();
 }

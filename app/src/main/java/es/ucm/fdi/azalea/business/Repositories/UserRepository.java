@@ -13,7 +13,7 @@ public class UserRepository implements Repository<UserModel> {
     }
 
     @Override
-    public UserModel findById(int id) {
+    public UserModel findById(String id) {
         return null;
     }
 
@@ -23,7 +23,7 @@ public class UserRepository implements Repository<UserModel> {
     }
 
     @Override
-    public String delete(int id) {
+    public String delete(String id) {
         return "";
     }
 

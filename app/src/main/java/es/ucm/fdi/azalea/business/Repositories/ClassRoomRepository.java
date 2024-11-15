@@ -13,7 +13,7 @@ public class ClassRoomRepository implements Repository<ClassRoomModel>{
     }
 
     @Override
-    public ClassRoomModel findById(int id) {
+    public ClassRoomModel findById(String id) {
         return null;
     }
 
@@ -23,7 +23,7 @@ public class ClassRoomRepository implements Repository<ClassRoomModel>{
     }
 
     @Override
-    public String delete(int id) {
+    public String delete(String id) {
         return "";
     }
 

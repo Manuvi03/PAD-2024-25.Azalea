@@ -12,7 +12,7 @@ public class ChatRepository implements Repository<ChatModel>{
     }
 
     @Override
-    public ChatModel findById(int id) {
+    public ChatModel findById(String id) {
         return null;
     }
 
@@ -22,7 +22,7 @@ public class ChatRepository implements Repository<ChatModel>{
     }
 
     @Override
-    public String delete(int id) {
+    public String delete(String id) {
         return "";
     }
 
