@@ -21,37 +21,37 @@ import es.ucm.fdi.azalea.business.model.UserModel;
 public class UserRepository implements Repository<UserModel> {
 
     private final static String TAG = "UserRepository";
-
+    private UserModel userdata;
     private FirebaseDatabase database = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/");
-    private DatabaseReference subjectReference = database.getReference("users");
+    private DatabaseReference usersReference = database.getReference("users");
 
     @Override
     public String create(UserModel item) {
-        String key = subjectReference.push().getKey();
-        if(key != null){
 
-            subjectReference.child(key).setValue(item);
-        }
-        Log.d(TAG, "User created with key: " + key);
-        return key;
+
+        usersReference.child(item.getId()).setValue(item);
+        Log.d(TAG, "User created with key: " + item.getId());
+        return item.getId();
     }
 
     @Override
     public UserModel findById(String id) {
-
-        subjectReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        userdata = null;
+        usersReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(!task.isSuccessful()){
                     Log.d(TAG,"Error recuperando los datos",task.getException());
+
                 }
                 else {
                     Log.d(TAG,String.valueOf(task.getResult().getValue()));
+                    userdata = task.getResult().getValue(UserModel.class);
                 }
             }
         });
 
-        return null;
+        return userdata;
     }
 
     @Override
