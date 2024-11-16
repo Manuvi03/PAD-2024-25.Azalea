@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/teacher_navbar_home"
+        android:title="@string/teacher_navbar_home_text"
+        android:icon="@drawable/navigation_bar_home"
+        />
+
+    <item
+        android:id="@+id/teacher_navbar_students"
+        android:title="@string/teacher_navbar_students_text"
+        android:icon="@drawable/navigation_bar_students"
+        />
+
+    <item
+        android:id="@+id/teacher_navbar_chat"
+        android:title="@string/teacher_navbar_chat_text"
+        android:icon="@drawable/navigation_bar_chat"
+        />
+
+    <item
+        android:id="@+id/teacher_navbar_reminders"
+        android:title="@string/teacher_navbar_reminders_text"
+        android:icon="@drawable/navigation_bar_reminders"
+        />
+
+</menu>
