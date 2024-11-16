@@ -15,13 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 
 public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdapter.ViewHolder>{
 
+    // atributps
     private List<StudentModel> mStudentsData;
+    private final LayoutInflater mInflater;
 
-    public ClassroomListAdapter(List<StudentModel> studentInfoList) {
+    public ClassroomListAdapter(List<StudentModel> studentInfoList, Context context) {
+        this.mInflater = LayoutInflater.from(context);
         this.mStudentsData = studentInfoList;
     }
 
@@ -33,9 +37,8 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // infla el layout para cada elemento de la vista
-        StudentElementBinding s = StudentElementBinding.inflate(LayoutInflater
-                .from(parent.getContext()), parent, false);
-        return new ViewHolder(s);
+        View view = mInflater.inflate(R.layout.teacher_classroom_list_element, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -54,11 +57,12 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
 
         // CONFIGURAR LA IMAGEN DE ALGUNA FORMA QUE SEA LA PRIMERA LETRA DEL NOMBRE
 
+        /*
         // listener para acceder a la informacion de cada alumno, abriendo el nuevo Fragment
         holder.itemView.setOnClickListener(view -> {
             findNavController().navigate(R.id.action...);
             view.getContext().startActivity(intent);
-        });
+        });*/
     }
 
     @Override
@@ -72,10 +76,10 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
         ImageView profileImage;
         TextView name;
 
-        public ViewHolder(StudentElementBinding itemView) {
-            super(itemView.getRoot());
-            profileImage = itemView.profile_image;
-            name = itemView.name;
+        public ViewHolder(View view) {
+            super(view);
+            profileImage = view.findViewById(R.id.teacher_classroom_student_image);
+            name = view.findViewById(R.id.teacher_classroom_student_name);
         }
     }
 }

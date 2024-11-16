@@ -3,15 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Misty_Rose">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/teacher_classroom_info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CLASE CON ALUMNOS"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_searchview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teacher_classroom_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="325dp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_add_student"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_loading_text" />
+
+    <SearchView
+        android:id="@+id/teacher_classroom_searchview"
+        android:layout_width="179dp"
+        android:layout_height="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_loading_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_info_text" />
+
+    <TextView
+        android:id="@+id/teacher_classroom_loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_recyclerview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_searchview" />
+
+    <Button
+        android:id="@+id/teacher_classroom_add_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_recyclerview" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

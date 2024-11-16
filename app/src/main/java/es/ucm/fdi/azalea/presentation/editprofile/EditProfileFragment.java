@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.presentation.teacher;
+package es.ucm.fdi.azalea.presentation.editprofile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,17 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import es.ucm.fdi.azalea.R;
 
-public class TeacherHomeFragment extends Fragment {
+public class EditProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
-        View view = inflater.inflate(R.layout.teacher_home_fragment, container, false);
+        View view = inflater.inflate(R.layout.edit_profile_fragment, container, false);
         return view;
     }
 

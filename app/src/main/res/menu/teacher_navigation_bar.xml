@@ -8,21 +8,15 @@
         />
 
     <item
-        android:id="@+id/teacher_navbar_students"
-        android:title="@string/teacher_navbar_students_text"
+        android:id="@+id/teacher_navbar_classroom"
+        android:title="@string/teacher_navbar_classroom_text"
         android:icon="@drawable/navigation_bar_students"
         />
 
     <item
-        android:id="@+id/teacher_navbar_chat"
-        android:title="@string/teacher_navbar_chat_text"
-        android:icon="@drawable/navigation_bar_chat"
-        />
-
-    <item
-        android:id="@+id/teacher_navbar_reminders"
-        android:title="@string/teacher_navbar_reminders_text"
-        android:icon="@drawable/navigation_bar_reminders"
+        android:id="@+id/teacher_navbar_profile"
+        android:title="@string/teacher_navbar_profile"
+        android:icon="@drawable/navigation_bar_profile"
         />
 
 </menu>

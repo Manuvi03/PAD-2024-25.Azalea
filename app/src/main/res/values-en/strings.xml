@@ -4,6 +4,9 @@
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
+    <string name="classroom_loading_string">Loading...</string>
+    <string name="classroom_no_students_string">No students</string>
+
     <!--CreateTeacher-->
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
@@ -28,15 +31,16 @@
     <string name="login_recover_password"><u>Do you forget your password?</u></string>
     <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
     <string name="login_create_button">Create</string>
-    <string name="teacher_navbar_home_text">Home</string>
-    <string name="teacher_navbar_students_text">Students</string>
-    <string name="teacher_navbar_chat_text">Chat</string>
-    <string name="teacher_navbar_reminders_text">Reminders</string>
 
     <!--Parent-->
     <!--PasswordRecovery-->
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->
+
     <!--Teacher-->
+    <string name="teacher_navbar_home_text">Home</string>
+    <string name="teacher_navbar_classroom_text">Classroom</string>
+    <string name="teacher_navbar_profile">Profile</string>
+
 </resources>
