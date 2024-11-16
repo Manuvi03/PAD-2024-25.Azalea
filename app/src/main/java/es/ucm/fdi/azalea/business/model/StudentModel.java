@@ -11,11 +11,14 @@ public class StudentModel {
     private String medicalConditions;
     private String allergens;
     private List<String> subjects;
+    private String classroomId;
+    private String parentId;
 
     public StudentModel(){}
 
     public StudentModel(List<String> subjects, String allergens, String medicalConditions,
-                        double height, double weight, String surnames, String name, String id) {
+                        double height, double weight, String surnames, String name,
+                        String classroomId, String parentId) {
         this.subjects = subjects;
         this.allergens = allergens;
         this.medicalConditions = medicalConditions;
@@ -23,7 +26,8 @@ public class StudentModel {
         this.weight = weight;
         this.surnames = surnames;
         this.name = name;
-        this.id = id;
+        this.classroomId = classroomId;
+        this.parentId = parentId;
     }
 
     public List<String> getSubjects() {
@@ -46,9 +50,7 @@ public class StudentModel {
         return medicalConditions;
     }
 
-    public void setMedicalConditions(String medicalConditions) {
-        this.medicalConditions = medicalConditions;
-    }
+    public void setMedicalConditions(String medicalConditions) { this.medicalConditions = medicalConditions;}
 
     public double getHeight() {
         return height;
@@ -89,4 +91,12 @@ public class StudentModel {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getClassroomId() { return classroomId; }
+
+    public void setClassroomId(String classroomId) { this.classroomId = classroomId; }
+
+    public String getParentId() { return parentId; }
+
+    public void setParentId(String parentId) { this.parentId = parentId; }
 }

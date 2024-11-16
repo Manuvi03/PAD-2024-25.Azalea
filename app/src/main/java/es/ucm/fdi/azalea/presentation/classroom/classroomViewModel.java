@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.fdi.azalea.business.model.StudentModel;
@@ -13,14 +12,16 @@ import es.ucm.fdi.azalea.integration.ReadStudentsByClassRoomUseCase;
 
 public class classroomViewModel extends ViewModel {
 
-    private MutableLiveData<List<StudentModel>> studentsState = new MutableLiveData<>(new ArrayList<StudentModel>());
+    private MutableLiveData<Event<List<StudentModel>>> studentsState;
 
-    public LiveData<List<StudentModel>> getStudentsState(){
+    public LiveData<Event<List<StudentModel>>> getStudentsState(){
         return studentsState;
     }
 
-    public <T> void readStudentsByClassroom(){
+    public <T> void readStudentsByClassroom(String classroomId){
+        //studentsState.setValue(new Event.Loading<>());
         ReadStudentsByClassRoomUseCase useCase = new ReadStudentsByClassRoomUseCase();
-        Event<T> event = useCase.readStudentsByClassRoomUseCase();
+        Event<List<StudentModel>> result = useCase.readStudentsByClassRoomUseCase(classroomId);
+        //studentsState.postValue(result);
     }
 }

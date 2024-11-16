@@ -57,10 +57,11 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
 
         // CONFIGURAR LA IMAGEN DE ALGUNA FORMA QUE SEA LA PRIMERA LETRA DEL NOMBRE
 
+
         /*
         // listener para acceder a la informacion de cada alumno, abriendo el nuevo Fragment
         holder.itemView.setOnClickListener(view -> {
-            findNavController().navigate(R.id.action...);
+
             view.getContext().startActivity(intent);
         });*/
     }
