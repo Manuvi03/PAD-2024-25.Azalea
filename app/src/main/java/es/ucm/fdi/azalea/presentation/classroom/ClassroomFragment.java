@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,15 +55,14 @@ public class ClassroomFragment extends Fragment {
         classroomViewModel classroomViewModel = new ViewModelProvider(this).get(classroomViewModel.class);
         classroomViewModel.readStudentsByClassroom("2");
 
-        // se inicializa el observador
-        classroomViewModel.getStudentsState().observe(getActivity(), studentsState ->{
-
-            if(studentsState instanceof Event.Loading){
+        // se declara el observador del recyclerview
+        final Observer<Event<List<StudentModel>>> studentsStateObserver = listEvent -> {
+            if(listEvent instanceof Event.Loading){
 
             }
-            else if(studentsState instanceof Event.Success){
+            else if(listEvent instanceof Event.Success){
                 // se obtiene la info
-                List<StudentModel> students = ((Event.Success<List<StudentModel>>) studentsState).getData();
+                List<StudentModel> students = ((Event.Success<List<StudentModel>>) listEvent).getData();
 
                 // actualiza la lista de datos en el adaptador
                 resultText.setText(R.string.classroom_loading_string);
@@ -74,13 +74,14 @@ public class ClassroomFragment extends Fragment {
                 // notifica al recycler view el cambio de datos
                 classroomAdapter.notifyDataSetChanged();
             }
-            else if(studentsState instanceof Event.Error){
+            else if(listEvent instanceof Event.Error){
                 //muestra un toast de error (se puede cambiar en un futuro)
                 Toast.makeText(getActivity(),R.string.classroom_no_students_string,Toast.LENGTH_LONG).show();
             }
+        };
 
-        });
-
+        // se inicializa el observador
+        classroomViewModel.getStudentsState().observe(getViewLifecycleOwner(), studentsStateObserver);
         return view;
     }
 

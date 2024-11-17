@@ -14,7 +14,7 @@ public class ReadStudentsByClassRoomUseCase {
     public Event<List<StudentModel>> readStudentsByClassRoomUseCase(String classroomId){
         try{
             // se obtiene la lista de estudiantes
-            List<StudentModel> list = new ArrayList<>();
+            List<StudentModel> list;
             list = BusinessFactory.getInstance().getStudentRepository().readByClassRoomId(classroomId);
             Log.d("ReadStudentsByClassRoomUseCase", "Alumnos de la clase " + classroomId + " leidos correctamente");
             return new Event.Success<>(list);

@@ -15,6 +15,9 @@ public class classroomViewModel extends ViewModel {
     private MutableLiveData<Event<List<StudentModel>>> studentsState;
 
     public LiveData<Event<List<StudentModel>>> getStudentsState(){
+        if (studentsState == null) {
+            studentsState = new MutableLiveData<>();
+        }
         return studentsState;
     }
 
@@ -22,6 +25,6 @@ public class classroomViewModel extends ViewModel {
         //studentsState.setValue(new Event.Loading<>());
         ReadStudentsByClassRoomUseCase useCase = new ReadStudentsByClassRoomUseCase();
         Event<List<StudentModel>> result = useCase.readStudentsByClassRoomUseCase(classroomId);
-        //studentsState.postValue(result);
+        studentsState.postValue(result);
     }
 }
