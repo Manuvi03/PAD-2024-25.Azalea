@@ -29,8 +29,24 @@ public class LoginViewModel extends ViewModel {
         loginEvent.setValue(new Event.Loading<>());
 
 
-        Event<UserModel> result = login_integration.logIn(mail,password);
+       login_integration.logIn(mail,password,new loginUseCase.CallBack(){
+
+           @Override
+           public void onSuccess(Event.Success<UserModel> success) {
+               loginEvent.postValue(success);
+           }
+
+           @Override
+           public void onError(Event.Error<UserModel> error) {
+               loginEvent.postValue(error);
+           }
+       });
+
+    }
+
+    public void handleLogin(Event<UserModel> result){
         loginEvent.postValue(result);
     }
+
 
 }

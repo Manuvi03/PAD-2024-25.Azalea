@@ -13,14 +13,18 @@ public class loginUseCase {
     private final static String TAG = "loginUseCase";
 
     private final AuthRepository authRepository;
-    private Event<UserModel> evento;
     public loginUseCase(){
         authRepository = new AuthRepository();
     }
 
     // la clase task de la api firebase ya gestiona ttodo lo que es acceso al repositorio
 
-    public Event<UserModel> logIn(String mail, String password){
+    public interface CallBack{
+        public void onSuccess(Event.Success<UserModel> success);
+        public void onError(Event.Error<UserModel> error);
+    }
+
+    public void logIn(String mail, String password, CallBack callback){
 
         try{
 
@@ -44,29 +48,25 @@ public class loginUseCase {
                     BusinessFactory.getInstance().getUserRepository().create(nuevoUser);
                     UserModel userdata = BusinessFactory.getInstance().getUserRepository().
                             findById(result.getResult().getUser().getUid());
-                    evento = new Event.Success<UserModel>(userdata) ;
+                    callback.onSuccess( new Event.Success<UserModel>(userdata));
 
                 } else {
                     //cogemos la excepcion de Task
                     Log.d("loginUseCase","error al iniciar sesion " +
                             result.getResult().toString());
-                    evento = new Event.Error<>(result.getException());
+
+                    callback.onError(new Event.Error<>(result.getException()));
 
                 }
             });
-        }catch(Exception e){
-            Log.d("loginUseCase","excepcion al iniciar sesion " +
+        }catch(Exception e) {
+            Log.d("loginUseCase", "excepcion al iniciar sesion " +
                     e.toString());
-            return new Event.Error<>(e);
+            callback.onError(new Event.Error<>(e));
         }
-        //mientras autentifica el usuario devolvemos un evento que indica que esta cargando
-        return evento;
 
     }
 
-    public void businessLoginCallbacks(UserModel user){
-
-    }
 
 
 }
