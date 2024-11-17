@@ -64,4 +64,9 @@ public class loginUseCase {
 
     }
 
+    public void businessLoginCallbacks(UserModel user){
+
+    }
+
+
 }
