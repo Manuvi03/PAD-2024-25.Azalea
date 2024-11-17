@@ -44,9 +44,6 @@ public class LoginViewModel extends ViewModel {
 
     }
 
-    public void handleLogin(Event<UserModel> result){
-        loginEvent.postValue(result);
-    }
 
 
 }

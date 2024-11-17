@@ -42,7 +42,7 @@ public class BusinessFactoryImp extends BusinessFactory{
     }
 
     @Override
-    public Repository<UserModel> getUserRepository() {
+    public UserRepository getUserRepository() {
         return new UserRepository();
     }
 }

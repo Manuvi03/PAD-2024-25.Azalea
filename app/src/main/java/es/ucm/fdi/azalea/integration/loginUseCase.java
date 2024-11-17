@@ -40,30 +40,50 @@ public class loginUseCase {
             nuevoUser.setPassword("123456");
 
             task.addOnCompleteListener(result ->{
+                //hace falta hacer otro try catch dentro del listener para coger excepciones de
+                // otros hilos
+                try{
+                    if (result.isSuccessful()) {
+                        Log.d(TAG,"Se ha podido hacer el log In con el usuario " +
+                                mail + " y constrasenya " + password);
+                        nuevoUser.setId(result.getResult().getUser().getUid());
+                        BusinessFactory.getInstance().getUserRepository().create(nuevoUser);
+                        handleLogin(result.getResult().getUser().getUid(),callback);
 
-                if (result.isSuccessful()) {
-                    Log.d(TAG,"Se ha podido hacer el log In con el usuario " +
-                            mail + " y constrasenya " + password);
-                    nuevoUser.setId(result.getResult().getUser().getUid());
-                    BusinessFactory.getInstance().getUserRepository().create(nuevoUser);
-                    UserModel userdata = BusinessFactory.getInstance().getUserRepository().
-                            findById(result.getResult().getUser().getUid());
-                    callback.onSuccess( new Event.Success<UserModel>(userdata));
 
-                } else {
-                    //cogemos la excepcion de Task
-                    Log.d("loginUseCase","error al iniciar sesion " +
-                            result.getResult().toString());
+                    } else {
+                        //cogemos la excepcion de Task
+                        Log.d("loginUseCase","error al iniciar sesion " +
+                                result.getResult().toString());
 
-                    callback.onError(new Event.Error<>(result.getException()));
+                        callback.onError(new Event.Error<>(result.getException()));
 
+                    }
+                }catch(Exception e){
+                    callback.onError(new Event.Error<>(e));
                 }
+
             });
         }catch(Exception e) {
             Log.d("loginUseCase", "excepcion al iniciar sesion " +
                     e.toString());
             callback.onError(new Event.Error<>(e));
         }
+
+    }
+    private void handleLogin(String userUid,CallBack cb){
+        BusinessFactory.getInstance().getUserRepository().
+                findById(userUid,new CallBack(){
+
+                    @Override
+                    public void onSuccess(Event.Success<UserModel> success) {
+                        cb.onSuccess(success);                    }
+
+                    @Override
+                    public void onError(Event.Error<UserModel> error) {
+                        cb.onError(error);
+                    }
+                });
 
     }
 

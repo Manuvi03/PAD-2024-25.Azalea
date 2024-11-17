@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.business.Repositories;
 
 
+import android.telecom.Call;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -17,15 +18,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import es.ucm.fdi.azalea.business.model.UserModel;
+import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.integration.loginUseCase;
 
-public class UserRepository implements Repository<UserModel> {
+public class UserRepository {
 
     private final static String TAG = "UserRepository";
     private UserModel userdata;
     private FirebaseDatabase database = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/");
     private DatabaseReference usersReference = database.getReference("users");
 
-    @Override
+
     public String create(UserModel item) {
 
 
@@ -34,37 +37,37 @@ public class UserRepository implements Repository<UserModel> {
         return item.getId();
     }
 
-    @Override
-    public UserModel findById(String id) {
+
+    public void findById(String id, loginUseCase.CallBack cb) {
         userdata = null;
         usersReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(!task.isSuccessful()){
                     Log.d(TAG,"Error recuperando los datos",task.getException());
+                    cb.onError(new Event.Error<UserModel>(task.getException()));
 
                 }
                 else {
                     Log.d(TAG,String.valueOf(task.getResult().getValue()));
-                    userdata = task.getResult().getValue(UserModel.class);
+                    cb.onSuccess(new Event.Success<>(task.getResult().getValue(UserModel.class)));
                 }
             }
         });
 
-        return userdata;
     }
 
-    @Override
+
     public String update(UserModel item) {
         return "";
     }
 
-    @Override
+
     public String delete(String id) {
         return "";
     }
 
-    @Override
+
     public List<UserModel> readAll() {
         return Collections.emptyList();
     }
