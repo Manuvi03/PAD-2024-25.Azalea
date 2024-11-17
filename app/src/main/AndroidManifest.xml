@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Azalea"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.teacher.teacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.chat.chatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.reminder.reminderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.editprofile.EditProfileFragment"
+            android:exported="false" />
+        <activity
             android:name=".presentation.login.MainActivity"
             android:exported="true">
             <intent-filter>

@@ -1,12 +1,46 @@
 <resources>
-    <string name="app_name">Azalea</string>
+    <!--AddEvent-->
+    <!--AddStudent-->
+    <!--Chat-->
+    <!--Classroom-->
+    <string name="classroom_loading_string">Cargando...</string>
+    <string name="classroom_no_students_string">No hay estudiantes</string>
+
+    <!--CreateTeacher-->
+    <string name="createteacher_titleView">¡Bienvenid@ Profe!</string>
+    <string name="createteacher_nameText">Nombre</string>
+    <string name="createteacher_surnameText">Apellidos</string>
+    <string name="createteacher_genderText">Género</string>
+    <string name="createteacher_emailText">Correo Electrónico</string>
+    <string name="createteacher_passwordText">Contraseña</string>
+    <string name="createteacher_ButtonCreateTeacherText">Crear cuenta de profesor</string>
+    <string name="createteacher_namehint">Tu nombre</string>
+    <string name="createteacher_surnameEditText">Tus apellidos</string>
+    <string name="createteacher_genderEditText">Tu género</string>
+    <string name="createteacher_emailEditText">Tu correo electrónico</string>
+    <string name="createteacher_passwordEditText">Tu contraseña</string>
+
+    <!--EditProfile-->
+    <!--EditStudent-->
+    <!--GradeSubject-->
+
+    <!--Login-->
+    <string name="app_name" translatable="false">Azalea</string>
     <string name="app_name_mayus" translatable="false">AZALEA</string>
-    <string name="username_hint">Correo electrónico</string>
-    <string name="password_hint">Contraseña</string>
-    <string name="button_login_text">Iniciar sesión</string>
-    <string name="recover_password"><u>¿Has olvidado tu contraseña?</u></string>
-    <string name="create_teacher_text">¿No tienes cuenta de profesor?</string>
-    <string name="create_button">Crear</string>
-    <string name="login_error">No se ha podido iniciar sesión, mail o constraseña erróneos</string>
-    <!-- separacion entre los distintos strings de las clases-->
+    <string name="login_username_hint">Correo electrónico</string>
+    <string name="login_password_hint">Contraseña</string>
+    <string name="login_button_login_text">Iniciar sesión</string>
+    <string name="login_recover_password"><u>¿Has olvidado tu contraseña?</u></string>
+    <string name="login_create_teacher_text">¿No tienes cuenta de profesor?</string>
+    <string name="login_create_button">Crear</string>
+
+    <!--Parent-->
+    <!--PasswordRecovery-->
+    <!--Reminder-->
+    <!--ShowGrades-->
+    <!--Student-->
+    <!--Teacher-->
+    <string name="teacher_navbar_home_text">Inicio</string>
+    <string name="teacher_navbar_classroom_text">Clase</string>
+    <string name="teacher_navbar_profile">Perfil</string>
 </resources>

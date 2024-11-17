@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/teacher_navbar_home"
+        android:title="@string/teacher_navbar_home_text"
+        android:icon="@drawable/navigation_bar_home"
+        />
+
+    <item
+        android:id="@+id/teacher_navbar_classroom"
+        android:title="@string/teacher_navbar_classroom_text"
+        android:icon="@drawable/navigation_bar_students"
+        />
+
+    <item
+        android:id="@+id/teacher_navbar_profile"
+        android:title="@string/teacher_navbar_profile"
+        android:icon="@drawable/navigation_bar_profile"
+        />
+
+</menu>

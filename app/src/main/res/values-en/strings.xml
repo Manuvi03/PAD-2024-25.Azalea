@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Azalea</string>
-    <string name="username_hint">Mail</string>
-    <string name="password_hint">Password</string>
-    <string name="button_login_text">Log In</string>
-    <string name="recover_password"><u>Do you forget your password?</u></string>
-    <string name="create_teacher_text">Don\'t have a teacher account?</string>
-    <string name="create_button">Create</string>
-    <string name="login_error">Log In failed, Incorrect username or password</string>
+    <!--AddEvent-->
+    <!--AddStudent-->
+    <!--Chat-->
+    <!--Classroom-->
+    <string name="classroom_loading_string">Loading...</string>
+    <string name="classroom_no_students_string">No students</string>
+
+    <!--CreateTeacher-->
+    <string name="createteacher_titleView">Welcome Teacher!"</string>
+    <string name="createteacher_nameText">Name</string>
+    <string name="createteacher_surnameText">Surnames</string>
+    <string name="createteacher_genderText">Gender</string>
+    <string name="createteacher_emailText">Email</string>
+    <string name="createteacher_passwordText">Password</string>
+    <string name="createteacher_ButtonCreateTeacherText">Create a teacher account</string>
+    <string name="createteacher_namehint">Your name</string>
+    <string name="createteacher_surnameEditText">Your surnames</string>
+    <string name="createteacher_genderEditText">Your gender</string>
+    <string name="createteacher_emailEditText">Your e-mail</string>
+    <string name="createteacher_passwordEditText">Your password</string>
+
+    <!--EditProfile-->
+    <!--EditStudent-->
+    <!--GradeSubject-->
+    <!--Login-->
+    <string name="login_username_hint">Mail</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button_login_text">Log In</string>
+    <string name="login_recover_password"><u>Do you forget your password?</u></string>
+    <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
+    <string name="login_create_button">Create</string>
+
+    <!--Parent-->
+    <!--PasswordRecovery-->
+    <!--Reminder-->
+    <!--ShowGrades-->
+    <!--Student-->
+
+    <!--Teacher-->
+    <string name="teacher_navbar_home_text">Home</string>
+    <string name="teacher_navbar_classroom_text">Classroom</string>
+    <string name="teacher_navbar_profile">Profile</string>
+
 </resources>
