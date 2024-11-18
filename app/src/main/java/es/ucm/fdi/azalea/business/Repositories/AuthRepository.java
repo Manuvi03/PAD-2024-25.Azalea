@@ -1,26 +1,11 @@
 package es.ucm.fdi.azalea.business.Repositories;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
-import es.ucm.fdi.azalea.business.model.UserModel;
+public interface AuthRepository {
 
-public class AuthRepository  {
-
-
-    public Task<AuthResult> login(String mail, String password){
-       return  FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password);
-    }
-
-    public Task<AuthResult> register(String mail, String password){
-        return  FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail,password);
-    }
-
-    public void logout(){
-        FirebaseAuth.getInstance().signOut();
-    }
+    public Task<AuthResult> login(String mail, String password);
+    public Task<AuthResult> register(String mail, String password);
+    public void logout();
 }

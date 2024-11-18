@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import es.ucm.fdi.azalea.business.model.UserModel;
+import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.loginUseCase;
 
@@ -29,7 +30,7 @@ public class LoginViewModel extends ViewModel {
         loginEvent.setValue(new Event.Loading<>());
 
 
-       login_integration.logIn(mail,password,new loginUseCase.CallBack(){
+       login_integration.logIn(mail,password,new CallBack<UserModel>(){
 
            @Override
            public void onSuccess(Event.Success<UserModel> success) {

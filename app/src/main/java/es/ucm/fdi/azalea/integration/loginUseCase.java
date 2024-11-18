@@ -4,27 +4,25 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DataSnapshot;
 
 import es.ucm.fdi.azalea.business.BusinessFactory;
-import es.ucm.fdi.azalea.business.Repositories.AuthRepository;
+import es.ucm.fdi.azalea.business.Repositories.implementations.AuthRepositoryImp;
 import es.ucm.fdi.azalea.business.model.UserModel;
 
 public class loginUseCase {
     private final static String TAG = "loginUseCase";
 
-    private final AuthRepository authRepository;
+    private final AuthRepositoryImp authRepositoryImp;
     public loginUseCase(){
-        authRepository = new AuthRepository();
+        authRepositoryImp = new AuthRepositoryImp();
     }
 
     // la clase task de la api firebase ya gestiona ttodo lo que es acceso al repositorio
 
-    public interface CallBack{
-        public void onSuccess(Event.Success<UserModel> success);
-        public void onError(Event.Error<UserModel> error);
-    }
 
-    public void logIn(String mail, String password, CallBack callback){
+
+    public void logIn(String mail, String password, CallBack<UserModel> callback){
 
         try{
 
@@ -33,7 +31,7 @@ public class loginUseCase {
             //es importante que para poder hacer el login correctamente el id que tiene asignado una cuenta
             //en el authentication de firebase sea el mismo que el id que tiene asignado en el repositorio de users
 
-            Task<AuthResult> task =  authRepository.login(mail, password);
+            Task<AuthResult> task =  authRepositoryImp.login(mail, password);
 
 
             task.addOnCompleteListener(result ->{
@@ -71,9 +69,9 @@ public class loginUseCase {
         }
 
     }
-    private void handleLogin(String userUid,CallBack cb){
+    private void handleLogin(String userUid, CallBack<UserModel> cb){
         BusinessFactory.getInstance().getUserRepository().
-                findById(userUid,new CallBack(){
+                findById(userUid,new CallBack<UserModel>(){
 
                     @Override
                     public void onSuccess(Event.Success<UserModel> success) {
@@ -83,6 +81,8 @@ public class loginUseCase {
                     public void onError(Event.Error<UserModel> error) {
                         cb.onError(error);
                     }
+
+
                 });
 
     }
