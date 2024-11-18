@@ -39,6 +39,12 @@
     <!--Student-->
 
     <!--Teacher-->
+    <string name="parent_recyclerView_empty">Ther\'re no events</string>
+    <string name="parent_recyclerView_title">Event\'s Title</string>
+    <string name="parent_recyclerView_date">Date</string>
+    <string name="parent_recyclerView_time">Time</string>
+    <string name="parent_recyclerView_location">Location</string>
+    <string name="parent_recyclerView_description">Description</string>
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>

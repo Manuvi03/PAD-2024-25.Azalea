@@ -35,6 +35,13 @@
     <string name="login_create_button">Crear</string>
 
     <!--Parent-->
+    <string name="parent_recyclerView_empty">No hay eventos</string>"
+    <string name="parent_recyclerView_title">Titulo Evento</string>
+    <string name="parent_recyclerView_date">Fecha</string>
+    <string name="parent_recyclerView_time">Hora</string>
+    <string name="parent_recyclerView_location">Ubicación</string>
+    <string name="parent_recyclerView_description">Descripción</string>
+    <string name="parent_separator" translatable="false"> | </string>
     <!--PasswordRecovery-->
     <!--Reminder-->
     <!--ShowGrades-->
