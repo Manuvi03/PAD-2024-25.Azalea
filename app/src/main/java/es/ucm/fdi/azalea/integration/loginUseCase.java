@@ -34,10 +34,7 @@ public class loginUseCase {
             //en el authentication de firebase sea el mismo que el id que tiene asignado en el repositorio de users
 
             Task<AuthResult> task =  authRepository.login(mail, password);
-            UserModel nuevoUser = new UserModel();
-            nuevoUser.setEmail("hdeben01@ucm.es");
-            nuevoUser.setParent(true);
-            nuevoUser.setPassword("123456");
+
 
             task.addOnCompleteListener(result ->{
                 //hace falta hacer otro try catch dentro del listener para coger excepciones de
@@ -46,8 +43,9 @@ public class loginUseCase {
                     if (result.isSuccessful()) {
                         Log.d(TAG,"Se ha podido hacer el log In con el usuario " +
                                 mail + " y constrasenya " + password);
-                        nuevoUser.setId(result.getResult().getUser().getUid());
-                        BusinessFactory.getInstance().getUserRepository().create(nuevoUser);
+
+                        //el callback del repositorio lo tratamos en otra funcion para
+                        //mayor claridad de codigo, le pasamos el callback del viewModel
                         handleLogin(result.getResult().getUser().getUid(),callback);
 
 
@@ -60,6 +58,8 @@ public class loginUseCase {
 
                     }
                 }catch(Exception e){
+                    Log.d("loginUseCase", "excepcion al iniciar sesion " +
+                            e.toString());
                     callback.onError(new Event.Error<>(e));
                 }
 

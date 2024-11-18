@@ -1,6 +1,7 @@
  package es.ucm.fdi.azalea.presentation.login;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.parent.parentActivity;
+import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
 
  public class MainActivity extends AppCompatActivity {
 
@@ -92,16 +95,21 @@ import es.ucm.fdi.azalea.integration.Event;
             if(event instanceof Event.Loading){
                 //TODO logica de carga de usuario
             }else if(event instanceof Event.Success){
+                Intent switchActivityIntent;
                 //TODO logica de cambiar de vista, dependiendo de si el usuario es profesor o padre tendra que cambiar de vista, para hacer
                 //TODO esto deberia leer el usuario de la base de datos con el uid de la clase user de Firebase y leer el booleano de la bd
                 Log.d(TAG,"el usuario ha iniciado sesion correctamente");
                 UserModel userdata = ((Event.Success<UserModel>) event).getData();
                 if(userdata.getParent()){
                     Log.d(TAG, "el usuario es padre");
+                    switchActivityIntent = new Intent(this, parentActivity.class);
                 }
                 else{
                     Log.d(TAG, "el usuario es profesor");
+                    switchActivityIntent = new Intent(this, teacherActivity.class);
                 }
+
+                startActivity(switchActivityIntent);
 
             }else if(event instanceof Event.Error){
                 //muestra un toast de error (se puede cambiar en un futuro)
