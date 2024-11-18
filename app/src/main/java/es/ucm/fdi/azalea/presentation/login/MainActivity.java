@@ -1,11 +1,16 @@
  package es.ucm.fdi.azalea.presentation.login;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +18,22 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import es.ucm.fdi.azalea.R;
+import es.ucm.fdi.azalea.business.model.UserModel;
+import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.parent.parentActivity;
+import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
 
  public class MainActivity extends AppCompatActivity {
+
+     private final static String TAG = "MainActivity";
+
+     private LoginViewModel loginViewModel;
+     private EditText mailEditText;
+     private EditText passwordEditText;
+     private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +45,13 @@ import es.ucm.fdi.azalea.R;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // inicializamos el viewModel
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        mailEditText = findViewById(R.id.editTextEmailAddress);
+        passwordEditText = findViewById(R.id.editTextPassword);
+        loginButton = findViewById(R.id.button_login);
+
+        initListeners();
 
         start_animations();
 
@@ -56,6 +80,42 @@ import es.ucm.fdi.azalea.R;
         sm.readAll();*/
 
 
+    }
+
+    private void initListeners(){
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginViewModel.doLogIn(mailEditText.getText().toString(),passwordEditText.getText().toString());
+            }
+        });
+
+        //tambien declaramos la mainActivity como observer de LoginViewModel
+        loginViewModel.getLoginEvent().observe(this,event ->{
+            if(event instanceof Event.Loading){
+                //TODO logica de carga de usuario
+            }else if(event instanceof Event.Success){
+                Intent switchActivityIntent;
+                //TODO logica de cambiar de vista, dependiendo de si el usuario es profesor o padre tendra que cambiar de vista, para hacer
+                //TODO esto deberia leer el usuario de la base de datos con el uid de la clase user de Firebase y leer el booleano de la bd
+                Log.d(TAG,"el usuario ha iniciado sesion correctamente");
+                UserModel userdata = ((Event.Success<UserModel>) event).getData();
+                if(userdata.getParent()){
+                    Log.d(TAG, "el usuario es padre");
+                    switchActivityIntent = new Intent(this, parentActivity.class);
+                }
+                else{
+                    Log.d(TAG, "el usuario es profesor");
+                    switchActivityIntent = new Intent(this, teacherActivity.class);
+                }
+
+                startActivity(switchActivityIntent);
+
+            }else if(event instanceof Event.Error){
+                //muestra un toast de error (se puede cambiar en un futuro)
+                Toast.makeText(this,R.string.login_error,Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void start_animations(){

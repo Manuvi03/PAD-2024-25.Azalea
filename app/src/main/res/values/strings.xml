@@ -33,6 +33,7 @@
     <string name="login_recover_password"><u>¿Has olvidado tu contraseña?</u></string>
     <string name="login_create_teacher_text">¿No tienes cuenta de profesor?</string>
     <string name="login_create_button">Crear</string>
+    <string name="login_error">Error al iniciar sesión, vuelva a introducir los datos</string>
 
     <!--Parent-->
     <!--PasswordRecovery-->

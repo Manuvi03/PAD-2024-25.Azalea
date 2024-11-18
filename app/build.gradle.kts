@@ -53,7 +53,6 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.firebase.messaging)
     implementation(libs.google.api.client.android)
-    implementation (libs.google.api.services.calendar)
     implementation (libs.play.services.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
