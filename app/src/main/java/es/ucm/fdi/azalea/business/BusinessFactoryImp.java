@@ -27,26 +27,26 @@ public class BusinessFactoryImp extends BusinessFactory{
 
     @Override
     public EventRepository EventRepository() {
-        return null;
+        return new EventRepositoryImp();
     }
 
     @Override
     public MessageRepository getMessageRepository() {
-        return null;
+        return new MessageRepositoryImp();
     }
 
     @Override
     public ChatRepository getChatRepository() {
-        return null;
+        return new ChatRepositoryImp();
     }
 
     @Override
     public ClassRoomRepository getClassRoomRepository() {
-        return null;
+        return new ClassRoomRepositoryImp();
     }
 
     @Override
     public UserRepository getUserRepository() {
-        return null;
+        return new UserRepositoryImp();
     }
 }

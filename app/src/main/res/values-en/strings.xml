@@ -18,7 +18,7 @@
     <string name="createteacher_namehint">Your name</string>
     <string name="createteacher_surnameEditText">Your surnames</string>
     <string name="createteacher_genderEditText">Your gender</string>
-    <string name="createteacher_emailEditText">Your e-mail</string>
+    <string name="createteacher_emailEditText">Your Email address</string>
     <string name="createteacher_passwordEditText">Your password</string>
 
     <!--EditProfile-->
@@ -28,13 +28,16 @@
     <string name="login_username_hint">Mail</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login_text">Log In</string>
-    <string name="login_recover_password"><u>Do you forget your password?</u></string>
+    <string name="login_recover_password"><u>Did you forget your password?</u></string>
     <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
     <string name="login_create_button">Create</string>
     <string name="login_error">Failed to log in, incorrect username or password</string>
 
     <!--Parent-->
     <!--PasswordRecovery-->
+    <string name="passwordRecovery_button">Reset Password</string>
+    <string name="passwordRecovery_text"><u>Did you forget your password?</u></string>
+    <string name="passwordRecovery_hint">Email address:</string>
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->

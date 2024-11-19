@@ -23,7 +23,9 @@ import androidx.lifecycle.ViewModelProvider;
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.createteacher.CreateTeacherActivity;
 import es.ucm.fdi.azalea.presentation.parent.parentActivity;
+import es.ucm.fdi.azalea.presentation.passwordrecovery.PasswordRecoveryActivity;
 import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
 
  public class MainActivity extends AppCompatActivity {
@@ -31,9 +33,13 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
      private final static String TAG = "MainActivity";
 
      private LoginViewModel loginViewModel;
+
+
      private EditText mailEditText;
      private EditText passwordEditText;
      private Button loginButton;
+     private TextView recoverPasswordText;
+     private Button createTeacherButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,34 +56,13 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         mailEditText = findViewById(R.id.editTextEmailAddress);
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.button_login);
+        recoverPasswordText = findViewById(R.id.textViewRecoverPassword);
+        createTeacherButton = findViewById(R.id.buttonCreateTeacherAccount);
 
         initListeners();
 
         start_animations();
 
-        /*
-        // estoy probando el firebase database
-        Subject subject1 = new Subject("Maths");
-        Subject subject2 = new Subject("PE");
-        Subject modifiedSubject = new Subject("English");
-
-        SubjectRepository sm = new SubjectRepository();
-
-        String key1 = sm.create(subject1);
-        String key2 = sm.create(subject2);
-
-        sm.readAll();
-
-        // investigando algunos guardan la key en el transfer otros no... no entiendo como hacerlo
-        // bien esto, de momento la devuelvo del create para ir probando
-        sm.update(key1, modifiedSubject);
-
-        sm.readAll();
-
-        sm.delete(key2);
-
-        // todos estos mensajes salen por consola
-        sm.readAll();*/
 
 
     }
@@ -90,7 +75,25 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
             }
         });
 
+        recoverPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent switchActivityIntent = new Intent(MainActivity.this, PasswordRecoveryActivity.class);
+                startActivity(switchActivityIntent);
+            }
+        });
+
+        createTeacherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent switchActivityIntent = new Intent(MainActivity.this, CreateTeacherActivity.class);
+                startActivity(switchActivityIntent);
+            }
+
+        });
+
         //tambien declaramos la mainActivity como observer de LoginViewModel
+
         loginViewModel.getLoginEvent().observe(this,event ->{
             if(event instanceof Event.Loading){
                 //TODO logica de carga de usuario
@@ -117,6 +120,8 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
             }
         });
     }
+
+    //<-----------------    Animation   -------------------->
 
     private void start_animations(){
         ImageView circleImageView = findViewById(R.id.circle);

@@ -20,6 +20,7 @@
     <string name="createteacher_emailEditText">Tu correo electrónico</string>
     <string name="createteacher_passwordEditText">Tu contraseña</string>
 
+
     <!--EditProfile-->
     <!--EditStudent-->
     <!--GradeSubject-->
@@ -37,6 +38,9 @@
 
     <!--Parent-->
     <!--PasswordRecovery-->
+    <string name="passwordRecovery_button">Restablecer Contraseña</string>
+    <string name="passwordRecovery_text"><u>¿Has olvidado tu contraseña?</u></string>
+    <string name="passwordRecovery_hint">Correo electrónico:</string>
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->

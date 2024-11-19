@@ -1,4 +1,6 @@
 package es.ucm.fdi.azalea.presentation.parent;
 
-public class parentActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class parentActivity extends AppCompatActivity {
 }
