@@ -1,6 +1,12 @@
 package es.ucm.fdi.azalea.business;
 
-import es.ucm.fdi.azalea.business.Repositories.Repository;
+import es.ucm.fdi.azalea.business.Repositories.ChatRepository;
+import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
+import es.ucm.fdi.azalea.business.Repositories.EventRepository;
+import es.ucm.fdi.azalea.business.Repositories.MessageRepository;
+import es.ucm.fdi.azalea.business.Repositories.StudentRepository;
+import es.ucm.fdi.azalea.business.Repositories.UserRepository;
+import es.ucm.fdi.azalea.business.Repositories.implementations.UserRepositoryImp;
 import es.ucm.fdi.azalea.business.model.ChatModel;
 import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.EventModel;
@@ -19,11 +25,10 @@ public abstract class BusinessFactory {
         return instance;
     }
 
-    public abstract Repository<StudentModel> getStudentRepository();
-    public abstract Repository<UserModel> getAuthRepository();
-    public abstract Repository<EventModel> getEventRepository();
-    public abstract Repository<MessageModel> getMessageRepository();
-    public abstract Repository<ChatModel> getChatRepository();
-    public abstract Repository<ClassRoomModel> getClassRoomRepository();
-    public abstract Repository<UserModel> getUserRepository();
+    public abstract StudentRepository getStudentRepository();
+    public abstract EventRepository EventRepository();
+    public abstract MessageRepository getMessageRepository();
+    public abstract ChatRepository getChatRepository();
+    public abstract ClassRoomRepository getClassRoomRepository();
+    public abstract UserRepository getUserRepository();
 }
