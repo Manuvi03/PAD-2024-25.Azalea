@@ -1,5 +1,7 @@
 package es.ucm.fdi.azalea.business.model;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 public class StudentModel {
@@ -11,14 +13,16 @@ public class StudentModel {
     private String medicalConditions;
     private String allergens;
     private List<String> subjects;
+    private String quickContact;
     private String classroomId;
     private String parentId;
+    private Bitmap profileImage;
 
-    public StudentModel(){}
+    public StudentModel(){} // constructor vacio necesario para introducir directamente el objeto en Firebase
 
     public StudentModel(List<String> subjects, String allergens, String medicalConditions,
                         double height, double weight, String surnames, String name,
-                        String classroomId, String parentId) {
+                        String quickContact, String classroomId, String parentId) {
         this.subjects = subjects;
         this.allergens = allergens;
         this.medicalConditions = medicalConditions;
@@ -26,6 +30,7 @@ public class StudentModel {
         this.weight = weight;
         this.surnames = surnames;
         this.name = name;
+        this.quickContact = quickContact;
         this.classroomId = classroomId;
         this.parentId = parentId;
     }
@@ -99,4 +104,13 @@ public class StudentModel {
     public String getParentId() { return parentId; }
 
     public void setParentId(String parentId) { this.parentId = parentId; }
+
+    public String getQuickContact() { return quickContact; }
+
+    public void setQuickContact(String quickContact) { this.quickContact = quickContact; }
+
+    // TODO solo serian necesarios si se utiliza el loader
+    public Bitmap getProfileImage() { return profileImage; }
+
+    public void setProfileImage(Bitmap profileImage) { this.profileImage = profileImage; }
 }

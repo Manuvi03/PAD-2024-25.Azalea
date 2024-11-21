@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Seashell">
+    android:background="@color/Seashell"
+    android:id="@+id/classroom_fragment"
+    tools:context=".presentation.classroom.ClassroomFragment">
 
     <TextView
         android:id="@+id/teacher_classroom_info_text"
@@ -35,12 +37,15 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:queryHint="Buscar alumno"
+            android:queryHint="@string/classroom_searchview_queryhint"
             android:textColorHint="@color/Dark_Purple"
-            android:background="@drawable/teacher_classroom_searchview" />
+            android:background="@drawable/teacher_classroom_searchview"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@null"
+            android:searchIcon="@null"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/teacher_classroom_add_student"
+            android:id="@+id/teacher_classroom_add_student_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -61,7 +66,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:textSize="26sp"
-        android:text="Resultados"
+        android:text="@string/classroom_results_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_linear_layout" />

@@ -11,6 +11,7 @@ constraintlayout = "2.2.0"
 navigationFragment = "2.8.4"
 googleGmsGoogleServices = "4.4.2"
 firebaseMessaging = "24.1.0"
+picasso = "2.8"
 playServicesAuth = "21.2.0"
 
 [libraries]
@@ -27,6 +28,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
 [plugins]
