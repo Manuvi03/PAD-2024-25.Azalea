@@ -27,7 +27,7 @@ public class BusinessFactoryImp extends BusinessFactory{
 
     @Override
     public EventRepository EventRepository() {
-        return null;
+        return new EventRepositoryImp();
     }
 
     @Override

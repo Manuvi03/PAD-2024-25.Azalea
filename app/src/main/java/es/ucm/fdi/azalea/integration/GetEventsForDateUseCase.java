@@ -1,20 +1,25 @@
 package es.ucm.fdi.azalea.integration;
 
-import java.util.ArrayList;
+import com.google.android.gms.tasks.Task;
+
 import java.util.List;
 
-import es.ucm.fdi.azalea.business.BusinessFactory;
+import es.ucm.fdi.azalea.business.Repositories.implementations.EventRepositoryImp;
 import es.ucm.fdi.azalea.business.model.EventModel;
 
 public class GetEventsForDateUseCase{
-    public <T> Event<T> getEventsForDateUseCase(){
+
+    EventRepositoryImp eventRepositoryImp;
+
+    public GetEventsForDateUseCase(){
+        eventRepositoryImp = new EventRepositoryImp();
+    }
+
+    public void getEventsForDate(String date, CallBack<List<EventModel>> cb){
         try{
-            List<EventModel> list = new ArrayList<>();
-            list = BusinessFactory.getInstance().getEventRepository().readAll();
-            return new Event.Success<>(null);
-        }
-        catch(Exception e){
-            return new Event.Error<>(null);
+            Task task = eventRepositoryImp.getEventsForDate(date);
+        }catch(Exception e){
+            cb.onError(new Event.Error<>(e));
         }
     }
 }
