@@ -43,6 +43,8 @@
     <string name="parent_recyclerView_location">Ubicación</string>
     <string name="parent_recyclerView_description">Descripción</string>
     <string name="parent_separator" translatable="false"> | </string>
+    <string name="parent_recyclerView_result">Resultados</string>"
+    <string name="parent_recyclerView_titleEvent">eventos</string>
     <!--PasswordRecovery-->
     <!--Reminder-->
     <!--ShowGrades-->

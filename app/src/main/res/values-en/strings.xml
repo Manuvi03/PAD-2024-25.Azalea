@@ -46,8 +46,11 @@
     <string name="parent_recyclerView_time">Time</string>
     <string name="parent_recyclerView_location">Location</string>
     <string name="parent_recyclerView_description">Description</string>
+    <string name="parent_recyclerView_result">Results</string>
+    <string name="parent_recyclerView_notresult">There\'re no events</string>
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
+    <string name="parent_recyclerView_titleEvent">events</string>
 
 </resources>

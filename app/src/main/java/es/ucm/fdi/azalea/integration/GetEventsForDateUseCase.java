@@ -1,25 +1,42 @@
 package es.ucm.fdi.azalea.integration;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.android.gms.tasks.Task;
 
+import java.util.Collections;
 import java.util.List;
 
+import es.ucm.fdi.azalea.business.Repositories.EventRepository;
 import es.ucm.fdi.azalea.business.Repositories.implementations.EventRepositoryImp;
 import es.ucm.fdi.azalea.business.model.EventModel;
 
 public class GetEventsForDateUseCase{
 
-    EventRepositoryImp eventRepositoryImp;
+    EventRepository eventRepository;
 
-    public GetEventsForDateUseCase(){
-        eventRepositoryImp = new EventRepositoryImp();
+    public GetEventsForDateUseCase(){}
+
+    public LiveData<List<EventModel>> execute(String date) {
+        MutableLiveData<List<EventModel>> resultLiveData = new MutableLiveData<>();
+
+        // Llama al repositorio para obtener eventos de la fecha
+        eventRepository.getEventsForDate(date, new CallBack<List<EventModel>>() {
+            @Override
+            public void onSuccess(Event.Success<List<EventModel>> success) {
+                // Publica los datos obtenidos en el LiveData
+                resultLiveData.postValue(success.getData());
+            }
+
+            @Override
+            public void onError(Event.Error<List<EventModel>> error) {
+                // Publica una lista vacía o maneja el error
+                resultLiveData.postValue(Collections.emptyList());
+            }
+        });
+
+        return resultLiveData;
     }
 
-    public void getEventsForDate(String date, CallBack<List<EventModel>> cb){
-        try{
-            Task task = eventRepositoryImp.getEventsForDate(date);
-        }catch(Exception e){
-            cb.onError(new Event.Error<>(e));
-        }
-    }
 }

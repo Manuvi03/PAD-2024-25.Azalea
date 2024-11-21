@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.Task;
 
 public interface EventRepository {
 
-    void create(EventModel em, CallBack<List<EventModel>> cb);
+    void create(EventModel em, CallBack<EventModel> cb);
     void getEventsForDate(String date, CallBack<List<EventModel>> cb);
 
     }
