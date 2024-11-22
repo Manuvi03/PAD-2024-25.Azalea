@@ -4,26 +4,25 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class ChatModel {
-    private int id;
+    private String id;
     private List<Integer> usersId;
     private Timestamp lastMessageTime;
     private int lastMessageUserId;
 
-    public ChatModel() {
-    }
+    public ChatModel() {}
 
-    public ChatModel(int id, List<Integer> usersId, Timestamp lastMessageTime, int lastMessageUserId) {
+    public ChatModel(String id, List<Integer> usersId, Timestamp lastMessageTime, int lastMessageUserId) {
         this.id = id;
         this.usersId = usersId;
-        this.lastMessageTime = lastMessageTime;
+        this.lastMessageTime = lastMessageTime; //TODO mirarlo con la oopcion de INDEXOf de dani
         this.lastMessageUserId = lastMessageUserId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
