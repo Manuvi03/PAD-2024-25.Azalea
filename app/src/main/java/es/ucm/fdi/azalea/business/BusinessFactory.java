@@ -26,7 +26,7 @@ public abstract class BusinessFactory {
     }
 
     public abstract StudentRepository getStudentRepository();
-    public abstract EventRepository EventRepository();
+    public abstract EventRepository getEventRepository();
     public abstract MessageRepository getMessageRepository();
     public abstract ChatRepository getChatRepository();
     public abstract ClassRoomRepository getClassRoomRepository();

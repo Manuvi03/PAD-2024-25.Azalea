@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.Collections;
 import java.util.List;
 
+import es.ucm.fdi.azalea.business.BusinessFactory;
 import es.ucm.fdi.azalea.business.Repositories.EventRepository;
 import es.ucm.fdi.azalea.business.Repositories.implementations.EventRepositoryImp;
 import es.ucm.fdi.azalea.business.model.EventModel;
@@ -22,7 +23,7 @@ public class GetEventsForDateUseCase{
         MutableLiveData<List<EventModel>> resultLiveData = new MutableLiveData<>();
 
         // Llama al repositorio para obtener eventos de la fecha
-        eventRepository.getEventsForDate(date, new CallBack<List<EventModel>>() {
+        BusinessFactory.getInstance().getEventRepository().getEventsForDate(date, new CallBack<List<EventModel>>() {
             @Override
             public void onSuccess(Event.Success<List<EventModel>> success) {
                 // Publica los datos obtenidos en el LiveData

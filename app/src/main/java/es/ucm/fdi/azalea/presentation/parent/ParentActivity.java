@@ -13,12 +13,16 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
+import es.ucm.fdi.azalea.integration.Event;
 
 public class ParentActivity extends AppCompatActivity {
 
@@ -53,6 +57,25 @@ public class ParentActivity extends AppCompatActivity {
 
         parentViewModel =new ParentViewModel();
         parentViewModel.getEventsForDateLiveData().observe(this, this::updateEvents);
+
+
+        TODO
+        EventModel em = new EventModel("2024-11-21", "Examen", "Examen de lengua", "18:00", "2");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("events");
+        //genero el id del evento
+        String id = db.push().getKey();
+        if(id!=null){
+            em.setId(id);
+
+            db.child(id).setValue(em)
+                    .addOnSuccessListener(task->{
+                        cb.onSuccess(new Event.Success<>(em));
+                    })      .addOnFailureListener(e->{
+                        cb.onError(new Event.Error<>(e));
+                    });
+        }else{
+            cb.onError(new Event.Error<>(new Exception("Error al crear el evento")));
+        }
 
         calendarView.setOnDateChangeListener((calendar1, year, month, day) -> {
             @SuppressLint("DefaultLocale") String date = String.format("%04d-%02d-%02d", year, month + 1, day);
