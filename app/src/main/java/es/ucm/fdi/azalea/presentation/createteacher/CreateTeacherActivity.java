@@ -2,6 +2,7 @@ package es.ucm.fdi.azalea.presentation.createteacher;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +15,11 @@ public class CreateTeacherActivity extends AppCompatActivity {
 
     private CreateTeacherViewModel createTeacherViewModel;
 
+    private EditText nameEditText, surnameEditText,mailEditText,genderEditText,passwordEditText;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,5 +28,11 @@ public class CreateTeacherActivity extends AppCompatActivity {
         setContentView(view);
 
         createTeacherViewModel = new ViewModelProvider(this).get(CreateTeacherViewModel.class);
+        nameEditText = binding.createTeacherNameEditText;
+        surnameEditText = binding.createTeacherEmailEditText;
+        genderEditText = binding.createTeacherGenderEditText;
+        mailEditText = binding.createTeacherEmailEditText;
+        passwordEditText = binding.createTeacherPasswordEditText;
+
     }
 }

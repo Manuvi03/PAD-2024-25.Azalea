@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.business.Repositories.implementations;
 
 
+import android.telecom.Call;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -24,12 +25,15 @@ public class UserRepositoryImp implements UserRepository {
     private DatabaseReference usersReference = database.getReference("users");
 
 
-    public void create(UserModel item) {
+    public void create(UserModel item, CallBack<UserModel> cb) {
+        try{
+            usersReference.child(item.getId()).setValue(item);
+            Log.d(TAG, "User created with key: " + item.getId());
+            cb.onSuccess(new Event.Success<>(item));
+        }catch(Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
 
-
-        usersReference.child(item.getId()).setValue(item);
-        Log.d(TAG, "User created with key: " + item.getId());
-        //return item.getId();
     }
 
 

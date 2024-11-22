@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.business;
 
+import es.ucm.fdi.azalea.business.Repositories.AuthRepository;
 import es.ucm.fdi.azalea.business.Repositories.ChatRepository;
 import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
 import es.ucm.fdi.azalea.business.Repositories.EventRepository;
@@ -30,4 +31,5 @@ public abstract class BusinessFactory {
     public abstract ChatRepository getChatRepository();
     public abstract ClassRoomRepository getClassRoomRepository();
     public abstract UserRepository getUserRepository();
+    public abstract AuthRepository getAuthRepository();
 }

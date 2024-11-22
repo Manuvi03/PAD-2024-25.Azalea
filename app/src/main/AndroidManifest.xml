@@ -31,6 +31,9 @@
             android:name=".presentation.passwordrecovery.PasswordRecoveryActivity"
             android:exported="false"/>
         <activity
+            android:name=".presentation.parent.parentActivity"
+            android:exported="false"/>
+        <activity
             android:name=".presentation.login.MainActivity"
             android:exported="true">
             <intent-filter>
