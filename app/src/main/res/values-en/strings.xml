@@ -5,9 +5,12 @@
     <!--Chat-->
     <!--Classroom-->
     <string name="classroom_loading_string">Loading...</string>
+    <string name="classroom_results_string">Results</string>
     <string name="classroom_no_students_string">No students</string>
 
     <!--CreateTeacher-->
+    <string name="classroom_search_error">Failed to search classroom students</string>
+    <string name="classroom_searchview_queryhint">Search student</string>
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
     <string name="createteacher_surnameText">Surnames</string>
@@ -46,5 +49,6 @@
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
+    <string name="student_contact">Quick contact: %1$s</string>
 
 </resources>

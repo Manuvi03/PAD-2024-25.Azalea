@@ -4,53 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Misty_Rose">
+    android:background="@color/Seashell"
+    android:id="@+id/classroom_fragment"
+    tools:context=".presentation.classroom.ClassroomFragment">
 
     <TextView
         android:id="@+id/teacher_classroom_info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_searchview"
+        android:layout_margin="10dp"
+        android:text="Clase de "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_linear_layout"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/teacher_classroom_recyclerview"
+    <LinearLayout
+        android:id="@+id/teacher_classroom_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="325dp"
-        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_add_student"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_loading_text" />
-
-    <SearchView
-        android:id="@+id/teacher_classroom_searchview"
-        android:layout_width="179dp"
-        android:layout_height="88dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_loading_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_info_text" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <SearchView
+            android:id="@+id/teacher_classroom_searchview"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:queryHint="@string/classroom_searchview_queryhint"
+            android:textColorHint="@color/Dark_Purple"
+            android:background="@drawable/teacher_classroom_searchview"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@null"
+            android:searchIcon="@null"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/teacher_classroom_add_student_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0"
+            android:background="@drawable/teacher_classroom_imagebutton"
+            android:src="@drawable/teacher_classroom_buttonimage"
+            android:scaleType="centerInside"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/teacher_classroom_loading_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/teacher_classroom_recyclerview"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="26sp"
+        android:text="@string/classroom_results_string"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_searchview" />
+        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_linear_layout" />
 
-    <Button
-        android:id="@+id/teacher_classroom_add_student"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teacher_classroom_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_recyclerview" />
+        app:layout_constraintTop_toBottomOf="@+id/teacher_classroom_loading_text" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

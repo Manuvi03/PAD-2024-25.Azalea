@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.firebase.messaging)
     implementation (libs.play.services.auth)
+    implementation(libs.recycler.view)
+    implementation (libs.picasso)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

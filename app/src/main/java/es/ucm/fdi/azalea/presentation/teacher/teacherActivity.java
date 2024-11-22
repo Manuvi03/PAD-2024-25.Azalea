@@ -41,8 +41,7 @@ public class teacherActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.teacher_bottom_navigation_view);
 
         // primero se muestra el fragmento predeterminado, el home
-        if (savedInstanceState == null)
-            replaceFragment(TeacherHomeFragment.class);
+        replaceFragment(TeacherHomeFragment.class);
 
 
         // se implemente la barra de navegacion para cambiar de fragmento
@@ -50,17 +49,14 @@ public class teacherActivity extends AppCompatActivity {
 
             // se reemplazan los fragmentos por los correspondientes
             if(item.getItemId() == R.id.teacher_navbar_home){
-                if (savedInstanceState == null)
-                    replaceFragment(TeacherHomeFragment.class);
+                replaceFragment(TeacherHomeFragment.class);
             }
             else if(item.getItemId() == R.id.teacher_navbar_classroom) {
-                if (savedInstanceState == null)
-                    replaceFragment(ClassroomFragment.class);
+                replaceFragment(ClassroomFragment.class);
             }
             // en caso de actividades, se incian
             else if(item.getItemId() == R.id.teacher_navbar_profile) {
-                if (savedInstanceState == null)
-                    replaceFragment(EditProfileFragment.class);
+                replaceFragment(EditProfileFragment.class);
             }
             return true;
         });
