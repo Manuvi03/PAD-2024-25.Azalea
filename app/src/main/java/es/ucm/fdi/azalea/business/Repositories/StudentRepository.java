@@ -11,6 +11,6 @@ public interface StudentRepository {
     public String update(String id, StudentModel item);
     public String delete(String id);
     public List<StudentModel> readAll();
-    public StudentModel readById(String id);
+    public void readById(String id, CallBack<StudentModel> cb);
     public void readByClassRoomId(String classroomId, CallBack<List<StudentModel>> cb);
 }

@@ -4,13 +4,14 @@
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
-    <string name="classroom_loading_string">Loading...</string>
+    <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_results_string">Results</string>
     <string name="classroom_no_students_string">No students</string>
 
     <!--CreateTeacher-->
     <string name="classroom_search_error">Failed to search classroom students</string>
     <string name="classroom_searchview_queryhint">Search student</string>
+    <string name="student_contact">Quick contact: %1$s</string>
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
     <string name="createteacher_surnameText">Surnames</string>
@@ -43,9 +44,28 @@
     <!--Student-->
 
     <!--Teacher-->
+    <string name="student_send_message_button">Send message</string>
+    <string name="student_grade_mark_button">Grade mark</string>
+    <string name="student_show_grades_button">Show grades</string>
+    <string name="student_edit_student_button">Edit student</string>
+    <string name="student_info_text">Student info</string>
+    <string name="student_birthday_text">\t\t\tBirthday: %1$s</string>
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
-    <string name="student_contact">Quick contact: %1$s</string>
+    <string name="student_weight_text">\t\t\tWeight: %1$f</string>
+    <string name="student_height_text">\t\t\tHeight: %1$f</string>
+    <string name="student_allergens_text">\t\t\tAllergens: %1$s</string>
+    <string name="student_medical_conditions_text">\t\t\tMedical conditions: %1$s</string>
+    <string name="student_contact_info_text">Contact info</string>
+    <string name="student_parent_name_text">\t\t\tParent name: %1$s</string>
+    <string name="student_phone_text">\t\t\tPhone: %1$s</string>
+    <string name="student_email_text">\t\t\tE-mail: %1$s</string>
+    <string name="student_address_text">\t\t\tAddress: %1$s</string>
+    <string name="student_name_text">Student name</string>
+    <string name="searching_student">Searching student…</string>
+    <string name="student_search_error">Failed to search student info</string>
+    <string name="searching_student_parent">Searching student\'s parent…</string>
+    <string name="students_parent_search_error">Failed to search student\'s parent info</string>
 
 </resources>

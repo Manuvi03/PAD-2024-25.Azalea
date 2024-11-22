@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.classroom;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -20,12 +22,15 @@ import java.util.List;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.StudentModel;
+import es.ucm.fdi.azalea.presentation.student.ClassroomStudentSharedViewModel;
 import es.ucm.fdi.azalea.presentation.student.StudentFragment;
 
 public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdapter.ViewHolder>{
 
     // constantes
     private final String TAG = "ClassroomListAdapter";
+    private final String STUDENT_ID_KEY = "studentId";
+    private final String STUDENT_IMAGE_KEY = "studentImage";
 
     // atributos
     private List<StudentModel> mStudentsData;           // todos los alumnos de la clase
@@ -80,9 +85,26 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
         // listener para acceder a la informacion de cada alumno, abriendo el nuevo Fragment
         holder.itemView.setOnClickListener(view -> {
             Log.d(TAG, "Se cambia de fragment a StudentFragment");
+
+            // siguiente fragment
+            StudentFragment studentFragment = new StudentFragment();
+
+            // para compartir la informacion necesaria en el StudentFragment se utiliza un viewmodel compartido
+            ClassroomStudentSharedViewModel viewModel = new ViewModelProvider(((FragmentActivity) view.getContext())).get(ClassroomStudentSharedViewModel.class);
+            viewModel.setStudentId(studentModel.getId());
+            viewModel.setStudenProfileImage(path);
+
+            /*
+            // se anyaden los argumentos que se pasan al fragment
+            Bundle args = new Bundle();
+            args.putString(STUDENT_ID_KEY, studentModel.getId());
+            args.putString(STUDENT_IMAGE_KEY, path);
+            studentFragment.setArguments(args);*/
+
+            // se crea el fragment
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.teacher_fragment_container_view, StudentFragment.class, null)
+                    .replace(R.id.teacher_fragment_container_view, studentFragment)
                     .commit();
         });
     }

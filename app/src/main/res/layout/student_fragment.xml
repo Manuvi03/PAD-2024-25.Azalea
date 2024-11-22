@@ -1,14 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Seashell"
+    android:id="@+id/student_fragment"
+    tools:context=".presentation.student.StudentFragment">
+
+    <ImageView
+        android:id="@+id/student_fragment_profile_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:layout_constraintEnd_toStartOf="@+id/student_fragment_name_textView"
+        app:layout_constraintStart_toStartOf="@+id/student_fragment_left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/student_fragment_name_guideline"
+        tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/student_fragment_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity=""
+        android:text="@string/student_name_text"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/student_fragment_profile_image"
+        app:layout_constraintEnd_toStartOf="@+id/student_fragment_right_guideline"
+        app:layout_constraintStart_toEndOf="@+id/student_fragment_profile_image"
+        app:layout_constraintTop_toTopOf="@+id/student_fragment_name_guideline" />
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/student_fragment_scrollView"
+        app:layout_constraintEnd_toStartOf="@+id/student_fragment_right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/student_fragment_left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/student_fragment_buttons_guideline">
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:fillViewport="true">
+
+            <Button
+                android:id="@+id/student_fragment_send_message_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student_send_message_button"
+                android:textSize="12sp"
+                android:backgroundTint="@color/Dark_Purple"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/student_fragment_edit_student_button"
+                app:layout_constraintEnd_toStartOf="@+id/student_fragment_grade_mark_button"
+                app:layout_constraintStart_toStartOf="@+id/student_fragment_left_guideline"
+                app:layout_constraintTop_toTopOf="@+id/student_fragment_buttons_guideline" />
+
+            <Button
+                android:id="@+id/student_fragment_grade_mark_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student_grade_mark_button"
+                android:textSize="12sp"
+                android:backgroundTint="@color/Dark_Purple"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/student_fragment_send_message_button"
+                app:layout_constraintEnd_toStartOf="@+id/student_fragment_show_grades_button"
+                app:layout_constraintStart_toEndOf="@+id/student_fragment_send_message_button"
+                app:layout_constraintTop_toTopOf="@+id/student_fragment_buttons_guideline" />
+
+            <Button
+                android:id="@+id/student_fragment_show_grades_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student_show_grades_button"
+                android:textSize="12sp"
+                android:backgroundTint="@color/Dark_Purple"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/student_fragment_grade_mark_button"
+                app:layout_constraintEnd_toStartOf="@+id/student_fragment_edit_student_button"
+                app:layout_constraintStart_toEndOf="@+id/student_fragment_grade_mark_button"
+                app:layout_constraintTop_toTopOf="@+id/student_fragment_buttons_guideline" />
+
+            <Button
+                android:id="@+id/student_fragment_edit_student_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student_edit_student_button"
+                android:textSize="12sp"
+                android:backgroundTint="@color/Dark_Purple"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/student_fragment_show_grades_button"
+                app:layout_constraintEnd_toStartOf="@+id/student_fragment_right_guideline"
+                app:layout_constraintStart_toEndOf="@+id/student_fragment_show_grades_button"
+                app:layout_constraintTop_toTopOf="@+id/student_fragment_buttons_guideline" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <ScrollView
+        android:id="@+id/student_fragment_scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/student_fragment_right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/student_fragment_left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/student_fragment_scrollView_guideline">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/student_fragment_student_info_textview"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity=""
+                android:text="@string/student_info_text"
+                android:textStyle="bold"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_birthday_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_birthday_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_weight_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_weight_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_height_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_height_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_allergens_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_allergens_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_medical_conditions_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_medical_conditions_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_contact_info_textview"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity=""
+                android:textStyle="bold"
+                android:text="@string/student_contact_info_text"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_parent_name_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_parent_name_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_parent_phone_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_phone_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_parent_email_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_email_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/student_fragment_address_textview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity=""
+                android:text="@string/student_address_text"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/student_fragment_name_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="STUDENT"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="302dp" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/student_fragment_buttons_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.125" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/student_fragment_scrollView_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/student_fragment_left_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/student_fragment_right_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

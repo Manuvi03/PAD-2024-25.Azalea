@@ -35,10 +35,10 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
     // atributos
 
     // view
-    View view;
+    private View view;
 
     // view model
-    classroomViewModel classroomViewModel;
+    private classroomViewModel classroomViewModel;
 
     // de la vista
     private RecyclerView classroomList;

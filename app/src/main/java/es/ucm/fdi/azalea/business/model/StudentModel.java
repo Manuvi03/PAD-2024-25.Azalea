@@ -14,6 +14,10 @@ public class StudentModel {
     private String allergens;
     private List<String> subjects;
     private String quickContact;
+    private String birthday;
+    private String address;
+    private List<String> parentsNames;
+    private List<String> parentsPhones;
     private String classroomId;
     private String parentId;
     private Bitmap profileImage;
@@ -22,7 +26,8 @@ public class StudentModel {
 
     public StudentModel(List<String> subjects, String allergens, String medicalConditions,
                         double height, double weight, String surnames, String name,
-                        String quickContact, String classroomId, String parentId) {
+                        String quickContact, String classroomId, String parentId, String birthday,
+                        String address, List<String> parentsNames, List<String> parentsPhones) {
         this.subjects = subjects;
         this.allergens = allergens;
         this.medicalConditions = medicalConditions;
@@ -33,6 +38,10 @@ public class StudentModel {
         this.quickContact = quickContact;
         this.classroomId = classroomId;
         this.parentId = parentId;
+        this.birthday = birthday;
+        this.address = address;
+        this.parentsNames = parentsNames;
+        this.parentsPhones = parentsPhones;
     }
 
     public List<String> getSubjects() {
@@ -108,6 +117,24 @@ public class StudentModel {
     public String getQuickContact() { return quickContact; }
 
     public void setQuickContact(String quickContact) { this.quickContact = quickContact; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
+
+    public String getBirthday() { return birthday; }
+
+    public void setBirthday(String birthday) { this.birthday = birthday; }
+
+    public List<String> getParentsPhones() { return parentsPhones; }
+
+    public void setParentsPhones(List<String> parentsPhones) { this.parentsPhones = parentsPhones; }
+
+    public List<String> getParentsNames() { return parentsNames; }
+
+    public void setParentsNames(List<String> parentsNames) {
+        this.parentsNames = parentsNames;
+    }
 
     // TODO solo serian necesarios si se utiliza el loader
     public Bitmap getProfileImage() { return profileImage; }
