@@ -121,6 +121,13 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         });
     }
 
+     private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+         getSupportFragmentManager().beginTransaction()
+                 .setReorderingAllowed(true)
+                 .replace(R.id.teacher_fragment_container_view, c, null)
+                 .commit();
+     }
+
     //<-----------------    Animation   -------------------->
 
     private void start_animations(){
