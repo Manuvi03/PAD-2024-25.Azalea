@@ -11,4 +11,6 @@ public interface AuthRepository {
     public void login(String mail, String password, CallBack<UserModel> cb);
     public void register(String mail, String password, CallBack<UserModel> cb);
     public void logout();
+    public void updateCurrUserMail(String mail,CallBack<Boolean> cb);
+    public void updateCurrUserPassword(String password,CallBack<Boolean> cb);
 }

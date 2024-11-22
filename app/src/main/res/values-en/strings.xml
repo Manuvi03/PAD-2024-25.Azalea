@@ -23,6 +23,7 @@
     <string name="createteacher_genderEditText">Your gender</string>
     <string name="createteacher_emailEditText">Your Email address</string>
     <string name="createteacher_passwordEditText">Your password</string>
+    <string name="createteacher_filledFieldError">This field is required</string>
 
     <!--EditProfile-->
     <!--EditStudent-->

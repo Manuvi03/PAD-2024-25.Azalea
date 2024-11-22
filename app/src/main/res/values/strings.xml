@@ -24,6 +24,7 @@
     <string name="createteacher_genderEditText">Tu género</string>
     <string name="createteacher_emailEditText">Tu correo electrónico</string>
     <string name="createteacher_passwordEditText">Tu contraseña</string>
+    <string name="createteacher_filledFieldError">Este campo es obligatorio</string>
 
 
     <!--EditProfile-->

@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import es.ucm.fdi.azalea.business.Repositories.AuthRepository;
 import es.ucm.fdi.azalea.business.model.UserModel;
@@ -24,6 +25,8 @@ public class AuthRepositoryImp implements AuthRepository {
                 Log.d(TAG,"Se ha podido hacer el log In con el usuario " +
                         mail + " y constrasenya " + password);
                 UserModel data = new UserModel();
+                data.setPassword(password);
+                data.setEmail(mail);
                 data.setId(task.getResult().getUser().getUid());
 
                 cb.onSuccess(new Event.Success<UserModel>(
@@ -59,6 +62,50 @@ public class AuthRepositoryImp implements AuthRepository {
                 cb.onError(new Event.Error<>(e));
             }
         });
+    }
+
+    public void updateCurrUserMail(String mail, CallBack<Boolean> cb){
+        try{
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            user.verifyBeforeUpdateEmail(mail)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "se ha actulizado el mail del usuario actual");
+                                cb.onSuccess(new Event.Success<>(true));
+                            }
+                            else{
+                                cb.onError(new Event.Error<>(task.getException()));
+                            }
+                        }
+                    });
+        }catch(Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
+
+    }
+
+    public void updateCurrUserPassword(String password,CallBack<Boolean> cb){
+        try{
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            user.updatePassword(password)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "Se ha actualizado la contrasenya del usuario actual");
+                                cb.onSuccess(new Event.Success<>(true));
+                            }else{
+                                cb.onError(new Event.Error<>(task.getException()));
+                            }
+                        }
+                    });
+        }catch (Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
     }
 
     public void logout(){

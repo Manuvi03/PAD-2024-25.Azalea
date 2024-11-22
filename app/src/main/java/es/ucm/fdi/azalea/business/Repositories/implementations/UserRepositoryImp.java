@@ -38,22 +38,26 @@ public class UserRepositoryImp implements UserRepository {
 
 
     public void findById(String id, CallBack<UserModel> cb) {
-        userdata = null;
+            userdata = null;
+         try{
+            usersReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if(!task.isSuccessful()){
+                        Log.d(TAG,"Error recuperando los datos",task.getException());
+                        cb.onError(new Event.Error<UserModel>(task.getException()));
 
-       usersReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(!task.isSuccessful()){
-                    Log.d(TAG,"Error recuperando los datos",task.getException());
-                    cb.onError(new Event.Error<UserModel>(task.getException()));
+                    }
+                    else {
+                        Log.d(TAG,String.valueOf(task.getResult().getValue()));
+                        cb.onSuccess(new Event.Success<>(task.getResult().getValue(UserModel.class)));
+                    }
+                }
+            });
+        }catch (Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
 
-                }
-                else {
-                    Log.d(TAG,String.valueOf(task.getResult().getValue()));
-                    cb.onSuccess(new Event.Success<>(task.getResult().getValue(UserModel.class)));
-                }
-            }
-        });
 
     }
 

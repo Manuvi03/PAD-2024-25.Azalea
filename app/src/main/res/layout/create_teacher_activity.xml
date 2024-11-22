@@ -13,11 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
+        android:background="@color/Tickle_me_Pink"
         android:text="@string/createteacher_titleView"
         android:textColor="@color/Amaranth_Purple"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:background="@color/Tickle_me_Pink"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_NameTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,136 +26,147 @@
 
     <TextView
         android:id="@+id/createTeacher_NameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/createteacher_nameText"
         android:theme="@style/createteacher_TextViews"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_nameEditText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_textView" />
 
     <EditText
         android:id="@+id/createTeacher_nameEditText"
-        android:layout_width="333dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/createteacher_namehint"
         android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_namehint"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_surnameTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_NameTextView" />
 
     <TextView
         android:id="@+id/createTeacher_surnameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/createteacher_surnameText"
         android:theme="@style/createteacher_TextViews"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_surnamesEditText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_nameEditText" />
 
     <EditText
         android:id="@+id/createTeacher_surnamesEditText"
-        android:layout_width="333dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/Dark_Purple"
         android:hint="@string/createteacher_surnameEditText"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_genderTextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_surnameTextView" />
 
     <TextView
         android:id="@+id/createTeacher_genderTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/createteacher_genderText"
         android:theme="@style/createteacher_TextViews"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_genderEditText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.107"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_surnamesEditText" />
 
     <EditText
         android:id="@+id/createTeacher_genderEditText"
-        android:layout_width="333dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/createteacher_genderEditText"
         android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_genderEditText"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_emailTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_genderTextView" />
 
     <TextView
         android:id="@+id/createTeacher_emailTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/createteacher_emailText"
         android:theme="@style/createteacher_TextViews"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_emailEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_genderEditText" />
 
     <EditText
         android:id="@+id/createTeacher_emailEditText"
-        android:layout_width="333dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/createteacher_emailEditText"
         android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_emailEditText"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/createteacher_passwordTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_emailTextView" />
 
     <TextView
         android:id="@+id/createteacher_passwordTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/createteacher_passwordText"
         android:theme="@style/createteacher_TextViews"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_passwordEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.122"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_emailEditText" />
 
     <EditText
         android:id="@+id/createTeacher_passwordEditText"
-        android:layout_width="333dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
         android:hint="@string/createteacher_passwordEditText"
         android:inputType="textPassword"
-        android:backgroundTint="@color/Dark_Purple"
         app:layout_constraintBottom_toTopOf="@+id/createTeacher_button"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createteacher_passwordTextView" />
 
     <Button
         android:id="@+id/createTeacher_button"
-        android:layout_width="333dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/Amaranth_Purple"
         android:text="@string/createteacher_ButtonCreateTeacherText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/createTeacher_passwordEditText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
