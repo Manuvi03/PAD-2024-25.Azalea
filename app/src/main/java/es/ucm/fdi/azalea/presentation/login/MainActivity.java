@@ -49,7 +49,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         });
 
         FirebaseApp.initializeApp(this);
-
+        Log.d(TAG, "onCreate: ");
 
         Intent intent = new Intent(this, ParentActivity.class);
         startActivity(intent);

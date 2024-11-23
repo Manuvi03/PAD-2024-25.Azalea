@@ -8,7 +8,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -21,19 +20,21 @@ import es.ucm.fdi.azalea.integration.Event;
 
 public class EventRepositoryImp implements EventRepository {
 
-    DatabaseReference db;
+    private final String TAG = "EventRepositoryImp";
+
+    private final FirebaseDatabase db = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/");
+    private final DatabaseReference eventsReference = db.getReference("events");
 
     @Override
     public void create(EventModel em, CallBack<EventModel> cb) {
-        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
-        DatabaseReference db = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("events");
+        Log.i(TAG, "Entro en create");
         //genero el id del evento
-        String id = db.push().getKey();
+        String id = eventsReference.push().getKey();
         if(id!=null){
             Log.d("EventRepositoryImp", "ID del evento generado: " + id);
             em.setId(id);
             Log.d("EventRepositoryImp", "Evento creado: " + em.toString());
-            db.child(id).setValue(em)
+            eventsReference.child(id).setValue(em)
                     .addOnSuccessListener(task->{
                         Log.d("EventRepositoryImp", "Evento creado correctamente");
                 cb.onSuccess(new Event.Success<>(em));
@@ -47,7 +48,7 @@ public class EventRepositoryImp implements EventRepository {
     }
 
     public void getEventsForDate(String date, CallBack<List<EventModel>> cb ) {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("events");
+        Log.i(TAG, "Entro en getEventsForDate");
 
         db.orderByChild("events").equalTo(date).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

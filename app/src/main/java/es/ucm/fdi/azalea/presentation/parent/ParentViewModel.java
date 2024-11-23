@@ -1,5 +1,7 @@
 package es.ucm.fdi.azalea.presentation.parent;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -26,6 +28,7 @@ public class ParentViewModel extends ViewModel {
     }
 
     public void getEventsForDate(String date) {
+        Log.i(this.getClass().getName(), "getEventsForDate: " + date);
         getEventsForDateUseCase.execute(date).observeForever(events::setValue);
     }
 

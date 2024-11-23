@@ -2,6 +2,7 @@ package es.ucm.fdi.azalea.presentation.parent;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class ParentActivity extends AppCompatActivity {
             return insets;
         });
 
+        Log.i(this.getClass().getName(), "entro en ParentActivity");
+
         resultText = findViewById(R.id.parenthomefragment_textResult);
 
         CalendarView calendarView = findViewById(R.id.parent_calendarView);
@@ -57,14 +60,6 @@ public class ParentActivity extends AppCompatActivity {
 
         parentViewModel =new ParentViewModel();
         parentViewModel.getEventsForDateLiveData().observe(this, this::updateEvents);
-        EventModel em = new EventModel("2024-11-22",
-                "Clase de programación",
-                "Introducción a Firebase y Realtime Database",
-                "10:00 AM",
-                "Aula 101",
-                "2",
-                null);
-        parentViewModel.CreateEvent(em);
 
         calendarView.setOnDateChangeListener((calendar1, year, month, day) -> {
             @SuppressLint("DefaultLocale") String date = String.format("%04d-%02d-%02d", year, month + 1, day);
