@@ -33,18 +33,19 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     @NonNull
     @Override
     public EventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.parent_activity, parent, false);
+        View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventsAdapter.ViewHolder holder, int position) {
+
         EventModel event = mEventsData.get(position);
-        holder.title.setText(event.getTitle());
-        holder.date.setText(event.getDate());
-        holder.time.setText(event.getTime());
-        holder.location.setText(event.getLocation());
-        holder.description.setText(event.getDescription());
+        holder.title.setText(event.getTitle()!=null ? event.getTitle() : "");
+        holder.date.setText(event.getDate()!=null ? event.getDate() : "");
+        holder.time.setText(event.getTime()!=null ? event.getTime() : "");
+        holder.location.setText(event.getLocation()!=null ? event.getLocation() : "");
+        holder.description.setText(event.getDescription()!=null ? event.getDescription() : "");
     }
 
     @Override

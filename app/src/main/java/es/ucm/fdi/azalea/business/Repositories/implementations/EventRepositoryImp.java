@@ -2,13 +2,10 @@ package es.ucm.fdi.azalea.business.Repositories.implementations;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +30,7 @@ public class EventRepositoryImp implements EventRepository {
         if(id!=null){
             Log.d("EventRepositoryImp", "ID del evento generado: " + id);
             em.setId(id);
-            Log.d("EventRepositoryImp", "Evento creado: " + em.toString());
+            Log.d("EventRepositoryImp", "Evento creado: " + em);
             eventsReference.child(id).setValue(em)
                     .addOnSuccessListener(task->{
                         Log.d("EventRepositoryImp", "Evento creado correctamente");
@@ -47,32 +44,33 @@ public class EventRepositoryImp implements EventRepository {
         }
     }
 
-    public void getEventsForDate(String date, CallBack<List<EventModel>> cb ) {
-        Log.i(TAG, "Entro en getEventsForDate");
+    public void getEventsForDate(String date, CallBack<List<EventModel>> cb) {
+        Log.i(TAG, "Entrando en getEventsForDate. Date: " + date);
+        List<EventModel> events = new ArrayList<>();
 
-        db.orderByChild("events").equalTo(date).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<EventModel> events = new ArrayList<>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    EventModel event = snapshot.getValue(EventModel.class);
+        // Crear la consulta
+        Query getEventsForDate = eventsReference.orderByChild("date").equalTo(date);
+
+        // Ejecutar la consulta
+        getEventsForDate.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful() || task.getResult() == null) {
+                Log.e(TAG, "Error al obtener los eventos", task.getException());
+                cb.onError(new Event.Error<>(task.getException()));
+                return;
+            }
+
+            // Procesar los resultados
+            for (DataSnapshot eventSnapshot : task.getResult().getChildren()) {
+                if (eventSnapshot.exists()) {
+                    EventModel event = eventSnapshot.getValue(EventModel.class);
                     if (event != null) {
                         events.add(event);
                     }
                 }
-                if (!events.isEmpty()) {
-                    // Llama al callback con un Event.Success
-                    cb.onSuccess(new Event.Success<>(events));
-                } else {
-                    // Si no hay eventos, devuelve un estado vacío
-                    cb.onSuccess(new Event.Success<>(new ArrayList<>()));
-                }
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                cb.onError(new Event.Error<>(error.toException()));
-            }
+            Log.d(TAG, "Eventos obtenidos correctamente. Devuelvo: " + events.size() + " resultados.");
+            cb.onSuccess(new Event.Success<>(events));
         });
     }
 }

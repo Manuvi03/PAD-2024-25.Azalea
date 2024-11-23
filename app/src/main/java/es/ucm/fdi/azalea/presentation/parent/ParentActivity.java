@@ -14,16 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
-import es.ucm.fdi.azalea.integration.Event;
 
 public class ParentActivity extends AppCompatActivity {
 
@@ -69,14 +65,14 @@ public class ParentActivity extends AppCompatActivity {
 
         @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
         public void updateEvents(List<EventModel> events) {
-            adapter.setEventsData(events);
-            adapter.notifyDataSetChanged();
-            if(events == null) {
-                resultText.setText("@string/parent_recyclerView_empty");
+        Log.i("ParentActivity", "updateEvents: " + events.size());
+            if (events.isEmpty()) {
+                adapter.setEventsData(Collections.emptyList());
+                resultText.setText(getString(R.string.parent_recyclerView_empty));
+            } else {
+                adapter.setEventsData(events);
+                resultText.setText(getString(R.string.parent_recyclerView_result) + ": " + events.size());
             }
-            else{
-                String results = (events.size() +' '+ "@string/parent_recyclerView_e");
-                resultText.setText(results);
-        }
+            adapter.notifyDataSetChanged();
         }
     }
