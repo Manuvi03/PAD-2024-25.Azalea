@@ -20,6 +20,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.FirebaseApp;
+
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
@@ -45,6 +47,9 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        FirebaseApp.initializeApp(this);
+
 
         Intent intent = new Intent(this, ParentActivity.class);
         startActivity(intent);

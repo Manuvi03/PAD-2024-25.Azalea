@@ -12,8 +12,8 @@ public class EventModel {
 
     EventModel(){}
 
-    EventModel(String date, String title, String description, String time,
-               String location, String idClass, String id){
+    public EventModel(String date, String title, String description, String time,
+                      String location, String idClass, String id){
         this.date = date;
         this.title = title;
         this.description = description;

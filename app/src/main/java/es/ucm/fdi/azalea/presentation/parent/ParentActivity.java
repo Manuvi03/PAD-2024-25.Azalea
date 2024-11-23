@@ -57,25 +57,14 @@ public class ParentActivity extends AppCompatActivity {
 
         parentViewModel =new ParentViewModel();
         parentViewModel.getEventsForDateLiveData().observe(this, this::updateEvents);
-
-
-        TODO
-        EventModel em = new EventModel("2024-11-21", "Examen", "Examen de lengua", "18:00", "2");
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("events");
-        //genero el id del evento
-        String id = db.push().getKey();
-        if(id!=null){
-            em.setId(id);
-
-            db.child(id).setValue(em)
-                    .addOnSuccessListener(task->{
-                        cb.onSuccess(new Event.Success<>(em));
-                    })      .addOnFailureListener(e->{
-                        cb.onError(new Event.Error<>(e));
-                    });
-        }else{
-            cb.onError(new Event.Error<>(new Exception("Error al crear el evento")));
-        }
+        EventModel em = new EventModel("2024-11-22",
+                "Clase de programación",
+                "Introducción a Firebase y Realtime Database",
+                "10:00 AM",
+                "Aula 101",
+                "2",
+                null);
+        parentViewModel.CreateEvent(em);
 
         calendarView.setOnDateChangeListener((calendar1, year, month, day) -> {
             @SuppressLint("DefaultLocale") String date = String.format("%04d-%02d-%02d", year, month + 1, day);

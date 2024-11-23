@@ -1,11 +1,14 @@
 package es.ucm.fdi.azalea.business.Repositories.implementations;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,17 +25,20 @@ public class EventRepositoryImp implements EventRepository {
 
     @Override
     public void create(EventModel em, CallBack<EventModel> cb) {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("events");
+        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+        DatabaseReference db = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("events");
         //genero el id del evento
         String id = db.push().getKey();
-
         if(id!=null){
+            Log.d("EventRepositoryImp", "ID del evento generado: " + id);
             em.setId(id);
-
+            Log.d("EventRepositoryImp", "Evento creado: " + em.toString());
             db.child(id).setValue(em)
                     .addOnSuccessListener(task->{
+                        Log.d("EventRepositoryImp", "Evento creado correctamente");
                 cb.onSuccess(new Event.Success<>(em));
             })      .addOnFailureListener(e->{
+                Log.d("EventRepositoryImp", "Error al crear el evento", e);
                 cb.onError(new Event.Error<>(e));
             });
         }else{

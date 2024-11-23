@@ -28,7 +28,7 @@ public class CreateEventUseCase {
 
             @Override
             public void onError(Event.Error<EventModel> error) {
-                resultLiveData.postValue(error.);
+                resultLiveData.postValue(null);
             }
         });
     }
