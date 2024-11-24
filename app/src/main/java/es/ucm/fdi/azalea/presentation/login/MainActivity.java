@@ -20,11 +20,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.FirebaseApp;
+
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.presentation.createteacher.CreateTeacherActivity;
-import es.ucm.fdi.azalea.presentation.parent.parentActivity;
+import es.ucm.fdi.azalea.presentation.parent.ParentActivity;
 import es.ucm.fdi.azalea.presentation.passwordrecovery.PasswordRecoveryActivity;
 import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
 
@@ -51,6 +53,11 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        FirebaseApp.initializeApp(this);
+        Log.d(TAG, "onCreate: ");
+
+
         // inicializamos el viewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         mailEditText = findViewById(R.id.editTextEmailAddress);
@@ -105,7 +112,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
                 UserModel userdata = ((Event.Success<UserModel>) event).getData();
                 if(userdata.getParent()){
                     Log.d(TAG, "el usuario es padre");
-                    switchActivityIntent = new Intent(this, parentActivity.class);
+                    switchActivityIntent = new Intent(this, ParentActivity.class);
                 }
                 else{
                     Log.d(TAG, "el usuario es profesor");

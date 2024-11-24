@@ -4,13 +4,13 @@
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
-    <string name="classroom_loading_string">Loading...</string>
     <string name="classroom_results_string">Results</string>
+    <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_no_students_string">No students</string>
-
-    <!--CreateTeacher-->
     <string name="classroom_search_error">Failed to search classroom students</string>
     <string name="classroom_searchview_queryhint">Search student</string>
+    <!--CreateTeacher-->
+
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
     <string name="createteacher_surnameText">Surnames</string>
@@ -38,6 +38,14 @@
     <string name="login_error">Failed to log in, incorrect username or password</string>
 
     <!--Parent-->
+    <string name="parent_recyclerView_empty">Ther\'re no events</string>
+    <string name="parent_recyclerView_title">Event\'s Title</string>
+    <string name="parent_recyclerView_date">Date</string>
+    <string name="parent_recyclerView_time">Time</string>
+    <string name="parent_recyclerView_location">Location</string>
+    <string name="parent_recyclerView_description">Description</string>
+    <string name="parent_recyclerView_result">Results</string>
+    <string name="parent_recyclerView_titleEvent">events</string>
     <!--PasswordRecovery-->
     <string name="passwordRecovery_button">Reset Password</string>
     <string name="passwordRecovery_text"><u>Did you forget your password?</u></string>
