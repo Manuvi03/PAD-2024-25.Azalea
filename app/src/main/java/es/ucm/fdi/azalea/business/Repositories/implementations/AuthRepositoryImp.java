@@ -49,7 +49,8 @@ public class AuthRepositoryImp implements AuthRepository {
             try{
                 UserModel data = new UserModel();
                 if(task.isSuccessful()){
-
+                    data.setPassword(password);
+                    data.setEmail(mail);
                     data.setId(task.getResult().getUser().getUid());
                     cb.onSuccess(new Event.Success<>(data));
                 }else{

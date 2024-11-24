@@ -6,6 +6,8 @@ public class ClassRoomModel {
     private String id;
     private String name;
     private List<String> subjects;
+    private List<String> alumnos;
+    private String idTeacher;
 
     public ClassRoomModel() {}
 
@@ -37,5 +39,21 @@ public class ClassRoomModel {
 
     public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
+    }
+
+    public List<String> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<String> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+    public String getIdTeacher() {
+        return idTeacher;
+    }
+
+    public void setIdTeacher(String idTeacher) {
+        this.idTeacher = idTeacher;
     }
 }
