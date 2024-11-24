@@ -51,18 +51,16 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         FirebaseApp.initializeApp(this);
         Log.d(TAG, "onCreate: ");
 
-        Intent intent = new Intent(this, ParentActivity.class);
-        startActivity(intent);
 
-  /*      // inicializamos el viewModel
+        // inicializamos el viewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         mailEditText = findViewById(R.id.editTextEmailAddress);
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.button_login);
-*/
-       // initListeners();
 
-        //start_animations();
+        initListeners();
+
+        start_animations();
 
         /*
         // estoy probando el firebase database
@@ -92,12 +90,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
     }
 
     private void initListeners(){
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginViewModel.doLogIn(mailEditText.getText().toString(),passwordEditText.getText().toString());
-            }
-        });
+        loginButton.setOnClickListener(view -> loginViewModel.doLogIn(mailEditText.getText().toString(),passwordEditText.getText().toString()));
 
         //tambien declaramos la mainActivity como observer de LoginViewModel
         loginViewModel.getLoginEvent().observe(this,event ->{

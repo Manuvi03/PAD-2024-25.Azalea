@@ -37,6 +37,8 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
     private final List<CalendarDay> eventDays = new ArrayList<>(); // Lista para almacenar los días con eventos
     private CalendarDay previouslySelectedDay; // Referencia al día seleccionado previamente
 
+    private final String TAG = "ParentHomeFragmentActivity";
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,15 +52,15 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
         });
         AndroidThreeTen.init(this); //inicializacion de la libreria de fechas
 
-        Log.i(this.getClass().getName(), "entro en ParentActivity");
+        Log.i(TAG, "entro en ParentHomeFragmentActivity");
 
         resultText = findViewById(R.id.parenthomefragment_textResult);
 
-        calendarView = findViewById(R.id.parent_calendarView);
+        calendarView = findViewById(R.id.parenthomefragment_calendarView);
         Calendar today = Calendar.getInstance();
         calendarView.setSelectedDates(Collections.singletonList(today));
 
-        RecyclerView recyclerView = findViewById(R.id.parent_recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.parenthomefragment_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -86,7 +88,7 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
         // Llamada para obtener los eventos de hoy
         LocalDate currentDate = LocalDate.now();
         String formattedDate = currentDate.format(DateTimeFormatter.ISO_DATE);
-        Log.i("ParentActivity", "formattedDate: " + formattedDate);
+        Log.i(TAG, "formattedDate: " + formattedDate);
 
         parentHomeFragmentViewModel.getEventsForDate(formattedDate);
 
@@ -94,7 +96,7 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     public void updateEvents(List<EventModel> events) {
-        Log.i("ParentActivity", "updateEvents: " + events.size());
+        Log.i(TAG, "updateEvents: " + events.size());
         if (events.isEmpty()) {
             adapter.setEventsData(Collections.emptyList());
             resultText.setText(getString(R.string.parent_recyclerView_empty));
@@ -106,7 +108,7 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
     }
 
     public void paintDaysWithEvents(List<EventModel> events) {
-        Log.i("ParentActivity", "paintDaysWithEvents: " + events.size());
+        Log.i(TAG, "paintDaysWithEvents: " + events.size());
         eventDays.clear(); // Limpiar la lista de días con eventos antes de añadir los nuevos
         for (EventModel event : events) {
             Calendar calendar = Calendar.getInstance();
