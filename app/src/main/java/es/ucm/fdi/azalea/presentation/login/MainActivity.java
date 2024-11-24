@@ -20,10 +20,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.FirebaseApp;
+
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
-import es.ucm.fdi.azalea.presentation.parent.parentActivity;
+import es.ucm.fdi.azalea.presentation.parent.ParentActivity;
 import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
 
  public class MainActivity extends AppCompatActivity {
@@ -45,15 +47,22 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // inicializamos el viewModel
+
+        FirebaseApp.initializeApp(this);
+        Log.d(TAG, "onCreate: ");
+
+        Intent intent = new Intent(this, ParentActivity.class);
+        startActivity(intent);
+
+  /*      // inicializamos el viewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         mailEditText = findViewById(R.id.editTextEmailAddress);
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.button_login);
+*/
+       // initListeners();
 
-        initListeners();
-
-        start_animations();
+        //start_animations();
 
         /*
         // estoy probando el firebase database
@@ -102,7 +111,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
                 UserModel userdata = ((Event.Success<UserModel>) event).getData();
                 if(userdata.getParent()){
                     Log.d(TAG, "el usuario es padre");
-                    switchActivityIntent = new Intent(this, parentActivity.class);
+                    switchActivityIntent = new Intent(this, ParentActivity.class);
                 }
                 else{
                     Log.d(TAG, "el usuario es profesor");

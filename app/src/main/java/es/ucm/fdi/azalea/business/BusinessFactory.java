@@ -12,6 +12,7 @@ import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.EventModel;
 import es.ucm.fdi.azalea.business.model.MessageModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
 
 public abstract class BusinessFactory {
     private static BusinessFactory instance;
@@ -25,7 +26,7 @@ public abstract class BusinessFactory {
     }
 
     public abstract StudentRepository getStudentRepository();
-    public abstract EventRepository EventRepository();
+    public abstract EventRepository getEventRepository();
     public abstract MessageRepository getMessageRepository();
     public abstract ChatRepository getChatRepository();
     public abstract ClassRoomRepository getClassRoomRepository();

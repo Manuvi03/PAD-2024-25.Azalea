@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    tools:context=".presentation.parent.EventsAdapter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Título del evento -->
+        <TextView
+            android:id="@+id/eventTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/parent_recyclerView_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#4A004A"
+            tools:text="Conferencia sobre Innovación" />
+
+        <!-- Layout horizontal para fecha y hora -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Fecha del evento -->
+            <TextView
+                android:id="@+id/eventDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/parent_recyclerView_date"
+                android:textSize="14sp"
+                android:textColor="#750075"
+                tools:text="25 Noviembre" />
+
+            <!-- Separador entre fecha y hora -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" | "
+                android:textSize="14sp"
+                android:textColor="#750075" />
+
+            <!-- Hora del evento -->
+            <TextView
+                android:id="@+id/eventTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora"
+                android:textSize="14sp"
+                android:textColor="#750075"
+                tools:text="10:00 AM" />
+        </LinearLayout>
+
+        <!-- Sitio del evento -->
+        <TextView
+            android:id="@+id/eventLocationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubicación"
+            android:textSize="14sp"
+            android:textColor="#750075"
+            tools:text="Auditorio Principal, Campus Virtual" />
+
+        <!-- Descripción del evento -->
+        <TextView
+            android:id="@+id/eventDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textSize="14sp"
+            android:textColor="#333"
+            tools:text="Únete a nosotros para una charla sobre los últimos avances en tecnología educativa y aprendizaje remoto." />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

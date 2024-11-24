@@ -34,9 +34,4 @@ public abstract class Event<T> {
         public Loading() {
         }
     }
-
-    public static final class Empty<T> extends Event<T> {
-        public Empty() {
-        }
-    }
 }
