@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.FirebaseApp;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
@@ -51,6 +52,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         FirebaseApp.initializeApp(this);
         Log.d(TAG, "onCreate: ");
 
+        AndroidThreeTen.init(this); //inicializacion de la libreria de fecha
 
         // inicializamos el viewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);

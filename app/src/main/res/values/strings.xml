@@ -58,4 +58,5 @@
     <string name="teacher_navbar_home_text">Inicio</string>
     <string name="teacher_navbar_classroom_text">Clase</string>
     <string name="teacher_navbar_profile">Perfil</string>
+    <string name="teacherhomefragment_textButton">Crear Evento</string>
 </resources>

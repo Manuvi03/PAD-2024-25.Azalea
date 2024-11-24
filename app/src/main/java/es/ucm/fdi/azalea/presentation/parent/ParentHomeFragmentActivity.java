@@ -50,7 +50,6 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        AndroidThreeTen.init(this); //inicializacion de la libreria de fechas
 
         Log.i(TAG, "entro en ParentHomeFragmentActivity");
 
