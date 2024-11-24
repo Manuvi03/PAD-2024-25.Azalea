@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation (libs.play.services.auth)
     implementation(libs.play.services.tasks)
+    implementation (libs.material.calendar.view)
+    implementation (libs.threetenabp)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

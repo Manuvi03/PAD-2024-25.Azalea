@@ -69,7 +69,34 @@ public class EventRepositoryImp implements EventRepository {
                 }
             }
 
-            Log.d(TAG, "Eventos obtenidos correctamente. Devuelvo: " + events.size() + " resultados.");
+            Log.d(TAG + "getEventsForDate", "Eventos obtenidos correctamente. Devuelvo: " + events.size() + " resultados.");
+            cb.onSuccess(new Event.Success<>(events));
+        });
+    }
+
+    @Override
+    public void getEventsForClassroom(String idclassroom, CallBack<List<EventModel>> cb) {
+        Log.i(TAG + "getEventsForClassroom", "Entrando en getEventsForClassroom. ClassroomId: " + idclassroom);
+        List<EventModel> events = new ArrayList<>();
+        Query getEventsForClassroom = eventsReference.orderByChild("idClass").equalTo(idclassroom);
+        getEventsForClassroom.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful() || task.getResult() == null) {
+                Log.e(TAG + "getEventsForClassroom", "Error al obtener los eventos", task.getException());
+                cb.onError(new Event.Error<>(task.getException()));
+                return;
+            }
+            Log.d(TAG + "getEventsForClassroom", "Eventos obtenidos correctamente. Devuelvo: " + task.getResult().getChildrenCount() + " resultados.");
+            for (DataSnapshot eventSnapshot : task.getResult().getChildren()) {
+                Log.d(TAG + "getEventsForClassroom", "Evento obtenido: " + eventSnapshot.getValue());
+                if (eventSnapshot.exists()) {
+                    EventModel event = eventSnapshot.getValue(EventModel.class);
+                    if (event != null) {
+                        events.add(event);
+                    }
+                }
+            }
+
+            Log.d(TAG + "getEventsForClassroom", "Eventos obtenidos correctamente. Devuelvo: " + events.size() + " resultados.");
             cb.onSuccess(new Event.Success<>(events));
         });
     }

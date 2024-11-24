@@ -4,7 +4,7 @@
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
-    <string name="classroom_loading_string">Loading...</string>
+    <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_no_students_string">No students</string>
 
     <!--CreateTeacher-->
@@ -47,7 +47,6 @@
     <string name="parent_recyclerView_location">Location</string>
     <string name="parent_recyclerView_description">Description</string>
     <string name="parent_recyclerView_result">Results</string>
-    <string name="parent_recyclerView_notresult">There\'re no events</string>
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
