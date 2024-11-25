@@ -22,13 +22,18 @@ public class ChatRepositoryImp implements ChatRepository {
     private final DatabaseReference chatsReference = database.getReference("chats");
 
     @Override
-    public void getOrCreateChat(String chatId, CallBack<ChatModel> cb) {
-        readById(chatId, cb);
+    public void create(ChatModel model, CallBack<ChatModel> cb) {
+        Log.i(TAG, "Create del chat");
 
-    }
+        chatsReference.child(model.getId()).setValue(model, new OnCompleteListener<DataSnapshot>() {
 
-    private void create(ChatModel model) {
-        chatsReference.child(model.getId()).setValue(model);
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()){
+
+                }
+            }
+        });
         Log.d(TAG, "Chat created with id: " + model.getId());
     }
 
@@ -49,11 +54,6 @@ public class ChatRepositoryImp implements ChatRepository {
                 }
             }
         });
-
-    }
-
-    @Override
-    public void delete(String id) {
 
     }
 

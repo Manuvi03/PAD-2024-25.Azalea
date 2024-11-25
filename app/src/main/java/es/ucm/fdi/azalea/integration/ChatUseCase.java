@@ -1,5 +1,7 @@
 package es.ucm.fdi.azalea.integration;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.android.gms.tasks.Task;
 
 import es.ucm.fdi.azalea.business.BusinessFactory;
@@ -14,23 +16,16 @@ public class ChatUseCase {
         this.repositoryImp = new ChatRepositoryImp();
     }
 
-    private String getChatRoomId(String user1, String user2){ //TODO intentar que siempre este el del profe delante.
-        if(user1.hashCode() < user2.hashCode())
-            return user1 + "+" + user2;
-        return user2 + "+" + user1;
-     }
-
-    public void getOrCreateChat(String chatId, CallBack<ChatModel> callBack) {
-        repositoryImp.getOrCreateChat(chatId, callBack);
-
+    private String getChatRoomId(String teacher, String parent){ //Construyo el id del chat con ambos ids
+        return teacher + "+" + parent;
     }
 
-    private void handleChat(String chatId, CallBack<ChatModel> cb){
+    public void getChat(String teacherId, String parentId, CallBack<ChatModel> cb){
+        String chatId = getChatRoomId(teacherId, parentId);
+
         BusinessFactory.getInstance().getChatRepository().readById(chatId, new CallBack<ChatModel>() {
             @Override
-            public void onSuccess(Event.Success<ChatModel> success) {
-                if (success.get)
-            }
+            public void onSuccess(Event.Success<ChatModel> success) {cb.onSuccess(success);}
 
             @Override
             public void onError(Event.Error<ChatModel> error) {
