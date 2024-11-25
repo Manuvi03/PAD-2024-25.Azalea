@@ -19,9 +19,22 @@ public class ClassRoomRepositoryImp implements ClassRoomRepository {
     @Override
     public void create(ClassRoomModel data, CallBack<ClassRoomModel> cb) {
         try{
-            classRoomReference.child(data.getId()).setValue(data);
-            Log.d(TAG, "User created with key: " + data.getId());
-            cb.onSuccess(new Event.Success<>(data));
+            String key = classRoomReference.push().getKey();
+            if(key != null)
+            {
+                data.setId(key);
+                classRoomReference.child(key).setValue(data).addOnSuccessListener(event->{
+                    Log.d(TAG, "ClassRoom created with key: " + data.getId());
+                    cb.onSuccess(new Event.Success<>(data));
+                }).addOnFailureListener(e->{
+                    Log.d(TAG,"Failed to create ClassRoom",e);
+                    cb.onError(new Event.Error<>(e));
+                });
+
+                cb.onSuccess(new Event.Success<>(data));
+            }else{
+                cb.onError(new Event.Error<>(new Exception("Error al crear la clase")));
+            }
         }catch(Exception e){
             cb.onError(new Event.Error<>(e));
         }

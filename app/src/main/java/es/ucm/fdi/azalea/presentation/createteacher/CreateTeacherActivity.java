@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -49,7 +50,17 @@ public class CreateTeacherActivity extends AppCompatActivity {
 
 
     private void initListeners(){
+        createTeacherViewModel.getAuthenticateTeacherEvent().observe(this,booleanEvent -> {
+            if(booleanEvent instanceof Event.Success){
+                //TODO logica para cambiar de fragment y preguntar por el nombre de la clase
+            }
+            else if(booleanEvent instanceof Event.Error){
+                Toast.makeText(this,R.string.createteacher_teacherAuthError,Toast.LENGTH_LONG).show();
+            }
+            else{
 
+            }
+        });
         createTeacherViewModel.getCreateTeacherEvent().observe(this, event->{
             if(event instanceof Event.Success){
 

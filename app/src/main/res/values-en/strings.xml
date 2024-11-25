@@ -24,6 +24,7 @@
     <string name="createteacher_emailEditText">Your Email address</string>
     <string name="createteacher_passwordEditText">Your password</string>
     <string name="createteacher_filledFieldError">This field is required</string>
+    <string name="createteacher_teacherAuthError">This Email has alread been used</string>
 
     <!--EditProfile-->
     <!--EditStudent-->
