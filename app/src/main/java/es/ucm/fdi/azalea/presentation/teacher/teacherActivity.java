@@ -63,7 +63,7 @@ public class teacherActivity extends AppCompatActivity {
     }
 
     // reemplaza el fragmento actual por el seleccionado en la barra de navegacion
-    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+    public void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.teacher_fragment_container_view, c, null)

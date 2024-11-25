@@ -8,10 +8,11 @@ import es.ucm.fdi.azalea.business.model.UserModel;
 //esta clase tiene dos funciones una para autenticar al profesor y otra para crear la clase y el usuario en la base de datos
 public class createTeacherUseCase {
 
-    public void createTeacher(UserModel data, CallBack<Boolean> cb){
+    public void createTeacher(UserModel data,String className, CallBack<Boolean> cb){
         try{
             ClassRoomModel new_class = new ClassRoomModel();
             new_class.setIdTeacher(data.getId());
+            new_class.setName(className);
             BusinessFactory.getInstance().getClassRoomRepository().create(new_class, new CallBack<ClassRoomModel>() {
                 @Override
                 public void onSuccess(Event.Success<ClassRoomModel> success) {

@@ -25,9 +25,6 @@
             android:name=".presentation.editprofile.EditProfileFragment"
             android:exported="false" />
         <activity
-            android:name=".presentation.createteacher.CreateTeacherActivity"
-            android:exported="false"/>
-        <activity
             android:name=".presentation.passwordrecovery.PasswordRecoveryActivity"
             android:exported="false"/>
         <activity

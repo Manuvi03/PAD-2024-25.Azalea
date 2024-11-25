@@ -15,6 +15,19 @@ public class CreateTeacherViewModel extends ViewModel {
     private MutableLiveData<Event<String>> createTeacherEvent;
     private MutableLiveData<Event<Boolean>> authenticateTeacherEvent;
 
+    //este userdata le utilizamos para pasar informacion entre fragments mediante el viewModel
+    private UserModel userdata;
+
+    public UserModel getUserdata() {
+        return userdata;
+    }
+
+    public void setUserdata(UserModel userdata) {
+        this.userdata = userdata;
+    }
+
+
+
     public CreateTeacherViewModel() {
         usecase = new createTeacherUseCase();
         createTeacherEvent = new MutableLiveData<>();
@@ -35,18 +48,18 @@ public class CreateTeacherViewModel extends ViewModel {
         });
     }
 
-    public void createTeacher(UserModel data){
+    public void createTeacher(UserModel data,String className){
         createTeacherEvent.postValue(new Event.Loading<>());
 
-        usecase.createTeacher(data, new CallBack<Boolean>() {
+        usecase.createTeacher(data,className, new CallBack<Boolean>() {
             @Override
             public void onSuccess(Event.Success<Boolean> success) {
-
+                createTeacherEvent.postValue(new Event.Success<String>(""));
             }
 
             @Override
             public void onError(Event.Error<Boolean> error) {
-
+                createTeacherEvent.postValue(new Event.Error<>(error.getException()));
             }
         });
     }

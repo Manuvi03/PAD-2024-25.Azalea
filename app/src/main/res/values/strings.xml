@@ -28,6 +28,13 @@
     <string name="createteacher_teacherAuthError">Este Email ya se encuentra asociado a un usuario</string>
 
 
+    <!--ClassRoomName-->
+    <string name ="ClassRoomName_acceptButton">Aceptar</string>
+    <string name ="ClassRoomName_lastStepTextView">¡Último paso!</string>
+    <string name ="ClassRoomName_hint">Nombre de tu clase</string>
+    <string name ="ClassRoomName_successToast">Cuenta de profesor creada correctamente</string>
+
+
     <!--EditProfile-->
     <!--EditStudent-->
     <!--GradeSubject-->

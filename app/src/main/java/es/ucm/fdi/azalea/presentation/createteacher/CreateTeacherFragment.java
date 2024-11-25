@@ -1,24 +1,26 @@
 package es.ucm.fdi.azalea.presentation.createteacher;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
-import es.ucm.fdi.azalea.databinding.ActivityMainBinding;
-import es.ucm.fdi.azalea.databinding.CreateTeacherActivityBinding;
+import es.ucm.fdi.azalea.databinding.CreateTeacherFragmentBinding;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.login.MainActivity;
 
-public class CreateTeacherActivity extends AppCompatActivity {
-    private CreateTeacherActivityBinding binding;
+public class CreateTeacherFragment extends Fragment {
+    private CreateTeacherFragmentBinding binding;
 
     private CreateTeacherViewModel createTeacherViewModel;
 
@@ -30,13 +32,14 @@ public class CreateTeacherActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = CreateTeacherActivityBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
 
-        createTeacherViewModel = new ViewModelProvider(this).get(CreateTeacherViewModel.class);
+        binding = CreateTeacherFragmentBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
+
+
+        createTeacherViewModel = new ViewModelProvider(requireActivity()).get(CreateTeacherViewModel.class);
         nameEditText = binding.createTeacherNameEditText;
         surnameEditText = binding.createTeacherEmailEditText;
         genderEditText = binding.createTeacherGenderEditText;
@@ -45,33 +48,26 @@ public class CreateTeacherActivity extends AppCompatActivity {
         createTeacher_button = binding.createTeacherButton;
 
         initListeners();
-
+        return view;
     }
 
 
     private void initListeners(){
-        createTeacherViewModel.getAuthenticateTeacherEvent().observe(this,booleanEvent -> {
+        createTeacherViewModel.getAuthenticateTeacherEvent().observe(requireActivity(),booleanEvent -> {
             if(booleanEvent instanceof Event.Success){
-                //TODO logica para cambiar de fragment y preguntar por el nombre de la clase
+                //LLama directamente al supportFragmentManager para cambiar
+                requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
+                ).replace(R.id.teacher_fragment_container_view, ClassRoomNameFragment.class,null);
             }
             else if(booleanEvent instanceof Event.Error){
-                Toast.makeText(this,R.string.createteacher_teacherAuthError,Toast.LENGTH_LONG).show();
+                Toast.makeText(requireActivity(),R.string.createteacher_teacherAuthError,Toast.LENGTH_LONG).show();
             }
             else{
-
+                //TODO crear los loadingView
             }
         });
-        createTeacherViewModel.getCreateTeacherEvent().observe(this, event->{
-            if(event instanceof Event.Success){
 
-            }
-            else if(event instanceof Event.Error){
 
-            }
-            else{
-
-            }
-        });
 
         createTeacher_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +79,8 @@ public class CreateTeacherActivity extends AppCompatActivity {
                     userdata.setSurname(surnameEditText.getText().toString());
                     userdata.setGender(genderEditText.getText().toString());
                     userdata.setEmail(mailEditText.getText().toString());
-                    createTeacherViewModel.createTeacher(userdata);
+                    createTeacherViewModel.setUserdata(userdata);
+                    createTeacherViewModel.authenticateTeacher(userdata.getEmail(),userdata.getPassword());
 
                 }
 

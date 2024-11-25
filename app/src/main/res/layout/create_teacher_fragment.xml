@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Misty_Rose"
-    tools:context=".presentation.createteacher.CreateTeacherActivity">
+    tools:context=".presentation.createteacher.CreateTeacherFragment">
 
     <TextView
         android:id="@+id/createTeacher_textView"

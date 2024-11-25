@@ -26,6 +26,13 @@
     <string name="createteacher_filledFieldError">This field is required</string>
     <string name="createteacher_teacherAuthError">This Email has alread been used</string>
 
+
+    <!--ClassRoomName-->
+    <string name ="ClassRoomName_acceptButton">Aceptar</string>
+    <string name ="ClassRoomName_lastStepTextView">Last step!</string>
+    <string name ="ClassRoomName_hint">Your Clasroom name</string>
+    <string name ="ClassRoomName_successToast">Teacher account signed in </string>
+
     <!--EditProfile-->
     <!--EditStudent-->
     <!--GradeSubject-->
