@@ -1,7 +1,7 @@
 <resources>
     <!--AddEvent-->
     <string name="addevent_title">Título</string>
-    <string name="addevent_date">Fecha (YYYY-MM-DD</string>
+    <string name="addevent_date">Fecha (YYYY-MM-DD)</string>
     <string name="addevent_hour">Hora (HH:MM)</string>
     <string name="addevent_location">Localización</string>
     <string name="addevent_description">Descripción</string>
@@ -53,6 +53,11 @@
     <!--ModifyFragment-->
     <string name="modifyevent_buttonString">Modificar</string>
     <string name="modifyevent_string">Modificar Evento</string>
+    <string name="modifyevent_toastCorrect">Evento creado correctamente</string>
+    <string name="modifyevent_toastIncorrect">Error al modificar el evento. Inténtelo de nuevo</string>
+    <string name="modifyevent_toastNoData">No se han recibido datos</string>
+    <string name="modifyevent_toastTitleEmpty">El título no puede estar vacío</string>
+    <string name="modifyevent_toastDateEmpty">La fecha no puede estar vacía</string>
     <!--Parent-->
     <string name="parent_recyclerView_empty">No hay eventos</string>"
     <string name="parent_recyclerView_title">Titulo Evento</string>

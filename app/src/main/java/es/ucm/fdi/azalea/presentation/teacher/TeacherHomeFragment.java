@@ -30,9 +30,11 @@ import java.util.List;
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
 import es.ucm.fdi.azalea.presentation.addevent.AddEventFragment;
+import es.ucm.fdi.azalea.presentation.modifyevent.ModifyEventFragment;
 
-public class TeacherHomeFragment extends Fragment {
+public class TeacherHomeFragment extends Fragment implements EventsTeacherAdapter.OnEventButtonClickListener {
 
+    private View view;
     private TeacherHomeFragmentViewModel teacherHomeFragmentViewModel;
     private EventsTeacherAdapter adapter;
     private TextView resultText;
@@ -44,9 +46,9 @@ public class TeacherHomeFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.teacher_home_fragment, container, false);
+        view = inflater.inflate(R.layout.teacher_home_fragment, container, false);
 
         resultText = view.findViewById(R.id.teacherhomefragment_textResult);
         MaterialButton button = view.findViewById(R.id.teacherhomefragment_buttonCreateEvent);
@@ -60,11 +62,25 @@ public class TeacherHomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new EventsTeacherAdapter(new ArrayList<>(), getContext(), event -> {
-            Log.d(TAG, "Se cambia de fragment a EditEventFragment");
+            Log.d(TAG, "Se cambia de fragment a ModifyEventFragment");
+
+            // Crear un Bundle con los datos del evento
+            Bundle bundle = new Bundle();
+            bundle.putString("id", event.getId());
+            bundle.putString("title", event.getTitle());
+            bundle.putString("date", event.getDate());
+            bundle.putString("time", event.getTime());
+            bundle.putString("location", event.getLocation());
+            bundle.putString("description", event.getDescription());
+            bundle.putString("idClass", event.getIdClass());
+            Log.d(TAG, "Datos del evento: " + bundle);
+            // Transición al ModifyEventFragment con los datos del evento
+            ModifyEventFragment fragment = new ModifyEventFragment();
+            fragment.setArguments(bundle);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.teacher_fragment_container_view, AddEventFragment.class, null)
-                    .addToBackStack("AddEventFragment") // Agregar a la pila de retroceso
+                    .replace(R.id.teacher_fragment_container_view, fragment)
+                    .addToBackStack("ModifyEventFragment")
                     .commit();
         });
         recyclerView.setAdapter(adapter);
@@ -95,12 +111,7 @@ public class TeacherHomeFragment extends Fragment {
         teacherHomeFragmentViewModel.getEventsForDate(formattedDate);
 
         button.setOnClickListener(v -> {
-            Log.d(TAG, "Se cambia de fragment a AddEventFragment");
-            ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .replace(R.id.teacher_fragment_container_view, AddEventFragment.class, null)
-                    .addToBackStack("AddEventFragment") // Agregar a la pila de retroceso
-                    .commit();
+            navigateToAddEventFragment();
         });
 
         return view;
@@ -160,4 +171,23 @@ public class TeacherHomeFragment extends Fragment {
         previouslySelectedDay = selectedDay;
     }
 
+    @Override
+    public void onButtonClick(EventModel event) {
+        Log.d(TAG, "Se cambia de fragment a ModifyEventFragment");
+        ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.teacher_fragment_container_view, ModifyEventFragment.class, null)
+                .addToBackStack("ModifyEventFragment") // Agregar a la pila de retroceso
+                .commit();
+
+    }
+
+    private void navigateToAddEventFragment() {
+        Log.d(TAG, "Se cambia de fragment a AddEventFragment");
+        ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.teacher_fragment_container_view, AddEventFragment.class, null)
+                .addToBackStack("AddEventFragment")
+                .commit();
+    }
 }

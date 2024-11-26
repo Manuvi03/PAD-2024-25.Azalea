@@ -46,6 +46,7 @@
     <string name="login_error">Failed to log in, incorrect username or password</string>
 
     <!--Parent-->
+    <string name="modifyevent_toastCorrect">Event modified successfully</string>
     <string name="parent_recyclerView_empty">Ther\'re no events</string>
     <string name="parent_recyclerView_title">Event\'s Title</string>
     <string name="parent_recyclerView_date">Date</string>
@@ -68,5 +69,9 @@
     <string name="parent_recyclerView_modify">Modify</string>
     <string name="modifyevent_buttonString">Modify</string>
     <string name="modifyevent_string">Modify Event</string>
+    <string name="modifyevent_toastIncorrect">Error modifying the event. Try again</string>
+    <string name="modifyevent_toastNoData">No data received</string>
+    <string name="modifyevent_toastTitleEmpty">Title cannot be empty</string>
+    <string name="modifyevent_toastDateEmpty">Date cannot be empty</string>
 
 </resources>

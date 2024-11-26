@@ -12,6 +12,7 @@ import es.ucm.fdi.azalea.business.model.EventModel;
 import es.ucm.fdi.azalea.integration.CreateEventUseCase;
 import es.ucm.fdi.azalea.integration.GetEventsForDateUseCase;
 import es.ucm.fdi.azalea.integration.GetEventsFromClassroomUseCase;
+import es.ucm.fdi.azalea.integration.ModifyEventUseCase;
 
 public class TeacherHomeFragmentViewModel extends ViewModel {
     private final GetEventsForDateUseCase getEventsForDateUseCase;
@@ -46,6 +47,12 @@ public class TeacherHomeFragmentViewModel extends ViewModel {
     public void CreateEvent(EventModel em){
         CreateEventUseCase createEventUseCase = new CreateEventUseCase(em);
         createEventUseCase.execute(em).observeForever(event::setValue);
+    }
 
+    public LiveData<EventModel> modifyEventLiveData(){return event;}
+
+    public void ModifyEvent(EventModel em){
+        ModifyEventUseCase modifyEventUseCase = new ModifyEventUseCase();
+        modifyEventUseCase.execute(em).observeForever(event::setValue);
     }
 }

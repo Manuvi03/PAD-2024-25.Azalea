@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.teacher;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,8 @@ import java.util.List;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
-import es.ucm.fdi.azalea.presentation.parent.EventsParentAdapter;
 
-public class EventsTeacherAdapter  extends RecyclerView.Adapter<EventsTeacherAdapter.ViewHolder>{
+public class EventsTeacherAdapter extends RecyclerView.Adapter<EventsTeacherAdapter.ViewHolder> {
 
     private List<EventModel> mEventsData;
     private final LayoutInflater mInflater;
@@ -30,7 +30,7 @@ public class EventsTeacherAdapter  extends RecyclerView.Adapter<EventsTeacherAda
     public EventsTeacherAdapter(List<EventModel> EventsInfoArrayList, Context context, OnEventButtonClickListener buttonClickListener) {
         this.mInflater = LayoutInflater.from(context);
         this.mEventsData = EventsInfoArrayList;
-        this.modifyButtonClickListener = (OnEventButtonClickListener) context;
+        this.modifyButtonClickListener = buttonClickListener;
     }
 
     public void setEventsData(List<EventModel> events) {
@@ -49,12 +49,14 @@ public class EventsTeacherAdapter  extends RecyclerView.Adapter<EventsTeacherAda
     public void onBindViewHolder(@NonNull EventsTeacherAdapter.ViewHolder holder, int position) {
 
         EventModel event = mEventsData.get(position);
-        holder.title.setText(event.getTitle()!=null ? event.getTitle() : "");
-        holder.date.setText(event.getDate()!=null ? event.getDate() : "");
-        holder.time.setText(event.getTime()!=null ? event.getTime() : "");
-        holder.location.setText(event.getLocation()!=null ? event.getLocation() : "");
-        holder.description.setText(event.getDescription()!=null ? event.getDescription() : "");
+        holder.title.setText(event.getTitle() != null ? event.getTitle() : "");
+        holder.date.setText(event.getDate() != null ? event.getDate() : "");
+        holder.time.setText(event.getTime() != null ? event.getTime() : "");
+        holder.location.setText(event.getLocation() != null ? event.getLocation() : "");
+        holder.description.setText(event.getDescription() != null ? event.getDescription() : "");
+        Log.d("EventsTeacherAdapter", "Event: " + event);
         holder.modifyButton.setOnClickListener(v -> modifyButtonClickListener.onButtonClick(event));
+
     }
 
     @Override
@@ -66,6 +68,7 @@ public class EventsTeacherAdapter  extends RecyclerView.Adapter<EventsTeacherAda
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView date, time, location, description, title;
         Button modifyButton;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.eventTitleTextView);

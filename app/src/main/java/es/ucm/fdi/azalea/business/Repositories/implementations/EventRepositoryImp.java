@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import es.ucm.fdi.azalea.business.Repositories.EventRepository;
@@ -98,5 +99,41 @@ public class EventRepositoryImp implements EventRepository {
             Log.d(TAG + "getEventsForClassroom", "Eventos obtenidos correctamente. Devuelvo: " + events.size() + " resultados.");
             cb.onSuccess(new Event.Success<>(events));
         });
+    }
+
+    @Override
+    public void modify(EventModel em, CallBack<EventModel> callBack) {
+        Log.i(TAG, "Entro en modify, modify: " + em.getId());
+        Query query = eventsReference.orderByChild("id").equalTo(em.getId());
+        Log.i(TAG, "Query ejecutada con ID: " + em.getId());
+        query.get().addOnSuccessListener(task -> {
+            if (task.exists()) {
+                Log.i(TAG, "Resultados encontrados: " + task.getChildrenCount());
+                for (DataSnapshot snapshot : task.getChildren()) {
+                    snapshot.getRef().updateChildren(new HashMap<String, Object>() {{
+                        put("title", em.getTitle());
+                        put("description", em.getDescription());
+                        put("date", em.getDate());
+                        put("time", em.getTime());
+                        put("location", em.getLocation());
+                    }}).addOnSuccessListener(task1 -> {
+                        Log.d(TAG, "Evento modificado correctamente");
+                        callBack.onSuccess(new Event.Success<>(em));
+                    }).addOnFailureListener(e -> {
+                        Log.e(TAG, "Error al modificar el evento", e);
+                        callBack.onError(new Event.Error<>(e));
+                    });
+                }
+            }
+            else{
+                Log.e(TAG, "Error al modificar el evento");
+                callBack.onError(new Event.Error<>(new Exception("Error al modificar el evento")));
+            }
+
+        }).addOnFailureListener(e -> {
+            Log.e(TAG, "Error al modificar el evento", e);
+            callBack.onError(new Event.Error<>(e));
+        });
+
     }
 }
