@@ -25,7 +25,7 @@
             android:name=".presentation.editprofile.EditProfileFragment"
             android:exported="false" />
         <activity
-            android:name=".presentation.passwordrecovery.PasswordRecoveryActivity"
+            android:name=".presentation.passwordrecovery.PasswordRecoveryFragment"
             android:exported="false"/>
         <activity
             android:name=".presentation.parent.ParentActivity"

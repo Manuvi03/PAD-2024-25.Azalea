@@ -77,4 +77,9 @@ public class ClassRoomNameFragment extends Fragment {
         });
 
     }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+    }
 }

@@ -118,6 +118,9 @@ public class CreateTeacherFragment extends Fragment {
         return filled;
     }
 
-
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+    }
 
 }

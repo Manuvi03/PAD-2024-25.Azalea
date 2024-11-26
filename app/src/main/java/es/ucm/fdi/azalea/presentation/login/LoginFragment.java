@@ -25,7 +25,7 @@ import es.ucm.fdi.azalea.databinding.LoginFragmentBinding;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.presentation.createteacher.CreateTeacherFragment;
 import es.ucm.fdi.azalea.presentation.parent.ParentActivity;
-import es.ucm.fdi.azalea.presentation.passwordrecovery.PasswordRecoveryActivity;
+import es.ucm.fdi.azalea.presentation.passwordrecovery.PasswordRecoveryFragment;
 import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
 
 public class LoginFragment extends Fragment {
@@ -81,7 +81,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
                 ).replace(R.id.login_fragment_container,
-                        CreateTeacherFragment.class,null).commit();
+                        PasswordRecoveryFragment.class,null).commit();
             }
         });
 

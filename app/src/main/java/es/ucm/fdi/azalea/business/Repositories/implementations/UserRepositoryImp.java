@@ -8,9 +8,11 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import es.ucm.fdi.azalea.business.Repositories.UserRepository;
 import es.ucm.fdi.azalea.business.model.UserModel;
@@ -59,6 +61,26 @@ public class UserRepositoryImp implements UserRepository {
         }
 
 
+    }
+
+    public void checkUserExists(String mail,CallBack<Boolean> cb){
+        try{
+           Query query = usersReference.orderByChild("email").equalTo(mail);
+
+           query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+               @Override
+               public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if(task.isSuccessful()){
+                        
+                    }else{
+
+                    }
+               }
+           });
+
+        }catch(Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
     }
 
 

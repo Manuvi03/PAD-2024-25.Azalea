@@ -13,4 +13,5 @@ public interface AuthRepository {
     public void logout();
     public void updateCurrUserMail(String mail,CallBack<Boolean> cb);
     public void updateCurrUserPassword(String password,CallBack<Boolean> cb);
+    public void sendUpdatePasswordMail(String mail, CallBack<Boolean> cb);
 }

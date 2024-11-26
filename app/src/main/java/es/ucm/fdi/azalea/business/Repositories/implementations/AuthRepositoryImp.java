@@ -65,6 +65,7 @@ public class AuthRepositoryImp implements AuthRepository {
         });
     }
 
+
     public void updateCurrUserMail(String mail, CallBack<Boolean> cb){
         try{
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -86,6 +87,23 @@ public class AuthRepositoryImp implements AuthRepository {
             cb.onError(new Event.Error<>(e));
         }
 
+    }
+
+    public void sendUpdatePasswordMail(String mail, CallBack<Boolean> cb){
+        try{
+            FirebaseAuth.getInstance().sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        cb.onSuccess(new Event.Success<>(true));
+                    }else{
+                        cb.onError(new Event.Error<>(task.getException()));
+                    }
+                }
+            });
+        }catch(Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
     }
 
     public void updateCurrUserPassword(String password,CallBack<Boolean> cb){

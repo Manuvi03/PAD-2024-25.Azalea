@@ -65,7 +65,7 @@ public class ClassRoomRepositoryImp implements ClassRoomRepository {
     @Override
     public void readById(String id, CallBack<ClassRoomModel> cb) {
         // se ejecuta la query, obteniendo una imagen unica de Firebase
-        classroomReference.child(id).get().addOnCompleteListener(task -> {
+        classRoomReference.child(id).get().addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
                 Log.d(TAG,"Error recuperando los datos de la clase", task.getException());
