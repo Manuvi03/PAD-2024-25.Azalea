@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--AddEvent-->
+    <string name="addevent_buttonString">Save Event</string>
+    <string name="addevent_datePickerTitle">Select a date</string>
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
     <string name="classroom_results_string">Results</string>
+    <string name="addevent_title">Title</string>
+    <string name="addevent_date">Date (YYYY-MM-DD)</string>
+    <string name="addevent_hour">Hour (HH:MM)</string>
+    <string name="addevent_location">Location</string>
+    <string name="addevent_description">Description</string>
+    <string name="addevent_string">Create Event</string>
+    <string name="addevent_timePickerTitle">Select a time</string>
     <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_no_students_string">No students</string>
     <string name="classroom_search_error">Failed to search classroom students</string>
@@ -56,5 +65,8 @@
     <string name="teacher_navbar_profile">Profile</string>
     <string name="student_contact">Quick contact: %1$s</string>
     <string name="teacherhomefragment_textButton">Create Event</string>
+    <string name="parent_recyclerView_modify">Modify</string>
+    <string name="modifyevent_buttonString">Modify</string>
+    <string name="modifyevent_string">Modify Event</string>
 
 </resources>

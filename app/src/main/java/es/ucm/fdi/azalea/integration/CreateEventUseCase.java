@@ -17,7 +17,7 @@ public class CreateEventUseCase {
         eventRepositoryImp = new EventRepositoryImp();
     }
 
-    public void execute(EventModel em){
+    public LiveData<EventModel> execute(EventModel em){
         MutableLiveData<EventModel> resultLiveData = new MutableLiveData<>();
 
         BusinessFactory.getInstance().getEventRepository().create(em, new CallBack<EventModel>() {
@@ -31,6 +31,7 @@ public class CreateEventUseCase {
                 resultLiveData.postValue(null);
             }
         });
+        return resultLiveData;
     }
 
 }

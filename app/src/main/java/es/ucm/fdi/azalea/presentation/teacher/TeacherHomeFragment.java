@@ -10,14 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.google.android.material.button.MaterialButton;
-import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -30,15 +29,13 @@ import java.util.List;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
-import es.ucm.fdi.azalea.presentation.parent.EventsAdapter;
-import es.ucm.fdi.azalea.presentation.parent.ParentHomeFragmentViewModel;
+import es.ucm.fdi.azalea.presentation.addevent.AddEventFragment;
 
 public class TeacherHomeFragment extends Fragment {
 
     private TeacherHomeFragmentViewModel teacherHomeFragmentViewModel;
-    private EventsAdapter adapter;
+    private EventsTeacherAdapter adapter;
     private TextView resultText;
-    private MaterialButton button;
     public CalendarView calendarView;
     private final List<CalendarDay> eventDays = new ArrayList<>(); // Lista para almacenar los días con eventos
     private CalendarDay previouslySelectedDay; // Referencia al día seleccionado previamente
@@ -52,7 +49,7 @@ public class TeacherHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.teacher_home_fragment, container, false);
 
         resultText = view.findViewById(R.id.teacherhomefragment_textResult);
-        button = view.findViewById(R.id.teacherhomefragment_buttonCreateEvent);
+        MaterialButton button = view.findViewById(R.id.teacherhomefragment_buttonCreateEvent);
 
         calendarView = view.findViewById(R.id.teacherhomefragment_calendarView);
         Calendar today = Calendar.getInstance();
@@ -62,7 +59,14 @@ public class TeacherHomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new EventsAdapter(new ArrayList<>(), getContext());
+        adapter = new EventsTeacherAdapter(new ArrayList<>(), getContext(), event -> {
+            Log.d(TAG, "Se cambia de fragment a EditEventFragment");
+            ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.teacher_fragment_container_view, AddEventFragment.class, null)
+                    .addToBackStack("AddEventFragment") // Agregar a la pila de retroceso
+                    .commit();
+        });
         recyclerView.setAdapter(adapter);
 
         teacherHomeFragmentViewModel = new TeacherHomeFragmentViewModel();
@@ -90,12 +94,22 @@ public class TeacherHomeFragment extends Fragment {
 
         teacherHomeFragmentViewModel.getEventsForDate(formattedDate);
 
-        //Listener para el boton
         button.setOnClickListener(v -> {
-            //abro la pantalla de creacion de eventos
+            Log.d(TAG, "Se cambia de fragment a AddEventFragment");
+            ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.teacher_fragment_container_view, AddEventFragment.class, null)
+                    .addToBackStack("AddEventFragment") // Agregar a la pila de retroceso
+                    .commit();
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        teacherHomeFragmentViewModel.getEventsForDate(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
     }
 
     @Override
@@ -108,7 +122,7 @@ public class TeacherHomeFragment extends Fragment {
         Log.i(TAG, "updateEvents: " + events.size());
         if (events.isEmpty()) {
             adapter.setEventsData(Collections.emptyList());
-            resultText.setText(getString(R.string.parent_recyclerView_empty));
+            resultText.setText(getString(R.string.parent_recyclerView_empty)); //Reutilizo los strings de parent_recyclerView
         } else {
             adapter.setEventsData(events);
             resultText.setText(getString(R.string.parent_recyclerView_result) + ": " + events.size());

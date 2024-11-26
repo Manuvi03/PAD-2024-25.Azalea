@@ -20,6 +20,7 @@ public class TeacherHomeFragmentViewModel extends ViewModel {
     private final MutableLiveData<List<EventModel>> eventsClassroom = new MutableLiveData<>();
     private final MutableLiveData<EventModel> event = new MutableLiveData<>();
 
+    private final String TAG = "TeacherHomeFragmentViewModel";
     public TeacherHomeFragmentViewModel(){
         this.getEventsForDateUseCase = new GetEventsForDateUseCase();
         this.getEventsFromClassroom = new GetEventsFromClassroomUseCase();
@@ -31,12 +32,12 @@ public class TeacherHomeFragmentViewModel extends ViewModel {
     public LiveData<List<EventModel>> getEventsForClassroomLiveData() {return eventsClassroom;}
 
     public void getEventsForDate(String date) {
-        Log.i(this.getClass().getName(), "getEventsForDate: " + date);
+        Log.i(TAG, "getEventsForDate: " + date);
         getEventsForDateUseCase.execute(date).observeForever(eventsDate::setValue);
     }
 
     public void getEventsForClassroom(String classroomId) {
-        Log.i(this.getClass().getName(), "getEventsForClassroom: " + classroomId);
+        Log.i(TAG, "getEventsForClassroom: " + classroomId);
         getEventsFromClassroom.execute(classroomId).observeForever(eventsClassroom::setValue);
     }
 
@@ -44,7 +45,7 @@ public class TeacherHomeFragmentViewModel extends ViewModel {
 
     public void CreateEvent(EventModel em){
         CreateEventUseCase createEventUseCase = new CreateEventUseCase(em);
-        createEventUseCase.execute(em);
+        createEventUseCase.execute(em).observeForever(event::setValue);
 
     }
 }

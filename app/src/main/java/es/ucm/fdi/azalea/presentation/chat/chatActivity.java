@@ -44,7 +44,7 @@ public class chatActivity extends AppCompatActivity {
             // del padre volveria al iniciop o a la vista de eventos.
         });
 
-        chatViewModel.getOrCreateChat();
+        //chatViewModel.getOrCreateChat();
     }
 
 }

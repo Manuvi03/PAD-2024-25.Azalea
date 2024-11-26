@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.firebase.messaging)
-    implementation(libs.google.api.client.android)
     implementation (libs.play.services.auth)
     implementation(libs.play.services.tasks)
     implementation (libs.material.calendar.view)

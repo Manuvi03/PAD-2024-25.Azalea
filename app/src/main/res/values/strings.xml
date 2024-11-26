@@ -1,5 +1,16 @@
 <resources>
     <!--AddEvent-->
+    <string name="addevent_title">Título</string>
+    <string name="addevent_date">Fecha (YYYY-MM-DD</string>
+    <string name="addevent_hour">Hora (HH:MM)</string>
+    <string name="addevent_location">Localización</string>
+    <string name="addevent_description">Descripción</string>
+    <string name="addevent_string">Crear Evento</string>
+    <string name="addevent_buttonString">Guardar Evento</string>
+    <string name="addevent_datePickerTitle">Selecciona una fecha</string>
+    <string name="addevent_timePickerTitle">Selecciona una hora</string>
+    <string name="addevent_timePickerEmoji" translatable="false">⏰</string>
+
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
@@ -9,7 +20,7 @@
     <string name="classroom_search_error">Error al buscar los estudiantes de la clase</string>
     <string name="classroom_searchview_queryhint">Buscar estudiante</string>
     <string name="student_name" translatable="false">%1$s %2$s</string>
-    <string name="student_contact" translatable="false">Contacto rápido: %1$s</string>
+    <string name="student_contact">Contacto rápido: %1$s</string>
 
     <!--CreateTeacher-->
     <string name="createteacher_titleView">¡Bienvenid@ Profe!</string>
@@ -39,7 +50,9 @@
     <string name="login_create_teacher_text">¿No tienes cuenta de profesor?</string>
     <string name="login_create_button">Crear</string>
     <string name="login_error">Error al iniciar sesión, vuelva a introducir los datos</string>
-
+    <!--ModifyFragment-->
+    <string name="modifyevent_buttonString">Modificar</string>
+    <string name="modifyevent_string">Modificar Evento</string>
     <!--Parent-->
     <string name="parent_recyclerView_empty">No hay eventos</string>"
     <string name="parent_recyclerView_title">Titulo Evento</string>
@@ -50,6 +63,7 @@
     <string name="parent_separator" translatable="false"> | </string>
     <string name="parent_recyclerView_result">Resultados</string>"
     <string name="parent_recyclerView_titleEvent">eventos</string>
+    <string name="parent_recyclerView_modify">Modificar</string>
     <!--PasswordRecovery-->
     <!--Reminder-->
     <!--ShowGrades-->
@@ -59,4 +73,5 @@
     <string name="teacher_navbar_classroom_text">Clase</string>
     <string name="teacher_navbar_profile">Perfil</string>
     <string name="teacherhomefragment_textButton">Crear Evento</string>
+    <string name="addevent_datePickerEmoji" translatable="false">📅</string>
 </resources>

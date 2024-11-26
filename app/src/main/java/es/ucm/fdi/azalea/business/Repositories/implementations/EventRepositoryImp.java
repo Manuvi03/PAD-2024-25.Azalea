@@ -18,7 +18,6 @@ import es.ucm.fdi.azalea.integration.Event;
 public class EventRepositoryImp implements EventRepository {
 
     private final String TAG = "EventRepositoryImp";
-
     private final FirebaseDatabase db = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/");
     private final DatabaseReference eventsReference = db.getReference("events");
 
@@ -28,15 +27,15 @@ public class EventRepositoryImp implements EventRepository {
         //genero el id del evento
         String id = eventsReference.push().getKey();
         if(id!=null){
-            Log.d("EventRepositoryImp", "ID del evento generado: " + id);
+            Log.d(TAG, "ID del evento generado: " + id);
             em.setId(id);
-            Log.d("EventRepositoryImp", "Evento creado: " + em);
+            Log.d(TAG, "Evento creado: " + em);
             eventsReference.child(id).setValue(em)
                     .addOnSuccessListener(task->{
                         Log.d("EventRepositoryImp", "Evento creado correctamente");
                 cb.onSuccess(new Event.Success<>(em));
             })      .addOnFailureListener(e->{
-                Log.d("EventRepositoryImp", "Error al crear el evento", e);
+                Log.d(TAG, "Error al crear el evento", e);
                 cb.onError(new Event.Error<>(e));
             });
         }else{
