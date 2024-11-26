@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
-import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ import es.ucm.fdi.azalea.business.model.EventModel;
 
 public class ParentHomeFragmentActivity extends AppCompatActivity {
     private ParentHomeFragmentViewModel parentHomeFragmentViewModel;
-    private EventsAdapter adapter;
+    private EventsParentAdapter adapter;
     private TextView resultText;
     public CalendarView calendarView;
     private final List<CalendarDay> eventDays = new ArrayList<>(); // Lista para almacenar los días con eventos
@@ -50,7 +49,6 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        AndroidThreeTen.init(this); //inicializacion de la libreria de fechas
 
         Log.i(TAG, "entro en ParentHomeFragmentActivity");
 
@@ -64,7 +62,7 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new EventsAdapter(new ArrayList<>(), this);
+        adapter = new EventsParentAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
         parentHomeFragmentViewModel = new ParentHomeFragmentViewModel();

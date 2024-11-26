@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +20,13 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.FirebaseApp;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.presentation.parent.ParentActivity;
-import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
+import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
 
  public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +51,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         FirebaseApp.initializeApp(this);
         Log.d(TAG, "onCreate: ");
 
+        AndroidThreeTen.init(this); //inicializacion de la libreria de fecha
 
         // inicializamos el viewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
@@ -58,9 +59,12 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.button_login);
 
-        initListeners();
+        Intent intent = new Intent(this, TeacherActivity.class);
+        startActivity(intent);
 
-        start_animations();
+        //initListeners();
+
+       // start_animations();
 
         /*
         // estoy probando el firebase database
@@ -108,7 +112,7 @@ import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
                 }
                 else{
                     Log.d(TAG, "el usuario es profesor");
-                    switchActivityIntent = new Intent(this, teacherActivity.class);
+                    switchActivityIntent = new Intent(this, TeacherActivity.class);
                 }
 
                 startActivity(switchActivityIntent);

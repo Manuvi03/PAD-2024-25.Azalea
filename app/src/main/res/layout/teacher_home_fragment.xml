@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/teacher_home_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/teacher_home_fragment"
-    android:background="@color/Misty_Rose">
+    android:background="@color/Seashell">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <!-- CalendarView -->
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/teacherhomefragment_calendarView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="CALENDARIO"
+        app:daysLabelsColor="@color/Dark_Purple"
+        app:headerColor="@color/Cyclomen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:pagesColor="@color/Misty_Rose"
+        app:selectionColor="@color/French_Rose"
+        app:selectionLabelColor="@color/Cyclomen"
+        app:todayLabelColor="@color/Amaranth_Purple" />
+
+    <!-- TextField and Button (on the same horizontal line) -->
+
+    <TextView
+        android:id="@+id/teacherhomefragment_textResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/parent_recyclerView_result"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/teacherhomefragment_recyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/teacherhomefragment_buttonCreateEvent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teacherhomefragment_calendarView"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/teacherhomefragment_buttonCreateEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/teacherhomefragment_textButton"
+        android:backgroundTint="@color/Amaranth_Purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/teacherhomefragment_textResult"
+        app:layout_constraintTop_toBottomOf="@+id/teacherhomefragment_calendarView" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teacherhomefragment_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teacherhomefragment_buttonCreateEvent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

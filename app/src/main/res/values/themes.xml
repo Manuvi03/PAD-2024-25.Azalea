@@ -1,9 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Base.Theme.Azalea" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Customize your light theme here -->
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/French_Rose</item>
+        <item name="colorPrimaryVariant">@color/Dogwood_Rose</item>
+        <item name="colorOnPrimary">@color/Seashell</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/Cyclomen</item>
+        <item name="colorSecondaryVariant">@color/Tickle_me_Pink</item>
+        <item name="colorOnSecondary">@color/Seashell</item>
+
+        <!-- Background and surface colors -->
+        <item name="colorOnBackground">@color/Dark_Purple</item>
+        <item name="colorSurface">@color/Misty_Rose</item>
+        <item name="colorOnSurface">@color/Dark_Purple</item>
+
+        <!-- Error colors -->
+        <item name="colorError">@color/Amaranth_Purple</item>
+        <item name="colorOnError">@color/Seashell</item>
+
+        <!-- Outlined buttons -->
+        <item name="colorOutline">@color/Tyrian_Purple</item>
+
+        <!-- Elevated surfaces (e.g., cards) -->
+        <item name="colorSurfaceVariant">@color/Orchid_Pink</item>
+        <item name="colorOnSurfaceVariant">@color/Tyrian_Purple</item>
     </style>
 
+    <!-- Theme wrapper for app -->
     <style name="Theme.Azalea" parent="Base.Theme.Azalea" />
 </resources>
