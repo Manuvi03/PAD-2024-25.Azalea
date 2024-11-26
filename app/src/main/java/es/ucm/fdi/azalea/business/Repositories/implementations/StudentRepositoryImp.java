@@ -67,11 +67,14 @@ public class StudentRepositoryImp implements StudentRepository {
     }
 
     @Override
-    public String update(String id, StudentModel item) {
-        /*
-        subjectReference.child(subjectId).setValue(updatedSubject);
-        Log.d("SubjectRepository", "Subject updated");*/
-        return "";
+    public void update(String id, StudentModel item, CallBack<StudentModel> cb) {
+        studentReference.child(id).setValue(item).addOnSuccessListener(task->{
+            Log.d(TAG, "Estudiante con id " + id + " modificado correctamente");
+            cb.onSuccess(new Event.Success<>(item));
+        })      .addOnFailureListener(e->{
+            Log.d(TAG, "Error al modificar el estudiante", e);
+            cb.onError(new Event.Error<>(e));
+        });
     }
 
     @Override

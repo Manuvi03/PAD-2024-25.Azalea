@@ -1,18 +1,19 @@
 package es.ucm.fdi.azalea.presentation.student;
 
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,6 +25,11 @@ import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.chat.chatActivity;
+import es.ucm.fdi.azalea.presentation.classroom.ClassroomStudentSharedViewModel;
+import es.ucm.fdi.azalea.presentation.editstudent.EditStudentFragment;
+import es.ucm.fdi.azalea.presentation.gradesubject.GradeSubjectFragment;
+import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment;
 
 public class StudentFragment extends Fragment {
 
@@ -39,13 +45,18 @@ public class StudentFragment extends Fragment {
 
     // view model
     private StudentViewModel studentViewModel;
+    ClassroomStudentSharedViewModel classroomSharedViewModel;
+    StudentGradeSubjectSharedViewModel gradeMarkSharedViewModel;
 
     // componentes de la vista
-    private ScrollView scrollView;
+    private AppCompatImageButton sendMessageButton;
+    private AppCompatImageButton gradeMarkButton;
+    private AppCompatImageButton showGradesButton;
+    private AppCompatImageButton editStudentButton;
 
     private ImageView studentProfileImage;
     private TextView studentNameText;
-    private TextView studentBirthadayText;
+    private TextView studentBirthdayText;
     private TextView studentWeightText;
     private TextView studentHeightText;
     private TextView studentAllergensText;
@@ -62,36 +73,38 @@ public class StudentFragment extends Fragment {
     private StudentModel studentInfo;
     private UserModel parentInfo;
 
+        @Override
+        public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+
+            // se genera el viewmodel compartido con classroom y se observan los valores que se reciben
+            classroomSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(ClassroomStudentSharedViewModel.class);
+            classroomSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
+                Log.d(TAG, "StudentId recibido");
+                studentId = data;
+            });
+            classroomSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
+                Log.d(TAG, "StudentImage recibido");
+                studentImage = data;
+            });
+
+            // se obtiene el viewmodel
+            studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
+
+            // se obtienen los componentes de la vista necesarios
+            bindComponents();
+
+            // se obtiene el scrollview y se inicializa su observador
+            initScrollView();
+
+        }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-
+        // se enlaza la vista a la clase
         view = inflater.inflate(R.layout.student_fragment, container, false);
         Log.d(TAG, "Se ha creado el StudentFragment");
-
-        ClassroomStudentSharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(ClassroomStudentSharedViewModel.class);
-        viewModel.getStudentId().observe(getViewLifecycleOwner(), data -> {
-            studentId = data;
-        });
-        viewModel.getStudentProfileImage().observe(getViewLifecycleOwner(), data -> {
-            studentImage = data;
-        });
-
-        /*
-        // se obtienen los argumentos pasados al Fragment
-        if(savedInstanceState != null){
-            studentId = savedInstanceState.getString(STUDENT_ID_KEY);
-            studentImage = savedInstanceState.getString(STUDENT_IMAGE_KEY);
-        }*/
-
-        // se obtiene el viewmodel
-        studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
-
-        // se obtienen los componentes de la vista necesarios
-        bindComponents();
-
-        // se obtiene el scrollview y se inicializa su observador
-        initScrollView();
 
         return view;
     }
@@ -106,7 +119,13 @@ public class StudentFragment extends Fragment {
     private void bindComponents(){
         studentProfileImage = view.findViewById(R.id.student_fragment_profile_image);
         studentNameText = view.findViewById(R.id.student_fragment_name_textView);
-        studentBirthadayText = view.findViewById(R.id.student_fragment_birthday_textview);
+
+        sendMessageButton = view.findViewById(R.id.student_fragment_send_message_button);
+        gradeMarkButton = view.findViewById(R.id.student_fragment_grade_mark_button);
+        showGradesButton = view.findViewById(R.id.student_fragment_show_grades_button);
+        editStudentButton = view.findViewById(R.id.student_fragment_edit_student_button);
+
+        studentBirthdayText = view.findViewById(R.id.student_fragment_birthday_textview);
         studentWeightText = view.findViewById(R.id.student_fragment_weight_textview);
         studentHeightText = view.findViewById(R.id.student_fragment_height_textview);
         studentAllergensText = view.findViewById(R.id.student_fragment_allergens_textview);
@@ -120,18 +139,18 @@ public class StudentFragment extends Fragment {
 
     // inicializa la scrollview
     private void initScrollView(){
-        // se encuentra la scrollview
-        scrollView = view.findViewById(R.id.student_fragment_scrollView);
-
         // se obtiene la informacion del estudiante
         studentViewModel.readStudent(studentId);
 
         // se obtiene informacion del tutor del estudiante
-        //studentViewModel.readParentByStudent(studentId);
+        studentViewModel.readParentByStudent(studentId);
 
         // se inicializan los observadores de la recyclerview
         initStudentInfoObserver();
-        //initParentInfoObserver();
+        initParentInfoObserver();
+
+        // se inicializan los listeners de los botones
+        initOnClickListeners();
     }
 
     // inicializa el observador de la informacion del estudiante
@@ -177,25 +196,25 @@ public class StudentFragment extends Fragment {
                 .into(studentProfileImage);
 
         // nombre del estudiante
-        studentNameText.setText(sm.getName());
+        studentNameText.setText(sm.getName() + " " + sm.getSurnames());
 
         // fecha de nacimiento
-        studentBirthadayText.setText(getString(R.string.student_birthday_text, sm.getBirthday()));
+        studentBirthdayText.setText(getString(R.string.student_birthday_text, sm.getBirthday()));
 
         // peso
-        studentWeightText.setText(getString(R.string.student_weight_text, sm.getWeight()));
+        studentWeightText.setText(getString(R.string.student_weight_text, String.format("%.2f", sm.getWeight())));
 
         // altura
-        studentHeightText.setText(getString(R.string.student_height_text, sm.getHeight()));
+        studentHeightText.setText(getString(R.string.student_height_text, String.format("%.2f", sm.getHeight())));
 
         // alergenos
-        studentBirthadayText.setText(getString(R.string.student_allergens_text, sm.getAllergens()));
+        studentAllergensText.setText(getString(R.string.student_allergens_text, sm.getAllergens()));
 
         // condiciones medicas
-        studentBirthadayText.setText(getString(R.string.student_medical_conditions_text, sm.getMedicalConditions()));
+        studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text, sm.getMedicalConditions()));
 
         // direccion
-        studentBirthadayText.setText(getString(R.string.student_address_text, sm.getAddress()));
+        studentAddressText.setText(getString(R.string.student_address_text, sm.getAddress()));
 
         // nombre del tutor
         parentNameText.setText(getString(R.string.student_parent_name_text, parentsAtributesToString(sm.getParentsNames())));
@@ -211,7 +230,7 @@ public class StudentFragment extends Fragment {
         StringBuilder atributesBuilt = new StringBuilder();
 
         // por cada entrada de la lista, se agrega al stringbuilder en una nueva linea
-        for(String s : names) atributesBuilt.append(s).append('\n');
+        for(String s : names) atributesBuilt.append('\n').append(s);
 
         // se devuelve convertido a string
         return atributesBuilt.toString();
@@ -254,6 +273,47 @@ public class StudentFragment extends Fragment {
     private void updateScrollViewParentInfo(UserModel um){
         // correo electronico
         parentEmailText.setText(getString(R.string.student_email_text, um.getEmail()));
+    }
+
+    // se inicializan los listeners de los botones
+    private void initOnClickListeners(){
+
+        // inicia el chat
+        sendMessageButton.setOnClickListener(listener -> {
+            //todo?
+            Intent intent = new Intent(getActivity(), chatActivity.class);
+            startActivity(intent);
+        });
+
+        gradeMarkButton.setOnClickListener(listener -> {
+            // se genera el viewmodel compartido
+            gradeMarkSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(StudentGradeSubjectSharedViewModel.class);
+
+            // se pasan los valores compartidos
+            gradeMarkSharedViewModel.setStudentId(studentId);
+            gradeMarkSharedViewModel.setStudentProfileImage(studentImage);
+
+            // se reemplaza el fragmento
+            replaceFragment(GradeSubjectFragment.class);
+        });
+
+        showGradesButton.setOnClickListener(listener -> {
+            //todo
+            replaceFragment(ShowGradesFragment.class);
+        });
+
+        editStudentButton.setOnClickListener(listener -> {
+            //todo
+            replaceFragment(EditStudentFragment.class);
+        });
+    }
+
+    // reemplaza este Fragment por el correspondiente segun el boton
+    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.teacher_fragment_container_view, c, null)
+                .commit();
     }
 
 }

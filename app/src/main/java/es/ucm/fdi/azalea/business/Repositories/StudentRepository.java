@@ -8,7 +8,7 @@ import es.ucm.fdi.azalea.integration.CallBack;
 
 public interface StudentRepository {
     public String create(StudentModel item);
-    public String update(String id, StudentModel item);
+    public void update(String id, StudentModel item, CallBack<StudentModel> cb);
     public String delete(String id);
     public List<StudentModel> readAll();
     public void readById(String id, CallBack<StudentModel> cb);

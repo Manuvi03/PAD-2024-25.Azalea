@@ -1,12 +1,17 @@
 package es.ucm.fdi.azalea.presentation.student;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ClassroomStudentSharedViewModel extends ViewModel {
+public class StudentGradeSubjectSharedViewModel extends ViewModel {
+    // constantes
+    private final String TAG = "StudentGradeSubjectSharedViewModel";
 
-    // datos compartidos entre ClassRoomFragment y StudentFragment
+    // variables
+    // datos compartidos entre StudentFragment y GradeSubjectFragment
     private final MutableLiveData<String> studentId = new MutableLiveData<>();
     private final MutableLiveData<String> studentImage = new MutableLiveData<>();
 
@@ -15,14 +20,16 @@ public class ClassroomStudentSharedViewModel extends ViewModel {
     }
 
     public void setStudentId(String studentId) {
-        this.studentId.setValue(studentId);
+        Log.d(TAG, "StudentId cambiando valor");
+        this.studentId.postValue(studentId);
     }
 
     public LiveData<String> getStudentProfileImage() {
         return studentImage;
     }
 
-    public void setStudenProfileImage(String profileImage) {
+    public void setStudentProfileImage(String profileImage) {
+        Log.d(TAG, "StudentImage cambiando valor");
         this.studentImage.setValue(profileImage);
     }
 }

@@ -8,10 +8,10 @@
     <string name="classroom_results_string">Results</string>
     <string name="classroom_no_students_string">No students</string>
 
-    <!--CreateTeacher-->
     <string name="classroom_search_error">Failed to search classroom students</string>
     <string name="classroom_searchview_queryhint">Search student</string>
-    <string name="student_contact">Quick contact: %1$s</string>
+
+    <!--CreateTeacher-->
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
     <string name="createteacher_surnameText">Surnames</string>
@@ -28,6 +28,19 @@
     <!--EditProfile-->
     <!--EditStudent-->
     <!--GradeSubject-->
+    <string name="grade_subject_intro_text">Grade mark</string>
+    <string name="grade_subject_grade_text">Mark</string>
+    <string name="grade_subject_send_grade_text">Send mark</string>
+
+    <string name="searching_class">Searching class…</string>
+    <string name="class_search_error">Failed to search class info</string>
+    <string name="grade_subject_no_selected">Please, choose a subject</string>
+    <string name="grade_subject_no_mark">Please, grade the student</string>
+    <string name="grade_subject_grading_mark">Grading…</string>
+    <string name="grade_subject_correctly_graded">Student %1$s correctly graded.</string>
+    <string name="grade_subject_error_grading">Failed to grade student %1$s.</string>
+    <string name="grade_subject_incorrect_grading">Incorrect grading, must be between 0 and 10.</string>
+
     <!--Login-->
     <string name="login_username_hint">Mail</string>
     <string name="login_password_hint">Password</string>
@@ -42,30 +55,34 @@
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->
-
-    <!--Teacher-->
-    <string name="student_send_message_button">Send message</string>
-    <string name="student_grade_mark_button">Grade mark</string>
-    <string name="student_show_grades_button">Show grades</string>
-    <string name="student_edit_student_button">Edit student</string>
+    <string name="student_send_message_button">Message</string>
+    <string name="student_grade_mark_button">Grade</string>
+    <string name="student_show_grades_button">Marks</string>
+    <string name="student_edit_student_button">Edit</string>
     <string name="student_info_text">Student info</string>
-    <string name="student_birthday_text">\t\t\tBirthday: %1$s</string>
-    <string name="teacher_navbar_home_text">Home</string>
-    <string name="teacher_navbar_classroom_text">Classroom</string>
-    <string name="teacher_navbar_profile">Profile</string>
-    <string name="student_weight_text">\t\t\tWeight: %1$f</string>
-    <string name="student_height_text">\t\t\tHeight: %1$f</string>
-    <string name="student_allergens_text">\t\t\tAllergens: %1$s</string>
-    <string name="student_medical_conditions_text">\t\t\tMedical conditions: %1$s</string>
+    <string name="student_birthday_text">Birthday: %1$s</string>
+    <string name="student_weight_text">Weight: %1$s</string>
+    <string name="student_height_text">Height: %1$s</string>
+    <string name="student_allergens_text">Allergens: %1$s</string>
+    <string name="student_medical_conditions_text">Medical conditions: %1$s</string>
     <string name="student_contact_info_text">Contact info</string>
-    <string name="student_parent_name_text">\t\t\tParent name: %1$s</string>
-    <string name="student_phone_text">\t\t\tPhone: %1$s</string>
-    <string name="student_email_text">\t\t\tE-mail: %1$s</string>
-    <string name="student_address_text">\t\t\tAddress: %1$s</string>
+    <string name="student_parent_name_text">Parent(s) name(s): %1$s</string>
+    <string name="student_phone_text">Phone(s): %1$s</string>
+    <string name="student_email_text">E-mail: %1$s</string>
+    <string name="student_address_text">Address: %1$s</string>
     <string name="student_name_text">Student name</string>
+    <string name="student_contact">Quick contact: %1$s</string>
+
     <string name="searching_student">Searching student…</string>
     <string name="student_search_error">Failed to search student info</string>
     <string name="searching_student_parent">Searching student\'s parent…</string>
     <string name="students_parent_search_error">Failed to search student\'s parent info</string>
+
+    <!--Teacher-->
+    <string name="teacher_navbar_home_text">Home</string>
+    <string name="teacher_navbar_classroom_text">Classroom</string>
+    <string name="teacher_navbar_profile">Profile</string>
+
+
 
 </resources>
