@@ -22,19 +22,15 @@ public class ChatRepositoryImp implements ChatRepository {
     private final DatabaseReference chatsReference = database.getReference("chats");
 
     @Override
-    public void create(ChatModel model, CallBack<ChatModel> cb) {
+    public void create(ChatModel model) {
         Log.i(TAG, "Create del chat");
+        chatsReference.child(model.getId()).setValue(model).addOnCompleteListener((OnCompleteListener) task -> {
+                    if(task.isSuccessful())
+                        Log.d(TAG, "Chat created with id: " + model.getId());
+                    else
+                        Log.e(TAG, "Fallo al crar el chat");
+                });
 
-        chatsReference.child(model.getId()).setValue(model, new OnCompleteListener<DataSnapshot>() {
-
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()){
-
-                }
-            }
-        });
-        Log.d(TAG, "Chat created with id: " + model.getId());
     }
 
     @Override
