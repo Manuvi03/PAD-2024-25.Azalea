@@ -35,10 +35,10 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
     // atributos
 
     // view
-    View view;
+    private View view;
 
     // view model
-    classroomViewModel classroomViewModel;
+    private classroomViewModel classroomViewModel;
 
     // de la vista
     private RecyclerView classroomList;
@@ -50,15 +50,15 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
     private ClassroomListAdapter classroomAdapter;  // su adaptador
     private List<StudentModel> students;            // la info
 
-    // contador para la imagen de perfil
-    private int imageProfileCounter = 0;
+    // para compartir la informacion necesaria en el StudentFragment se utiliza un viewmodel compartido
+    ClassroomStudentSharedViewModel viewModel;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        view = inflater.inflate(R.layout.teacher_classroom_fragment, container, false);
-        Log.d(TAG, "Se ha creado el ClassroomFragment");
+        // se genera el viewmodel compartido
+        viewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(ClassroomStudentSharedViewModel.class);
 
         // se obtiene el viewmodel
         classroomViewModel = new ViewModelProvider(this).get(classroomViewModel.class);
@@ -83,6 +83,14 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
             }
         });
 
+    }
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        // se enlaza la vista a la clase
+        view = inflater.inflate(R.layout.teacher_classroom_fragment, container, false);
+        Log.d(TAG, "Se ha creado el ClassroomFragment");
+
         return view;
     }
 
@@ -102,7 +110,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
         classroomList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // se crea el adaptador de la RecyclerView, de momento con una lista vacia
-        classroomAdapter = new ClassroomListAdapter(Collections.emptyList(), getActivity());
+        classroomAdapter = new ClassroomListAdapter(Collections.emptyList(), getActivity(), viewModel);
         classroomList.setAdapter(classroomAdapter);
 
         // al inicar este fragment, directamente aparece la lista de estudiantes
@@ -194,5 +202,4 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
         // notifica al recycler view el cambio de datos
         classroomAdapter.notifyDataSetChanged();
     }
-
 }

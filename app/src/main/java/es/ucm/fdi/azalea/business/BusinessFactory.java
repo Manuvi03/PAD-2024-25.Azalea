@@ -4,6 +4,7 @@ import es.ucm.fdi.azalea.business.Repositories.AuthRepository;
 import es.ucm.fdi.azalea.business.Repositories.ChatRepository;
 import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
 import es.ucm.fdi.azalea.business.Repositories.EventRepository;
+import es.ucm.fdi.azalea.business.Repositories.MarkRepository;
 import es.ucm.fdi.azalea.business.Repositories.MessageRepository;
 import es.ucm.fdi.azalea.business.Repositories.StudentRepository;
 import es.ucm.fdi.azalea.business.Repositories.UserRepository;
@@ -32,5 +33,6 @@ public abstract class BusinessFactory {
     public abstract ChatRepository getChatRepository();
     public abstract ClassRoomRepository getClassRoomRepository();
     public abstract UserRepository getUserRepository();
+    public abstract MarkRepository getMarkRepository();
     public abstract AuthRepository getAuthRepository();
 }
