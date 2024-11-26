@@ -68,7 +68,8 @@ public class ClassRoomNameFragment extends Fragment {
                if(classroomnameEditText.getText().toString().trim().isEmpty()){
                    classroomnameEditText.setError(getString(R.string.createteacher_filledFieldError));
                }else{
-                viewModel.createTeacher(viewModel.getUserdata(),classroomnameEditText.getText().toString());
+
+                viewModel.createTeacher(viewModel.getUserdata().getValue(),classroomnameEditText.getText().toString());
 
                }
 

@@ -14,7 +14,7 @@ public class ClassRoomRepositoryImp implements ClassRoomRepository {
     private final String TAG = "ClassRoomRepositoryImp";
 
     private final FirebaseDatabase db = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/");
-    private final DatabaseReference classRoomReference = db.getReference("classroom");
+    private final DatabaseReference classRoomReference = db.getReference("classrooms");
 
     @Override
     public void create(ClassRoomModel data, CallBack<ClassRoomModel> cb) {

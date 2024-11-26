@@ -19,7 +19,19 @@ public abstract class Event<T> {
     }
 
     public static final class Error<T> extends Event<T> {
-        private final Exception exception;
+        private Exception exception;
+        private String errorData;
+
+        public String getErrorData() {
+            return errorData;
+        }
+
+        public void setErrorData(String errorData) {
+            this.errorData = errorData;
+        }
+
+
+        public Error(){}
 
         public Error(Exception exception) {
             this.exception = exception;

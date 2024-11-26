@@ -41,7 +41,7 @@ public class CreateTeacherFragment extends Fragment {
 
         createTeacherViewModel = new ViewModelProvider(requireActivity()).get(CreateTeacherViewModel.class);
         nameEditText = binding.createTeacherNameEditText;
-        surnameEditText = binding.createTeacherEmailEditText;
+        surnameEditText = binding.createTeacherSurnamesEditText;
         genderEditText = binding.createTeacherGenderEditText;
         mailEditText = binding.createTeacherEmailEditText;
         passwordEditText = binding.createTeacherPasswordEditText;
@@ -57,7 +57,7 @@ public class CreateTeacherFragment extends Fragment {
             if(booleanEvent instanceof Event.Success){
                 //LLama directamente al supportFragmentManager para cambiar
                 requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
-                ).replace(R.id.teacher_fragment_container_view, ClassRoomNameFragment.class,null);
+                ).replace(R.id.login_fragment_container, ClassRoomNameFragment.class,null).commit();
             }
             else if(booleanEvent instanceof Event.Error){
                 Toast.makeText(requireActivity(),R.string.createteacher_teacherAuthError,Toast.LENGTH_LONG).show();
@@ -74,13 +74,29 @@ public class CreateTeacherFragment extends Fragment {
             public void onClick(View view) {
                 UserModel userdata = new UserModel();
                 if(allFilled(nameEditText,surnameEditText,genderEditText,mailEditText,passwordEditText)){
-                    userdata.setPassword(passwordEditText.getText().toString());
-                    userdata.setName(nameEditText.getText().toString());userdata.setSurname(surnameEditText.getText().toString());
-                    userdata.setSurname(surnameEditText.getText().toString());
-                    userdata.setGender(genderEditText.getText().toString());
-                    userdata.setEmail(mailEditText.getText().toString());
-                    createTeacherViewModel.setUserdata(userdata);
-                    createTeacherViewModel.authenticateTeacher(userdata.getEmail(),userdata.getPassword());
+
+                    //funcoon auxiliar del viewModel para comprobar que la contrasenya y el mail estan
+                    //correctos
+                    Event<String> verifiedEvent = createTeacherViewModel.verify(mailEditText.getText().toString()
+                            ,passwordEditText.getText().toString());
+                    if(verifiedEvent instanceof Event.Success){
+                        userdata.setPassword(passwordEditText.getText().toString());
+                        userdata.setName(nameEditText.getText().toString());
+                        userdata.setSurname(surnameEditText.getText().toString());
+                        userdata.setGender(genderEditText.getText().toString());
+                        userdata.setEmail(mailEditText.getText().toString());
+                        userdata.setParent(false);
+                        createTeacherViewModel.setUserdata(userdata);
+                        createTeacherViewModel.authenticateTeacher(userdata.getEmail(),userdata.getPassword());
+                    }
+                    else{
+                        Event.Error<String> error = (Event.Error<String>) verifiedEvent;
+                        if(error.getErrorData().equalsIgnoreCase("MailError")){
+                            mailEditText.setError(getString(R.string.createteacher_mailFormatError));
+                        }else if(error.getErrorData().equalsIgnoreCase("PasswordError")){
+                            passwordEditText.setError(getString(R.string.createteacher_passwordFormatError));
+                        }
+                    }
 
                 }
 

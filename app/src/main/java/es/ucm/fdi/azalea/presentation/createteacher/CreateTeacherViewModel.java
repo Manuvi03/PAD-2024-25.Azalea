@@ -13,17 +13,17 @@ import es.ucm.fdi.azalea.integration.passWordRecoveryUseCase;
 public class CreateTeacherViewModel extends ViewModel {
     private createTeacherUseCase usecase;
     private MutableLiveData<Event<String>> createTeacherEvent;
-    private MutableLiveData<Event<Boolean>> authenticateTeacherEvent;
+    private MutableLiveData<Event<UserModel>> authenticateTeacherEvent;
 
     //este userdata le utilizamos para pasar informacion entre fragments mediante el viewModel
-    private UserModel userdata;
+    private MutableLiveData<UserModel> userdata;
 
-    public UserModel getUserdata() {
+    public LiveData<UserModel> getUserdata() {
         return userdata;
     }
 
-    public void setUserdata(UserModel userdata) {
-        this.userdata = userdata;
+    public void setUserdata(UserModel user){
+        userdata.setValue(user);
     }
 
 
@@ -32,17 +32,19 @@ public class CreateTeacherViewModel extends ViewModel {
         usecase = new createTeacherUseCase();
         createTeacherEvent = new MutableLiveData<>();
         authenticateTeacherEvent = new MutableLiveData<>();
+        userdata = new MutableLiveData<>();
     }
 
     public void authenticateTeacher(String mail, String password){
-        usecase.authenticateTeacher(mail, password, new CallBack<Boolean>() {
+        usecase.authenticateTeacher(mail, password, new CallBack<UserModel>() {
             @Override
-            public void onSuccess(Event.Success<Boolean> success) {
+            public void onSuccess(Event.Success<UserModel> success) {
+                userdata.getValue().setId(success.getData().getId());
                 authenticateTeacherEvent.postValue(success);
             }
 
             @Override
-            public void onError(Event.Error<Boolean> error) {
+            public void onError(Event.Error<UserModel> error) {
                 authenticateTeacherEvent.postValue(error);
             }
         });
@@ -64,10 +66,29 @@ public class CreateTeacherViewModel extends ViewModel {
         });
     }
 
+    public Event<String> verify(String mail, String password){
+        Event<String> result = new Event.Success<String>("");
+        /*regex para la comprobacion del email
+        comprueeba varios requisitos como el hecho de que tenga @ , . y solo ciertos tipos de
+        caracteres especiales*/
+        if(!(mail).matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+            Event.Error<String> error = new Event.Error<>();
+            error.setErrorData("MailError");
+            return error;
+
+        }else if(!password.matches("^.{6,}$")){
+            Event.Error<String> error = new Event.Error<>();
+            error.setErrorData("PasswordError");
+            return error;
+        }
+
+        return result;
+    }
+
     public LiveData<Event<String>> getCreateTeacherEvent(){
         return createTeacherEvent;
     }
-    public LiveData<Event<Boolean>> getAuthenticateTeacherEvent() {return authenticateTeacherEvent;}
+    public LiveData<Event<UserModel>> getAuthenticateTeacherEvent() {return authenticateTeacherEvent;}
 }
 
 
