@@ -132,6 +132,7 @@ public class ModifyEventFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        Log.d("ModifyEventFragment", "onDestroyView: Fragment eliminado de la pila de retroceso.");
         super.onDestroyView();
     }
 

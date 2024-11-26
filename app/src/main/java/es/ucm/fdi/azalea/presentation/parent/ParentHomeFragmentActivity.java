@@ -3,13 +3,13 @@ package es.ucm.fdi.azalea.presentation.parent;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +28,9 @@ import org.threeten.bp.format.DateTimeFormatter;
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
 
-public class ParentHomeFragmentActivity extends AppCompatActivity {
+public class ParentHomeFragmentActivity extends Fragment  {
+    private View view;
+
     private ParentHomeFragmentViewModel parentHomeFragmentViewModel;
     private EventsParentAdapter adapter;
     private TextView resultText;
@@ -38,35 +40,29 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
 
     private final String TAG = "ParentHomeFragmentActivity";
 
-    @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.parent_home_fragment);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.parentHomeFragment), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.teacher_home_fragment, container, false);
 
         Log.i(TAG, "entro en ParentHomeFragmentActivity");
 
-        resultText = findViewById(R.id.parenthomefragment_textResult);
+        resultText = view.findViewById(R.id.parenthomefragment_textResult);
 
-        calendarView = findViewById(R.id.parenthomefragment_calendarView);
+        calendarView = view.findViewById(R.id.parenthomefragment_calendarView);
         Calendar today = Calendar.getInstance();
         calendarView.setSelectedDates(Collections.singletonList(today));
 
-        RecyclerView recyclerView = findViewById(R.id.parenthomefragment_recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.parenthomefragment_recyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new EventsParentAdapter(new ArrayList<>(), this);
+        adapter = new EventsParentAdapter(new ArrayList<>(), getContext());
         recyclerView.setAdapter(adapter);
 
         parentHomeFragmentViewModel = new ParentHomeFragmentViewModel();
-        parentHomeFragmentViewModel.getEventsForDateLiveData().observe(this, this::updateEvents);
+        parentHomeFragmentViewModel.getEventsForDateLiveData().observe(getViewLifecycleOwner(), this::updateEvents);
 
         calendarView.setOnCalendarDayClickListener(eventDay -> {
             Calendar calendar = eventDay.getCalendar();
@@ -81,7 +77,7 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
 
         // Llamada para pintar de un color distinto los días que tengan algún evento
         parentHomeFragmentViewModel.getEventsForClassroom("2"); // TODO CAMBIAR ESTO POR EL ID DE LA CLASE CORRESPONDIENTE
-        parentHomeFragmentViewModel.getEventsForClassroomLiveData().observe(this, this::paintDaysWithEvents);
+        parentHomeFragmentViewModel.getEventsForClassroomLiveData().observe(getViewLifecycleOwner(), this::paintDaysWithEvents);
 
         // Llamada para obtener los eventos de hoy
         LocalDate currentDate = LocalDate.now();
@@ -90,6 +86,7 @@ public class ParentHomeFragmentActivity extends AppCompatActivity {
 
         parentHomeFragmentViewModel.getEventsForDate(formattedDate);
 
+        return view;
     }
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
