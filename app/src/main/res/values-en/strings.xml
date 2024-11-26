@@ -89,6 +89,5 @@
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
-    <string name="student_contact">Quick contact: %1$s</string>
 
 </resources>
