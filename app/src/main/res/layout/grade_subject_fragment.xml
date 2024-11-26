@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/grade_subject_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Seashell"
+    tools:context=".presentation.gradesubject.GradeSubjectFragment">
+
+    <ImageView
+        android:id="@+id/grade_subject_profile_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/grade_subject_name_guideline"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/grade_subject_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity=""
+        android:text="@string/student_name_text"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/grade_subject_profile_image"
+        app:layout_constraintEnd_toStartOf="@+id/grade_subject_right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_name_text_guideline"
+        app:layout_constraintTop_toTopOf="@+id/grade_subject_name_guideline" />
+
+    <TextView
+        android:id="@+id/grade_subject_intro_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grade_subject_intro_text"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <Spinner
+        android:id="@+id/grade_subject_subjects_spinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/grade_mark_spinner"
+        app:layout_constraintEnd_toStartOf="@+id/grade_subject_spinner_guideline"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/grade_subject_intro_text" />
+
+    <TextView
+        android:id="@+id/grade_subject_grade_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grade_subject_grade_text"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <EditText
+        android:id="@+id/grade_subject_mark_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:autofillHints=""
+        android:inputType="numberDecimal"
+        android:hint="@string/grade_subject_hint_text"
+        android:maxLength="5"
+        app:layout_constraintEnd_toStartOf="@+id/grade_subject_spinner_guideline"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/grade_subject_grade_text" />
+
+    <Button
+        android:id="@+id/grade_subject_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grade_subject_send_grade_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_name_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_left_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_texts_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_name_text_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.24" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_spinner_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_right_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

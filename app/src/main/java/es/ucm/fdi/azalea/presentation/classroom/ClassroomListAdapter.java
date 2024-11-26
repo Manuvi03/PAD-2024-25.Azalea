@@ -26,17 +26,21 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
 
     // constantes
     private final String TAG = "ClassroomListAdapter";
+    private final String STUDENT_ID_KEY = "studentId";
+    private final String STUDENT_IMAGE_KEY = "studentImage";
 
     // atributos
     private List<StudentModel> mStudentsData;           // todos los alumnos de la clase
     private List<StudentModel> mStudentsFilteredData;   // los alumnos de la busqueda
     private final LayoutInflater mInflater;
+    ClassroomStudentSharedViewModel viewModel;
 
-    public ClassroomListAdapter(List<StudentModel> studentInfoList, Context context) {
+    public ClassroomListAdapter(List<StudentModel> studentInfoList, Context context, ClassroomStudentSharedViewModel viewModel) {
         Log.d(TAG, "Se crea el ClassroomListAdapter");
         this.mInflater = LayoutInflater.from(context);
         this.mStudentsData = studentInfoList;
         this.mStudentsFilteredData = studentInfoList;
+        this.viewModel = viewModel;
     }
 
     public void setStudentsData(List<StudentModel> students) {
@@ -80,6 +84,11 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
         // listener para acceder a la informacion de cada alumno, abriendo el nuevo Fragment
         holder.itemView.setOnClickListener(view -> {
             Log.d(TAG, "Se cambia de fragment a StudentFragment");
+
+            viewModel.setStudentId(studentModel.getId());
+            viewModel.setStudentProfileImage(path);
+
+            // se crea el fragment
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .replace(R.id.teacher_fragment_container_view, StudentFragment.class, null)

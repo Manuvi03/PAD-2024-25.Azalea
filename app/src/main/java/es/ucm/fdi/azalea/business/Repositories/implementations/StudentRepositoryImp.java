@@ -48,16 +48,33 @@ public class StudentRepositoryImp implements StudentRepository {
     }
 
     @Override
-    public StudentModel readById(String id) {
-        return null;
+    public void readById(String id, CallBack<StudentModel> cb) {
+
+        // se ejecuta la query, obteniendo una imagen unica de Firebase
+        studentReference.child(id).get().addOnCompleteListener(task -> {
+            if(!task.isSuccessful()){
+                // si no se puede realizar la busqueda, se devuelve un error
+                Log.d(TAG,"Error recuperando los datos del estudiante", task.getException());
+                cb.onError(new Event.Error<>(task.getException()));
+            }
+            else {
+                Log.d(TAG, "StudentRepository devolvio el estudiante con id "  + id);
+
+                // se devuelve un exito y la informacion, que es el estudiante
+                cb.onSuccess(new Event.Success<>(task.getResult().getValue(StudentModel.class)));
+            }
+        });
     }
 
     @Override
-    public String update(String id, StudentModel item) {
-        /*
-        subjectReference.child(subjectId).setValue(updatedSubject);
-        Log.d("SubjectRepository", "Subject updated");*/
-        return "";
+    public void update(String id, StudentModel item, CallBack<StudentModel> cb) {
+        studentReference.child(id).setValue(item).addOnSuccessListener(task->{
+            Log.d(TAG, "Estudiante con id " + id + " modificado correctamente");
+            cb.onSuccess(new Event.Success<>(item));
+        })      .addOnFailureListener(e->{
+            Log.d(TAG, "Error al modificar el estudiante", e);
+            cb.onError(new Event.Error<>(e));
+        });
     }
 
     @Override
@@ -97,7 +114,7 @@ public class StudentRepositoryImp implements StudentRepository {
                         list.add(studentSnapshot.getValue(StudentModel.class));
                     }
                 }
-                Log.d(TAG, "ReadByClassroomId devolvio una lista con " + list.size() + " resultados.");
+                Log.d(TAG, "StudentRepository devolvio una lista con " + list.size() + " resultados.");
 
                 // se devuelve un exito y la informacion
                 cb.onSuccess(new Event.Success<>(list));

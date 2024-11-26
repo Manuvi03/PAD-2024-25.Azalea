@@ -3,12 +3,14 @@ package es.ucm.fdi.azalea.business;
 import es.ucm.fdi.azalea.business.Repositories.ChatRepository;
 import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
 import es.ucm.fdi.azalea.business.Repositories.EventRepository;
+import es.ucm.fdi.azalea.business.Repositories.MarkRepository;
 import es.ucm.fdi.azalea.business.Repositories.MessageRepository;
 import es.ucm.fdi.azalea.business.Repositories.StudentRepository;
 import es.ucm.fdi.azalea.business.Repositories.UserRepository;
 import es.ucm.fdi.azalea.business.Repositories.implementations.ChatRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.ClassRoomRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.EventRepositoryImp;
+import es.ucm.fdi.azalea.business.Repositories.implementations.MarkRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.MessageRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.StudentRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.UserRepositoryImp;
@@ -42,11 +44,16 @@ public class BusinessFactoryImp extends BusinessFactory{
 
     @Override
     public ClassRoomRepository getClassRoomRepository() {
-        return null;
+        return new ClassRoomRepositoryImp();
     }
 
     @Override
     public UserRepository getUserRepository() {
-        return null;
+        return new UserRepositoryImp();
+    }
+
+    @Override
+    public MarkRepository getMarkRepository() {
+        return new MarkRepositoryImp();
     }
 }
