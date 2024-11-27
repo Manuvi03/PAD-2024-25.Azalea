@@ -61,6 +61,8 @@
     <!--PasswordRecovery-->
     <!--Reminder-->
     <!--ShowGrades-->
+    <string name="show_grades_no_marks">There is no marks</string>
+
     <!--Student-->
     <string name="student_send_message_button">Message</string>
     <string name="student_grade_mark_button">Grade</string>

@@ -148,6 +148,11 @@
             android:fillViewport="true"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10sp" />
+
+
             <TextView
                 android:id="@+id/student_fragment_student_info_textview"
                 android:layout_width="match_parent"
