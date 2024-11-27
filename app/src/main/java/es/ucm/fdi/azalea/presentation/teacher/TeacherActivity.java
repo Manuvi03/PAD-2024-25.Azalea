@@ -1,6 +1,5 @@
 package es.ucm.fdi.azalea.presentation.teacher;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -8,17 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import es.ucm.fdi.azalea.R;
-import es.ucm.fdi.azalea.presentation.chat.chatActivity;
 import es.ucm.fdi.azalea.presentation.classroom.ClassroomFragment;
 import es.ucm.fdi.azalea.presentation.editprofile.EditProfileFragment;
-import es.ucm.fdi.azalea.presentation.reminder.reminderActivity;
 
-public class teacherActivity extends AppCompatActivity {
+public class TeacherActivity extends AppCompatActivity {
 
     // atributos de componentes de la vista
     private BottomNavigationView bottomNavigationView;

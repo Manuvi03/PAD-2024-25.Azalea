@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--AddEvent-->
+    <string name="addevent_buttonString">Save Event</string>
+    <string name="addevent_datePickerTitle">Select a date</string>
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
     <string name="classroom_results_string">Results</string>
+    <string name="addevent_title">Title</string>
+    <string name="addevent_date">Date (YYYY-MM-DD)</string>
+    <string name="addevent_hour">Hour (HH:MM)</string>
+    <string name="addevent_location">Location</string>
+    <string name="addevent_description">Description</string>
+    <string name="addevent_string">Create Event</string>
+    <string name="addevent_timePickerTitle">Select a time</string>
     <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_no_students_string">No students</string>
     <string name="classroom_search_error">Failed to search classroom students</string>
     <string name="classroom_searchview_queryhint">Search student</string>
 
     <!--CreateTeacher-->
+
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
     <string name="createteacher_surnameText">Surnames</string>
@@ -63,6 +73,7 @@
     <string name="login_error">Failed to log in, incorrect username or password</string>
 
     <!--Parent-->
+    <string name="modifyevent_toastCorrect">Event modified successfully</string>
     <string name="parent_recyclerView_empty">Ther\'re no events</string>
     <string name="parent_recyclerView_title">Event\'s Title</string>
     <string name="parent_recyclerView_date">Date</string>
@@ -107,5 +118,13 @@
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
+    <string name="teacherhomefragment_textButton">Create Event</string>
+    <string name="parent_recyclerView_modify">Modify</string>
+    <string name="modifyevent_buttonString">Modify</string>
+    <string name="modifyevent_string">Modify Event</string>
+    <string name="modifyevent_toastIncorrect">Error modifying the event. Try again</string>
+    <string name="modifyevent_toastNoData">No data received</string>
+    <string name="modifyevent_toastTitleEmpty">Title cannot be empty</string>
+    <string name="modifyevent_toastDateEmpty">Date cannot be empty</string>
 
 </resources>

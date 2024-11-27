@@ -15,12 +15,12 @@ import java.util.List;
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
+public class EventsParentAdapter extends RecyclerView.Adapter<EventsParentAdapter.ViewHolder> {
 
     private List<EventModel> mEventsData;
     private final LayoutInflater mInflater;
 
-    public EventsAdapter(List<EventModel> EventsInfoArrayList, Context context) {
+    public EventsParentAdapter(List<EventModel> EventsInfoArrayList, Context context) {
         this.mInflater = LayoutInflater.from(context);
         this.mEventsData = EventsInfoArrayList;
     }
@@ -32,13 +32,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @NonNull
     @Override
-    public EventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+    public EventsParentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.parent_calendar_recyclerview_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventsParentAdapter.ViewHolder holder, int position) {
 
         EventModel event = mEventsData.get(position);
         holder.title.setText(event.getTitle()!=null ? event.getTitle() : "");

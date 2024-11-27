@@ -1,5 +1,16 @@
 <resources>
     <!--AddEvent-->
+    <string name="addevent_title">Título</string>
+    <string name="addevent_date">Fecha (YYYY-MM-DD)</string>
+    <string name="addevent_hour">Hora (HH:MM)</string>
+    <string name="addevent_location">Localización</string>
+    <string name="addevent_description">Descripción</string>
+    <string name="addevent_string">Crear Evento</string>
+    <string name="addevent_buttonString">Guardar Evento</string>
+    <string name="addevent_datePickerTitle">Selecciona una fecha</string>
+    <string name="addevent_timePickerTitle">Selecciona una hora</string>
+    <string name="addevent_timePickerEmoji" translatable="false">⏰</string>
+
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
@@ -65,7 +76,14 @@
     <string name="login_create_teacher_text">¿No tienes cuenta de profesor?</string>
     <string name="login_create_button">Crear</string>
     <string name="login_error">Error al iniciar sesión, vuelva a introducir los datos</string>
-
+    <!--ModifyFragment-->
+    <string name="modifyevent_buttonString">Modificar</string>
+    <string name="modifyevent_string">Modificar Evento</string>
+    <string name="modifyevent_toastCorrect">Evento creado correctamente</string>
+    <string name="modifyevent_toastIncorrect">Error al modificar el evento. Inténtelo de nuevo</string>
+    <string name="modifyevent_toastNoData">No se han recibido datos</string>
+    <string name="modifyevent_toastTitleEmpty">El título no puede estar vacío</string>
+    <string name="modifyevent_toastDateEmpty">La fecha no puede estar vacía</string>
     <!--Parent-->
     <string name="parent_recyclerView_empty">No hay eventos</string>"
     <string name="parent_recyclerView_title">Titulo Evento</string>
@@ -76,6 +94,8 @@
     <string name="parent_separator" translatable="false"> | </string>
     <string name="parent_recyclerView_result">Resultados</string>"
     <string name="parent_recyclerView_titleEvent">eventos</string>
+    <string name="parent_recyclerView_modify">Modificar</string>
+
     <!--PasswordRecovery-->
     <string name="passwordRecovery_button">Restablecer Contraseña</string>
     <string name="passwordRecovery_text"><u>¿Has olvidado tu contraseña?</u></string>
@@ -114,4 +134,6 @@
     <string name="teacher_navbar_home_text">Inicio</string>
     <string name="teacher_navbar_classroom_text">Clase</string>
     <string name="teacher_navbar_profile">Perfil</string>
+    <string name="teacherhomefragment_textButton">Crear Evento</string>
+    <string name="addevent_datePickerEmoji" translatable="false">📅</string>
 </resources>
