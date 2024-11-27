@@ -44,7 +44,7 @@ public class ParentHomeFragmentActivity extends Fragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.teacher_home_fragment, container, false);
+        view = inflater.inflate(R.layout.parent_home_fragment, container, false);
 
         Log.i(TAG, "entro en ParentHomeFragmentActivity");
 
@@ -87,6 +87,12 @@ public class ParentHomeFragmentActivity extends Fragment  {
         parentHomeFragmentViewModel.getEventsForDate(formattedDate);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        parentHomeFragmentViewModel.getEventsForDate(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
     }
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})

@@ -82,6 +82,7 @@
     <string name="parent_recyclerView_result">Resultados</string>"
     <string name="parent_recyclerView_titleEvent">eventos</string>
     <string name="parent_recyclerView_modify">Modificar</string>
+
     <!--PasswordRecovery-->
     <!--Reminder-->
     <!--ShowGrades-->

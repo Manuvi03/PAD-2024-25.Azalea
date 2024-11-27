@@ -123,10 +123,6 @@ public class TeacherHomeFragment extends Fragment implements EventsTeacherAdapte
         teacherHomeFragmentViewModel.getEventsForDate(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     public void updateEvents(List<EventModel> events) {

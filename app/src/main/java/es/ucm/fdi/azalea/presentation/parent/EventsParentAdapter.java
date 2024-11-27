@@ -33,7 +33,7 @@ public class EventsParentAdapter extends RecyclerView.Adapter<EventsParentAdapte
     @NonNull
     @Override
     public EventsParentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.teacher_calendar_recyclerview_item, parent, false);
+        View view = mInflater.inflate(R.layout.parent_calendar_recyclerview_item, parent, false);
         return new ViewHolder(view);
     }
 
