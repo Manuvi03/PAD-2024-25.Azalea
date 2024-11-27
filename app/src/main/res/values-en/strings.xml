@@ -34,6 +34,7 @@
     <string name ="ClassRoomName_lastStepTextView">Last step!</string>
     <string name ="ClassRoomName_hint">Your Clasroom name</string>
     <string name ="ClassRoomName_successToast">Teacher account signed in </string>
+    <string name ="ClassRoomName_error">Error creating the user, please try again</string>
 
 
     <!--EditProfile-->

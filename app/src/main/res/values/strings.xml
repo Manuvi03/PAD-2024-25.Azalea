@@ -35,6 +35,7 @@
     <string name ="ClassRoomName_lastStepTextView">¡Último paso!</string>
     <string name ="ClassRoomName_hint">Nombre de tu clase</string>
     <string name ="ClassRoomName_successToast">Cuenta de profesor creada correctamente</string>
+    <string name ="ClassRoomName_error">Error al crear el usuario, por favor vuelva a intentarlo</string>
 
 
     <!--EditProfile-->

@@ -69,6 +69,10 @@ public class loginUseCase {
 
     }
 
+    public void logOut(){
+        BusinessFactory.getInstance().getAuthRepository().logout();
+    }
+
 
 
 }

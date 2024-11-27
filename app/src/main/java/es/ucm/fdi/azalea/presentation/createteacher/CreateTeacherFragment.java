@@ -57,7 +57,7 @@ public class CreateTeacherFragment extends Fragment {
             if(booleanEvent instanceof Event.Success){
                 //LLama directamente al supportFragmentManager para cambiar
                 requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
-                ).replace(R.id.login_fragment_container, ClassRoomNameFragment.class,null).commit();
+                ).replace(R.id.login_fragment_container, ClassRoomNameFragment.class,null).addToBackStack(null).commit();
             }
             else if(booleanEvent instanceof Event.Error){
                 Toast.makeText(requireActivity(),R.string.createteacher_teacherAuthError,Toast.LENGTH_LONG).show();
@@ -90,6 +90,8 @@ public class CreateTeacherFragment extends Fragment {
                         createTeacherViewModel.authenticateTeacher(userdata.getEmail(),userdata.getPassword());
                     }
                     else{
+                        // en este caso no puede ser nunca Event.loading ya que la funcion manda
+                        // o un error o un success
                         Event.Error<String> error = (Event.Error<String>) verifiedEvent;
                         if(error.getErrorData().equalsIgnoreCase("MailError")){
                             mailEditText.setError(getString(R.string.createteacher_mailFormatError));

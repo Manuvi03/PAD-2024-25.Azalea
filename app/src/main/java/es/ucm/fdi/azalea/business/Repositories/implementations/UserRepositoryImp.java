@@ -71,9 +71,9 @@ public class UserRepositoryImp implements UserRepository {
                @Override
                public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if(task.isSuccessful()){
-                        
-                    }else{
-
+                        cb.onSuccess(new Event.Success<Boolean>(true));
+                    }else if(!task.isSuccessful() || task.getResult() == null){
+                        cb.onError(new Event.Error<>(task.getException()));
                     }
                }
            });

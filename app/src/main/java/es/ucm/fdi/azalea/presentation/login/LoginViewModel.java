@@ -45,6 +45,10 @@ public class LoginViewModel extends ViewModel {
 
     }
 
+    public void logOut(){
+        login_integration.logOut();
+    }
+
 
 
 }

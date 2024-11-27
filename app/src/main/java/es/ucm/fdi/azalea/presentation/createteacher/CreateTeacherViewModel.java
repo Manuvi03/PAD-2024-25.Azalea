@@ -13,7 +13,7 @@ import es.ucm.fdi.azalea.integration.passWordRecoveryUseCase;
 public class CreateTeacherViewModel extends ViewModel {
     private createTeacherUseCase usecase;
     private MutableLiveData<Event<String>> createTeacherEvent;
-    private MutableLiveData<Event<UserModel>> authenticateTeacherEvent;
+    private MutableLiveData<Event<Boolean>> authenticateTeacherEvent;
 
     //este userdata le utilizamos para pasar informacion entre fragments mediante el viewModel
     private MutableLiveData<UserModel> userdata;
@@ -36,15 +36,15 @@ public class CreateTeacherViewModel extends ViewModel {
     }
 
     public void authenticateTeacher(String mail, String password){
-        usecase.authenticateTeacher(mail, password, new CallBack<UserModel>() {
+        usecase.authenticateTeacher(mail, password, new CallBack<Boolean>() {
             @Override
-            public void onSuccess(Event.Success<UserModel> success) {
-                userdata.getValue().setId(success.getData().getId());
+            public void onSuccess(Event.Success<Boolean> success) {
+
                 authenticateTeacherEvent.postValue(success);
             }
 
             @Override
-            public void onError(Event.Error<UserModel> error) {
+            public void onError(Event.Error<Boolean> error) {
                 authenticateTeacherEvent.postValue(error);
             }
         });
@@ -88,7 +88,7 @@ public class CreateTeacherViewModel extends ViewModel {
     public LiveData<Event<String>> getCreateTeacherEvent(){
         return createTeacherEvent;
     }
-    public LiveData<Event<UserModel>> getAuthenticateTeacherEvent() {return authenticateTeacherEvent;}
+    public LiveData<Event<Boolean>> getAuthenticateTeacherEvent() {return authenticateTeacherEvent;}
 }
 
 

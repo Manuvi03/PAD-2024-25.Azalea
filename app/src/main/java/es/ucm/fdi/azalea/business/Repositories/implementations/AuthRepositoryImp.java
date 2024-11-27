@@ -18,6 +18,7 @@ import es.ucm.fdi.azalea.integration.Event;
 public class AuthRepositoryImp implements AuthRepository {
     private static String TAG = "AuthRepository";
 
+
     public void login(String mail, String password, CallBack<UserModel> cb){
        FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password).addOnCompleteListener(task ->{
            try{

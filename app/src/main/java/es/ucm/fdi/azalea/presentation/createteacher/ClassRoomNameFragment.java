@@ -55,8 +55,11 @@ public class ClassRoomNameFragment extends Fragment {
                 Intent switchToTeacher = new Intent(requireActivity(), teacherActivity.class);
                 Log.d(TAG,"profesor creado correctamente");
                 requireActivity().startActivity(switchToTeacher);
+                //la activity de log in termina ya que no queremos que se pueda volver al log in
+                // una vez se ha iniciado sesion
+                requireActivity().finish();
             }else if(event instanceof Event.Error){
-
+                Toast.makeText(requireActivity(),getString(R.string.ClassRoomName_error),Toast.LENGTH_LONG).show();
             }else{
 
             }

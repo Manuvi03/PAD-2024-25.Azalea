@@ -56,6 +56,10 @@ public class LoginFragment extends Fragment {
         recoverPasswordText = loginBinding.textViewRecoverPassword;
         createTeacherButton = loginBinding.buttonCreateTeacherAccount;
 
+        //Hacemos un logOut cada vez que se inicia la aplicacion, hemos decidido hacerlo asi por simplicidad, si la aplicacion se cierra el usuario ha de
+        //iniciar sesion cada vez que abre la aplicacion
+        loginViewModel.logOut();
+
         initListeners();
         start_animations();
 
@@ -81,7 +85,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
                 ).replace(R.id.login_fragment_container,
-                        PasswordRecoveryFragment.class,null).commit();
+                        PasswordRecoveryFragment.class,null).addToBackStack(null).commit();
             }
         });
 
@@ -90,7 +94,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
                 ).replace(R.id.login_fragment_container,
-                        CreateTeacherFragment.class,null).commit();
+                        CreateTeacherFragment.class,null).addToBackStack(null).commit();
             }
 
         });
@@ -116,6 +120,7 @@ public class LoginFragment extends Fragment {
                 }
 
                 startActivity(switchActivityIntent);
+                requireActivity().finish();
 
             }else{
                 //muestra un toast de error (se puede cambiar en un futuro)
