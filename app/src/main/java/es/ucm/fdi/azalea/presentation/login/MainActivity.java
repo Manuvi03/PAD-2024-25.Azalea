@@ -59,38 +59,9 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.button_login);
 
-        Intent intent = new Intent(this, TeacherActivity.class);
-        startActivity(intent);
 
-        //initListeners();
-
-       // start_animations();
-
-        /*
-        // estoy probando el firebase database
-        Subject subject1 = new Subject("Maths");
-        Subject subject2 = new Subject("PE");
-        Subject modifiedSubject = new Subject("English");
-
-        SubjectRepository sm = new SubjectRepository();
-
-        String key1 = sm.create(subject1);
-        String key2 = sm.create(subject2);
-
-        sm.readAll();
-
-        // investigando algunos guardan la key en el transfer otros no... no entiendo como hacerlo
-        // bien esto, de momento la devuelvo del create para ir probando
-        sm.update(key1, modifiedSubject);
-
-        sm.readAll();
-
-        sm.delete(key2);
-
-        // todos estos mensajes salen por consola
-        sm.readAll();*/
-
-
+        initListeners();
+        start_animations();
     }
 
     private void initListeners(){
