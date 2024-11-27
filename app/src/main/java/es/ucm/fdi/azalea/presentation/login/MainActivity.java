@@ -52,7 +52,7 @@ import es.ucm.fdi.azalea.R;
      private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
          getSupportFragmentManager().beginTransaction()
                  .setReorderingAllowed(true)
-                 .replace(R.id.login_fragment_container, c, null).addToBackStack(null).commit();
+                 .replace(R.id.login_fragment_container, c, null).commit();
 
      }
 

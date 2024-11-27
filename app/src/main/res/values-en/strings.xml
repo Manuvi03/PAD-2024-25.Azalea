@@ -80,7 +80,7 @@
     <string name="parent_recyclerView_titleEvent">events</string>
     <!--PasswordRecovery-->
     <string name="passwordRecovery_button">Reset Password</string>
-    <string name="passwordRecovery_text"><u>Did you forget your password?</u></string>
+    <string name="passwordRecovery_text"><u>Forgot your password?</u></string>
     <string name="passwordRecovery_hint">Email address:</string>
     <string name="passwordRecovery_success">The password recovery email has been sent</string>
     <string name="passwordRecovery_error">This Email does not exist in the database</string>
