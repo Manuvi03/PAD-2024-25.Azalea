@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import es.ucm.fdi.azalea.R;
@@ -26,7 +28,8 @@ import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.presentation.createteacher.CreateTeacherFragment;
 import es.ucm.fdi.azalea.presentation.parent.ParentActivity;
 import es.ucm.fdi.azalea.presentation.passwordrecovery.PasswordRecoveryFragment;
-import es.ucm.fdi.azalea.presentation.teacher.teacherActivity;
+import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
+
 
 public class LoginFragment extends Fragment {
 
@@ -39,6 +42,7 @@ public class LoginFragment extends Fragment {
     private Button loginButton;
     private TextView recoverPasswordText;
     private Button createTeacherButton;
+    private FrameLayout loadingView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,11 +59,11 @@ public class LoginFragment extends Fragment {
         loginButton = loginBinding.buttonLogin;
         recoverPasswordText = loginBinding.textViewRecoverPassword;
         createTeacherButton = loginBinding.buttonCreateTeacherAccount;
+        loadingView = loginBinding.loadingOverlay;
 
         //Hacemos un logOut cada vez que se inicia la aplicacion, hemos decidido hacerlo asi por simplicidad, si la aplicacion se cierra el usuario ha de
         //iniciar sesion cada vez que abre la aplicacion
         loginViewModel.logOut();
-
         initListeners();
         start_animations();
 
@@ -68,9 +72,9 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        loginBinding = null;
         super.onDestroyView();
     }
+
 
     private void initListeners(){
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +98,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
                 ).replace(R.id.login_fragment_container,
-                        CreateTeacherFragment.class,null).addToBackStack(null).commit();
+                        new CreateTeacherFragment(),null).addToBackStack(null).commit();
             }
 
         });
@@ -103,20 +107,21 @@ public class LoginFragment extends Fragment {
 
         loginViewModel.getLoginEvent().observe(requireActivity(),event ->{
             if(event instanceof Event.Loading){
-                //TODO logica de carga de usuario
+                loadingView.setVisibility(View.VISIBLE);
             }else if(event instanceof Event.Success){
                 Intent switchActivityIntent;
-                //TODO logica de cambiar de vista, dependiendo de si el usuario es profesor o padre tendra que cambiar de vista, para hacer
-                //TODO esto deberia leer el usuario de la base de datos con el uid de la clase user de Firebase y leer el booleano de la bd
+                loadingView.setVisibility(View.GONE);
                 Log.d(TAG,"el usuario ha iniciado sesion correctamente");
                 UserModel userdata = ((Event.Success<UserModel>) event).getData();
                 if(userdata.getParent()){
                     Log.d(TAG, "el usuario es padre");
                     switchActivityIntent = new Intent(requireActivity(), ParentActivity.class);
+
                 }
                 else{
                     Log.d(TAG, "el usuario es profesor");
-                    switchActivityIntent = new Intent(requireActivity(), teacherActivity.class);
+                    switchActivityIntent = new Intent(requireActivity(), TeacherActivity.class);
+
                 }
 
                 startActivity(switchActivityIntent);
@@ -124,6 +129,7 @@ public class LoginFragment extends Fragment {
 
             }else{
                 //muestra un toast de error (se puede cambiar en un futuro)
+                loadingView.setVisibility(View.GONE);
                 Toast.makeText(requireActivity(),R.string.login_error,Toast.LENGTH_LONG).show();
             }
         });

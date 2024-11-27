@@ -37,14 +37,10 @@
     <string name="createteacher_teacherAuthError">This Email has alread been used</string>
     <string name="createteacher_mailFormatError">This Email format is not valid</string>
     <string name="createteacher_passwordFormatError">The password must have at least 6 characters</string>
-
-
-    <!--ClassRoomName-->
-    <string name ="ClassRoomName_acceptButton">Aceptar</string>
-    <string name ="ClassRoomName_lastStepTextView">Last step!</string>
     <string name ="ClassRoomName_hint">Your Clasroom name</string>
     <string name ="ClassRoomName_successToast">Teacher account signed in </string>
     <string name ="ClassRoomName_error">Error creating the user, please try again</string>
+    <string name ="ClassRoomName_Text">Classroom</string>
 
 
     <!--EditProfile-->

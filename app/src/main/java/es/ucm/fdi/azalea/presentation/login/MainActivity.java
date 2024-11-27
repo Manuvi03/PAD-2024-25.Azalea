@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.FirebaseApp;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import es.ucm.fdi.azalea.R;
 
@@ -42,7 +43,7 @@ import es.ucm.fdi.azalea.R;
 
         FirebaseApp.initializeApp(this);
         Log.d(TAG, "onCreate: ");
-
+        AndroidThreeTen.init(this); //inicializacion de la libreria de fecha
         replaceFragment(LoginFragment.class);
 
 
@@ -51,9 +52,10 @@ import es.ucm.fdi.azalea.R;
      private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
          getSupportFragmentManager().beginTransaction()
                  .setReorderingAllowed(true)
-                 .replace(R.id.login_fragment_container, c, null)
-                 .commit();
+                 .replace(R.id.login_fragment_container, c, null).addToBackStack(null).commit();
+
      }
+
 
 
  }

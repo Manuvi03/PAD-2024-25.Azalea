@@ -1,11 +1,14 @@
 package es.ucm.fdi.azalea.presentation.createteacher;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,15 +20,19 @@ import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.databinding.CreateTeacherFragmentBinding;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.login.LoginFragment;
 import es.ucm.fdi.azalea.presentation.login.MainActivity;
+import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
 
 public class CreateTeacherFragment extends Fragment {
+    private static String TAG = "CreateTeacherFragment";
     private CreateTeacherFragmentBinding binding;
 
     private CreateTeacherViewModel createTeacherViewModel;
 
-    private EditText nameEditText, surnameEditText,mailEditText,genderEditText,passwordEditText;
+    private EditText nameEditText, surnameEditText,mailEditText,genderEditText,passwordEditText,classRoomNameEditText;
     private Button createTeacher_button;
+    FrameLayout loadingView;
 
 
 
@@ -46,6 +53,8 @@ public class CreateTeacherFragment extends Fragment {
         mailEditText = binding.createTeacherEmailEditText;
         passwordEditText = binding.createTeacherPasswordEditText;
         createTeacher_button = binding.createTeacherButton;
+        loadingView = binding.loadingOverlay;
+        classRoomNameEditText = binding.createTeacherClassRoomNameEditText;
 
         initListeners();
         return view;
@@ -55,15 +64,35 @@ public class CreateTeacherFragment extends Fragment {
     private void initListeners(){
         createTeacherViewModel.getAuthenticateTeacherEvent().observe(requireActivity(),booleanEvent -> {
             if(booleanEvent instanceof Event.Success){
-                //LLama directamente al supportFragmentManager para cambiar
-                requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
-                ).replace(R.id.login_fragment_container, ClassRoomNameFragment.class,null).addToBackStack(null).commit();
+                //si confirmamos que no existe en la bd (no esta registrado) lo registramos
+                loadingView.setVisibility(View.GONE);
+                createTeacherViewModel.createTeacher(createTeacherViewModel.getUserdata().getValue(),classRoomNameEditText.getText().toString());
+
             }
             else if(booleanEvent instanceof Event.Error){
+                loadingView.setVisibility(View.GONE);
                 Toast.makeText(requireActivity(),R.string.createteacher_teacherAuthError,Toast.LENGTH_LONG).show();
             }
             else{
-                //TODO crear los loadingView
+                loadingView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        createTeacherViewModel.getCreateTeacherEvent().observe(requireActivity(),event ->{
+            if(event instanceof Event.Success){
+                loadingView.setVisibility(View.GONE);
+                Toast.makeText(requireActivity(),getString(R.string.ClassRoomName_successToast), Toast.LENGTH_LONG).show();
+                Intent switchToTeacher = new Intent(requireActivity(), TeacherActivity.class);
+                Log.d(TAG,"profesor creado correctamente");
+                requireActivity().startActivity(switchToTeacher);
+                //la activity de log in termina ya que no queremos que se pueda volver al log in
+                // una vez se ha iniciado sesion
+                requireActivity().finish();
+            }else if(event instanceof Event.Error){
+                loadingView.setVisibility(View.GONE);
+                Toast.makeText(requireActivity(),getString(R.string.ClassRoomName_error),Toast.LENGTH_LONG).show();
+            }else{
+                loadingView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -73,7 +102,7 @@ public class CreateTeacherFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 UserModel userdata = new UserModel();
-                if(allFilled(nameEditText,surnameEditText,genderEditText,mailEditText,passwordEditText)){
+                if(allFilled(nameEditText,surnameEditText,genderEditText,mailEditText,passwordEditText,classRoomNameEditText)){
 
                     //funcoon auxiliar del viewModel para comprobar que la contrasenya y el mail estan
                     //correctos
@@ -106,6 +135,7 @@ public class CreateTeacherFragment extends Fragment {
         });
     }
 
+
     // los puntos suspensivos permiten pasar varios argumentos
     private boolean allFilled(EditText... fields){
         boolean filled = true;
@@ -123,6 +153,7 @@ public class CreateTeacherFragment extends Fragment {
     @Override
     public void onDestroyView(){
         super.onDestroyView();
+
     }
 
 }
