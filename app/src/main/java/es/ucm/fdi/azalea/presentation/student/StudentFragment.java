@@ -49,6 +49,7 @@ public class StudentFragment extends Fragment {
     private StudentViewModel studentViewModel;
     ClassroomStudentSharedViewModel classroomSharedViewModel;
     StudentGradeSubjectSharedViewModel gradeMarkSharedViewModel;
+    StudentShowGradesSharedViewModel studentShowGradesSharedViewModel;
 
     // componentes de la vista
     private AppCompatImageButton sendMessageButton;
@@ -307,7 +308,7 @@ public class StudentFragment extends Fragment {
             studentShowGradesSharedViewModel.setStudentId(studentId);
             studentShowGradesSharedViewModel.setStudentProfileImage(studentImage);
 
-            replaceFragment(ShowGradesFragment.class);
+            replaceFragment(ShowGradesFragment.class,null);
         });
 
         editStudentButton.setOnClickListener(listener -> {
@@ -335,12 +336,14 @@ public class StudentFragment extends Fragment {
                 data.putString("subject" + i,studentInfo.getSubjects().get(i));
                 i++;
             }
+            data.putInt("nsubject",i);
 
             int j = 0;
             for(String s: studentInfo.getMarksId()){
                 data.putString("mark" + i,studentInfo.getSubjects().get(j));
                 j++;
             }
+            data.putInt("nmarks",j);
             replaceFragment(EditStudentFragment.class,data);
         });
     }

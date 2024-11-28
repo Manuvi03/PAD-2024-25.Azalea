@@ -34,16 +34,20 @@ public class EditStudentFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(editStudentViewModel.class);
         View view = binding.getRoot();
 
-
-        bindViews();
         constructSM(savedInstanceState);
+        bindViews();
         initListeners();
         return view;
 
     }
 
     private void initListeners(){
+        editStudentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
     }
     private void constructSM(Bundle data){
         sm.setAddress(data.getString("direccion"));
@@ -66,23 +70,44 @@ public class EditStudentFragment extends Fragment {
         phones.add(data.getString("movil1"));
         phones.add(data.getString("movilp2"));
         sm.setParentsPhones(phones);
+        List<String> subjects = new ArrayList<>();
+        for(int i = 0; i <data.getInt("nsubject"); i++){
+            subjects.add(data.getString("subject" + i));
+        }
+        sm.setSubjects(subjects);
 
+        List<String> marks = new ArrayList<>();
+        for(int j = 0; j <data.getInt("nmarks"); j++){
+            marks.add(data.getString("subject" + j));
+        }
+        sm.setMarksId(marks);
 
     }
 
 
     private void bindViews(){
         direccionEditText = binding.teacherEditStudentDireccionEditText;
+        direccionEditText.setText(sm.getAddress());
         alergiasEditText = binding.teacherEditStudentAlergiasEditText;
+        alergiasEditText.setText(sm.getAllergens());
         diaNacEditText = binding.teacherEditStudentDiaNacEditText;
+        diaNacEditText.setText(sm.getBirthday());
         alturaEditText = binding.teacherEditStudentAlturaEditText;
+        alturaEditText.setText(sm.getHeight() +"");
         conMedEditText = binding.teacherEditStudentCondMedEditText;
+        conMedEditText.setText(sm.getMedicalConditions());
         nombreEditText = binding.teacherEditStudentNombreEditText;
+        nombreEditText.setText(sm.getName());
         apellidosEditText = binding.teacherEditStudentApellidosEditText;
+        apellidosEditText.setText(sm.getSurnames());
         pesoEditText = binding.teacherEditStudentPesoEditText;
+        pesoEditText.setText(sm.getWeight() +"");
         contactoRapidoEditText = binding.teacherEditStudentContactoRapidoEditText;
+        contactoRapidoEditText.setText(sm.getQuickContact());
         telefaux1EditText = binding.teacherEditStudentTelefaux1EditText;
+        telefaux1EditText.setText(sm.getParentsPhones().get(0));
         telefaux2EditText = binding.teacherEditStudentTelefaux2EditText;
+        telefaux2EditText.setText(sm.getParentsPhones().get(1));
 
     }
 }
