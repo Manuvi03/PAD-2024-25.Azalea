@@ -14,6 +14,7 @@ public class AddStudentViewModel extends ViewModel {
     private final String TAG = "AddStudentViewModel";
     private final MutableLiveData<StudentModel> studentState = new MutableLiveData<>();
     private final CreateStudentUseCase createStudentUseCase;
+
     public AddStudentViewModel() {
         createStudentUseCase = new CreateStudentUseCase();
     }
