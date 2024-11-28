@@ -92,6 +92,7 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .replace(R.id.teacher_fragment_container_view, StudentFragment.class, null)
+                    .addToBackStack("ClassroomListAdapter")
                     .commit();
         });
     }

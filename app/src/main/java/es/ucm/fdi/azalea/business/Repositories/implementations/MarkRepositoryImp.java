@@ -47,6 +47,17 @@ public class MarkRepositoryImp implements MarkRepository {
     }
 
     @Override
+    public void update(String id, MarkModel item, CallBack<MarkModel> cb) {
+        marksReference.child(id).setValue(item).addOnSuccessListener(task->{
+            Log.d(TAG, "Nota con id " + id + " modificada correctamente");
+            cb.onSuccess(new Event.Success<>(item));
+        })      .addOnFailureListener(e->{
+            Log.d(TAG, "Error al modificar la nota", e);
+            cb.onError(new Event.Error<>(e));
+        });
+    }
+
+    @Override
     public void findById(String id, CallBack<MarkModel> cb) {
 
         // se ejecuta la query, obteniendo una imagen unica de Firebase

@@ -79,6 +79,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
                 ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .replace(R.id.teacher_fragment_container_view, AddStudentFragment.class, null)
+                        .addToBackStack(TAG)
                         .commit();
             }
         });

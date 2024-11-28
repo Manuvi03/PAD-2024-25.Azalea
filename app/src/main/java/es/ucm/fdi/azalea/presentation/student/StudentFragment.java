@@ -318,10 +318,11 @@ public class StudentFragment extends Fragment {
     }
 
     // reemplaza este Fragment por el correspondiente segun el boton
-    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> fragment){
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.teacher_fragment_container_view, c, null)
+                .replace(R.id.teacher_fragment_container_view, fragment, null)
+                .addToBackStack(TAG)
                 .commit();
     }
 
