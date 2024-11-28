@@ -45,8 +45,36 @@
 
     <!--EditProfile-->
     <!--EditStudent-->
+        <!--editText-->
     <string name="editstudent_direccionEditText">Address</string>
+    <string name="editstudent_alergiasEditText">Allergies</string>
+    <string name="editstudent_dianacEditText">Birth date</string>
+    <string name="editstudent_alturaEditText">Height</string>
+    <string name="editstudent_condmedEditText">Medical conditions</string>
+    <string name="editstudent_nombreEditText">Student name</string>
+    <string name="editstudent_contactorapidoEditText">Main phone</string>
+    <string name="editstudent_apellidosEditText">Student surname</string>
+    <string name="editstudent_pesoEditText">Weight</string>
+    <string name="editstudent_telefaux1EditText">Auxiliary phone</string>
+    <string name="editstudent_telefaux2EditText">Auxiliary phone</string>
+        <!--textView-->
+    <string name="editstudent_text">Enter the data you want to modify</string>
+    <string name="editstudent_direcciontextView">Enter your address</string>
+    <string name="editstudent_alergiastextView">Enter allergies</string>
+    <string name="editstudent_dianactextView">Enter birth date</string>
+    <string name="editstudent_alturatextView">Enter height</string>
+    <string name="editstudent_condmedtextView">Enter medical conditions</string>
+    <string name="editstudent_nombretextView">Enter student name</string>
+    <string name="editstudent_contactorapidotextView">Enter main phone number</string>
+    <string name="editstudent_apellidostextView">Enter student surname</string>
+    <string name="editstudent_pesotextView">Enter weight</string>
+    <string name="editstudent_telefaux1textView">Enter auxiliary phone 1</string>
+    <string name="editstudent_telefaux2textView">"Enter auxiliary phone 2</string>
+
+    <string name="editstudent_button">Update data</string>
+
     <!--GradeSubject-->
+
     <string name="grade_subject_intro_text">Grade mark</string>
     <string name="grade_subject_grade_text">Mark</string>
     <string name="grade_subject_send_grade_text">Send mark</string>
@@ -123,5 +151,6 @@
     <string name="modifyevent_toastNoData">No data received</string>
     <string name="modifyevent_toastTitleEmpty">Title cannot be empty</string>
     <string name="modifyevent_toastDateEmpty">Date cannot be empty</string>
+
 
 </resources>

@@ -294,25 +294,54 @@ public class StudentFragment extends Fragment {
             gradeMarkSharedViewModel.setStudentProfileImage(studentImage);
 
             // se reemplaza el fragmento
-            replaceFragment(GradeSubjectFragment.class);
+            replaceFragment(GradeSubjectFragment.class,null);
         });
 
         showGradesButton.setOnClickListener(listener -> {
             //todo
-            replaceFragment(ShowGradesFragment.class);
+            replaceFragment(ShowGradesFragment.class,null);
         });
 
         editStudentButton.setOnClickListener(listener -> {
-            //todo
-            replaceFragment(EditStudentFragment.class);
+
+            Bundle data = new Bundle();
+            data.putString("direccion",studentInfo.getAddress());
+            data.putString("alergenos",studentInfo.getAllergens());
+            data.putString("dianac",studentInfo.getBirthday());
+            data.putDouble("altura",studentInfo.getHeight());
+            data.putString("condmed",studentInfo.getMedicalConditions());
+            data.putString("nombre",studentInfo.getName());
+            data.putString("apellido",studentInfo.getSurnames());
+            data.putString("id",studentInfo.getId());
+            data.putString("idclassroom",studentInfo.getClassroomId());
+            data.putDouble("peso",studentInfo.getWeight());
+            data.putString("idpadre",studentInfo.getParentId());
+            data.putString("contactorapido",studentInfo.getQuickContact());
+            data.putString("nombrep1",studentInfo.getParentsNames().get(0));
+            data.putString("nombrep1",studentInfo.getParentsNames().get(1));
+            data.putString("movilp1",studentInfo.getParentsPhones().get(0));
+            data.putString("movilp2",studentInfo.getParentsNames().get(0));
+
+            int i = 0;
+            for(String s: studentInfo.getSubjects()){
+                data.putString("subject" + i,studentInfo.getSubjects().get(i));
+                i++;
+            }
+
+            int j = 0;
+            for(String s: studentInfo.getMarksId()){
+                data.putString("mark" + i,studentInfo.getSubjects().get(j));
+                j++;
+            }
+            replaceFragment(EditStudentFragment.class,data);
         });
     }
 
     // reemplaza este Fragment por el correspondiente segun el boton
-    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c,Bundle args){
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.teacher_fragment_container_view, c, null)
+                .replace(R.id.teacher_fragment_container_view, c, args)
                 .commit();
     }
 

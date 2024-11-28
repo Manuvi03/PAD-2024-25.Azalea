@@ -49,16 +49,32 @@
     <!--EditStudent-->
         <!--editText-->
     <string name="editstudent_direccionEditText">Dirección</string>
-    <string name="editstudent_alergiasEditText">Dirección</string>
-    <string name="editstudent_dianacEditText">Dirección</string>
-    <string name="editstudent_alturaEditText">Dirección</string>
-    <string name="editstudent_condmedEditText">Dirección</string>
-    <string name="editstudent_nombreEditText">Dirección</string>
-    <string name="editstudent_contactorapidoEditText">Dirección</string>
-    <string name="editstudent_apellidosEditText">Dirección</string>
-    <string name="editstudent_pesoEditText">Dirección</string>
+    <string name="editstudent_alergiasEditText">Alergias</string>
+    <string name="editstudent_dianacEditText">Día de nacimiento</string>
+    <string name="editstudent_alturaEditText">Altura</string>
+    <string name="editstudent_condmedEditText">Condiciones médicas</string>
+    <string name="editstudent_nombreEditText">Nombre de el estudiante</string>
+    <string name="editstudent_contactorapidoEditText">Contacto principal</string>
+    <string name="editstudent_apellidosEditText">Apellidos de el estudiante</string>
+    <string name="editstudent_pesoEditText">Peso</string>
+    <string name="editstudent_telefaux1EditText">Teléfono auxiliar 1</string>
+    <string name="editstudent_telefaux2EditText">Teléfono auxiliar 2</string>
 
         <!--textView-->
+    <string name="editstudent_text">Introduzca los datos a modificar</string>
+    <string name="editstudent_direcciontextView">Introduzca la dirección</string>
+    <string name="editstudent_alergiastextView">Introduzca las alergias</string>
+    <string name="editstudent_dianactextView">Introduzca el día de nacimiento</string>
+    <string name="editstudent_alturatextView">Introduzca la altura</string>
+    <string name="editstudent_condmedtextView">Introduzca las condiciones médicas</string>
+    <string name="editstudent_nombretextView">Introduzca el nombre de el/la estudiante</string>
+    <string name="editstudent_contactorapidotextView">Introduzca el contacto principal</string>
+    <string name="editstudent_apellidostextView">Introduzca los pellidos de el estudiante</string>
+    <string name="editstudent_pesotextView">Introduzca el peso</string>
+    <string name="editstudent_telefaux1textView">Introduzca un teléfono auxiliar</string>
+    <string name="editstudent_telefaux2textView">Introduzca un teléfono auxiliar</string>
+
+    <string name="editstudent_button">Actualizar datos</string>
 
 
     <!--GradeSubject-->
