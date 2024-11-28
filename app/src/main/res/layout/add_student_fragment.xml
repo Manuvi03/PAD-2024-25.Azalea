@@ -1,14 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Seashell"
+    android:padding="16dp">
 
+    <!-- Título -->
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:id="@+id/addStudentTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ADDSTUDENT"
-        tools:layout_editor_absoluteX="186dp"
-        tools:layout_editor_absoluteY="315dp" />
+        android:text="@string/add_student_title"
+        android:textColor="@color/Dark_Purple"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@color/Tickle_me_Pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+
+        android:id="@+id/addStudentScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/addStudentTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/saveStudentButton"
+        tools:ignore="ScrollViewCount">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:orientation="vertical">
+            <!-- Campos para el estudiante -->
+            <EditText
+                android:id="@+id/student_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:hint="@string/add_student_name_hint"
+                android:padding="12dp"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/student_surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_student_surnames_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/student_birthdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_student_birthdate_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="date"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_surname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/student_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_student_weight_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="numberDecimal"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_birthdate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/student_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_student_height_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="numberDecimal"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_weight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/student_allergens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_student_allergens_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/student_medical_conditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_student_medical_conditions_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_allergens"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Separador -->
+            <TextView
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_parent"
+                android:gravity="center"
+                android:textColor="@color/Dark_Purple"
+                android:textStyle="bold"
+                android:background="@color/Tickle_me_Pink"
+                app:layout_constraintTop_toBottomOf="@id/student_medical_conditions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- Campos para el padre -->
+            <EditText
+                android:id="@+id/parent_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_parent_name_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/parent_surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_parent_surnames_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/parent_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <EditText
+                android:id="@+id/parent_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_parent_email_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/parent_surname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/parent_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_parent_address_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/parent_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/primary_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:hint="@string/add_primary_phone_hint"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/parent_address" />
+            <EditText
+                android:id="@+id/secondary_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_secondary_phone_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="phone"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/primary_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Separador -->
+            <TextView
+                android:id="@+id/divider_parents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_parent"
+                android:gravity="center"
+                android:textColor="@color/Dark_Purple"
+                android:textStyle="bold"
+                android:background="@color/Tickle_me_Pink"
+                app:layout_constraintTop_toBottomOf="@id/secondary_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+            <EditText
+                android:id="@+id/second_parent_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_secondary_parent_name_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/divider_parents"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <EditText
+                android:id="@+id/second_parent_surnames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_secondary_parent_surnames"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/second_parent_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/tertiary_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_tertiary_phone_hint"
+                android:padding="12dp"
+                android:backgroundTint="@color/Tickle_me_Pink"
+                android:inputType="phone"
+                android:textColor="@color/Dark_Purple"
+                android:textColorHint="@color/Orchid_Pink"
+                app:layout_constraintTop_toBottomOf="@id/second_parent_surnames"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botón -->
+    <Button
+        android:id="@+id/saveStudentButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_student_save_button_text"
+        android:backgroundTint="@color/French_Rose"
+        android:textColor="@color/Seashell"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/addStudentScrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

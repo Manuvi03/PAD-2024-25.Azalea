@@ -59,9 +59,11 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.button_login);
 
+        Intent intent = new Intent(this, TeacherActivity.class);
+        startActivity(intent);
 
-        initListeners();
-        start_animations();
+        //initListeners();
+        //start_animations();
     }
 
     private void initListeners(){
