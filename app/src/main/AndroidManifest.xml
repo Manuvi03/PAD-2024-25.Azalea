@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Azalea"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.teacher.teacherActivity"
+            android:name=".presentation.teacher.TeacherActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.chat.chatActivity"
@@ -24,6 +24,12 @@
         <activity
             android:name=".presentation.editprofile.EditProfileFragment"
             android:exported="false" />
+        <activity
+            android:name=".presentation.passwordrecovery.PasswordRecoveryFragment"
+            android:exported="false"/>
+        <activity
+            android:name=".presentation.parent.ParentActivity"
+            android:exported="false"/>
         <activity
             android:name=".presentation.login.MainActivity"
             android:exported="true">

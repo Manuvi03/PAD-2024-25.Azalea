@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--AddEvent-->
+    <string name="addevent_buttonString">Save Event</string>
+    <string name="addevent_datePickerTitle">Select a date</string>
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
-    <string name="classroom_loading_string">Loading...</string>
+    <string name="classroom_results_string">Results</string>
+    <string name="addevent_title">Title</string>
+    <string name="addevent_date">Date (YYYY-MM-DD)</string>
+    <string name="addevent_hour">Hour (HH:MM)</string>
+    <string name="addevent_location">Location</string>
+    <string name="addevent_description">Description</string>
+    <string name="addevent_string">Create Event</string>
+    <string name="addevent_timePickerTitle">Select a time</string>
+    <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_no_students_string">No students</string>
+    <string name="classroom_search_error">Failed to search classroom students</string>
+    <string name="classroom_searchview_queryhint">Search student</string>
 
     <!--CreateTeacher-->
+
     <string name="createteacher_titleView">Welcome Teacher!"</string>
     <string name="createteacher_nameText">Name</string>
     <string name="createteacher_surnameText">Surnames</string>
@@ -18,30 +31,96 @@
     <string name="createteacher_namehint">Your name</string>
     <string name="createteacher_surnameEditText">Your surnames</string>
     <string name="createteacher_genderEditText">Your gender</string>
-    <string name="createteacher_emailEditText">Your e-mail</string>
+    <string name="createteacher_emailEditText">Your Email address</string>
     <string name="createteacher_passwordEditText">Your password</string>
+    <string name="createteacher_filledFieldError">This field is required</string>
+    <string name="createteacher_teacherAuthError">This Email has alread been used</string>
+    <string name="createteacher_mailFormatError">This Email format is not valid</string>
+    <string name="createteacher_passwordFormatError">The password must have at least 6 characters</string>
+    <string name ="ClassRoomName_hint">Your Clasroom name</string>
+    <string name ="ClassRoomName_successToast">Teacher account signed in </string>
+    <string name ="ClassRoomName_error">Error creating the user, please try again</string>
+    <string name ="ClassRoomName_Text">Classroom</string>
+
 
     <!--EditProfile-->
     <!--EditStudent-->
     <!--GradeSubject-->
+    <string name="grade_subject_intro_text">Grade mark</string>
+    <string name="grade_subject_grade_text">Mark</string>
+    <string name="grade_subject_send_grade_text">Send mark</string>
+
+    <string name="searching_class">Searching class…</string>
+    <string name="class_search_error">Failed to search class info</string>
+    <string name="grade_subject_no_selected">Please, choose a subject</string>
+    <string name="grade_subject_no_mark">Please, grade the student</string>
+    <string name="grade_subject_grading_mark">Grading…</string>
+    <string name="grade_subject_correctly_graded">Student %1$s correctly graded.</string>
+    <string name="grade_subject_error_grading">Failed to grade student %1$s.</string>
+    <string name="grade_subject_incorrect_grading">Incorrect grading, must be between 0 and 10.</string>
+
     <!--Login-->
     <string name="login_username_hint">Mail</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login_text">Log In</string>
-    <string name="login_recover_password"><u>Do you forget your password?</u></string>
+    <string name="login_recover_password"><u>Did you forget your password?</u></string>
     <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
     <string name="login_create_button">Create</string>
     <string name="login_error">Failed to log in, incorrect username or password</string>
 
     <!--Parent-->
+    <string name="modifyevent_toastCorrect">Event modified successfully</string>
+    <string name="parent_recyclerView_empty">Ther\'re no events</string>
+    <string name="parent_recyclerView_title">Event\'s Title</string>
+    <string name="parent_recyclerView_date">Date</string>
+    <string name="parent_recyclerView_time">Time</string>
+    <string name="parent_recyclerView_location">Location</string>
+    <string name="parent_recyclerView_description">Description</string>
+    <string name="parent_recyclerView_result">Results</string>
+    <string name="parent_recyclerView_titleEvent">events</string>
     <!--PasswordRecovery-->
+    <string name="passwordRecovery_button">Reset Password</string>
+    <string name="passwordRecovery_text"><u>Forgot your password?</u></string>
+    <string name="passwordRecovery_hint">Email address:</string>
+    <string name="passwordRecovery_success">The password recovery email has been sent</string>
+    <string name="passwordRecovery_error">This Email does not exist in the database</string>
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->
+    <string name="student_send_message_button">Message</string>
+    <string name="student_grade_mark_button">Grade</string>
+    <string name="student_show_grades_button">Marks</string>
+    <string name="student_edit_student_button">Edit</string>
+    <string name="student_info_text">Student info</string>
+    <string name="student_birthday_text">Birthday: %1$s</string>
+    <string name="student_weight_text">Weight: %1$s</string>
+    <string name="student_height_text">Height: %1$s</string>
+    <string name="student_allergens_text">Allergens: %1$s</string>
+    <string name="student_medical_conditions_text">Medical conditions: %1$s</string>
+    <string name="student_contact_info_text">Contact info</string>
+    <string name="student_parent_name_text">Parent(s) name(s): %1$s</string>
+    <string name="student_phone_text">Phone(s): %1$s</string>
+    <string name="student_email_text">E-mail: %1$s</string>
+    <string name="student_address_text">Address: %1$s</string>
+    <string name="student_name_text">Student name</string>
+    <string name="student_contact">Quick contact: %1$s</string>
+
+    <string name="searching_student">Searching student…</string>
+    <string name="student_search_error">Failed to search student info</string>
+    <string name="searching_student_parent">Searching student\'s parent…</string>
+    <string name="students_parent_search_error">Failed to search student\'s parent info</string>
 
     <!--Teacher-->
     <string name="teacher_navbar_home_text">Home</string>
     <string name="teacher_navbar_classroom_text">Classroom</string>
     <string name="teacher_navbar_profile">Profile</string>
+    <string name="teacherhomefragment_textButton">Create Event</string>
+    <string name="parent_recyclerView_modify">Modify</string>
+    <string name="modifyevent_buttonString">Modify</string>
+    <string name="modifyevent_string">Modify Event</string>
+    <string name="modifyevent_toastIncorrect">Error modifying the event. Try again</string>
+    <string name="modifyevent_toastNoData">No data received</string>
+    <string name="modifyevent_toastTitleEmpty">Title cannot be empty</string>
+    <string name="modifyevent_toastDateEmpty">Date cannot be empty</string>
 
 </resources>

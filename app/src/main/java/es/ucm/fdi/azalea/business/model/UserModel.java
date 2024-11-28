@@ -4,6 +4,43 @@ public class UserModel {
     private String email;
     private String password;
     private String id;
+    private String classId;
+    private String surname;
+    private String name;
+    private String gender;
+    private String studentId;
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
     public Boolean getParent() {
         return parent;
@@ -41,4 +78,7 @@ public class UserModel {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void setClassId(String classId){this.classId = classId;}
+    public String getClassId(){return this.classId;}
 }

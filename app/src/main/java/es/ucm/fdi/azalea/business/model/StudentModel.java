@@ -1,5 +1,7 @@
 package es.ucm.fdi.azalea.business.model;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 public class StudentModel {
@@ -11,14 +13,22 @@ public class StudentModel {
     private String medicalConditions;
     private String allergens;
     private List<String> subjects;
+    private String quickContact;
+    private String birthday;
+    private String address;
+    private List<String> parentsNames;
+    private List<String> parentsPhones;
     private String classroomId;
     private String parentId;
+    private List<String> marksId;
+    private Bitmap profileImage;
 
-    public StudentModel(){}
+    public StudentModel(){} // constructor vacio necesario para introducir directamente el objeto en Firebase
 
     public StudentModel(List<String> subjects, String allergens, String medicalConditions,
                         double height, double weight, String surnames, String name,
-                        String classroomId, String parentId) {
+                        String quickContact, String classroomId, String parentId, String birthday,
+                        String address, List<String> parentsNames, List<String> parentsPhones) {
         this.subjects = subjects;
         this.allergens = allergens;
         this.medicalConditions = medicalConditions;
@@ -26,8 +36,13 @@ public class StudentModel {
         this.weight = weight;
         this.surnames = surnames;
         this.name = name;
+        this.quickContact = quickContact;
         this.classroomId = classroomId;
         this.parentId = parentId;
+        this.birthday = birthday;
+        this.address = address;
+        this.parentsNames = parentsNames;
+        this.parentsPhones = parentsPhones;
     }
 
     public List<String> getSubjects() {
@@ -99,4 +114,35 @@ public class StudentModel {
     public String getParentId() { return parentId; }
 
     public void setParentId(String parentId) { this.parentId = parentId; }
+
+    public String getQuickContact() { return quickContact; }
+
+    public void setQuickContact(String quickContact) { this.quickContact = quickContact; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
+
+    public String getBirthday() { return birthday; }
+
+    public void setBirthday(String birthday) { this.birthday = birthday; }
+
+    public List<String> getParentsPhones() { return parentsPhones; }
+
+    public void setParentsPhones(List<String> parentsPhones) { this.parentsPhones = parentsPhones; }
+
+    public List<String> getParentsNames() { return parentsNames; }
+
+    public void setParentsNames(List<String> parentsNames) {
+        this.parentsNames = parentsNames;
+    }
+
+    public List<String> getMarksId() { return marksId; }
+
+    public void setMarksId(List<String> marksId) { this.marksId = marksId; }
+
+    // TODO solo serian necesarios si se utiliza el loader
+    public Bitmap getProfileImage() { return profileImage; }
+
+    public void setProfileImage(Bitmap profileImage) { this.profileImage = profileImage; }
 }

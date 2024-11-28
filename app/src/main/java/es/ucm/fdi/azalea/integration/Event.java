@@ -19,7 +19,19 @@ public abstract class Event<T> {
     }
 
     public static final class Error<T> extends Event<T> {
-        private final Exception exception;
+        private Exception exception;
+        private String errorData;
+
+        public String getErrorData() {
+            return errorData;
+        }
+
+        public void setErrorData(String errorData) {
+            this.errorData = errorData;
+        }
+
+
+        public Error(){}
 
         public Error(Exception exception) {
             this.exception = exception;
@@ -32,11 +44,6 @@ public abstract class Event<T> {
     //este evento se podra usar para actualizar la vista si es necesario que muestre una accion de loading como en el caso de un recycler view
     public static final class Loading<T> extends Event<T> {
         public Loading() {
-        }
-    }
-
-    public static final class Empty<T> extends Event<T> {
-        public Empty() {
         }
     }
 }

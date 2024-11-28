@@ -1,10 +1,26 @@
 <resources>
     <!--AddEvent-->
+    <string name="addevent_title">Título</string>
+    <string name="addevent_date">Fecha (YYYY-MM-DD)</string>
+    <string name="addevent_hour">Hora (HH:MM)</string>
+    <string name="addevent_location">Localización</string>
+    <string name="addevent_description">Descripción</string>
+    <string name="addevent_string">Crear Evento</string>
+    <string name="addevent_buttonString">Guardar Evento</string>
+    <string name="addevent_datePickerTitle">Selecciona una fecha</string>
+    <string name="addevent_timePickerTitle">Selecciona una hora</string>
+    <string name="addevent_timePickerEmoji" translatable="false">⏰</string>
+
     <!--AddStudent-->
     <!--Chat-->
     <!--Classroom-->
-    <string name="classroom_loading_string">Cargando...</string>
+    <string name="classroom_loading_string">Cargando…</string>
+    <string name="classroom_results_string">Resultados</string>
     <string name="classroom_no_students_string">No hay estudiantes</string>
+    <string name="classroom_search_error">Error al buscar los estudiantes de la clase</string>
+    <string name="classroom_searchview_queryhint">Buscar estudiante</string>
+    <string name="student_name" translatable="false">%1$s %2$s</string>
+    <string name="student_contact">Contacto rápido: %1$s</string>
 
     <!--CreateTeacher-->
     <string name="createteacher_titleView">¡Bienvenid@ Profe!</string>
@@ -19,10 +35,32 @@
     <string name="createteacher_genderEditText">Tu género</string>
     <string name="createteacher_emailEditText">Tu correo electrónico</string>
     <string name="createteacher_passwordEditText">Tu contraseña</string>
+    <string name="createteacher_filledFieldError">Este campo es obligatorio</string>
+    <string name="createteacher_teacherAuthError">Este correo ya se encuentra asociado a un usuario</string>
+    <string name="createteacher_mailFormatError">Este no es un formato de corre válido</string>
+    <string name="createteacher_passwordFormatError">La contraseña debe tener al menos 6 caracteres</string>
+    <string name ="ClassRoomName_hint">Nombre de tu clase</string>
+    <string name ="ClassRoomName_Text">Clase</string>
+    <string name ="ClassRoomName_successToast">Cuenta de profesor creada correctamente</string>
+    <string name ="ClassRoomName_error">Error al crear el usuario, por favor vuelva a intentarlo</string>
+
 
     <!--EditProfile-->
     <!--EditStudent-->
     <!--GradeSubject-->
+    <string name="grade_subject_intro_text">Calificar nota</string>
+    <string name="grade_subject_grade_text">Nota</string>
+    <string name="grade_subject_send_grade_text">Enviar nota</string>
+    <string name="grade_subject_hint_text" translatable="false">5.00</string>
+
+    <string name="searching_class">Buscando clase…</string>
+    <string name="class_search_error">Error al buscar la información de la clase</string>
+    <string name="grade_subject_no_selected">Por favor, seleccione una asignatura</string>
+    <string name="grade_subject_no_mark">Por favor, califique al estudiante</string>
+    <string name="grade_subject_grading_mark">Calificando…</string>
+    <string name="grade_subject_correctly_graded">Se califico correctamente al estudiante %1$s.</string>
+    <string name="grade_subject_error_grading">Se produjo un error calificando al estudiante %1$s.</string>
+    <string name="grade_subject_incorrect_grading">Calificación incorrecta, debe encontrarse entre 0 y 10.</string>
 
     <!--Login-->
     <string name="app_name" translatable="false">Azalea</string>
@@ -34,14 +72,64 @@
     <string name="login_create_teacher_text">¿No tienes cuenta de profesor?</string>
     <string name="login_create_button">Crear</string>
     <string name="login_error">Error al iniciar sesión, vuelva a introducir los datos</string>
-
+    <!--ModifyFragment-->
+    <string name="modifyevent_buttonString">Modificar</string>
+    <string name="modifyevent_string">Modificar Evento</string>
+    <string name="modifyevent_toastCorrect">Evento creado correctamente</string>
+    <string name="modifyevent_toastIncorrect">Error al modificar el evento. Inténtelo de nuevo</string>
+    <string name="modifyevent_toastNoData">No se han recibido datos</string>
+    <string name="modifyevent_toastTitleEmpty">El título no puede estar vacío</string>
+    <string name="modifyevent_toastDateEmpty">La fecha no puede estar vacía</string>
     <!--Parent-->
+    <string name="parent_recyclerView_empty">No hay eventos</string>"
+    <string name="parent_recyclerView_title">Titulo Evento</string>
+    <string name="parent_recyclerView_date">Fecha</string>
+    <string name="parent_recyclerView_time">Hora</string>
+    <string name="parent_recyclerView_location">Ubicación</string>
+    <string name="parent_recyclerView_description">Descripción</string>
+    <string name="parent_separator" translatable="false"> | </string>
+    <string name="parent_recyclerView_result">Resultados</string>"
+    <string name="parent_recyclerView_titleEvent">eventos</string>
+    <string name="parent_recyclerView_modify">Modificar</string>
+
     <!--PasswordRecovery-->
+    <string name="passwordRecovery_button">Restablecer Contraseña</string>
+    <string name="passwordRecovery_text"><u>¿Has olvidado tu contraseña?</u></string>
+    <string name="passwordRecovery_hint">Correo electrónico:</string>
+    <string name="passwordRecovery_success">Se ha enviado el correo de recuperación</string>
+    <string name="passwordRecovery_error">Este correo no se encuentra en la base de datos</string>
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->
+    <string name="student_name_text">Nombre del estudiante</string>
+
+    <!-- Los siguientes cuatro strings se recomienda que sean palabras cortas-->
+    <string name="student_send_message_button">Mensaje</string>
+    <string name="student_grade_mark_button">Calificar</string>
+    <string name="student_show_grades_button">Notas</string>
+    <string name="student_edit_student_button">Editar</string>
+
+    <string name="student_info_text">Información del estudiante</string>
+    <string name="student_birthday_text">Fecha de nacimiento: %1$s</string>
+    <string name="student_weight_text">Peso: %1$s</string>
+    <string name="student_height_text">Altura: %1$s</string>
+    <string name="student_allergens_text">Alérgenos: %1$s</string>
+    <string name="student_medical_conditions_text">Condiciones médicas: %1$s</string>
+    <string name="student_contact_info_text">Información de contacto </string>
+    <string name="student_parent_name_text">Nombre(s) del/los tutor(es): %1$s</string>
+    <string name="student_phone_text">Teléfono(s): %1$s</string>
+    <string name="student_email_text">Correo electrónico: %1$s</string>
+    <string name="student_address_text">Dirección: %1$s</string>
+
+    <string name="searching_student">Buscando estudiante…</string>
+    <string name="student_search_error">Error al buscar la información del estudiante</string>
+    <string name="searching_student_parent">Buscando tutor del estudiante…</string>
+    <string name="students_parent_search_error">Error al buscar la información del tutor del estudiante</string>
+
     <!--Teacher-->
     <string name="teacher_navbar_home_text">Inicio</string>
     <string name="teacher_navbar_classroom_text">Clase</string>
     <string name="teacher_navbar_profile">Perfil</string>
+    <string name="teacherhomefragment_textButton">Crear Evento</string>
+    <string name="addevent_datePickerEmoji" translatable="false">📅</string>
 </resources>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Seashell"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/addEvent_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/addevent_string"
+        android:textColor="@color/Dark_Purple"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addEvent_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addEvent_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEvent_string"
+        android:backgroundTint="@color/Tickle_me_Pink"
+        android:hint="@string/addevent_title"
+        android:padding="12dp"
+        android:textColor="@color/Dark_Purple"
+        android:textColorHint="@color/Orchid_Pink"
+        app:layout_constraintBottom_toTopOf="@+id/addEvent_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEvent_string" />
+
+    <EditText
+        android:id="@+id/addEvent_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEvent_title"
+        android:backgroundTint="@color/Tickle_me_Pink"
+        android:hint="@string/addevent_description"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:padding="12dp"
+        android:textColor="@color/Dark_Purple"
+        android:textColorHint="@color/Orchid_Pink"
+        app:layout_constraintBottom_toTopOf="@+id/addEvent_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEvent_location" />
+
+    <Button
+        android:id="@+id/addEvent_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cyclomen"
+        android:text="@string/addevent_datePickerEmoji"
+        android:textColor="@color/Seashell"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/addEvent_date"
+        app:layout_constraintStart_toStartOf="@+id/addEvent_time_picker"
+        app:layout_constraintTop_toTopOf="@id/addEvent_date" />
+
+    <TextView
+        android:id="@+id/addEvent_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEvent_description"
+        android:backgroundTint="@color/Tickle_me_Pink"
+        android:hint="@string/addevent_date"
+        android:textColor="@color/Dark_Purple"
+        android:textColorHint="@color/Orchid_Pink"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/addEvent_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEvent_title" />
+
+    <Button
+        android:id="@+id/addEvent_time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cyclomen"
+        android:text="@string/addevent_timePickerEmoji"
+        android:textColor="@color/Seashell"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/addEvent_time"
+        app:layout_constraintStart_toStartOf="@+id/addEvent_location"
+        app:layout_constraintTop_toTopOf="@id/addEvent_time" />
+
+    <TextView
+        android:id="@+id/addEvent_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEvent_date"
+        android:backgroundTint="@color/Tickle_me_Pink"
+        android:hint="@string/addevent_hour"
+        android:textColor="@color/Dark_Purple"
+        android:textColorHint="@color/Orchid_Pink"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/addEvent_location"
+        app:layout_constraintEnd_toEndOf="@+id/addEvent_date"
+        app:layout_constraintTop_toBottomOf="@+id/addEvent_date"/>
+
+    <EditText
+        android:id="@+id/addEvent_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEvent_time"
+        android:backgroundTint="@color/Tickle_me_Pink"
+        android:hint="@string/addevent_location"
+        android:padding="12dp"
+        android:textColor="@color/Dark_Purple"
+        android:textColorHint="@color/Orchid_Pink"
+        app:layout_constraintBottom_toTopOf="@+id/addEvent_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEvent_time" />
+
+    <Button
+        android:id="@+id/addEvent_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEvent_location"
+        android:backgroundTint="@color/French_Rose"
+        android:padding="12dp"
+        android:text="@string/addevent_buttonString"
+        android:textColor="@color/Seashell"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEvent_description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

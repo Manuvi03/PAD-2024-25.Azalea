@@ -1,0 +1,97 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    tools:context=".presentation.parent.EventsParentAdapter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Título del evento -->
+        <TextView
+            android:id="@+id/eventTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/parent_recyclerView_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/French_Rose"
+            tools:text="Conferencia sobre Innovación" />
+
+        <!-- Layout horizontal para fecha y hora -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Fecha del evento -->
+            <TextView
+                android:id="@+id/eventDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/parent_recyclerView_date"
+                android:textSize="14sp"
+                android:textColor="@color/Tyrian_Purple"
+                tools:text="25 Noviembre" />
+
+            <!-- Separador entre fecha y hora -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/parent_separator"
+                android:textSize="14sp"
+                android:textColor="@color/Tyrian_Purple" />
+
+            <!-- Hora del evento -->
+            <TextView
+                android:id="@+id/eventTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/parent_recyclerView_time"
+                android:textSize="14sp"
+                android:textColor="@color/Tyrian_Purple"
+                tools:text="10:00 AM" />
+        </LinearLayout>
+
+        <!-- Sitio del evento -->
+        <TextView
+            android:id="@+id/eventLocationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/parent_recyclerView_location"
+            android:textSize="14sp"
+            android:textColor="@color/Amaranth_Purple"
+            tools:text="Auditorio Principal, Campus Virtual" />
+
+        <!-- Descripción del evento -->
+        <TextView
+            android:id="@+id/eventDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/parent_recyclerView_description"
+            android:textSize="14sp"
+            tools:text="Únete a nosotros para una charla sobre los últimos avances en tecnología educativa y aprendizaje remoto." />
+
+        <!-- Botón de acción -->
+        <Button
+            android:id="@+id/eventActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="8dp"
+            android:text="@string/parent_recyclerView_modify"
+            android:textSize="14sp"
+            android:backgroundTint="@color/Tyrian_Purple"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

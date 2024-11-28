@@ -9,6 +9,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/Orchid_Pink"
     tools:context=".presentation.classroom.ClassroomListAdapter">
 
     <LinearLayout
@@ -37,11 +38,16 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
                 android:orientation="vertical">
-            <TextView
-                android:id="@+id/teacher_classroom_student_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="13sp"/>
+                <TextView
+                    android:id="@+id/teacher_classroom_student_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/teacher_classroom_student_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
