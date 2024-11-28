@@ -47,6 +47,20 @@
 
     <!--EditProfile-->
     <!--EditStudent-->
+        <!--editText-->
+    <string name="editstudent_direccionEditText">Dirección</string>
+    <string name="editstudent_alergiasEditText">Dirección</string>
+    <string name="editstudent_dianacEditText">Dirección</string>
+    <string name="editstudent_alturaEditText">Dirección</string>
+    <string name="editstudent_condmedEditText">Dirección</string>
+    <string name="editstudent_nombreEditText">Dirección</string>
+    <string name="editstudent_contactorapidoEditText">Dirección</string>
+    <string name="editstudent_apellidosEditText">Dirección</string>
+    <string name="editstudent_pesoEditText">Dirección</string>
+
+        <!--textView-->
+
+
     <!--GradeSubject-->
     <string name="grade_subject_intro_text">Calificar nota</string>
     <string name="grade_subject_grade_text">Nota</string>
