@@ -9,16 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import es.ucm.fdi.azalea.R;
+import es.ucm.fdi.azalea.business.model.StudentModel;
+import es.ucm.fdi.azalea.presentation.student.StudentViewModel;
 
 public class AddStudentFragment extends Fragment {
 
     private final String TAG = "AddStudentFragment";
 
+    private AddStudentViewModel addstudentViewModel;
     private View view;
     private TextView addStudentTitle, divider, dividerParents;
     private EditText studentName, studentSurname, studentBirthdate, studentWeight, studentHeight, studentAllergens, studentMedicalConditions;
@@ -35,7 +40,13 @@ public class AddStudentFragment extends Fragment {
         Log.d("AddStudentFragment", "onCreate: Fragment añadido a la pila de retroceso.");
         view = inflater.inflate(R.layout.add_student_fragment, container, false);
 
+        addstudentViewModel = new ViewModelProvider(this).get(AddStudentViewModel.class);
+
         bindComponents();
+
+        saveStudentButton.setOnClickListener(v ->{
+            init();
+        });
 
         return view;
     }
@@ -78,6 +89,46 @@ public class AddStudentFragment extends Fragment {
 
         // Enlazar Botón
         saveStudentButton = view.findViewById(R.id.saveStudentButton);
+    }
+
+    private void init() {
+        StudentModel student = getStudentInfo();
+        if(student != null) {
+
+        }
+        else{
+            Toast.makeText(getContext(), R.string.add_student_toast_empty, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private StudentModel getStudentInfo() {
+        String name = studentName.getText().toString();
+        String surname = studentSurname.getText().toString();
+        String birthdate = studentBirthdate.getText().toString();
+        String weight = studentWeight.getText().toString();
+        String height = studentHeight.getText().toString();
+        String allergens = studentAllergens.getText().toString();
+        String medicalConditions = studentMedicalConditions.getText().toString();
+        String parentName1 = parentName.getText().toString();
+        String parentSurname1 = parentSurname.getText().toString();
+        String parentEmail1 = parentEmail.getText().toString();
+        String parentAddress1 = parentAddress.getText().toString();
+        String primaryPhone1 = primaryPhone.getText().toString();
+        String secondaryPhone1 = secondaryPhone.getText().toString();
+        String parentName2 = secondParentName.getText().toString();
+        String parentSurname2 = secondParentSurnames.getText().toString();
+        String tertiaryPhone2 = tertiaryPhone.getText().toString();
+
+        if(name.isEmpty()||surname.isEmpty()||birthdate.isEmpty() ||
+        parentName1.isEmpty()||parentSurname1.isEmpty()||parentEmail1.isEmpty()||
+        parentAddress1.isEmpty()||primaryPhone1.isEmpty()) {
+            return null;
+        }
+
+
+
+        return new StudentModel();
+
     }
 }
 

@@ -10,7 +10,7 @@ import es.ucm.fdi.azalea.business.model.StudentModel;
 public class CreateStudentUseCase {
     private StudentRepositoryImp studentRepositoryImp;
 
-    public CreateStudentUseCase(StudentModel sm){
+    public CreateStudentUseCase(){
         studentRepositoryImp = new StudentRepositoryImp();
     }
 
