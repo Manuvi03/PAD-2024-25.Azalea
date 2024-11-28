@@ -80,7 +80,10 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginViewModel.doLogIn(mailEditText.getText().toString(),passwordEditText.getText().toString());
+                if(allFilled(mailEditText,passwordEditText)){
+                    loginViewModel.doLogIn(mailEditText.getText().toString(),passwordEditText.getText().toString());
+                }
+
             }
         });
 
@@ -130,9 +133,23 @@ public class LoginFragment extends Fragment {
             }else{
                 //muestra un toast de error (se puede cambiar en un futuro)
                 loadingView.setVisibility(View.GONE);
+                passwordEditText.setText("");
                 Toast.makeText(requireActivity(),R.string.login_error,Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private boolean allFilled(EditText... fields){
+        boolean filled = true;
+        for(EditText field: fields){
+            //el trim detecta que si hay espacios en el string tambien lo detecte como empty
+            if(field.getText().toString().trim().isEmpty()){
+                field.setError(getString(R.string.createteacher_filledFieldError));
+                filled = false;
+            }
+        }
+
+        return filled;
     }
 
 
