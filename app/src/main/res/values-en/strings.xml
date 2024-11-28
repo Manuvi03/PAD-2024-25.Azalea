@@ -32,8 +32,17 @@
     <string name="createteacher_namehint">Your name</string>
     <string name="createteacher_surnameEditText">Your surnames</string>
     <string name="createteacher_genderEditText">Your gender</string>
-    <string name="createteacher_emailEditText">Your e-mail</string>
+    <string name="createteacher_emailEditText">Your Email address</string>
     <string name="createteacher_passwordEditText">Your password</string>
+    <string name="createteacher_filledFieldError">This field is required</string>
+    <string name="createteacher_teacherAuthError">This Email has alread been used</string>
+    <string name="createteacher_mailFormatError">This Email format is not valid</string>
+    <string name="createteacher_passwordFormatError">The password must have at least 6 characters</string>
+    <string name ="ClassRoomName_hint">Your Clasroom name</string>
+    <string name ="ClassRoomName_successToast">Teacher account signed in </string>
+    <string name ="ClassRoomName_error">Error creating the user, please try again</string>
+    <string name ="ClassRoomName_Text">Classroom</string>
+
 
     <!--EditProfile-->
     <!--EditStudent-->
@@ -55,7 +64,7 @@
     <string name="login_username_hint">Mail</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login_text">Log In</string>
-    <string name="login_recover_password"><u>Do you forget your password?</u></string>
+    <string name="login_recover_password"><u>Did you forget your password?</u></string>
     <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
     <string name="login_create_button">Create</string>
     <string name="login_error">Failed to log in, incorrect username or password</string>
@@ -71,6 +80,11 @@
     <string name="parent_recyclerView_result">Results</string>
     <string name="parent_recyclerView_titleEvent">events</string>
     <!--PasswordRecovery-->
+    <string name="passwordRecovery_button">Reset Password</string>
+    <string name="passwordRecovery_text"><u>Forgot your password?</u></string>
+    <string name="passwordRecovery_hint">Email address:</string>
+    <string name="passwordRecovery_success">The password recovery email has been sent</string>
+    <string name="passwordRecovery_error">This Email does not exist in the database</string>
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->

@@ -54,6 +54,15 @@
     <string name="createteacher_genderEditText">Tu género</string>
     <string name="createteacher_emailEditText">Tu correo electrónico</string>
     <string name="createteacher_passwordEditText">Tu contraseña</string>
+    <string name="createteacher_filledFieldError">Este campo es obligatorio</string>
+    <string name="createteacher_teacherAuthError">Este correo ya se encuentra asociado a un usuario</string>
+    <string name="createteacher_mailFormatError">Este no es un formato de corre válido</string>
+    <string name="createteacher_passwordFormatError">La contraseña debe tener al menos 6 caracteres</string>
+    <string name ="ClassRoomName_hint">Nombre de tu clase</string>
+    <string name ="ClassRoomName_Text">Clase</string>
+    <string name ="ClassRoomName_successToast">Cuenta de profesor creada correctamente</string>
+    <string name ="ClassRoomName_error">Error al crear el usuario, por favor vuelva a intentarlo</string>
+
 
     <!--EditProfile-->
     <!--EditStudent-->
@@ -103,6 +112,11 @@
     <string name="parent_recyclerView_modify">Modificar</string>
 
     <!--PasswordRecovery-->
+    <string name="passwordRecovery_button">Restablecer Contraseña</string>
+    <string name="passwordRecovery_text"><u>¿Has olvidado tu contraseña?</u></string>
+    <string name="passwordRecovery_hint">Correo electrónico:</string>
+    <string name="passwordRecovery_success">Se ha enviado el correo de recuperación</string>
+    <string name="passwordRecovery_error">Este correo no se encuentra en la base de datos</string>
     <!--Reminder-->
     <!--ShowGrades-->
     <!--Student-->

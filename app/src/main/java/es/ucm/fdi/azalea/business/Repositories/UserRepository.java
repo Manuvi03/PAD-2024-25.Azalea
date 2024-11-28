@@ -5,5 +5,6 @@ import es.ucm.fdi.azalea.integration.CallBack;
 
 public interface UserRepository {
     public void findById(String id, CallBack<UserModel> cb);
-    public void create(UserModel item);
+    public void create(UserModel item,CallBack<UserModel> cb);
+    public void checkUserExists(String mail,CallBack<Boolean> cb);
 }

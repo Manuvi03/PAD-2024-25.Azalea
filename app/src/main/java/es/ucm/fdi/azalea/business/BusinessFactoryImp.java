@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.business;
 
+import es.ucm.fdi.azalea.business.Repositories.AuthRepository;
 import es.ucm.fdi.azalea.business.Repositories.ChatRepository;
 import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
 import es.ucm.fdi.azalea.business.Repositories.EventRepository;
@@ -7,6 +8,7 @@ import es.ucm.fdi.azalea.business.Repositories.MarkRepository;
 import es.ucm.fdi.azalea.business.Repositories.MessageRepository;
 import es.ucm.fdi.azalea.business.Repositories.StudentRepository;
 import es.ucm.fdi.azalea.business.Repositories.UserRepository;
+import es.ucm.fdi.azalea.business.Repositories.implementations.AuthRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.ChatRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.ClassRoomRepositoryImp;
 import es.ucm.fdi.azalea.business.Repositories.implementations.EventRepositoryImp;
@@ -22,6 +24,7 @@ import es.ucm.fdi.azalea.business.model.StudentModel;
 
 public class BusinessFactoryImp extends BusinessFactory{
 
+
     @Override
     public StudentRepository getStudentRepository() {
         return new StudentRepositoryImp();
@@ -34,12 +37,12 @@ public class BusinessFactoryImp extends BusinessFactory{
 
     @Override
     public MessageRepository getMessageRepository() {
-        return null;
+        return new MessageRepositoryImp();
     }
 
     @Override
     public ChatRepository getChatRepository() {
-        return null;
+        return new ChatRepositoryImp();
     }
 
     @Override
@@ -50,6 +53,12 @@ public class BusinessFactoryImp extends BusinessFactory{
     @Override
     public UserRepository getUserRepository() {
         return new UserRepositoryImp();
+    }
+
+    @Override
+    public AuthRepository getAuthRepository() {
+        return new AuthRepositoryImp();
+
     }
 
     @Override
