@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/teacher_editStudent_scrollView"
+android:fillViewport="true"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/teacher_editStudent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/Misty_Rose"
+    tools:context=".presentation.createteacher.CreateTeacherFragment">
+    <!-- Superposición para el progress bar el elevation es para que se muestre por encima
+     de todos los objetos de la view-->
+    <FrameLayout
+        android:id="@+id/teacher_editStudent_loading_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#80000000"
+        android:visibility="gone"
+        android:elevation="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <!-- Ícono de carga -->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/teacher_editStudent_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@color/Tickle_me_Pink"
+        android:text="@string/createteacher_titleView"
+        android:textColor="@color/Amaranth_Purple"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_direccionTextView"
+        app:layout_constraintEnd_toEndOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/teacher_editStudent_direccionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createteacher_nameText"
+        android:theme="@style/createteacher_TextViews"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_direccionEditText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_textView" />
+
+    <EditText
+        android:id="@+id/teacher_editStudent_direccionEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_namehint"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_alergiasTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_direccionTextView" />
+
+    <TextView
+        android:id="@+id/teacher_editStudent_alergiasTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createteacher_surnameText"
+        android:theme="@style/createteacher_TextViews"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_alergiasEditText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_direccionEditText" />
+
+    <EditText
+        android:id="@+id/teacher_editStudent_alergiasEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_surnameEditText"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_diaNacTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_alergiasTextView" />
+
+    <TextView
+        android:id="@+id/teacher_editStudent_diaNacTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createteacher_genderText"
+        android:theme="@style/createteacher_TextViews"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_diaNacEditText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_alergiasEditText" />
+
+    <EditText
+        android:id="@+id/teacher_editStudent_diaNacEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_genderEditText"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_alturaTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_diaNacTextView" />
+
+    <TextView
+        android:id="@+id/teacher_editStudent_alturaTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createteacher_emailText"
+        android:theme="@style/createteacher_TextViews"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_alturaEditText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_diaNacEditText" />
+
+    <EditText
+        android:id="@+id/teacher_editStudent_alturaEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_emailEditText"
+        android:inputType="textEmailAddress"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_condMedTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_alturaTextView" />
+
+    <TextView
+        android:id="@+id/teacher_editStudent_condMedTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createteacher_passwordText"
+        android:theme="@style/createteacher_TextViews"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_condMedEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_alturaEditText" />
+
+    <EditText
+        android:id="@+id/teacher_editStudent_condMedEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/createteacher_passwordEditText"
+        android:inputType="textPassword"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_nombreTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_condMedTextView" />
+
+    <TextView
+        android:id="@+id/teacher_editStudent_nombreTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ClassRoomName_Text"
+        android:theme="@style/createteacher_TextViews"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_condMedEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_nombreEditText"/>
+
+    <EditText
+        android:id="@+id/teacher_editStudent_nombreEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Dark_Purple"
+        android:hint="@string/ClassRoomName_hint"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_button"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_nombreTextView" />
+
+    <Button
+        android:id="@+id/teacher_editStudent_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Amaranth_Purple"
+        android:text="@string/createteacher_ButtonCreateTeacherText"
+        android:layout_marginVertical="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_nombreEditText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

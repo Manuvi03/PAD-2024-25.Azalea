@@ -128,6 +128,23 @@ public class AuthRepositoryImp implements AuthRepository {
         }
     }
 
+    public void getCurrUser(CallBack<UserModel> cb){
+        try {
+            FirebaseUser user_auth = FirebaseAuth.getInstance().getCurrentUser();
+            if(user_auth == null){
+                cb.onError(new Event.Error<>());
+            }else{
+                UserModel user = new UserModel();
+                user.setId(user_auth.getUid());
+                user.setEmail(user_auth.getEmail());
+                cb.onSuccess(new Event.Success<>(user));
+            }
+
+        }catch (Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
+    }
+
     public void logout(){
         try{
             FirebaseAuth.getInstance().signOut();

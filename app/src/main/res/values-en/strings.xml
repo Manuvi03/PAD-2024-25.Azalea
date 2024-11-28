@@ -46,6 +46,7 @@
 
     <!--EditProfile-->
     <!--EditStudent-->
+    <string name="editstudent_direccionEditText">Address</string>
     <!--GradeSubject-->
     <string name="grade_subject_intro_text">Grade mark</string>
     <string name="grade_subject_grade_text">Mark</string>
