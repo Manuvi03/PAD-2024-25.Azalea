@@ -16,12 +16,7 @@ public class ChatUseCase {
         this.repositoryImp = new ChatRepositoryImp();
     }
 
-    private String getChatRoomId(String teacher, String parent){ //Construyo el id del chat con ambos ids
-        return teacher + "+" + parent;
-    }
-
-    public void getChat(String teacherId, String parentId, CallBack<ChatModel> cb){
-        String chatId = getChatRoomId(teacherId, parentId);
+    public void getChat(String chatId, CallBack<ChatModel> cb){
 
         BusinessFactory.getInstance().getChatRepository().readById(chatId, new CallBack<ChatModel>() {
             @Override

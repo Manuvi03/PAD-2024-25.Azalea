@@ -23,6 +23,7 @@ public class chatActivity extends AppCompatActivity {
     UserModel otherUser; //TODO mirar si el nombre el padre o el hijo
     String myUserId;
     String chatRoomId;
+    MessagesChatAdapter adapter;
 
     EditText messageInput;
     ImageButton sendButton;
@@ -49,6 +50,10 @@ public class chatActivity extends AppCompatActivity {
         //otherUserName = findViewById(R.id.other_user_name);
         //otherUserName.setText(otherUser.getName());
 
+        initListeners();
+    }
+
+    private void initListeners(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +62,22 @@ public class chatActivity extends AppCompatActivity {
         });
 
         if(otherUser.getParent())
-            chatViewModel.getChat(myUserId, otherUser.getId());
-    }
+           chatRoomId = chatViewModel.getChatId(myUserId, otherUser.getId());
+        else
+            chatRoomId = chatViewModel.getChatId(otherUser.getId(), myUserId);
 
+        sendButton.setOnClickListener((e) -> {
+            String message = messageInput.getText().toString().trim();
+            if(message.isEmpty())
+                return;
+            //¿Devuelve el messageModel? chatViewModel.sendMessage(myUserId, otherUser.getId(), message);
+            //TODO mandamos el mensaje si no está vacío y en caso de mandarlo actualizamos el chat.
+            //chatViewModel.updateChat(myUserId, otherUser.getId(), ¿messageModel?)
+
+        });
+
+        chatViewModel.getChat(chatRoomId);
+
+       // adapter = new MessagesChatAdapter(chatViewModel.getMessagesFromChat(chatRoomId));
+    }
 }
