@@ -29,7 +29,9 @@ import es.ucm.fdi.azalea.presentation.chat.chatActivity;
 import es.ucm.fdi.azalea.presentation.classroom.ClassroomStudentSharedViewModel;
 import es.ucm.fdi.azalea.presentation.editstudent.EditStudentFragment;
 import es.ucm.fdi.azalea.presentation.gradesubject.GradeSubjectFragment;
+import es.ucm.fdi.azalea.presentation.gradesubject.StudentGradeSubjectSharedViewModel;
 import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment;
+import es.ucm.fdi.azalea.presentation.showgrades.StudentShowGradesSharedViewModel;
 
 public class StudentFragment extends Fragment {
 
@@ -47,6 +49,7 @@ public class StudentFragment extends Fragment {
     private StudentViewModel studentViewModel;
     ClassroomStudentSharedViewModel classroomSharedViewModel;
     StudentGradeSubjectSharedViewModel gradeMarkSharedViewModel;
+    StudentShowGradesSharedViewModel studentShowGradesSharedViewModel;
 
     // componentes de la vista
     private AppCompatImageButton sendMessageButton;
@@ -298,7 +301,13 @@ public class StudentFragment extends Fragment {
         });
 
         showGradesButton.setOnClickListener(listener -> {
-            //todo
+            // se genera el viewmodel compartido
+            studentShowGradesSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(StudentShowGradesSharedViewModel.class);
+
+            // se pasan los valores compartidos
+            studentShowGradesSharedViewModel.setStudentId(studentId);
+            studentShowGradesSharedViewModel.setStudentProfileImage(studentImage);
+
             replaceFragment(ShowGradesFragment.class);
         });
 
@@ -309,10 +318,11 @@ public class StudentFragment extends Fragment {
     }
 
     // reemplaza este Fragment por el correspondiente segun el boton
-    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> fragment){
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.teacher_fragment_container_view, c, null)
+                .replace(R.id.teacher_fragment_container_view, fragment, null)
+                .addToBackStack(TAG)
                 .commit();
     }
 
