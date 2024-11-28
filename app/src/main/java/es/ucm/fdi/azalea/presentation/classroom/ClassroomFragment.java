@@ -79,6 +79,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
                 ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .replace(R.id.teacher_fragment_container_view, AddStudentFragment.class, null)
+                        .addToBackStack(TAG)
                         .commit();
             }
         });
@@ -117,7 +118,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
         resultText = view.findViewById(R.id.teacher_classroom_loading_text);
 
         // TODO esto de momento para hacer las pruebas
-        classroomViewModel.readStudentsByClassroom("2");
+        classroomViewModel.readStudentsByClassroom("-OCiwTrNUUv5c5G5-3zd");
 
         // se inicializa el observador
         initRecyclerViewObserver();

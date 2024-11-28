@@ -129,7 +129,10 @@
     <string name="passwordRecovery_success">Se ha enviado el correo de recuperación</string>
     <string name="passwordRecovery_error">Este correo no se encuentra en la base de datos</string>
     <!--Reminder-->
+
     <!--ShowGrades-->
+    <string name="show_grades_no_marks">No hay calificaciones</string>
+
     <!--Student-->
     <string name="student_name_text">Nombre del estudiante</string>
 
