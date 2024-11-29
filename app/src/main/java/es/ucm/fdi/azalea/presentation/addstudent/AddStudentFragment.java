@@ -15,15 +15,26 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
 import es.ucm.fdi.azalea.R;
+import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
-import es.ucm.fdi.azalea.presentation.student.StudentViewModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
+import es.ucm.fdi.azalea.integration.Event;
 
 public class AddStudentFragment extends Fragment {
 
     private final String TAG = "AddStudentFragment";
 
     private AddStudentViewModel addstudentViewModel;
+    private FirebaseUser current_firebase_user;
+    private UserModel current_user;
+    private ClassRoomModel current_class;
     private View view;
     private TextView addStudentTitle, divider, dividerParents;
     private EditText studentName, studentSurname, studentBirthdate, studentWeight, studentHeight, studentAllergens, studentMedicalConditions;
@@ -92,16 +103,88 @@ public class AddStudentFragment extends Fragment {
     }
 
     private void init() {
-        StudentModel student = getStudentInfo();
-        if(student != null) {
+        Log.d(TAG, "init: Iniciando la creación del estudiante.");
 
-        }
-        else{
-            Toast.makeText(getContext(), R.string.add_student_toast_empty, Toast.LENGTH_SHORT).show();
-        }
+        // Llamamos a la función asíncrona para obtener y crear el estudiante
+        getStudentInfoAsync(() -> {
+            // Éxito: Estudiante creado correctamente
+            Log.d(TAG, "onSuccess: El estudiante se ha creado correctamente.");
+
+            // Mostrar el mensaje de éxito
+            Toast.makeText(getContext(), R.string.add_student_toast_success, Toast.LENGTH_SHORT).show();
+
+            // Volver a la pantalla anterior
+            requireActivity().getSupportFragmentManager().popBackStack();
+        }, () -> {
+            // Error: No se pudo crear el estudiante
+            Log.d(TAG, "onFailure: Ha ocurrido un error al crear el estudiante.");
+
+            // Mostrar el mensaje de error
+            Toast.makeText(getContext(), R.string.add_student_toast_error, Toast.LENGTH_SHORT).show();
+
+            // Volver a la pantalla anterior
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
+    }
+    private void getStudentInfoAsync(Runnable onSuccess, Runnable onFailure) {
+        Log.d(TAG, "getStudentInfoAsync: Obteniendo información del estudiante");
+        // Paso 1: Obtener el usuario actual
+        addstudentViewModel.getCurrUserFirebase();
+
+        addstudentViewModel.getCurrUserFirebaseLD().observe(getViewLifecycleOwner(), event -> {
+            if (event instanceof Event.Success) {
+                current_firebase_user = ((Event.Success<FirebaseUser>) event).getData();
+                Log.d(TAG, "Se ha obtenido el usuario actual con email: " + current_firebase_user.getEmail());
+
+                //Paso 2: Obtener el modelo de usuario asociado al usuario actual
+                Log.d(TAG, "Se ha obtenido el usuario actual con id: " + current_firebase_user.getUid());
+                addstudentViewModel.getCurrUser(current_firebase_user.getUid());
+                addstudentViewModel.getCurrUserLD().observe(getViewLifecycleOwner(), event1 -> {
+                    if (event1 instanceof Event.Success) {
+                        current_user = ((Event.Success<UserModel>) event1).getData();
+
+                        // Paso 3: Obtener la clase asociada al usuario
+                        String classId = current_user.getClassId();
+                        Log.d(TAG, "Se ha obtenido la clase asociada al usuario actual con id: " + classId);
+                        addstudentViewModel.getClass(classId);
+                        addstudentViewModel.getClassState().observe(getViewLifecycleOwner(), event2 -> {
+                            if (event2 instanceof Event.Success) {
+                                current_class = ((Event.Success<ClassRoomModel>) event2).getData();
+                                Log.d(TAG, "Se ha obtenido la clase asociada al usuario actual con id: " + current_class.getId());
+
+                                // Paso 4: Crear el estudiante
+                                StudentModel student = getStudentInfo();
+                                if (student == null) {
+                                    onFailure.run();
+                                    return;
+                                }
+                                addstudentViewModel.createStudent(student);
+                                addstudentViewModel.getStudentState().observe(getViewLifecycleOwner(), result -> {
+                                    if (result != null) {
+                                        Log.i(TAG, "Se ha creado el estudiante correctamente");
+                                        //Paso 5: Crear el auth para el padre
+                                        onSuccess.run();
+
+                                    } else {
+                                        onFailure.run();
+                                    }
+                                });
+                            } else {
+                                Log.d(TAG, "Error al obtener la clase del usuario actual");
+                                onFailure.run();
+                            }
+                        });
+                    } else {
+                        Log.d(TAG, "Error al obtener el usuario actual en el Authentication");
+                        onFailure.run();
+                    }
+                });
+            }
+        });
     }
 
     private StudentModel getStudentInfo() {
+
         String name = studentName.getText().toString();
         String surname = studentSurname.getText().toString();
         String birthdate = studentBirthdate.getText().toString();
@@ -124,11 +207,29 @@ public class AddStudentFragment extends Fragment {
         parentAddress1.isEmpty()||primaryPhone1.isEmpty()) {
             return null;
         }
+        if(weight.isEmpty()) {
+            weight = "0";
+        }
+        if(height.isEmpty()) {
+            height = "0";
+        }
 
+            StudentModel student = new StudentModel(current_class.getSubjects(),
+                    allergens,
+                    medicalConditions,
+                    Double.parseDouble(height),
+                    Double.parseDouble(weight),
+                    surname,
+                    name,
+                    primaryPhone1,
+                    current_class.getId(),
+                    "",
+                    birthdate,
+                    parentAddress1,
+                    List.of(parentName1 + " " + parentSurname1, parentName2 + " " + parentSurname2),
+                    List.of(primaryPhone1, secondaryPhone1, tertiaryPhone2));
 
-
-        return new StudentModel();
-
+          return student;
     }
 }
 

@@ -9,11 +9,7 @@ import es.ucm.fdi.azalea.business.model.EventModel;
 
 public class ModifyEventUseCase {
 
-    EventRepositoryImp eventRepositoryImp;
-
-    public ModifyEventUseCase(){
-        eventRepositoryImp = new EventRepositoryImp();
-    }
+    public ModifyEventUseCase(){}
 
     public LiveData<EventModel> execute(EventModel em){
         MutableLiveData<EventModel> resultLiveData = new MutableLiveData<>();

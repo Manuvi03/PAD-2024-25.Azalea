@@ -143,5 +143,8 @@
     <string name="add_tertiary_phone_hint">Auxiliary Telephone Number</string>
     <string name="add_parent">Add Parent/Tutor</string>
     <string name="add_student_toast_empty">Please fill out all required fields (those with *)</string>
+    <string name="add_student_toast_error">Cannot create student</string>
+    <string name="add_student_toast_class_error">The class of the current user could not be accessed</string>
+    <string name="add_student_toast_success">Student created successfully</string>
 
 </resources>

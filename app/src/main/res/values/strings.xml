@@ -31,6 +31,8 @@
     <string name="add_primary_phone_hint">*Teléfono principal</string>
     <string name="add_secondary_phone_hint">Teléfono auxiliar</string>
     <string name="add_tertiary_phone_hint">Teléfono auxiliar</string>
+    <string name="add_student_toast_empty">Por favor, rellene todos los campos obligatorios (los que tienen *)</string>
+    <string name="add_student_toast_error">No se puede crear el estudiante</string>
     <!--Chat-->
     <!--Classroom-->
     <string name="classroom_loading_string">Cargando…</string>
@@ -68,14 +70,7 @@
     <!--EditStudent-->
         <!--editText-->
     <string name="editstudent_direccionEditText">Dirección</string>
-    <string name="editstudent_alergiasEditText">Dirección</string>
-    <string name="editstudent_dianacEditText">Dirección</string>
-    <string name="editstudent_alturaEditText">Dirección</string>
-    <string name="editstudent_condmedEditText">Dirección</string>
-    <string name="editstudent_nombreEditText">Dirección</string>
-    <string name="editstudent_contactorapidoEditText">Dirección</string>
-    <string name="editstudent_apellidosEditText">Dirección</string>
-    <string name="editstudent_pesoEditText">Dirección</string>
+
 
         <!--textView-->
 
@@ -165,5 +160,7 @@
     <string name="teacher_navbar_profile">Perfil</string>
     <string name="teacherhomefragment_textButton">Crear Evento</string>
     <string name="addevent_datePickerEmoji" translatable="false">📅</string>
-    <string name="add_student_toast_empty">Por favor, rellene todos los campos obligatorios (los que tienen *)</string>
+    <string name="add_student_toast_class_error">No se ha podido acceder a la clase del usuario actual</string>
+    <string name="add_student_toast_success">Estudiante creado con éxito</string>
+
 </resources>
