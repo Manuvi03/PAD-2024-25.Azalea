@@ -30,7 +30,11 @@ public class GradeMarkUseCase {
 
                 // si existia la nota, la actualiza, y si no, la crea
                 if(!encontrado) addMark(markModel, studentModel, cb);
-                else updateMark(success.getData().get(i).getId(), markModel, studentModel, cb);
+                else {
+                    // a la nueva nota se le pone el id antiguo para realizar correctamente el update
+                    markModel.setId(success.getData().get(i).getId());
+                    updateMark(success.getData().get(i).getId(), markModel, studentModel, cb);
+                }
             }
 
             @Override

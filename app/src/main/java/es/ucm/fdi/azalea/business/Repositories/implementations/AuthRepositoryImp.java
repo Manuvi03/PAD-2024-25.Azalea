@@ -71,7 +71,7 @@ public class AuthRepositoryImp implements AuthRepository {
         try{
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            user.verifyBeforeUpdateEmail(mail)
+            user.updateEmail(mail)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

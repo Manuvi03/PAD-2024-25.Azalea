@@ -83,6 +83,17 @@ public class UserRepositoryImp implements UserRepository {
         }
     }
 
+    @Override
+    public void update(String id, UserModel item, CallBack<Boolean> cb) {
+        usersReference.child(id).setValue(item).addOnSuccessListener(task->{
+            Log.d(TAG, "Usuario con id " + id + " modificado correctamente");
+            cb.onSuccess(new Event.Success<>(true));
+        })      .addOnFailureListener(e->{
+            Log.d(TAG, "Error al modificar el usuario", e);
+            cb.onError(new Event.Error<>(e));
+        });
+    }
+
 
     public void update(UserModel item) {
 

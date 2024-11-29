@@ -37,7 +37,7 @@
     <string name="createteacher_passwordEditText">Tu contraseña</string>
     <string name="createteacher_filledFieldError">Este campo es obligatorio</string>
     <string name="createteacher_teacherAuthError">Este correo ya se encuentra asociado a un usuario</string>
-    <string name="createteacher_mailFormatError">Este no es un formato de corre válido</string>
+    <string name="createteacher_mailFormatError">Este no es un formato de correo válido</string>
     <string name="createteacher_passwordFormatError">La contraseña debe tener al menos 6 caracteres</string>
     <string name ="ClassRoomName_hint">Nombre de tu clase</string>
     <string name ="ClassRoomName_Text">Clase</string>
@@ -46,6 +46,13 @@
 
 
     <!--EditProfile-->
+    <string name="edit_profile_buttonText">Editar perfil</string>
+    <string name="edit_profile_searching_user">Buscando usuario…</string>
+    <string name="edit_profile_search_error">Error al buscar la información del usuario</string>
+    <string name="edit_profile_modifying">Editando…</string>
+    <string name="edit_profile_correctly_modified">Se modificó correctamente al usuario</string>
+    <string name="edit_profile_error_modifying">Se produjo un error modificando al usuario %1$s %2$s.</string>
+
     <!--EditStudent-->
         <!--editText-->
     <string name="editstudent_direccionEditText">Dirección</string>

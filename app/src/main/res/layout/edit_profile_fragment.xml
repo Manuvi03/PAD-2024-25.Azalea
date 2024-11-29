@@ -8,13 +8,151 @@
     tools:context=".presentation.editprofile.EditProfileFragment"
     android:background="@color/Misty_Rose">
 
+    <ImageView
+        android:id="@+id/edit_profile_profile_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:layout_constraintStart_toStartOf="@+id/edit_profile_left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/edit_profile_name_guideline"
+        tools:ignore="ContentDescription" />
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/edit_profile_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity=""
+        android:text="@string/student_name_text"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_profile_profile_image"
+        app:layout_constraintEnd_toStartOf="@+id/edit_profile_right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/edit_profile_name_text_guideline"
+        app:layout_constraintTop_toTopOf="@+id/edit_profile_name_guideline" />
+
+    <ScrollView
+        android:id="@+id/edit_profile_scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edit_profile_right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/edit_profile_left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/edit_profile_scrollView_guideline">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/edit_profile_NameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/createteacher_nameText"
+                android:theme="@style/createteacher_TextViews"
+                android:layout_marginVertical="10sp"/>
+
+            <EditText
+                android:id="@+id/edit_profile_nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Dark_Purple"
+                android:hint="@string/createteacher_namehint"
+                android:layout_marginVertical="10sp"/>
+
+            <TextView
+                android:id="@+id/edit_profile_surnameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/createteacher_surnameText"
+                android:theme="@style/createteacher_TextViews"
+                android:layout_marginVertical="10sp"/>
+
+            <EditText
+                android:id="@+id/edit_profile_surnamesEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Dark_Purple"
+                android:hint="@string/createteacher_surnameEditText"
+                android:layout_marginVertical="10sp"/>
+
+            <TextView
+                android:id="@+id/edit_profile_genderTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/createteacher_genderText"
+                android:theme="@style/createteacher_TextViews"
+                android:layout_marginVertical="10sp"/>
+
+            <EditText
+                android:id="@+id/edit_profile_genderEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Dark_Purple"
+                android:hint="@string/createteacher_genderEditText"
+                android:layout_marginVertical="10sp"/>
+
+            <TextView
+                android:id="@+id/edit_profile_emailTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/createteacher_emailText"
+                android:theme="@style/createteacher_TextViews"
+                android:layout_marginVertical="10sp"/>
+
+            <EditText
+                android:id="@+id/edit_profile_emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Dark_Purple"
+                android:hint="@string/createteacher_emailEditText"
+                android:inputType="textEmailAddress"
+                android:layout_marginVertical="10sp"/>
+
+            <Button
+                android:id="@+id/edit_profile_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:backgroundTint="@color/Amaranth_Purple"
+                android:text="@string/edit_profile_buttonText"
+                android:layout_marginVertical="10sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/edit_profile_name_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:text="EDIT PROFIEL"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/edit_profile_scrollView_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/edit_profile_left_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/edit_profile_name_text_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/edit_profile_right_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
