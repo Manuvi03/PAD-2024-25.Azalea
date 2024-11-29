@@ -13,9 +13,11 @@ import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.CreateStudentUseCase;
+import es.ucm.fdi.azalea.integration.CreateUserUseCase;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.ReadClassRoomByIdUseCase;
 import es.ucm.fdi.azalea.integration.getCurrUserUseCase;
+import okhttp3.Call;
 
 public class AddStudentViewModel extends ViewModel {
 
@@ -24,15 +26,38 @@ public class AddStudentViewModel extends ViewModel {
     private final MutableLiveData<Event<FirebaseUser>> userfirebaseState = new MutableLiveData<>();
     private final MutableLiveData<Event<UserModel>> userState = new MutableLiveData<>();
     private final MutableLiveData<Event<ClassRoomModel>> classState = new MutableLiveData<>();
+    private final MutableLiveData<Event<UserModel>> parentState = new MutableLiveData<>();
     private final CreateStudentUseCase createStudentUseCase;
     private final ReadClassRoomByIdUseCase readClassRoomByIdUseCase;
     private final getCurrUserUseCase getCurrUserUseCase;
+    private final CreateUserUseCase createUserUseCase;
 
     public AddStudentViewModel() {
         createStudentUseCase = new CreateStudentUseCase();
         getCurrUserUseCase = new getCurrUserUseCase();
         readClassRoomByIdUseCase = new ReadClassRoomByIdUseCase();
+        createUserUseCase = new CreateUserUseCase();
     }
+
+    public LiveData<Event<UserModel>> getParentState(){return parentState;}
+
+    public void createParent(String studentid, String email, String password){
+        Log.i(TAG, "createParent con id de estudiante: " + studentid);
+        createUserUseCase.createUser(studentid, email, password, new CallBack<UserModel>(){
+
+            @Override
+            public void onSuccess(Event.Success<UserModel> success) {
+
+            }
+
+            @Override
+            public void onError(Event.Error<UserModel> error) {
+
+            }
+        });
+    }
+
+
 
     public LiveData<StudentModel> getStudentState() {return studentState;}
 

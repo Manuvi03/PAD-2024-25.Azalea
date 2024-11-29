@@ -163,8 +163,17 @@ public class AddStudentFragment extends Fragment {
                                     if (result != null) {
                                         Log.i(TAG, "Se ha creado el estudiante correctamente");
                                         //Paso 5: Crear el auth para el padre
-                                        onSuccess.run();
-
+                                        UserModel parent = new UserModel();
+                                        //TODO CREAR UN PADRE AQUÍ QUE TENGA RELACION CON EL HIJO Y ESA MOVIDA WTF
+                                        parent.setStudentId();
+                                        parent.setEmail()
+                                        addstudentViewModel.createParent(currentcurrent_user.getId(),current_user.getEmail(), "CONTRASEÑA" );
+                                       /* addStudentViewModel.getParentState().observe(getViewLifecycleOwner(), event3 -> {
+                                           if(event3 instanceof Event.Success){
+                                               Log.i();
+                                           }
+                                        });
+*/
                                     } else {
                                         onFailure.run();
                                     }
