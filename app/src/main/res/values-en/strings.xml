@@ -44,6 +44,13 @@
 
 
     <!--EditProfile-->
+    <string name="edit_profile_buttonText">Edit profile</string>
+    <string name="edit_profile_searching_user">Searching user…</string>
+    <string name="edit_profile_search_error">Failed to search user info</string>
+    <string name="edit_profile_modifying">Modifying…</string>
+    <string name="edit_profile_correctly_modified">User correctly modified</string>
+    <string name="edit_profile_error_modifying">Failed modifying user %1$s %2$s.</string>
+
     <!--EditStudent-->
     <string name="editstudent_direccionEditText">Address</string>
     <!--GradeSubject-->

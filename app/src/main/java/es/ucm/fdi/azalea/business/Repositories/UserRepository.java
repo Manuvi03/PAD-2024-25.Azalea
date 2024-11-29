@@ -7,4 +7,5 @@ public interface UserRepository {
     public void findById(String id, CallBack<UserModel> cb);
     public void create(UserModel item,CallBack<UserModel> cb);
     public void checkUserExists(String mail,CallBack<Boolean> cb);
+    public void update(String id, UserModel item, CallBack<Boolean> cb);
 }
