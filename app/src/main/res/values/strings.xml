@@ -75,6 +75,15 @@
     <string name="editstudent_telefaux2textView">Introduzca un teléfono auxiliar</string>
 
     <string name="editstudent_button">Actualizar datos</string>
+    <string name="editstudent_successUpdate">Información actualizada correctamente</string>
+
+        <!---Errors-->
+    <string name="editstudent_errorStudentData">Error recogiendo los datos del alumno</string>
+    <string name="editstudent_errorDateFormat">Formato de fecha incorrecto, debe ser DD/MM/YYYY</string>
+    <string name="editstudent_errorDoubleFormat">El texto debe estar conformado por números y/o puntos</string>
+    <string name="editstudent_errorPhoneFormat">Teléfono incorrecto, debe tener 9 carácteres</string>
+    <string name="editstudent_errorUpdate">Error al actualizar la información, porfavor vuelva a intentarlo</string>
+
 
 
     <!--GradeSubject-->

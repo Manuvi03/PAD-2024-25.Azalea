@@ -29,6 +29,7 @@ public class CreateTeacherFragment extends Fragment {
     private CreateTeacherFragmentBinding binding;
 
     private CreateTeacherViewModel createTeacherViewModel;
+    private View viewRoot;
 
     private EditText nameEditText, surnameEditText,mailEditText,genderEditText,passwordEditText,classRoomNameEditText;
     private Button createTeacher_button;
@@ -43,10 +44,12 @@ public class CreateTeacherFragment extends Fragment {
                              Bundle savedInstanceState){
 
         binding = CreateTeacherFragmentBinding.inflate(inflater,container,false);
-        View view = binding.getRoot();
+        viewRoot = binding.getRoot();
 
-
-        createTeacherViewModel = new ViewModelProvider(requireActivity()).get(CreateTeacherViewModel.class);
+        //al crear el viewModel le paso this ya que quiero que este viewModel sea unico para el fragment,
+        //asi se destruye al destruirse el fragment, de la otra manera el viewModel no se destruye y
+        // al volver al abrir el fragment se guarda el event anterior con los datos de ese event
+        createTeacherViewModel = new ViewModelProvider(this).get(CreateTeacherViewModel.class);
         nameEditText = binding.createTeacherNameEditText;
         surnameEditText = binding.createTeacherSurnamesEditText;
         genderEditText = binding.createTeacherGenderEditText;
@@ -57,7 +60,7 @@ public class CreateTeacherFragment extends Fragment {
         classRoomNameEditText = binding.createTeacherClassRoomNameEditText;
 
         initListeners();
-        return view;
+        return viewRoot;
     }
 
 
@@ -90,7 +93,8 @@ public class CreateTeacherFragment extends Fragment {
                 requireActivity().finish();
             }else if(event instanceof Event.Error){
                 loadingView.setVisibility(View.GONE);
-                Toast.makeText(requireActivity(),getString(R.string.ClassRoomName_error),Toast.LENGTH_LONG).show();
+                if(viewRoot.getContext() != null)
+                    Toast.makeText(viewRoot.getContext(),getString(R.string.ClassRoomName_error),Toast.LENGTH_LONG).show();
             }else{
                 loadingView.setVisibility(View.VISIBLE);
             }
@@ -153,6 +157,7 @@ public class CreateTeacherFragment extends Fragment {
     @Override
     public void onDestroyView(){
         super.onDestroyView();
+        binding = null;
 
     }
 

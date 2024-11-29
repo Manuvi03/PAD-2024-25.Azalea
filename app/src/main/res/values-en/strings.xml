@@ -72,6 +72,7 @@
     <string name="editstudent_telefaux2textView">"Enter auxiliary phone 2</string>
 
     <string name="editstudent_button">Update data</string>
+    <string name="editstudent_errorStudentData">Error retrieving student data</string>
 
     <!--GradeSubject-->
 

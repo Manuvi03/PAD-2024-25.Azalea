@@ -39,19 +39,19 @@ android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/teacher_editStudent_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginVertical="10sp"
         android:background="@color/Tickle_me_Pink"
         android:text="@string/editstudent_text"
         android:textColor="@color/Amaranth_Purple"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginVertical="10sp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_direccionTextView"
         app:layout_constraintEnd_toEndOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -71,11 +71,12 @@ android:layout_height="match_parent">
         android:id="@+id/teacher_editStudent_direccionEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
         android:backgroundTint="@color/Dark_Purple"
         android:hint="@string/editstudent_direccionEditText"
-        android:layout_marginVertical="10sp"
         app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_alergiasTextView"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_direccionTextView" />
 
@@ -83,12 +84,12 @@ android:layout_height="match_parent">
         android:id="@+id/teacher_editStudent_alergiasTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
         android:text="@string/editstudent_alergiastextView"
         android:theme="@style/createteacher_TextViews"
-        android:layout_marginVertical="10sp"
         app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_alergiasEditText"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/teacher_editStudent_direccionEditText" />
 
