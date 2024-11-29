@@ -329,7 +329,7 @@ public class StudentFragment extends Fragment {
             data.putString("nombrep1",studentInfo.getParentsNames().get(0));
             data.putString("nombrep1",studentInfo.getParentsNames().get(1));
             data.putString("movilp1",studentInfo.getParentsPhones().get(0));
-            data.putString("movilp2",studentInfo.getParentsNames().get(0));
+            data.putString("movilp2",studentInfo.getParentsPhones().get(1));
 
             int i = 0;
             for(String s: studentInfo.getSubjects()){
@@ -340,7 +340,7 @@ public class StudentFragment extends Fragment {
 
             int j = 0;
             for(String s: studentInfo.getMarksId()){
-                data.putString("mark" + i,studentInfo.getSubjects().get(j));
+                data.putString("mark" + i,studentInfo.getMarksId().get(j));
                 j++;
             }
             data.putInt("nmarks",j);

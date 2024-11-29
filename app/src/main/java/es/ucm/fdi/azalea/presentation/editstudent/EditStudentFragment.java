@@ -34,7 +34,7 @@ public class EditStudentFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(editStudentViewModel.class);
         View view = binding.getRoot();
 
-        constructSM(savedInstanceState);
+        constructSM(getArguments());
         bindViews();
         initListeners();
         return view;
