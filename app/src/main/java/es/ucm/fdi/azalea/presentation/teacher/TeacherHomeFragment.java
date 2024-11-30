@@ -22,13 +22,16 @@ import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
+import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.presentation.addevent.AddEventFragment;
 import es.ucm.fdi.azalea.presentation.modifyevent.ModifyEventFragment;
 
@@ -86,7 +89,12 @@ public class TeacherHomeFragment extends Fragment implements EventsTeacherAdapte
         recyclerView.setAdapter(adapter);
 
         teacherHomeFragmentViewModel = new TeacherHomeFragmentViewModel();
-        teacherHomeFragmentViewModel.getEventsForDateLiveData().observe(getViewLifecycleOwner(), this::updateEvents);
+        teacherHomeFragmentViewModel.getEventsForDate(getCurrentDate());
+        teacherHomeFragmentViewModel.getEventsForDateLiveData().observe(getViewLifecycleOwner(), events -> {
+            if (events instanceof Event.Success) {
+                updateEvents(((Event.Success<List<EventModel>>) events).getData());
+            }
+        });
 
         calendarView.setOnCalendarDayClickListener(eventDay -> {
             Calendar calendar = eventDay.getCalendar();
@@ -100,8 +108,13 @@ public class TeacherHomeFragment extends Fragment implements EventsTeacherAdapte
         });
 
         // Llamada para pintar de un color distinto los días que tengan algún evento
-        teacherHomeFragmentViewModel.getEventsForClassroom("2"); // TODO CAMBIAR ESTO POR EL ID DE LA CLASE CORRESPONDIENTE
-        teacherHomeFragmentViewModel.getEventsForClassroomLiveData().observe(getViewLifecycleOwner(), this::paintDaysWithEvents);
+        teacherHomeFragmentViewModel.getEventsForClassroom();
+        teacherHomeFragmentViewModel.getEventsForClassroomLiveData().observe(getViewLifecycleOwner(), events -> {
+            if (events instanceof Event.Success) {
+                paintDaysWithEvents(((Event.Success<List<EventModel>>) events).getData());
+            }
+        });
+
 
         // Llamada para obtener los eventos de hoy
         LocalDate currentDate = LocalDate.now();
@@ -185,5 +198,13 @@ public class TeacherHomeFragment extends Fragment implements EventsTeacherAdapte
                 .replace(R.id.teacher_fragment_container_view, AddEventFragment.class, null)
                 .addToBackStack("AddEventFragment")
                 .commit();
+    }
+    public static String getCurrentDate() {
+        // Crear un formato de fecha
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        // Obtener la fecha actual
+        java.util.Date today = new java.util.Date();
+        // Devolver la fecha formateada
+        return dateFormat.format(today);
     }
 }

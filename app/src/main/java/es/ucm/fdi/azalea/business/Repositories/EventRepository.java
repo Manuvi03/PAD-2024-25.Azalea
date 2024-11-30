@@ -9,7 +9,7 @@ import es.ucm.fdi.azalea.integration.CallBack;
 public interface EventRepository {
 
     void create(EventModel em, CallBack<EventModel> cb);
-    void getEventsForDate(String date, CallBack<List<EventModel>> cb);
+    void getEventsForDate(String date, String idclassroom, CallBack<List<EventModel>> cb);
     void getEventsForClassroom(String idclassroom, CallBack<List<EventModel>> cb);
     void modify(EventModel em, CallBack<EventModel> callBack);
 }

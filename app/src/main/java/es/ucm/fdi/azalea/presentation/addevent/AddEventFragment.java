@@ -85,7 +85,7 @@ public class AddEventFragment extends Fragment {
             String em_time = time.getText().toString();
             String em_location = location.getText().toString();
             String em_description = description.getText().toString();
-            String em_idClass = "2"; // TODO: CAMBIAR ESTO POR EL ID DE LA CLASE CORRESPONDIENTE
+
             if(em_title.isEmpty()){
                 Toast.makeText(getContext(), "El título no puede estar vacío", Toast.LENGTH_SHORT).show();
                 return;
@@ -94,7 +94,7 @@ public class AddEventFragment extends Fragment {
                 Toast.makeText(getContext(), "La fecha no puede estar vacía", Toast.LENGTH_SHORT).show();
                 return;
             }
-            EventModel event = new EventModel(em_date, em_title, em_description, em_time, em_location, em_idClass, "");
+            EventModel event = new EventModel(em_date, em_title, em_description, em_time, em_location, "", "");
             Log.i("AddEventFragment", "Event: " + event);
             viewModel.CreateEvent(event);
 

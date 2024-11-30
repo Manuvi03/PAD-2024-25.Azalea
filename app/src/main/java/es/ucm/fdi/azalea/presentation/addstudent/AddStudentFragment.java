@@ -13,27 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.firebase.auth.FirebaseUser;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import es.ucm.fdi.azalea.R;
-import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
 
 public class AddStudentFragment extends Fragment {
 
-    private final String TAG = "AddStudentFragment";
-
-    private StudentModel student_generated;
     private AddStudentViewModel addstudentViewModel;
-    private FirebaseUser current_firebase_user;
-    private UserModel current_user, parent_generated;
-    private ClassRoomModel current_class;
-    private boolean exist, updated;
 
     private View view;
     private EditText studentName, studentSurname, studentBirthdate, studentWeight, studentHeight, studentAllergens, studentMedicalConditions;
@@ -49,9 +39,6 @@ public class AddStudentFragment extends Fragment {
         view = inflater.inflate(R.layout.add_student_fragment, container, false);
 
         addstudentViewModel = new ViewModelProvider(this).get(AddStudentViewModel.class);
-
-        exist = false;
-        updated = false;
 
         bindComponents();
 
@@ -97,6 +84,28 @@ public class AddStudentFragment extends Fragment {
     }
 
     private void init() {
+        StudentModel student = getStudentInfo();
+        if (student == null) {
+            Toast.makeText(getContext(), "Error al obtener los datos del estudiante", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        UserModel parent = getParentInfo();
+        if (parent == null) {
+            Toast.makeText(getContext(), "Error al obtener los datos del padre", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        addstudentViewModel.funcion(student, parent);
+        addstudentViewModel.gethState().observe(getViewLifecycleOwner(), event -> {
+            if (event instanceof Event.Success) {
+                Toast.makeText(getContext(), "Estudiante creado correctamente", Toast.LENGTH_SHORT).show();
+                requireActivity().getSupportFragmentManager().popBackStack();
+            } else {
+                Toast.makeText(getContext(), "Error al crear el estudiante", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+   /* private void init() {
         Log.d(TAG, "init: Iniciando la creación del estudiante.");
 
         getStudent().thenAccept(result -> {
@@ -273,7 +282,7 @@ public class AddStudentFragment extends Fragment {
             }
             return 0;
         });
-    }
+    }*/
 
     private UserModel getParentInfo() {
         UserModel parent = new UserModel();
@@ -283,59 +292,94 @@ public class AddStudentFragment extends Fragment {
         parent.setGender(parentGender.getText().toString());
         parent.setPassword(PasswordGenerate.generateRandomPassword());
         parent.setParent(true);
-        parent.setClassId(current_class.getId());
-        parent.setStudentId(student_generated.getId());
-        return parent;
+
+        if (parent.getEmail().isEmpty() || parent.getName().isEmpty() || parent.getSurname().isEmpty() || parent.getGender().isEmpty()) {
+            return null;
+        } else {
+            return parent;
+        }
     }
+
 
     private StudentModel getStudentInfo() {
+        String name = studentName.getText().toString().trim();
+        String surname = studentSurname.getText().toString().trim();
+        String birthdate = studentBirthdate.getText().toString().trim();
+        String weight = studentWeight.getText().toString().trim();
+        String height = studentHeight.getText().toString().trim();
+        String allergens = studentAllergens.getText().toString().trim();
+        String medicalConditions = studentMedicalConditions.getText().toString().trim();
+        String parentName1 = parentName.getText().toString().trim();
+        String parentSurname1 = parentSurname.getText().toString().trim();
+        String parentEmail1 = parentEmail.getText().toString().trim();
+        String parentAddress1 = parentAddress.getText().toString().trim();
+        String primaryPhone1 = primaryPhone.getText().toString().trim();
+        String secondaryPhone1 = secondaryPhone.getText().toString().trim();
+        String parentName2 = secondParentName.getText().toString().trim();
+        String parentSurname2 = secondParentSurnames.getText().toString().trim();
+        String tertiaryPhone2 = tertiaryPhone.getText().toString().trim();
 
-        String name = studentName.getText().toString();
-        String surname = studentSurname.getText().toString();
-        String birthdate = studentBirthdate.getText().toString();
-        String weight = studentWeight.getText().toString();
-        String height = studentHeight.getText().toString();
-        String allergens = studentAllergens.getText().toString();
-        String medicalConditions = studentMedicalConditions.getText().toString();
-        String parentName1 = parentName.getText().toString();
-        String parentSurname1 = parentSurname.getText().toString();
-        String parentEmail1 = parentEmail.getText().toString();
-        String parentAddress1 = parentAddress.getText().toString();
-        String primaryPhone1 = primaryPhone.getText().toString();
-        String secondaryPhone1 = secondaryPhone.getText().toString();
-        String parentName2 = secondParentName.getText().toString();
-        String parentSurname2 = secondParentSurnames.getText().toString();
-        String tertiaryPhone2 = tertiaryPhone.getText().toString();
-
+        // Validaciones obligatorias
         if (name.isEmpty() || surname.isEmpty() || birthdate.isEmpty() ||
-                parentName1.isEmpty() || parentSurname1.isEmpty() || parentEmail1.isEmpty() ||
-                parentAddress1.isEmpty() || primaryPhone1.isEmpty()) {
+                parentName1.isEmpty() || parentSurname1.isEmpty() ||
+                parentEmail1.isEmpty() || parentAddress1.isEmpty() ||
+                primaryPhone1.isEmpty()) {
+            return null; // Retorna nulo si falta información obligatoria
+        }
+
+        // Valores por defecto para peso y altura
+        double weightValue;
+        double heightValue;
+        try {
+            weightValue = weight.isEmpty() ? 0 : Double.parseDouble(weight);
+        } catch (NumberFormatException e) {
+            weightValue = 0;
+        }
+
+        try {
+            heightValue = height.isEmpty() ? 0 : Double.parseDouble(height);
+        } catch (NumberFormatException e) {
+            heightValue = 0;
+        }
+
+        try {
+            List<String> parents = new ArrayList<>();
+            parents.add(parentName1 + " " + parentSurname1);
+            if (!parentName2.isEmpty() && !parentSurname2.isEmpty()) {
+                parents.add(parentName2 + " " + parentSurname2);
+            }
+
+            List<String> phones = new ArrayList<>();
+            if (!secondaryPhone1.isEmpty()) {
+                phones.add(secondaryPhone1);
+            }
+            if (!tertiaryPhone2.isEmpty()) {
+                phones.add(tertiaryPhone2);
+            }
+
+            return new StudentModel(
+                    List.of(),
+                    allergens,
+                    medicalConditions,
+                    heightValue,
+                    weightValue,
+                    surname,
+                    name,
+                    primaryPhone1,
+                    "",
+                    "",
+                    birthdate,
+                    parentAddress1,
+                    parents,
+                    phones
+            );
+        } catch (Exception e) {
+            String TAG = "AddStudentFragment";
+            Log.e(TAG, "Error al obtener los datos del estudiante", e); // Muestra el error en la consola para depuración
             return null;
         }
-        if (weight.isEmpty()) {
-            weight = "0";
-        }
-        if (height.isEmpty()) {
-            height = "0";
-        }
-
-        StudentModel student = new StudentModel(current_class.getSubjects(),
-                allergens,
-                medicalConditions,
-                Double.parseDouble(height),
-                Double.parseDouble(weight),
-                surname,
-                name,
-                primaryPhone1,
-                current_class.getId(),
-                "",
-                birthdate,
-                parentAddress1,
-                List.of(parentName1 + " " + parentSurname1, parentName2 + " " + parentSurname2),
-                List.of(primaryPhone1, secondaryPhone1, tertiaryPhone2));
-
-        return student;
     }
+
 
 }
 
