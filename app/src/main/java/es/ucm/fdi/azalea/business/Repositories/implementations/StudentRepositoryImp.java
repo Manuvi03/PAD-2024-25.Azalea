@@ -36,15 +36,23 @@ public class StudentRepositoryImp implements StudentRepository {
     private DatabaseReference studentReference = database.getReference("students");
 
     @Override
-    public String create(StudentModel item){
+    public void create(StudentModel item, CallBack<StudentModel> cb){
         // el push crea el hijo con una key automatica
         String key = studentReference.push().getKey();
         if(key != null){
             item.setId(key);
-            studentReference.child(key).setValue(item);
+            studentReference.child(key).setValue(item).addOnSuccessListener(task->{
+                Log.d("StudentRepository", "Alumno creado correctamente");
+                cb.onSuccess(new Event.Success<>(item));
+            })      .addOnFailureListener(e->{
+                Log.d("StudentRepository", "Error al crear el alumno", e);
+                cb.onError(new Event.Error<>(e));
+            });
+        }else{
+            cb.onError(new Event.Error<>(new Exception("Error al crear el alumno")));
         }
         Log.d("StudentRepository", "Alumno creado con id: " + key + ".");
-        return key;
+
     }
 
     @Override

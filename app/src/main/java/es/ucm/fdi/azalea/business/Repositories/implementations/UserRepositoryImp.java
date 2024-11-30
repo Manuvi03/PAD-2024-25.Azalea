@@ -22,7 +22,6 @@ import es.ucm.fdi.azalea.integration.Event;
 public class UserRepositoryImp implements UserRepository {
 
     private final static String TAG = "UserRepository";
-    private UserModel userdata;
     private FirebaseDatabase database = FirebaseDatabase.getInstance("https://azalea-fde19-default-rtdb.europe-west1.firebasedatabase.app/");
     private DatabaseReference usersReference = database.getReference("users");
 
@@ -40,42 +39,35 @@ public class UserRepositoryImp implements UserRepository {
 
 
     public void findById(String id, CallBack<UserModel> cb) {
-            userdata = null;
-         try{
-            usersReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if(!task.isSuccessful()){
-                        Log.d(TAG,"Error recuperando los datos",task.getException());
-                        cb.onError(new Event.Error<UserModel>(task.getException()));
+        Log.d(TAG, "Buscando usuario directamente con id: " + id);
+        usersReference.child(id).get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful() || task.getResult() == null) {
+                Log.e(TAG, "Error al obtener el usuario", task.getException());
+                cb.onError(new Event.Error<>(task.getException()));
+                return;
+            }
 
-                    }
-                    else {
-                        Log.d(TAG,String.valueOf(task.getResult().getValue()));
-                        cb.onSuccess(new Event.Success<>(task.getResult().getValue(UserModel.class)));
-                    }
-                }
-            });
-        }catch (Exception e){
-            cb.onError(new Event.Error<>(e));
-        }
-
-
+            UserModel user = task.getResult().getValue(UserModel.class);
+            if (user == null) {
+                Log.d(TAG, "No se encontró usuario con id: " + id);
+                cb.onError(new Event.Error<>(new Exception("Usuario no encontrado")));
+            } else {
+                Log.d(TAG, "Usuario encontrado: " + user.getEmail());
+                cb.onSuccess(new Event.Success<>(user));
+            }
+        });
     }
 
     public void checkUserExists(String mail,CallBack<Boolean> cb){
         try{
            Query query = usersReference.orderByChild("email").equalTo(mail);
 
-           query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-               @Override
-               public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if(task.isSuccessful()){
-                        cb.onSuccess(new Event.Success<Boolean>(true));
-                    }else if(!task.isSuccessful() || task.getResult() == null){
-                        cb.onError(new Event.Error<>(task.getException()));
-                    }
-               }
+           query.get().addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    cb.onSuccess(new Event.Success<>(true));
+                }else if(!task.isSuccessful() || task.getResult() == null){
+                    cb.onError(new Event.Error<>(task.getException()));
+                }
            });
 
         }catch(Exception e){

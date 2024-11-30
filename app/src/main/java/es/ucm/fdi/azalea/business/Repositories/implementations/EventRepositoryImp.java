@@ -44,35 +44,46 @@ public class EventRepositoryImp implements EventRepository {
         }
     }
 
-    public void getEventsForDate(String date, CallBack<List<EventModel>> cb) {
-        Log.i(TAG, "Entrando en getEventsForDate. Date: " + date);
-        List<EventModel> events = new ArrayList<>();
+    public void getEventsForDate(String date, String classroomId, CallBack<List<EventModel>> cb) {
+        Log.i(TAG, "Entrando en getEventsForDateAndClassroom. Date: " + date + ", ClassroomId: " + classroomId);
+        List<EventModel> filteredEvents = new ArrayList<>();
 
-        // Crear la consulta
-        Query getEventsForDate = eventsReference.orderByChild("date").equalTo(date);
+        // Primera consulta: Filtrar por classroomId
+        Query getEventsByClassroom = eventsReference.orderByChild("idClass").equalTo(classroomId);
 
-        // Ejecutar la consulta
-        getEventsForDate.get().addOnCompleteListener(task -> {
+        getEventsByClassroom.get().addOnCompleteListener(task -> {
             if (!task.isSuccessful() || task.getResult() == null) {
-                Log.e(TAG, "Error al obtener los eventos", task.getException());
+                Log.e(TAG, "Error al obtener eventos por classroomId", task.getException());
                 cb.onError(new Event.Error<>(task.getException()));
                 return;
             }
 
-            // Procesar los resultados
+            List<EventModel> classroomEvents = new ArrayList<>();
+
+            // Procesar resultados de la primera consulta
             for (DataSnapshot eventSnapshot : task.getResult().getChildren()) {
                 if (eventSnapshot.exists()) {
                     EventModel event = eventSnapshot.getValue(EventModel.class);
                     if (event != null) {
-                        events.add(event);
+                        classroomEvents.add(event);
                     }
                 }
             }
 
-            Log.d(TAG + "getEventsForDate", "Eventos obtenidos correctamente. Devuelvo: " + events.size() + " resultados.");
-            cb.onSuccess(new Event.Success<>(events));
+            Log.d(TAG, "Eventos filtrados por classroomId: " + classroomEvents.size());
+
+            // Segunda consulta: Filtrar los eventos obtenidos por la fecha
+            for (EventModel event : classroomEvents) {
+                if (date.equals(event.getDate())) {
+                    filteredEvents.add(event);
+                }
+            }
+
+            Log.d(TAG, "Eventos filtrados por fecha: " + filteredEvents.size());
+            cb.onSuccess(new Event.Success<>(filteredEvents));
         });
     }
+
 
     @Override
     public void getEventsForClassroom(String idclassroom, CallBack<List<EventModel>> cb) {

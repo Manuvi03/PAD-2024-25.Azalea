@@ -31,7 +31,7 @@ public class classroomViewModel extends ViewModel {
     }
 
     // metodo que implementa el caso de uso
-    public <T> void readStudentsByClassroom(String classroomId){
+    public void readStudentsByClassroom(){
         // el valor de la informacion aun no se ha encontrado, por lo que se marca el evento como cargando
         studentsState.postValue(new Event.Loading<>());
 
@@ -39,7 +39,7 @@ public class classroomViewModel extends ViewModel {
         ReadStudentsByClassRoomUseCase useCase = new ReadStudentsByClassRoomUseCase();
 
         // implementando el callback que recibira la informacion cuando esta se busque
-        useCase.readStudentsByClassRoom(classroomId, new CallBack<List<StudentModel>>() {
+        useCase.execute(new CallBack<List<StudentModel>>() {
             @Override
             public void onSuccess(Event.Success<List<StudentModel>> success) {
                 Log.d(TAG, "Los datos han llegado correctamente al ClassRoomViewModel en readStudentsByClassroom");

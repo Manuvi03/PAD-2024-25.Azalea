@@ -117,8 +117,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
         // al inicar este fragment, directamente aparece la lista de estudiantes
         resultText = view.findViewById(R.id.teacher_classroom_loading_text);
 
-        // TODO esto de momento para hacer las pruebas
-        classroomViewModel.readStudentsByClassroom("-OCiwTrNUUv5c5G5-3zd");
+        classroomViewModel.readStudentsByClassroom();
 
         // se inicializa el observador
         initRecyclerViewObserver();

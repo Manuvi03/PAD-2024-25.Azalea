@@ -11,7 +11,29 @@
     <string name="addevent_timePickerTitle">Selecciona una hora</string>
     <string name="addevent_timePickerEmoji" translatable="false">⏰</string>
 
-    <!--AddStudent-->
+    <!--AddStudentandParent-->
+    <string name="add_student_title">Añadir Estudiante</string>
+    <string name="add_student_name_hint">*Nombre</string>
+    <string name="add_student_surnames_hint">*Apellidos</string>
+    <string name="add_student_birthdate_hint">*Fecha de nacimiento</string>
+    <string name="add_student_weight_hint">Peso</string>
+    <string name="add_student_height_hint">Altura</string>
+    <string name="add_student_allergens_hint">Alérgenos</string>
+    <string name="add_parent">Añadir Padre/Tutor</string>
+    <string name="add_student_medical_conditions_hint">Condiciones médicas</string>
+    <string name="add_student_save_button_text">Crear estudiante y padre o tutor</string>
+    <string name="add_parent_name_hint">*Nombre de padre/tutor</string>
+    <string name="add_secondary_parent_name_hint">Nombre de otro padre/tutor</string>
+    <string name="add_parent_surnames_hint">*Apellidos de padre/tutor</string>
+    <string name="add_parent_gender_hint">*Género</string>
+    <string name="add_secondary_parent_surnames">Apellidos de otro padre/tutor</string>
+    <string name="add_parent_email_hint">*Correo electrónico</string>
+    <string name="add_parent_address_hint">*Dirección</string>
+    <string name="add_primary_phone_hint">*Teléfono principal</string>
+    <string name="add_secondary_phone_hint">Teléfono auxiliar</string>
+    <string name="add_tertiary_phone_hint">Teléfono auxiliar</string>
+    <string name="add_student_toast_empty">Por favor, rellene todos los campos obligatorios (los que tienen *)</string>
+    <string name="add_student_toast_error">No se puede crear el estudiante</string>
     <!--Chat-->
     <!--Classroom-->
     <string name="classroom_loading_string">Cargando…</string>
@@ -181,4 +203,7 @@
     <string name="teacher_navbar_profile">Perfil</string>
     <string name="teacherhomefragment_textButton">Crear Evento</string>
     <string name="addevent_datePickerEmoji" translatable="false">📅</string>
+    <string name="add_student_toast_class_error">No se ha podido acceder a la clase del usuario actual</string>
+    <string name="add_student_toast_success">Estudiante creado con éxito</string>
+
 </resources>

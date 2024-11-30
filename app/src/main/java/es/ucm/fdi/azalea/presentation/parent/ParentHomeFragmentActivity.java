@@ -16,20 +16,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
+import es.ucm.fdi.azalea.integration.Event;
 
 public class ParentHomeFragmentActivity extends Fragment  {
-    private View view;
 
     private ParentHomeFragmentViewModel parentHomeFragmentViewModel;
     private EventsParentAdapter adapter;
@@ -44,7 +46,7 @@ public class ParentHomeFragmentActivity extends Fragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.parent_home_fragment, container, false);
+        View view = inflater.inflate(R.layout.parent_home_fragment, container, false);
 
         Log.i(TAG, "entro en ParentHomeFragmentActivity");
 
@@ -62,7 +64,12 @@ public class ParentHomeFragmentActivity extends Fragment  {
         recyclerView.setAdapter(adapter);
 
         parentHomeFragmentViewModel = new ParentHomeFragmentViewModel();
-        parentHomeFragmentViewModel.getEventsForDateLiveData().observe(getViewLifecycleOwner(), this::updateEvents);
+        parentHomeFragmentViewModel.getEventsForDate(getCurrentDate());
+        parentHomeFragmentViewModel.getEventsForDateLiveData().observe(getViewLifecycleOwner(), events -> {
+            if (events instanceof Event.Success) {
+                updateEvents(((Event.Success<List<EventModel>>) events).getData());
+            }
+        });
 
         calendarView.setOnCalendarDayClickListener(eventDay -> {
             Calendar calendar = eventDay.getCalendar();
@@ -76,8 +83,12 @@ public class ParentHomeFragmentActivity extends Fragment  {
         });
 
         // Llamada para pintar de un color distinto los días que tengan algún evento
-        parentHomeFragmentViewModel.getEventsForClassroom("2"); // TODO CAMBIAR ESTO POR EL ID DE LA CLASE CORRESPONDIENTE
-        parentHomeFragmentViewModel.getEventsForClassroomLiveData().observe(getViewLifecycleOwner(), this::paintDaysWithEvents);
+        parentHomeFragmentViewModel.getEventsForClassroom();
+        parentHomeFragmentViewModel.getEventsForClassroomLiveData().observe(getViewLifecycleOwner(), events -> {
+            if (events instanceof Event.Success) {
+                paintDaysWithEvents(((Event.Success<List<EventModel>>) events).getData());
+            }
+        });
 
         // Llamada para obtener los eventos de hoy
         LocalDate currentDate = LocalDate.now();
@@ -113,7 +124,7 @@ public class ParentHomeFragmentActivity extends Fragment  {
         eventDays.clear(); // Limpiar la lista de días con eventos antes de añadir los nuevos
         for (EventModel event : events) {
             Calendar calendar = Calendar.getInstance();
-            Date date = Date.valueOf(event.getDate());
+            java.sql.Date date = java.sql.Date.valueOf(event.getDate());
             calendar.setTime(date);
             CalendarDay eventDay = new CalendarDay(calendar);
             eventDay.setImageResource(R.drawable.baseline_event_24);
@@ -137,5 +148,13 @@ public class ParentHomeFragmentActivity extends Fragment  {
         calendarView.setCalendarDays(selectedDays);
 
         previouslySelectedDay = selectedDay; // Actualizar la referencia al día seleccionado previamente
+    }
+    public static String getCurrentDate() {
+        // Crear un formato de fecha
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        // Obtener la fecha actual
+        Date today = new Date();
+        // Devolver la fecha formateada
+        return dateFormat.format(today);
     }
 }
