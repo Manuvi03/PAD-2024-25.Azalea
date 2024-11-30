@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Color primario -->
     <color name="Seashell">#FFE4E1</color>
     <color name="Misty_Rose">#F3D2D2</color>
     <color name="Orchid_Pink">#EFBBC3</color>
@@ -10,6 +11,35 @@
     <color name="Amaranth_Purple">#9B1347</color>
     <color name="Tyrian_Purple">#6D1638</color>
     <color name="Dark_Purple">#3E1929</color>
-    <color name="Lapis_Lazuli">#035E7B</color>
+    <color name="Licorice">#200C15</color>
+
+    <!-- Color secundario -->
+    <color name="Mint_Green">#D5F7F6</color>
+    <color name="Tiffany_Blue">#A3E7E3</color>
+    <color name="Dark_Tiffany_Blue">#73D1CB</color>
+    <color name="Verdigris">#42B6AF</color>
+    <color name="Persian_Green">#1A9B93</color>
+    <color name="Skobeloff">#0A7B74</color>
+    <color name="Caribbean_Current">#055B56</color>
+    <color name="Brunswick_Green">#013C38</color>
     <color name="Dark_Green">#002E2C</color>
+    <color name="Very_Dark_Green">#001E1D</color>
+
+    <!-- Color terciario -->
+    <color name="Light_Azure">#E9F9FB</color>
+    <color name="Light_Cyan">#CDEEF5</color>
+    <color name="Light_Non_Photo_Blue">#A8E6EE</color>
+    <color name="Non_Photo_Blue">#81D3E1</color>
+    <color name="Moonstone">#4DB8CA</color>
+    <color name="Blue_Munsell">#069BB0</color>
+    <color name="Cerulean">#057D92</color>
+    <color name="Lapis_Lazuli">#035E7B</color>
+    <color name="Light_Midnight_Green">#04566B</color>
+    <color name="Midnight_Green">#023E52</color>
+
+    <!-- Color de error -->
+    <color name="Salmon_Pink">#F9A3A3</color>
+    <color name="Imperial_Red">#E64545</color>
+    <color name="Black_Bean">#4C0303</color>
+
 </resources>

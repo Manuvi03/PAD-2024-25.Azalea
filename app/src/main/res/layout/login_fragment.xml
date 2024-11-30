@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Misty_Rose"
     tools:context=".presentation.login.MainActivity">
 
     <!-- Superposición para el progress bar el elevation es para que se muestre por encima
@@ -34,13 +33,11 @@
         android:id="@+id/editTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="@string/login_password_hint"
+        android:theme="@style/standard_editText"
+        android:inputType="textPassword"
         android:layout_marginHorizontal="20dp"
         android:autofillHints=""
-        android:backgroundTint="@color/Dark_Purple"
-        android:ems="10"
-        android:hint="@string/login_password_hint"
-        android:inputType="textPassword"
-        android:textColorHint="@color/Dark_Purple"
         app:layout_constraintBottom_toTopOf="@+id/button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,14 +47,12 @@
         android:id="@+id/editTextEmailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:autofillHints=""
-        android:backgroundTint="@color/Dark_Purple"
-        android:layout_marginTop="10dp"
-        android:ems="10"
+        android:theme="@style/standard_editText"
         android:hint="@string/login_username_hint"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/Dark_Purple"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:autofillHints=""
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +62,7 @@
         android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/Dogwood_Rose"
         android:text="@string/login_button_login_text"
-        android:textColor="@color/Seashell"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewRecoverPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,11 +75,11 @@
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:importantForAccessibility="no"
         android:scaleType="centerCrop"
         android:src="@drawable/circle_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -129,8 +122,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_recover_password"
-        android:textColor="@color/Tickle_me_Pink"
-        android:textSize="13sp"
+        android:textColor="@color/Cyclomen"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCreateTeacherAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +136,7 @@
         android:backgroundTint="@color/Tyrian_Purple"
         android:text="@string/login_create_button"
         android:layout_marginBottom="10dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -153,15 +147,13 @@
         android:id="@+id/textViewProfesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="@string/login_create_teacher_text"
-        android:textColor="@color/Tickle_me_Pink"
+        android:textColor="@color/Cyclomen"
         android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonCreateTeacherAccount"
         app:layout_constraintEnd_toStartOf="@+id/buttonCreateTeacherAccount"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

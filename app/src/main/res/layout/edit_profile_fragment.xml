@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/createteacher_nameText"
-                android:theme="@style/createteacher_TextViews"
+                android:theme="@style/create_teacher_TextViews"
                 android:layout_marginVertical="10sp"/>
 
             <EditText
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/createteacher_surnameText"
-                android:theme="@style/createteacher_TextViews"
+                android:theme="@style/create_teacher_TextViews"
                 android:layout_marginVertical="10sp"/>
 
             <EditText
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/createteacher_genderText"
-                android:theme="@style/createteacher_TextViews"
+                android:theme="@style/create_teacher_TextViews"
                 android:layout_marginVertical="10sp"/>
 
             <EditText
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/createteacher_emailText"
-                android:theme="@style/createteacher_TextViews"
+                android:theme="@style/create_teacher_TextViews"
                 android:layout_marginVertical="10sp"/>
 
             <EditText

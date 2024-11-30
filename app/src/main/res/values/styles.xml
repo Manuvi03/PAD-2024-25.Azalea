@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- General Styles -->
+    <style name="standard_button" >
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="standard_editText" parent="Base.Theme.Azalea">
+        <item name="android:backgroundTint">@color/Dark_Purple</item>
+        <item name="android:ems">10</item>
+        <item name="android:textColorHint">@color/Dark_Purple</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColorPrimary">@color/Dark_Purple</item>
+    </style>
+
     <!--Create Teacher Styles-->
-    <style name="createteacher_TextViews">
-        <item name="android:textColor">@color/Cyclomen</item>
+    <style name="create_teacher_TextViews">
+        <item name="android:textColor">@color/Dogwood_Rose</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">25sp</item>
     </style>>
