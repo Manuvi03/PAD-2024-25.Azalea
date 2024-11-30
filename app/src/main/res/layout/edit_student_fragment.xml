@@ -176,7 +176,6 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:backgroundTint="@color/Dark_Purple"
         android:hint="@string/editstudent_condmedEditText"
-        android:inputType="textPassword"
         android:layout_marginVertical="10sp"
         app:layout_constraintBottom_toTopOf="@+id/teacher_editStudent_nombreTextView"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"

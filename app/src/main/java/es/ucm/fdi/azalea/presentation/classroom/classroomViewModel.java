@@ -11,6 +11,7 @@ import java.util.List;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.integration.GetClassNameUserCase;
 import es.ucm.fdi.azalea.integration.ReadStudentsByClassRoomUseCase;
 
 public class classroomViewModel extends ViewModel {
@@ -20,6 +21,7 @@ public class classroomViewModel extends ViewModel {
 
     // atributo con la info de los estudiantes que maneja el viewmodel
     private MutableLiveData<Event<List<StudentModel>>> studentsState = new MutableLiveData<>();
+    private MutableLiveData<Event<String>> nameclassState = new MutableLiveData<>();
 
     // devuelve un objeto inmodificable de la informacion actual del viewmodel
     public LiveData<Event<List<StudentModel>>> getStudentsState(){
@@ -50,6 +52,36 @@ public class classroomViewModel extends ViewModel {
             public void onError(Event.Error<List<StudentModel>> error) {
                 Log.d(TAG, "Los datos NO han llegado correctamente al ClassRoomViewModel en readStudentsByClassroom");
                 studentsState.postValue(error);
+            }
+        });
+    }
+
+    public LiveData<Event<String>> getClassNameState(){
+        Log.d(TAG, "Se obtiene el nombre de la clase");
+        if (nameclassState == null) {
+            Log.d(TAG, "nameclassState es null");
+            nameclassState = new MutableLiveData<>();
+        }
+        Log.d(TAG, "Se devuelve nameclassState");
+        return nameclassState;
+    }
+
+    public void getClassName(){
+        nameclassState.postValue(new Event.Loading<>());
+
+        GetClassNameUserCase useCase = new GetClassNameUserCase();
+        Log.d(TAG, "Se realiza el caso de uso");
+        useCase.execute(new CallBack<String>(){
+
+            @Override
+            public void onSuccess(Event.Success<String> success) {
+                Log.d(TAG, "Se ha obtenido el nombre de la clase: " + success.getData());
+                nameclassState.postValue(success);
+            }
+
+            @Override
+            public void onError(Event.Error<String> error) {
+                nameclassState.postValue(error);
             }
         });
     }

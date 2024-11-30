@@ -80,10 +80,15 @@
     <string name="editstudent_telefaux2textView">"Enter auxiliary phone 2</string>
 
     <string name="editstudent_button">Update data</string>
+    <string name="editstudent_successUpdate">Correctly updated information</string>
     <string name="editstudent_errorStudentData">Error retrieving student data</string>
 
     <!--GradeSubject-->
 
+    <string name="editstudent_errorDateFormat">Incorrect date format, should be DD/MM/YYYY</string>
+    <string name="editstudent_errorDoubleFormat">The text must be made up of numbers and/or points</string>
+    <string name="editstudent_errorPhoneFormat">Wrong phone number, must be 9 characters</string>
+    <string name="editstudent_errorUpdate">Error updating information, please try again</string>
     <string name="grade_subject_intro_text">Grade mark</string>
     <string name="grade_subject_grade_text">Mark</string>
     <string name="grade_subject_send_grade_text">Send mark</string>
