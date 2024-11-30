@@ -25,6 +25,7 @@
     <string name="add_parent_name_hint">*Nombre de padre/tutor</string>
     <string name="add_secondary_parent_name_hint">Nombre de otro padre/tutor</string>
     <string name="add_parent_surnames_hint">*Apellidos de padre/tutor</string>
+    <string name="add_parent_gender_hint">*Género</string>
     <string name="add_secondary_parent_surnames">Apellidos de otro padre/tutor</string>
     <string name="add_parent_email_hint">*Correo electrónico</string>
     <string name="add_parent_address_hint">*Dirección</string>

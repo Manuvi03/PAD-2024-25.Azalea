@@ -15,7 +15,7 @@ public class getCurrUserUseCase {
             BusinessFactory.getInstance().getAuthRepository().getCurrUser(new CallBack<FirebaseUser>() {
                 @Override
                 public void onSuccess(Event.Success<FirebaseUser> success) {
-                    Log.d(TAG, "Usuario autenticado obtenido: " + success.getData());
+                    Log.d(TAG, "Usuario autenticado obtenido: " + success.getData().getUid());
                     cb.onSuccess(success);
                 }
 

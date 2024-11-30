@@ -17,7 +17,6 @@ import es.ucm.fdi.azalea.integration.CreateUserUseCase;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.ReadClassRoomByIdUseCase;
 import es.ucm.fdi.azalea.integration.getCurrUserUseCase;
-import okhttp3.Call;
 
 public class AddStudentViewModel extends ViewModel {
 
@@ -27,6 +26,9 @@ public class AddStudentViewModel extends ViewModel {
     private final MutableLiveData<Event<UserModel>> userState = new MutableLiveData<>();
     private final MutableLiveData<Event<ClassRoomModel>> classState = new MutableLiveData<>();
     private final MutableLiveData<Event<UserModel>> parentState = new MutableLiveData<>();
+    private final MutableLiveData<Event<Boolean>> checkParentState = new MutableLiveData<>();
+    private final MutableLiveData<Event<Boolean>> updateStudentState = new MutableLiveData<>();
+
     private final CreateStudentUseCase createStudentUseCase;
     private final ReadClassRoomByIdUseCase readClassRoomByIdUseCase;
     private final getCurrUserUseCase getCurrUserUseCase;
@@ -39,11 +41,29 @@ public class AddStudentViewModel extends ViewModel {
         createUserUseCase = new CreateUserUseCase();
     }
 
+    public LiveData<Event<Boolean>> getCheckParentState() {return checkParentState;}
+
+    public void checkParent(String email) {
+        createUserUseCase.checkUserExists(email, new CallBack<Boolean>() {
+
+
+            @Override
+            public void onSuccess(Event.Success<Boolean> success) {
+                checkParentState.postValue(success);
+            }
+
+            @Override
+            public void onError(Event.Error<Boolean> error) {
+                checkParentState.postValue(error);
+            }
+        });
+    }
+
+
     public LiveData<Event<UserModel>> getParentState(){return parentState;}
 
-    public void createParent(String studentid, String email, String password){
-        Log.i(TAG, "createParent con id de estudiante: " + studentid);
-        createUserUseCase.createUser(studentid, email, password, new CallBack<UserModel>(){
+    public void createParent(UserModel um) {
+        createUserUseCase.createUser(um, new CallBack<UserModel>() {
 
             @Override
             public void onSuccess(Event.Success<UserModel> success) {
@@ -57,29 +77,28 @@ public class AddStudentViewModel extends ViewModel {
         });
     }
 
-
-
     public LiveData<StudentModel> getStudentState() {return studentState;}
 
     public void createStudent(StudentModel sm) {
         Log.i(TAG, "createStudent: " + sm);
-        createStudentUseCase.execute(sm).observeForever(studentState::setValue);
+        createStudentUseCase.execute(sm).observeForever(studentState::postValue);
     }
 
     public LiveData<Event<FirebaseUser>> getCurrUserFirebaseLD() {return userfirebaseState;}
 
     public void getCurrUserFirebase() {
-        userState.setValue(new Event.Loading<>());
         getCurrUserUseCase.getCurrentUser(new CallBack<FirebaseUser>() {
 
 
             @Override
             public void onSuccess(Event.Success<FirebaseUser> success) {
+                Log.d(TAG, "Usuario autenticado obtenido: " + success.getData().getEmail());
                 userfirebaseState.postValue(success);
             }
 
             @Override
             public void onError(Event.Error<FirebaseUser> error) {
+                Log.d(TAG, "Error obteniendo usuario autenticado: " + error);
                 userfirebaseState.postValue(error);
             }
         });
@@ -88,7 +107,6 @@ public class AddStudentViewModel extends ViewModel {
     public LiveData<Event<UserModel>> getCurrUserLD() {return userState;}
 
     public void getCurrUser(String id) {
-        userState.setValue(new Event.Loading<>());
         getCurrUserUseCase.getUserModel(id,new CallBack<UserModel>() {
 
 
@@ -106,9 +124,8 @@ public class AddStudentViewModel extends ViewModel {
 
     public LiveData<Event<ClassRoomModel>> getClassState() {return classState;}
 
-    public void getClass(String classId) {
-        classState.setValue(new Event.Loading<>());
-        readClassRoomByIdUseCase.readClassRoomById(classId, new CallBack<ClassRoomModel>() {
+    public void getClass(String id) {
+        readClassRoomByIdUseCase.readClassRoomById(id, new CallBack<ClassRoomModel>() {
             @Override
             public void onSuccess(Event.Success<ClassRoomModel> success) {
                 classState.postValue(success);
@@ -120,5 +137,24 @@ public class AddStudentViewModel extends ViewModel {
             }
         }
         );
+    }
+
+    public LiveData<Event<Boolean>> getUpdateStudentState() {return updateStudentState;}
+
+    public void updateStudent(String id, StudentModel sm) {
+        createUserUseCase.updateStudent(id, sm, new CallBack<Boolean>(){
+
+            @Override
+            public void onSuccess(Event.Success<Boolean> success) {
+                Log.i(TAG, "El Estudiante se ha updateado correctamente");
+                updateStudentState.postValue(success);
+            }
+
+            @Override
+            public void onError(Event.Error<Boolean> error) {
+                Log.i(TAG, "Error al actualizar el estudiante");
+                updateStudentState.postValue(error);
+            }
+        });
     }
 }

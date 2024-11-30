@@ -146,5 +146,6 @@
     <string name="add_student_toast_error">Cannot create student</string>
     <string name="add_student_toast_class_error">The class of the current user could not be accessed</string>
     <string name="add_student_toast_success">Student created successfully</string>
+    <string name="add_parent_gender_hint">*Gender</string>
 
 </resources>
