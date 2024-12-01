@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.fdi.azalea.R;
+import es.ucm.fdi.azalea.business.model.ChatModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
@@ -94,7 +95,9 @@ public class AddStudentFragment extends Fragment {
             Toast.makeText(getContext(), "Error al obtener los datos del padre", Toast.LENGTH_SHORT).show();
             return;
         }
-        addstudentViewModel.funcion(student, parent);
+        ChatModel chat = new ChatModel();
+
+        addstudentViewModel.funcion(student, parent, chat);
         addstudentViewModel.gethState().observe(getViewLifecycleOwner(), event -> {
             if (event instanceof Event.Success) {
                 Toast.makeText(getContext(), "Estudiante creado correctamente", Toast.LENGTH_SHORT).show();

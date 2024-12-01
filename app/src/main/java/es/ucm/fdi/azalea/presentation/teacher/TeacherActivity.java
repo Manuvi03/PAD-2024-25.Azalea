@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.teacher;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.presentation.classroom.ClassroomFragment;
@@ -55,6 +57,13 @@ public class TeacherActivity extends AppCompatActivity {
                 replaceFragment(EditProfileFragment.class);
             }
             return true;
+        });
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                String token = task.getResult();
+                Log.i("IDTOKEN", token);
+            }
         });
     }
 

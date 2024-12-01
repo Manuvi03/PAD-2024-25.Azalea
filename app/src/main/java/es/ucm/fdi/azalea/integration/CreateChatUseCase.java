@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.integration;
+/*package es.ucm.fdi.azalea.integration;
 
 import es.ucm.fdi.azalea.business.BusinessFactory;
 import es.ucm.fdi.azalea.business.Repositories.implementations.ChatRepositoryImp;
@@ -15,4 +15,4 @@ public class CreateChatUseCase {
     public void execute(ChatModel chatModel) {//El model solo tiene el id del chat.
         BusinessFactory.getInstance().getChatRepository().create(chatModel);
     }
-}
+}*/

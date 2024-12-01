@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import es.ucm.fdi.azalea.business.model.ChatModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
@@ -27,8 +28,8 @@ public class AddStudentViewModel extends ViewModel {
 
     public LiveData<Event<Boolean>> gethState(){return hState;}
 
-    public void funcion(StudentModel student, UserModel parent){
-        createStudentAndParentUseCaseUseCase.execute(student,parent, new CallBack<Boolean>() {
+    public void funcion(StudentModel student, UserModel parent, ChatModel chat){
+        createStudentAndParentUseCaseUseCase.execute(student,parent, chat, new CallBack<Boolean>() {
 
             @Override
             public void onSuccess(Event.Success<Boolean> success) {

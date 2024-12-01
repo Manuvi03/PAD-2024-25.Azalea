@@ -22,15 +22,16 @@ public class ChatRepositoryImp implements ChatRepository {
     private final DatabaseReference chatsReference = database.getReference("chats");
 
     @Override
-    public void create(ChatModel model) {
+    public void create(ChatModel model, CallBack<ChatModel> cb) {
         Log.i(TAG, "Create del chat");
-        chatsReference.child(model.getId()).setValue(model).addOnCompleteListener((OnCompleteListener) task -> {
-                    if(task.isSuccessful())
-                        Log.d(TAG, "Chat created with id: " + model.getId());
-                    else
-                        Log.e(TAG, "Fallo al crar el chat");
-                });
-
+        //Si llega aqui significa que el padre no estaba en la base de datos y por tanto el chat es nuevo.
+        try{
+            chatsReference.child(model.getId()).setValue(model);
+            Log.d(TAG, "Chat created with key: " + model.getId());
+            cb.onSuccess(new Event.Success<>(model));
+        }catch(Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
     }
 
     @Override
