@@ -1,35 +1,34 @@
 package es.ucm.fdi.azalea.integration;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import es.ucm.fdi.azalea.business.BusinessFactory;
-import es.ucm.fdi.azalea.business.Repositories.implementations.EventRepositoryImp;
 import es.ucm.fdi.azalea.business.model.EventModel;
 
 public class ModifyEventUseCase {
 
-    EventRepositoryImp eventRepositoryImp;
+    private final String TAG = "ModifyEventUseCase";
 
-    public ModifyEventUseCase(){
-        eventRepositoryImp = new EventRepositoryImp();
+    public ModifyEventUseCase(){}
+
+    public void execute(EventModel em, CallBack<EventModel> cb) {
+        modifyEvent(em, cb);
     }
 
-    public LiveData<EventModel> execute(EventModel em){
-        MutableLiveData<EventModel> resultLiveData = new MutableLiveData<>();
-
+    private void modifyEvent(EventModel em, CallBack<EventModel> cb){
+        Log.d(TAG, "modifyEvent: " + em.getId());
         BusinessFactory.getInstance().getEventRepository().modify(em, new CallBack<EventModel>() {
-
             @Override
             public void onSuccess(Event.Success<EventModel> success) {
-                resultLiveData.postValue(success.getData());
+                Log.d(TAG, "modifyEvent: " + success.getData().getId());
+                cb.onSuccess(success);
             }
 
             @Override
             public void onError(Event.Error<EventModel> error) {
-                resultLiveData.postValue(null);
+                Log.d(TAG, "modifyEvent: " + error.getErrorData());
+                cb.onError(error);
             }
         });
-        return resultLiveData;
     }
 }

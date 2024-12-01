@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,7 +29,7 @@ public class AuthRepositoryImp implements AuthRepository {
                 data.setEmail(mail);
                 data.setId(task.getResult().getUser().getUid());
 
-                cb.onSuccess(new Event.Success<UserModel>(
+                cb.onSuccess(new Event.Success<>(
                         data));
             }else{
                 Log.d(TAG,"error al iniciar sesion " +
@@ -71,7 +70,7 @@ public class AuthRepositoryImp implements AuthRepository {
         try{
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            user.verifyBeforeUpdateEmail(mail)
+            user.updateEmail(mail)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -123,6 +122,20 @@ public class AuthRepositoryImp implements AuthRepository {
                             }
                         }
                     });
+        }catch (Exception e){
+            cb.onError(new Event.Error<>(e));
+        }
+    }
+
+    public void getCurrUser(CallBack<FirebaseUser> cb){
+        try {
+            FirebaseUser user_auth = FirebaseAuth.getInstance().getCurrentUser();
+            if(user_auth == null){
+                cb.onError(new Event.Error<>());
+            }else{
+                cb.onSuccess(new Event.Success<>(user_auth));
+            }
+
         }catch (Exception e){
             cb.onError(new Event.Error<>(e));
         }

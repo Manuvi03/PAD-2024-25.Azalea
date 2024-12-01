@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,7 +37,7 @@ public class LoginFragment extends Fragment {
     private final static String TAG = "LoginFragment";
     private LoginFragmentBinding loginBinding;
     private LoginViewModel loginViewModel;
-
+    private View viewRoot;
     private EditText mailEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -49,7 +50,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState){
 
         loginBinding = LoginFragmentBinding.inflate(inflater,container,false);
-        View view = loginBinding.getRoot();
+        viewRoot = loginBinding.getRoot();
 
         //inicializamos el ViewModel con la activity (MainActivity) para compartir el mismo ViewModel entre fragments
 
@@ -67,12 +68,13 @@ public class LoginFragment extends Fragment {
         initListeners();
         start_animations();
 
-        return view;
+        return viewRoot;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        loginBinding = null;
     }
 
 
@@ -99,9 +101,9 @@ public class LoginFragment extends Fragment {
         createTeacherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
+                ((FragmentActivity)viewRoot.getContext()).getSupportFragmentManager().beginTransaction().setReorderingAllowed(true
                 ).replace(R.id.login_fragment_container,
-                        new CreateTeacherFragment(),null).addToBackStack(null).commit();
+                        CreateTeacherFragment.class,null).addToBackStack(TAG).commit();
             }
 
         });

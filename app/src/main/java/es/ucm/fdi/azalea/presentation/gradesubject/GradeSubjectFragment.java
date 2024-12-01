@@ -22,8 +22,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.squareup.picasso.Picasso;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +30,6 @@ import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.MarkModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.integration.Event;
-import es.ucm.fdi.azalea.presentation.classroom.ClassroomStudentSharedViewModel;
-import es.ucm.fdi.azalea.presentation.student.StudentGradeSubjectSharedViewModel;
-import es.ucm.fdi.azalea.presentation.student.StudentViewModel;
 
 public class GradeSubjectFragment extends Fragment {
     // constantes
@@ -59,7 +54,7 @@ public class GradeSubjectFragment extends Fragment {
     // info de la vista todo
     private String studentId;
     private String studentImage;
-    private String classId = "2";//todo
+    private String classId = "-OCiwTrNUUv5c5G5-3zd";//todo
     private StudentModel studentInfo;
     private ClassRoomModel classInfo;
 

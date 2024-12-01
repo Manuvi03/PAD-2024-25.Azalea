@@ -14,6 +14,7 @@
     <string name="addevent_description">Description</string>
     <string name="addevent_string">Create Event</string>
     <string name="addevent_timePickerTitle">Select a time</string>
+    <string name="add_student_title">Add Student</string>
     <string name="classroom_loading_string">Loading…</string>
     <string name="classroom_no_students_string">No students</string>
     <string name="classroom_search_error">Failed to search classroom students</string>
@@ -44,8 +45,50 @@
 
 
     <!--EditProfile-->
+    <string name="edit_profile_buttonText">Edit profile</string>
+    <string name="edit_profile_searching_user">Searching user…</string>
+    <string name="edit_profile_search_error">Failed to search user info</string>
+    <string name="edit_profile_modifying">Modifying…</string>
+    <string name="edit_profile_correctly_modified">User correctly modified</string>
+    <string name="edit_profile_error_modifying">Failed modifying user %1$s %2$s.</string>
+
     <!--EditStudent-->
+        <!--editText-->
+    <string name="editstudent_direccionEditText">Address</string>
+    <string name="editstudent_alergiasEditText">Allergies</string>
+    <string name="editstudent_dianacEditText">Birth date</string>
+    <string name="editstudent_alturaEditText">Height</string>
+    <string name="editstudent_condmedEditText">Medical conditions</string>
+    <string name="editstudent_nombreEditText">Student name</string>
+    <string name="editstudent_contactorapidoEditText">Main phone</string>
+    <string name="editstudent_apellidosEditText">Student surname</string>
+    <string name="editstudent_pesoEditText">Weight</string>
+    <string name="editstudent_telefaux1EditText">Auxiliary phone</string>
+    <string name="editstudent_telefaux2EditText">Auxiliary phone</string>
+        <!--textView-->
+    <string name="editstudent_text">Enter the data you want to modify</string>
+    <string name="editstudent_direcciontextView">Enter your address</string>
+    <string name="editstudent_alergiastextView">Enter allergies</string>
+    <string name="editstudent_dianactextView">Enter birth date</string>
+    <string name="editstudent_alturatextView">Enter height</string>
+    <string name="editstudent_condmedtextView">Enter medical conditions</string>
+    <string name="editstudent_nombretextView">Enter student name</string>
+    <string name="editstudent_contactorapidotextView">Enter main phone number</string>
+    <string name="editstudent_apellidostextView">Enter student surname</string>
+    <string name="editstudent_pesotextView">Enter weight</string>
+    <string name="editstudent_telefaux1textView">Enter auxiliary phone 1</string>
+    <string name="editstudent_telefaux2textView">"Enter auxiliary phone 2</string>
+
+    <string name="editstudent_button">Update data</string>
+    <string name="editstudent_successUpdate">Correctly updated information</string>
+    <string name="editstudent_errorStudentData">Error retrieving student data</string>
+
     <!--GradeSubject-->
+
+    <string name="editstudent_errorDateFormat">Incorrect date format, should be DD/MM/YYYY</string>
+    <string name="editstudent_errorDoubleFormat">The text must be made up of numbers and/or points</string>
+    <string name="editstudent_errorPhoneFormat">Wrong phone number, must be 9 characters</string>
+    <string name="editstudent_errorUpdate">Error updating information, please try again</string>
     <string name="grade_subject_intro_text">Grade mark</string>
     <string name="grade_subject_grade_text">Mark</string>
     <string name="grade_subject_send_grade_text">Send mark</string>
@@ -86,6 +129,8 @@
     <string name="passwordRecovery_error">This Email does not exist in the database</string>
     <!--Reminder-->
     <!--ShowGrades-->
+    <string name="show_grades_no_marks">There is no marks</string>
+
     <!--Student-->
     <string name="student_send_message_button">Message</string>
     <string name="student_grade_mark_button">Grade</string>
@@ -122,5 +167,29 @@
     <string name="modifyevent_toastNoData">No data received</string>
     <string name="modifyevent_toastTitleEmpty">Title cannot be empty</string>
     <string name="modifyevent_toastDateEmpty">Date cannot be empty</string>
+    <string name="add_student_name_hint">*Name</string>
+    <string name="add_student_surnames_hint">*Surnames</string>
+    <string name="add_student_birthdate_hint">*Birthdate</string>
+    <string name="add_student_weight_hint">Weight</string>
+    <string name="add_student_height_hint">Height</string>
+    <string name="add_student_allergens_hint">Allergens</string>
+    <string name="add_student_medical_conditions_hint">Medical conditions</string>
+    <string name="add_student_save_button_text">Create student and parent or tutor</string>
+    <string name="add_parent_email_hint">*E-mail</string>
+    <string name="add_parent_address_hint">*Address</string>
+    <string name="add_primary_phone_hint">*Principal Telephone Number</string>
+    <string name="add_parent_name_hint">*Parent/Tutor Name</string>
+    <string name="add_secondary_parent_name_hint">Auxiliary Parent/Tutor Name</string>
+    <string name="add_parent_surnames_hint">*Parent/Tutor Surnames</string>
+    <string name="add_secondary_parent_surnames">Auxiliary Parent/Tutor Surnames</string>
+    <string name="add_secondary_phone_hint">Auxiliary Telephone Number</string>
+    <string name="add_tertiary_phone_hint">Auxiliary Telephone Number</string>
+    <string name="add_parent">Add Parent/Tutor</string>
+    <string name="add_student_toast_empty">Please fill out all required fields (those with *)</string>
+    <string name="add_student_toast_error">Cannot create student</string>
+    <string name="add_student_toast_class_error">The class of the current user could not be accessed</string>
+    <string name="add_student_toast_success">Student created successfully</string>
+    <string name="add_parent_gender_hint">*Gender</string>
+
 
 </resources>

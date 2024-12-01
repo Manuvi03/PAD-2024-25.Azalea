@@ -7,10 +7,10 @@ import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 
 public interface StudentRepository {
-    public String create(StudentModel item);
-    public void update(String id, StudentModel item, CallBack<StudentModel> cb);
-    public String delete(String id);
-    public List<StudentModel> readAll();
-    public void readById(String id, CallBack<StudentModel> cb);
-    public void readByClassRoomId(String classroomId, CallBack<List<StudentModel>> cb);
+    void create(StudentModel item, CallBack<StudentModel> cb);
+    void update(String id, StudentModel item, CallBack<StudentModel> cb);
+    String delete(String id);
+    List<StudentModel> readAll();
+    void readById(String id, CallBack<StudentModel> cb);
+    void readByClassRoomId(String classroomId, CallBack<List<StudentModel>> cb);
 }

@@ -153,134 +153,102 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="20sp"
                 android:text="@string/student_info_text"
                 android:textSize="30sp"
                 android:textStyle="bold" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10sp" />
 
             <TextView
                 android:id="@+id/student_fragment_birthday_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="10sp"
                 android:text="@string/student_birthday_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_weight_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_weight_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_height_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_height_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_allergens_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_allergens_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_medical_conditions_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_medical_conditions_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="40sp" />
 
             <TextView
                 android:id="@+id/student_fragment_contact_info_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="40sp"
                 android:text="@string/student_contact_info_text"
                 android:textSize="30sp"
                 android:textStyle="bold" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10sp" />
 
             <TextView
                 android:id="@+id/student_fragment_parent_name_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="10sp"
                 android:text="@string/student_parent_name_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_parent_phone_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_phone_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_parent_email_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_email_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
             <TextView
                 android:id="@+id/student_fragment_address_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity=""
+                android:layout_marginTop="5sp"
+                android:layout_marginBottom="10sp"
                 android:text="@string/student_address_text"
                 android:textSize="25sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5sp" />
 
         </LinearLayout>
     </ScrollView>

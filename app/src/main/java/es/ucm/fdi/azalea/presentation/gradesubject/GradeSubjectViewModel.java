@@ -27,7 +27,7 @@ public class GradeSubjectViewModel extends ViewModel {
     // atributo con la info de la clase que maneja el viewmodel
     private MutableLiveData<Event<ClassRoomModel>> classState = new MutableLiveData<>();
 
-    // atributo con la info de la nota que maneja el viewmodel
+    // atributo con la info del estudiante tras ponerle la nota que maneja el viewmodel
     private MutableLiveData<Event<StudentModel>> markState = new MutableLiveData<>();
 
     // devuelve un objeto inmodificable de la informacion actual del estudiante del viewmodel
@@ -50,9 +50,9 @@ public class GradeSubjectViewModel extends ViewModel {
 
     // devuelve un objeto inmodificable de la informacion actual de la clase del viewmodel
     public LiveData<Event<StudentModel>> getMarkState(){
-        Log.d(TAG, "Se obtiene la informacion actual del estudiante del GradeSubjectViewModel");
-        if (classState == null) {
-            classState = new MutableLiveData<>();
+        Log.d(TAG, "Se obtiene la informacion actual del estudiante tras ponerle la nota del GradeSubjectViewModel");
+        if (markState == null) {
+            markState = new MutableLiveData<>();
         }
         return markState;
     }

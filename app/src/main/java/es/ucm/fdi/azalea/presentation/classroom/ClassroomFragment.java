@@ -40,11 +40,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
     // view model
     private classroomViewModel classroomViewModel;
 
-    // de la vista
-    private RecyclerView classroomList;
-    private SearchView searchView;
-    private TextView resultText;
-    private AppCompatImageButton addStudentButton;
+    private TextView resultText, classnameText;
 
     // para la recyclerview
     private ClassroomListAdapter classroomAdapter;  // su adaptador
@@ -67,20 +63,33 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
         initRecyclerView();
 
         // se encuentra la searchview y se inicializa su listener
-        searchView = view.findViewById(R.id.teacher_classroom_searchview);
+        SearchView searchView = view.findViewById(R.id.teacher_classroom_searchview);
         searchView.setOnQueryTextListener(this);
 
-        // se encuentra el boton para anyadir un alumno y se inicializa su listener
-        addStudentButton = view.findViewById(R.id.teacher_classroom_add_student_button);
-        addStudentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "Se cambia de fragment a AddStudentFragment");
-                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .replace(R.id.teacher_fragment_container_view, AddStudentFragment.class, null)
-                        .commit();
+        // se encuentra el textview para mostrar el nombre de la clase
+        classnameText = view.findViewById(R.id.teacher_classroom_info_text);
+        classroomViewModel.getClassName();
+        classroomViewModel.getClassNameState().observe(getViewLifecycleOwner(), event -> {
+            if (event == null) {
+                Log.e(TAG, "classNameState es null");
+            } else if (event instanceof Event.Success) {
+                String className = ((Event.Success<String>) event).getData();
+                Log.d(TAG, "Nombre de la clase recibido: " + className);
+                classnameText.setText(className);
+            } else {
+                Log.d(TAG, "Evento recibido: " + event.getClass().getSimpleName());
             }
+        });
+
+        // se encuentra el boton para anyadir un alumno y se inicializa su listener
+        AppCompatImageButton addStudentButton = view.findViewById(R.id.teacher_classroom_add_student_button);
+        addStudentButton.setOnClickListener(view1 -> {
+            Log.d(TAG, "Se cambia de fragment a AddStudentFragment");
+            ((FragmentActivity) view1.getContext()).getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.teacher_fragment_container_view, AddStudentFragment.class, null)
+                    .addToBackStack(TAG)
+                    .commit();
         });
 
     }
@@ -103,7 +112,8 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
     // manejo de la recyclerview
     private void initRecyclerView(){
         // se encuentra y ajusta la recycler view
-        classroomList = view.findViewById(R.id.teacher_classroom_recyclerview);
+        // de la vista
+        RecyclerView classroomList = view.findViewById(R.id.teacher_classroom_recyclerview);
         classroomList.setHasFixedSize(true);
 
         // como es un fragment, se obtiene su activity (context) asociada
@@ -116,8 +126,7 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
         // al inicar este fragment, directamente aparece la lista de estudiantes
         resultText = view.findViewById(R.id.teacher_classroom_loading_text);
 
-        // TODO esto de momento para hacer las pruebas
-        classroomViewModel.readStudentsByClassroom("2");
+        classroomViewModel.readStudentsByClassroom();
 
         // se inicializa el observador
         initRecyclerViewObserver();

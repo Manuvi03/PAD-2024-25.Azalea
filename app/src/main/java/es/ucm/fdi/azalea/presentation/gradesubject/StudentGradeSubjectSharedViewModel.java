@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.presentation.student;
+package es.ucm.fdi.azalea.presentation.gradesubject;
 
 import android.util.Log;
 
