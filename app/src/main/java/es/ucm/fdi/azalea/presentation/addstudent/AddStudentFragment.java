@@ -113,10 +113,9 @@ public class AddStudentFragment extends Fragment {
             Toast.makeText(getContext(), "Error al obtener los datos del padre", Toast.LENGTH_SHORT).show();
             return;
         }
-        addstudentViewModel.funcion(student, parent, requireActivity());
-        ChatModel chat = new ChatModel();
 
-       //addstudentViewModel.funcion(student, parent, chat);
+        ChatModel chat = new ChatModel();
+        addstudentViewModel.funcion(student, parent, chat, requireActivity());
         addstudentViewModel.gethState().observe(getViewLifecycleOwner(), event -> {
             if (event instanceof Event.Success) {
                 Toast.makeText(getContext(), "Estudiante creado correctamente", Toast.LENGTH_SHORT).show();

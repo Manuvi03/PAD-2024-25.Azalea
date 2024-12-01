@@ -32,13 +32,10 @@ public class AddStudentViewModel extends ViewModel {
 
     public LiveData<Event<Boolean>> gethState(){return hState;}
 
-    /*public void funcion(StudentModel student, UserModel parent, Context context){
+    public void funcion(StudentModel student, UserModel parent, ChatModel chat, Context context){
         // se generan las fotos de perfil tanto de padre como de estudiante
         generateProfileImages(student, parent, context);
-
-        // se crea el estudiante y el padre
-        createStudentAndParentUseCaseUseCase.execute(student,parent, new CallBack<Boolean>() {*/
-    public void funcion(StudentModel student, UserModel parent, ChatModel chat){
+        // se crea el estudiante y el padre y el chat con el profesor
         createStudentAndParentUseCaseUseCase.execute(student,parent, chat, new CallBack<Boolean>() {
 
             @Override

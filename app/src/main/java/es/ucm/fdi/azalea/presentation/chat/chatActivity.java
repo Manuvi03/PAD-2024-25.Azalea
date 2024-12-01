@@ -85,6 +85,7 @@ public class chatActivity extends AppCompatActivity {
             if(message.isEmpty())
                 return;
 
+            chatViewModel.sendMessage(chatRoomId, message);
             messageInput.setText("");
             initRecycler();
             //Mandamos el mensaje si no está vacío y en caso de mandarlo actualizamos el chat.
