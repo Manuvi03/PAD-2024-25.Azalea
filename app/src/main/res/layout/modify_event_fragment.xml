@@ -9,13 +9,10 @@
     <!-- Título del fragment -->
     <TextView
         android:id="@+id/modifyEvent_string"
+        android:theme="@style/standard_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/modifyevent_string"
-        android:background="@drawable/circle_shape"
-        android:textColor="@color/Tyrian_Purple"
-        android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/modifyEvent_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
