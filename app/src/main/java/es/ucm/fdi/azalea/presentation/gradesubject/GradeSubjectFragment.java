@@ -206,8 +206,8 @@ public class GradeSubjectFragment extends Fragment {
         List<String> list = new ArrayList<String>();
         if(crm.getSubjects() != null) list.addAll(crm.getSubjects());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity(),
-                android.R.layout.simple_spinner_item, crm.getSubjects());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.grade_subject_spinner_item, crm.getSubjects());
+        adapter.setDropDownViewResource(R.layout.grade_subject_spinner_item);
         subjectsSpinner.setAdapter(adapter);
     }
 

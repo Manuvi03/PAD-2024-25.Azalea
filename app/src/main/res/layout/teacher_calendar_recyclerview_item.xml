@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/Light_Azure">
 
         <!-- Título del evento -->
         <TextView
@@ -79,6 +80,7 @@
             android:layout_height="wrap_content"
             android:text="@string/parent_recyclerView_description"
             android:textSize="14sp"
+            android:textColor="@color/Licorice"
             tools:text="Únete a nosotros para una charla sobre los últimos avances en tecnología educativa y aprendizaje remoto." />
 
         <!-- Botón de acción -->

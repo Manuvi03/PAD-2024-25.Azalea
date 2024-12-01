@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -119,7 +120,7 @@ public class CreateTeacherFragment extends Fragment {
                         userdata.setGender(genderEditText.getText().toString());
                         userdata.setEmail(mailEditText.getText().toString());
                         userdata.setParent(false);
-                        createTeacherViewModel.setUserdata(userdata);
+                        createTeacherViewModel.setUserdata(userdata, requireActivity());
                         createTeacherViewModel.authenticateTeacher(userdata.getEmail(),userdata.getPassword());
                     }
                     else{

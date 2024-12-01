@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/teacher_home_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/Seashell">
+    android:layout_height="match_parent">
 
     <!-- CalendarView -->
     <com.applandeo.materialcalendarview.CalendarView
@@ -31,6 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/parent_recyclerView_result"
         android:gravity="center"
+        android:textColor="@color/Licorice"
         app:layout_constraintBottom_toTopOf="@+id/teacherhomefragment_recyclerView"
         app:layout_constraintEnd_toStartOf="@+id/teacherhomefragment_buttonCreateEvent"
         app:layout_constraintStart_toStartOf="parent"

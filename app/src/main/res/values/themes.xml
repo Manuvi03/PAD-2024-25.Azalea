@@ -2,31 +2,50 @@
     <!-- Base application theme -->
     <style name="Base.Theme.Azalea" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here -->
-        <!-- Primary colors -->
+        <!-- Colores primarios -->
         <item name="colorPrimary">@color/French_Rose</item>
         <item name="colorPrimaryVariant">@color/Dogwood_Rose</item>
         <item name="colorOnPrimary">@color/Seashell</item>
+        <item name="colorPrimaryContainer">@color/Tickle_me_Pink</item>
+        <item name="colorOnPrimaryContainer">@color/Tyrian_Purple</item>
 
-        <!-- Secondary colors -->
-        <item name="colorSecondary">@color/Cyclomen</item>
-        <item name="colorSecondaryVariant">@color/Tickle_me_Pink</item>
-        <item name="colorOnSecondary">@color/Seashell</item>
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/Dark_Green</item>
+        <item name="colorSecondaryVariant">@color/Brunswick_Green</item>
+        <item name="colorOnSecondary">@color/Mint_Green</item>
+        <item name="colorSecondaryContainer">@color/Orchid_Pink</item>
+        <item name="colorOnSecondaryContainer">@color/Tyrian_Purple</item>
 
-        <!-- Background and surface colors -->
-        <item name="colorOnBackground">@color/Dark_Purple</item>
-        <item name="colorSurface">@color/Misty_Rose</item>
-        <item name="colorOnSurface">@color/Dark_Purple</item>
+        <!-- Colores Terciarios -->
+        <item name="colorTertiary">@color/Moonstone</item>
+        <item name="colorOnTertiary">@color/Midnight_Green</item>
+        <item name="colorTertiaryContainer">@color/Light_Non_Photo_Blue</item>
+        <item name="colorOnTertiaryContainer">@color/Light_Midnight_Green</item>
 
-        <!-- Error colors -->
-        <item name="colorError">@color/Amaranth_Purple</item>
+        <!-- Colores de error -->
+        <item name="colorError">@color/Imperial_Red</item>
         <item name="colorOnError">@color/Seashell</item>
+        <item name="colorErrorContainer">@color/Salmon_Pink</item>
+        <item name="colorOnErrorContainer">@color/Black_Bean</item>
 
-        <!-- Outlined buttons -->
-        <item name="colorOutline">@color/Tyrian_Purple</item>
+        <!-- Colores de fondo y superficie -->
+        <item name="colorSurface">@color/Seashell</item>
+        <item name="colorOnSurface">@color/Licorice</item>
+        <item name="colorOnSurfaceVariant">@color/Dark_Purple</item>
 
-        <!-- Elevated surfaces (e.g., cards) -->
-        <item name="colorSurfaceVariant">@color/Orchid_Pink</item>
-        <item name="colorOnSurfaceVariant">@color/Tyrian_Purple</item>
+        <item name="colorSurfaceContainer">@color/Misty_Rose</item>
+
+        <item name="android:colorBackground">@color/Seashell</item>
+        <item name="colorOnBackground">@color/Dark_Purple</item>
+
+        <!-- Colores de contorno -->
+        <item name="colorOutline">@color/Midnight_Green</item>
+        <item name="colorOutlineVariant">@color/Very_Dark_Green</item>
+
+        <!--- Colores inversos -->
+        <item name="colorSurfaceInverse">@color/Licorice</item>
+        <item name="colorOnSurfaceInverse">@color/Seashell</item>
+
     </style>
 
     <!-- Theme wrapper for app -->
