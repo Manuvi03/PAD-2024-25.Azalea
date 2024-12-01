@@ -285,8 +285,10 @@ public class StudentFragment extends Fragment {
 
         // inicia el chat
         sendMessageButton.setOnClickListener(listener -> {
-            //todo?
             Intent intent = new Intent(getActivity(), chatActivity.class);
+            intent.putExtra("classId", studentInfo.getClassroomId());
+            intent.putExtra("parentId", parentInfo.getId());
+            intent.putExtra("parentName", parentInfo.getName());
             startActivity(intent);
         });
 

@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="User"
+            android:text="parent"
             android:textAlignment="center"
             android:textColor="@color/Dark_Purple"
             android:textSize="22sp"
@@ -44,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
+        android:padding="8dp"
         android:id="@+id/message_bar">
         <EditText
             android:layout_width="match_parent"
@@ -51,8 +52,8 @@
             android:hint="Write message"
             android:layout_centerInParent="true"
             android:layout_margin="10dp"
-            android:elevation="4dp"
             android:padding="10dp"
+            android:background="@color/Seashell"
             android:layout_toLeftOf="@id/send_message_button"
             android:id="@+id/message_input"/>
         <ImageButton
