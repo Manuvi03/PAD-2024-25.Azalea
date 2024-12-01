@@ -150,6 +150,7 @@
     <string name="student_address_text">Address: %1$s</string>
     <string name="student_name_text">Student name</string>
     <string name="student_contact">Quick contact: %1$s</string>
+    <string name="student_no_data">no data</string>
 
     <string name="searching_student">Searching student…</string>
     <string name="student_search_error">Failed to search student info</string>

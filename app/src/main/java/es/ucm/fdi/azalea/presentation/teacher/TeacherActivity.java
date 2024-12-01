@@ -3,10 +3,12 @@ package es.ucm.fdi.azalea.presentation.teacher;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,8 +38,19 @@ public class TeacherActivity extends AppCompatActivity {
         // se encuentra la barra de navegacion
         bottomNavigationView = findViewById(R.id.teacher_bottom_navigation_view);
 
+
+        // restaura el fragmento que estaba activo antes de cambiar de configuracion
+        if (savedInstanceState != null) {
+            Fragment restoredFragment = getSupportFragmentManager().getFragment(savedInstanceState, "currentFragment");
+            if (restoredFragment != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.teacher_fragment_container_view, restoredFragment)
+                        .commit();
+            }
+        }
         // primero se muestra el fragmento predeterminado, el home
-        replaceFragment(TeacherHomeFragment.class);
+        else replaceFragment(TeacherHomeFragment.class);
 
 
         // se implemente la barra de navegacion para cambiar de fragmento
@@ -58,11 +71,27 @@ public class TeacherActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // se guarda el fragmento actual
+        if (!getSupportFragmentManager().getFragments().isEmpty()) {
+            Fragment currentFragment = getSupportFragmentManager().getFragments().get(0);
+            getSupportFragmentManager().putFragment(outState, "currentFragment", currentFragment);
+        }
+    }
+
     // reemplaza el fragmento actual por el seleccionado en la barra de navegacion
     public void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
+        Fragment fragment = null;
+        try {
+            fragment = c.newInstance(); // Instanciar el fragmento
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.teacher_fragment_container_view, c, null)
+                .replace(R.id.teacher_fragment_container_view, fragment, null)
                 .commit();
     }
 }

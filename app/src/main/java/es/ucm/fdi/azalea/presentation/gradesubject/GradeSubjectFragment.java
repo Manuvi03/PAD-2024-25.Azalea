@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.gradesubject;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,6 +96,19 @@ public class GradeSubjectFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse solo en vertical
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     // se obtienen los componentes de la vista
     private void bindComponents(){

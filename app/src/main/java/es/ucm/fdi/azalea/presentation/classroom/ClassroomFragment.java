@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.classroom;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -107,6 +108,14 @@ public class ClassroomFragment extends Fragment implements SearchView.OnQueryTex
     public void onDestroyView() {
         Log.d(TAG, "Se destruye el ClassroomFragment");
         super.onDestroyView();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse en ambas orientaciones
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     // manejo de la recyclerview

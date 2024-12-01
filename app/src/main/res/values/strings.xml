@@ -43,6 +43,7 @@
     <string name="classroom_searchview_queryhint">Buscar estudiante</string>
     <string name="student_name" translatable="false">%1$s %2$s</string>
     <string name="student_contact">Contacto rápido: %1$s</string>
+    <string name="student_no_data">sin datos</string>
 
     <!--CreateTeacher-->
     <string name="createteacher_titleView">¡Bienvenid@ Profe!</string>

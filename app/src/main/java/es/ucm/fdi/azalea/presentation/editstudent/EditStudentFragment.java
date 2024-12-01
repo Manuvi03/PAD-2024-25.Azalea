@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.editstudent;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,21 @@ public class EditStudentFragment extends Fragment {
         return view;
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse solo en vertical
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
     private void getStudentData(){
         String id = sharedViewModel.getIdStudent().getValue();
         viewModel.getStudentDataEvent().observe(requireActivity(),event->{
