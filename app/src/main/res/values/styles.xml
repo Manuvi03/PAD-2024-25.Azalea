@@ -1,12 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--Create Teacher Styles-->
-    <style name="createteacher_TextViews">
-        <item name="android:textColor">@color/Cyclomen</item>
+    <!-- General Styles -->
+    <style name="standard_button" >
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="standard_editText" parent="Base.Theme.Azalea">
+        <item name="android:backgroundTint">@color/Dark_Purple</item>
+        <item name="android:ems">10</item>
+        <item name="android:textColorHint">@color/Dark_Purple</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColorPrimary">@color/Dark_Purple</item>
+    </style>
+
+    <style name="standard_title_textView">
+        <item name="android:background">@drawable/circle_shape</item>
+        <item name="android:textColor">@color/Tyrian_Purple</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="standard_textView">
+        <item name="android:textColor">@color/Dogwood_Rose</item>
+        <item name="android:textColorHint">@color/Dogwood_Rose</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">25sp</item>
-    </style>>
+    </style>
+
+    <!-- Classroom Styles -->
+    <style name="classroom_searchview" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorPrimary">@color/Licorice</item>
+        <item name="android:textColorHint">@color/Dark_Purple</item>
+    </style>
+
+    <!--Create Teacher Styles-->
+    <style name="create_teacher_TextViews" parent="standard_textView">
+    </style>
+
+    <!-- Student Styles -->
+    <style name="student_color_textView">
+        <item name="android:textColor">@color/Licorice</item>
+    </style>
+
+    <style name="student_title_TextView" parent="student_color_textView">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="student_normal_TextView" parent="student_color_textView">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="student_small_TextView" parent="student_color_textView">
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 
 
 </resources>

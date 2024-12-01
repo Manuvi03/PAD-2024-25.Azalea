@@ -8,6 +8,7 @@ public class UserModel {
     private String surname;
     private String name;
     private String gender;
+    private String profileImage;
     private String studentId;
 
     public String getStudentId() {
@@ -80,5 +81,10 @@ public class UserModel {
     }
 
     public void setClassId(String classId){this.classId = classId;}
+
     public String getClassId(){return this.classId;}
+
+    public String getProfileImage() { return profileImage; }
+
+    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
 }

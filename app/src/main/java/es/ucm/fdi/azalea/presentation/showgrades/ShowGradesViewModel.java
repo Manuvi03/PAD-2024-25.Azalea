@@ -10,10 +10,12 @@ import java.util.List;
 
 import es.ucm.fdi.azalea.business.model.MarkModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.ReadMarksByStudentIdUseCase;
 import es.ucm.fdi.azalea.integration.ReadStudentUseCase;
+import es.ucm.fdi.azalea.integration.getCurrUserUseCase;
 
 public class ShowGradesViewModel extends ViewModel {
     // constantes

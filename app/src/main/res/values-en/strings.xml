@@ -144,11 +144,13 @@
     <string name="student_medical_conditions_text">Medical conditions: %1$s</string>
     <string name="student_contact_info_text">Contact info</string>
     <string name="student_parent_name_text">Parent(s) name(s): %1$s</string>
-    <string name="student_phone_text">Phone(s): %1$s</string>
+    <string name="student_phone_text">Auxiliary phone(s): %1$s</string>
+    <string name="student_primary_phone_text">Main phone: %1$s</string>
     <string name="student_email_text">E-mail: %1$s</string>
     <string name="student_address_text">Address: %1$s</string>
     <string name="student_name_text">Student name</string>
     <string name="student_contact">Quick contact: %1$s</string>
+    <string name="student_no_data">no data</string>
 
     <string name="searching_student">Searching student…</string>
     <string name="student_search_error">Failed to search student info</string>

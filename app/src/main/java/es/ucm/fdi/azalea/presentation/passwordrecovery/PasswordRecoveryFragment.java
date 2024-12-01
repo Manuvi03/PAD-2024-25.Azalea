@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.passwordrecovery;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -40,6 +41,20 @@ public class PasswordRecoveryFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse en ambas orientaciones
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
     private void initListeners(){
         recoveryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +72,7 @@ public class PasswordRecoveryFragment extends Fragment {
             }
         });
 
-        viewModel.getRecoveryEvent().observe(requireActivity(), event->{
+        viewModel.getRecoveryEvent().observe(getViewLifecycleOwner(), event->{
             if(event instanceof Event.Success){
                 Toast.makeText(requireActivity(),getString(R.string.passwordRecovery_success),Toast.LENGTH_LONG).show();
             }else if(event instanceof Event.Error){

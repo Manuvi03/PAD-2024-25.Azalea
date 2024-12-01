@@ -12,33 +12,82 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Azalea"
         tools:targetApi="31">
-        <activity
-            android:name=".presentation.teacher.TeacherActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.chat.chatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.reminder.reminderActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.editprofile.EditProfileFragment"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.passwordrecovery.PasswordRecoveryFragment"
-            android:exported="false"/>
-        <activity
-            android:name=".presentation.parent.ParentActivity"
-            android:exported="false"/>
+
+        <!-- screenOrientation - Restringe la orientacion del Fragment principal a vertical -->
+
+        <!-- Main Activity -->
         <activity
             android:name=".presentation.login.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.passwordrecovery.PasswordRecoveryFragment"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.teacher.TeacherActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.addevent.AddEventFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.modifyevent.ModifyEventFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.addstudent.AddStudentFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.student.StudentFragment"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".presentation.gradesubject.GradeSubjectFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.showgrades.ShowGradesFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.editstudent.EditStudentFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.editprofile.EditProfileFragment"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.chat.chatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.reminder.reminderActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.parent.ParentActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+
         <service android:name=".notificationService.FCMNotificationService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

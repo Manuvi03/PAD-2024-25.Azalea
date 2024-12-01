@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:pagesColor="@color/Misty_Rose"
+        app:pagesColor="@color/Orchid_Pink"
         app:selectionColor="@color/French_Rose"
         app:selectionLabelColor="@color/Cyclomen"
         app:todayLabelColor="@color/Amaranth_Purple" />
@@ -40,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/parent_recyclerView_result"
+        android:textColor="@color/Licorice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/parenthomefragment_calendarView" />

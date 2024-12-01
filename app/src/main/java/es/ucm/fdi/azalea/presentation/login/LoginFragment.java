@@ -110,7 +110,7 @@ public class LoginFragment extends Fragment {
 
         //tambien declaramos la mainActivity como observer de LoginViewModel
 
-        loginViewModel.getLoginEvent().observe(requireActivity(),event ->{
+        loginViewModel.getLoginEvent().observe(getViewLifecycleOwner(),event ->{
             if(event instanceof Event.Loading){
                 loadingView.setVisibility(View.VISIBLE);
             }else if(event instanceof Event.Success){

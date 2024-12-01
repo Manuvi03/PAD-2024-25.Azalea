@@ -213,7 +213,6 @@
 
         <Button
             android:id="@+id/createTeacher_button"
-            android:theme="@style/standard_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/createteacher_ButtonCreateTeacherText"

@@ -43,7 +43,7 @@ public class StudentViewModel extends ViewModel {
     }
 
     // implementa el caso de uso de leer un estudiante
-    public <T> void readStudent(String studentId){
+    public void readStudent(String studentId){
         // el valor de la informacion aun no se ha encontrado, por lo que se marca el evento como cargando
         studentState.postValue(new Event.Loading<>());
 
@@ -67,7 +67,7 @@ public class StudentViewModel extends ViewModel {
     }
 
     // implementa el caso de uso de leer un tutor a partir del estudiante
-    public <T> void readParentByStudent(String studentId){
+    public void readParentByStudent(String studentId){
         // el valor de la informacion aun no se ha encontrado, por lo que se marca el evento como cargando
         parentState.postValue(new Event.Loading<>());
 

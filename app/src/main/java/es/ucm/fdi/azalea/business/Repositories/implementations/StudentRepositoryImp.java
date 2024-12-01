@@ -27,6 +27,7 @@ public class StudentRepositoryImp implements StudentRepository {
 
     // constantes
     private final static String TAG = "StudentRepositoryImp";
+    ValueEventListener readbyClassroomIdListener;
 
     // atributos
     // puesto que la BD no es la predeterminada por Firebase (esta se encuentra en Belgica), hay que pasar la URL
@@ -34,6 +35,7 @@ public class StudentRepositoryImp implements StudentRepository {
 
     // referencia a un lugar de la BD
     private DatabaseReference studentReference = database.getReference("students");
+
 
     @Override
     public void create(StudentModel item, CallBack<StudentModel> cb){
@@ -59,6 +61,27 @@ public class StudentRepositoryImp implements StudentRepository {
     public void readById(String id, CallBack<StudentModel> cb) {
 
         // se ejecuta la query, obteniendo una imagen unica de Firebase
+        studentReference.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Log.d(TAG, "StudentRepository devolvio el estudiante con id "  + id);
+
+                    // se devuelve un exito y la informacion, que es el estudiante
+                    cb.onSuccess(new Event.Success<>(snapshot.getValue(StudentModel.class)));
+                }else{
+                    Log.d(TAG,"No existe el estudiante con id: " + id);
+                    cb.onError(new Event.Error<>());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG,"Error recuperando los datos del estudiante", error.toException());
+                cb.onError(new Event.Error<>(error.toException()));
+            }
+        });
+        /*
         studentReference.child(id).get().addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
@@ -71,7 +94,7 @@ public class StudentRepositoryImp implements StudentRepository {
                 // se devuelve un exito y la informacion, que es el estudiante
                 cb.onSuccess(new Event.Success<>(task.getResult().getValue(StudentModel.class)));
             }
-        });
+        });*/
     }
 
     @Override
@@ -109,7 +132,29 @@ public class StudentRepositoryImp implements StudentRepository {
         Query readByClassRoomIdQuery = studentReference.orderByChild("classroomId").equalTo(classroomId);
 
         // se ejecuta la query, obteniendo una imagen unica de Firebase
-        readByClassRoomIdQuery.get().addOnCompleteListener(task -> {
+       readByClassRoomIdQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot studentSnapshot : snapshot.getChildren()){
+                    // por cada alumno encontrado, si existe se anyade a la lista
+                    if(studentSnapshot.exists()) {
+                        list.add(studentSnapshot.getValue(StudentModel.class));
+                    }
+                }
+                Log.d(TAG, "StudentRepository devolvio una lista con " + list.size() + " resultados.");
+
+                // se devuelve un exito y la informacion
+                cb.onSuccess(new Event.Success<>(list));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG,"Error recuperando los datos",error.toException());
+                cb.onError(new Event.Error<>(error.toException()));
+            }
+        });
+
+        /*readByClassRoomIdQuery.get().addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
                 Log.d(TAG,"Error recuperando los datos",task.getException());
@@ -127,6 +172,6 @@ public class StudentRepositoryImp implements StudentRepository {
                 // se devuelve un exito y la informacion
                 cb.onSuccess(new Event.Success<>(list));
             }
-        });
+        });*/
     }
 }

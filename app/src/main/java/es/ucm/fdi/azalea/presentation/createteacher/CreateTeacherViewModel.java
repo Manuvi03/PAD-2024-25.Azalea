@@ -1,14 +1,18 @@
 package es.ucm.fdi.azalea.presentation.createteacher;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.Random;
 
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.createTeacherUseCase;
-import es.ucm.fdi.azalea.integration.passWordRecoveryUseCase;
+import es.ucm.fdi.azalea.presentation.profilepicture.RandomColor;
 
 public class CreateTeacherViewModel extends ViewModel {
     private createTeacherUseCase usecase;
@@ -22,11 +26,16 @@ public class CreateTeacherViewModel extends ViewModel {
         return userdata;
     }
 
-    public void setUserdata(UserModel user){
+    public void setUserdata(UserModel user, Context context){
+        // se genera la imagen de perfil del usuario
+        Random r = new Random();
+        String color = RandomColor.generateAppRandomColor(context, r.nextInt());
+        String path = "https://ui-avatars.com/api/?name=" + user.getName() + "&background=" + color + "&length=1&rounded=true";
+        user.setProfileImage(path);
+
+        // se guarda el valor
         userdata.setValue(user);
     }
-
-
 
     public CreateTeacherViewModel() {
         usecase = new createTeacherUseCase();

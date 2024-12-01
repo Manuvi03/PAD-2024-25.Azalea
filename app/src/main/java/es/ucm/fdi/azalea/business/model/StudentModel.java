@@ -21,7 +21,7 @@ public class StudentModel {
     private String classroomId;
     private String parentId;
     private List<String> marksId;
-    private Bitmap profileImage;
+    private String profileImage;
 
     public StudentModel(){} // constructor vacio necesario para introducir directamente el objeto en Firebase
 
@@ -141,8 +141,7 @@ public class StudentModel {
 
     public void setMarksId(List<String> marksId) { this.marksId = marksId; }
 
-    // TODO solo serian necesarios si se utiliza el loader
-    public Bitmap getProfileImage() { return profileImage; }
+    public String getProfileImage() { return profileImage; }
 
-    public void setProfileImage(Bitmap profileImage) { this.profileImage = profileImage; }
+    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
 }

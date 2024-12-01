@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.editprofile;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 
 public class EditProfileFragment extends Fragment {
 
@@ -36,6 +39,7 @@ public class EditProfileFragment extends Fragment {
     private EditProfileViewModel editProfileViewModel;
 
     // componentes de la vista
+    private ImageView profileImage;
     private TextView nameText;
     private EditText nameEditText;
     private EditText surnameEditText;
@@ -81,8 +85,17 @@ public class EditProfileFragment extends Fragment {
         super.onDestroyView();
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse en ambas orientaciones
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
     // se obtienen los componentes de la vista
     private void bindComponents(){
+        profileImage = view.findViewById(R.id.edit_profile_profile_image);
         nameText = view.findViewById(R.id.edit_profile_name_textView);
         nameEditText = view.findViewById(R.id.edit_profile_nameEditText);
         surnameEditText = view.findViewById(R.id.edit_profile_surnamesEditText);
@@ -140,6 +153,9 @@ public class EditProfileFragment extends Fragment {
         surnameEditText.setText(userInfo.getSurname());
         mailEditText.setText(userInfo.getEmail());
         genderEditText.setText(userInfo.getGender());
+
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(userInfo.getProfileImage(), profileImage);
     }
 
     // se inicializan los listeners de la vista
@@ -150,14 +166,14 @@ public class EditProfileFragment extends Fragment {
                 // se comprueba si el email es sintacticamente correcto
                 Event<String> verifiedEvent = editProfileViewModel.verify(mailEditText.getText().toString());
                 if(verifiedEvent instanceof Event.Success){
-                    userInfo.setName(nameEditText.getText().toString());
-                    userInfo.setSurname(surnameEditText.getText().toString());
-                    userInfo.setGender(genderEditText.getText().toString());
+                    userInfo.setName(nameEditText.getText().toString().trim());
+                    userInfo.setSurname(surnameEditText.getText().toString().trim());
+                    userInfo.setGender(genderEditText.getText().toString().trim());
 
                     // se comprueba si el email ha sido modificado
                     if(!Objects.equals(userInfo.getEmail(), mailEditText.getText().toString()))
                         emailModified = true;
-                    userInfo.setEmail(mailEditText.getText().toString());
+                    userInfo.setEmail(mailEditText.getText().toString().trim());
 
                     // se modifica el usuario
                     editProfileViewModel.editUser(userInfo, emailModified);
@@ -203,6 +219,9 @@ public class EditProfileFragment extends Fragment {
             else if(userEvent instanceof Event.Success){
                 Log.d(TAG, "Se modifico correctamente el usuario");
                 edit_button.setText(R.string.edit_profile_buttonText);
+
+                // se vuelve a leer el usuario para actualizar la info
+                editProfileViewModel.readUser();
 
                 // se muestra la operacion realizada mediante un mensaje toast
                 Toast.makeText(getActivity(),

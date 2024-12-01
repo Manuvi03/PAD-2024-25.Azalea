@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/grade_subject_profile_image"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         app:layout_constraintStart_toStartOf="@+id/grade_subject_left_guideline"
         app:layout_constraintTop_toTopOf="@+id/grade_subject_name_guideline"
         tools:ignore="ContentDescription" />
@@ -33,9 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/grade_subject_intro_text"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/Licorice"
-        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_left_guideline"
         app:layout_constraintTop_toTopOf="@+id/grade_subject_elements_guideline" />
 
     <Spinner
@@ -45,7 +45,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/grade_mark_spinner"
         app:layout_constraintEnd_toStartOf="@+id/grade_subject_left_middle_guideline"
-        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_left_guideline"
         app:layout_constraintTop_toBottomOf="@+id/grade_subject_intro_text" />
 
     <TextView
@@ -53,10 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/grade_subject_grade_text"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/Licorice"
-        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
-        app:layout_constraintTop_toTopOf="@+id/grade_subject_mark_guideline" />
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_right_middle_guideline"
+        app:layout_constraintTop_toTopOf="@+id/grade_subject_elements_guideline" />
 
     <EditText
         android:id="@+id/grade_subject_mark_edittext"
@@ -71,8 +71,8 @@
         android:textColor="@color/Licorice"
         android:backgroundTint="@color/Licorice"
         android:textColorHint="@color/Licorice"
-        app:layout_constraintEnd_toStartOf="@+id/grade_subject_left_middle_guideline"
-        app:layout_constraintStart_toStartOf="@+id/grade_subject_texts_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/grade_subject_right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/grade_subject_right_middle_guideline"
         app:layout_constraintTop_toBottomOf="@+id/grade_subject_grade_text" />
 
     <Button
@@ -100,13 +100,6 @@
         app:layout_constraintGuide_percent="0.04" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/grade_subject_texts_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.08" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/grade_subject_name_text_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,7 +111,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/grade_subject_right_middle_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.52" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/grade_subject_right_guideline"
@@ -132,22 +132,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/grade_subject_mark_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.276" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/grade_subject_button_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
-
-
+        app:layout_constraintGuide_percent="0.72" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

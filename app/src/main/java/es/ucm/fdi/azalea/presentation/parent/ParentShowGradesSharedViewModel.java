@@ -1,4 +1,4 @@
-package es.ucm.fdi.azalea.presentation.showgrades;
+package es.ucm.fdi.azalea.presentation.parent;
 
 import android.util.Log;
 
@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class StudentShowGradesSharedViewModel extends ViewModel {
+public class ParentShowGradesSharedViewModel extends ViewModel {
     // constantes
-    private final String TAG = "StudentShowGradesSharedViewModel";
+    private final String TAG = "ParentShowGradesSharedViewModel";
 
     // variables
     // datos compartidos entre StudentFragment y GradeSubjectFragment

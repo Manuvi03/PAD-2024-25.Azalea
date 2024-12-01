@@ -1,6 +1,9 @@
 package es.ucm.fdi.azalea.presentation.student;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -31,6 +36,7 @@ import es.ucm.fdi.azalea.presentation.editstudent.EditStudentFragment;
 import es.ucm.fdi.azalea.presentation.editstudent.editStudentSharedViewModel;
 import es.ucm.fdi.azalea.presentation.gradesubject.GradeSubjectFragment;
 import es.ucm.fdi.azalea.presentation.gradesubject.StudentGradeSubjectSharedViewModel;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment;
 import es.ucm.fdi.azalea.presentation.showgrades.StudentShowGradesSharedViewModel;
 
@@ -39,8 +45,6 @@ public class StudentFragment extends Fragment {
     // constantes
     private final String TAG = "StudentFragment";
     private final String STUDENT_ID_KEY = "studentId";
-    private final String STUDENT_IMAGE_KEY = "studentImage";
-
     // atributos
 
     // view
@@ -69,6 +73,7 @@ public class StudentFragment extends Fragment {
 
     private TextView parentNameText;
     private TextView parentPhoneText;
+    private TextView parentAuxiliaryPhonesText;
     private TextView parentEmailText;
     private TextView studentAddressText;
 
@@ -78,35 +83,34 @@ public class StudentFragment extends Fragment {
     private StudentModel studentInfo;
     private UserModel parentInfo;
 
-        @Override
-        public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-            // se genera el viewmodel compartido con classroom y se observan los valores que se reciben
-            classroomSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(ClassroomStudentSharedViewModel.class);
-            classroomSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
-                Log.d(TAG, "StudentId recibido");
-                studentId = data;
-            });
-            classroomSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-                Log.d(TAG, "StudentImage recibido");
-                studentImage = data;
-            });
+        // se genera el viewmodel compartido con classroom y se observan los valores que se reciben
+        classroomSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(ClassroomStudentSharedViewModel.class);
+        classroomSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
+            Log.d(TAG, "StudentId recibido");
+            studentId = data;
+        });
 
-            // se obtiene el viewmodel
-            studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
+        // se obtiene el id del estudiante si es que se ha guardado en el estado
+        if(savedInstanceState != null) studentId = savedInstanceState.getString(STUDENT_ID_KEY);
 
-            // se obtienen los componentes de la vista necesarios
-            bindComponents();
+        // se obtiene el viewmodel
+        studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
-            // se obtiene el scrollview y se inicializa su observador
-            initScrollView();
+        // se obtienen los componentes de la vista necesarios
+        bindComponents();
 
-        }
+        // se obtiene el scrollview y se inicializa su observador
+        initScrollView();
+
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         // se enlaza la vista a la clase
         view = inflater.inflate(R.layout.student_fragment, container, false);
         Log.d(TAG, "Se ha creado el StudentFragment");
@@ -120,8 +124,30 @@ public class StudentFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse solo en vertical
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // se guarda el id del estudiante
+        outState.putString(STUDENT_ID_KEY, studentId);
+    }
+
     // enlaza los componentes de la vista con esta clase
-    private void bindComponents(){
+    private void bindComponents() {
         studentProfileImage = view.findViewById(R.id.student_fragment_profile_image);
         studentNameText = view.findViewById(R.id.student_fragment_name_textView);
 
@@ -138,12 +164,13 @@ public class StudentFragment extends Fragment {
 
         parentNameText = view.findViewById(R.id.student_fragment_parent_name_textview);
         parentPhoneText = view.findViewById(R.id.student_fragment_parent_phone_textview);
+        parentAuxiliaryPhonesText = view.findViewById(R.id.student_fragment_auxiliary_phones_textview);
         parentEmailText = view.findViewById(R.id.student_fragment_parent_email_textview);
         studentAddressText = view.findViewById(R.id.student_fragment_address_textview);
     }
 
     // inicializa la scrollview
-    private void initScrollView(){
+    private void initScrollView() {
         // se obtiene la informacion del estudiante
         studentViewModel.readStudent(studentId);
 
@@ -159,18 +186,18 @@ public class StudentFragment extends Fragment {
     }
 
     // inicializa el observador de la informacion del estudiante
-    private void initStudentInfoObserver(){
+    private void initStudentInfoObserver() {
         // se declara el observador de la info del estudiante
         final Observer<Event<StudentModel>> studentInfoObserver = studentEvent -> {
 
             // mientras se busca, se muestra el texto de cargando
-            if(studentEvent instanceof Event.Loading){
+            if (studentEvent instanceof Event.Loading) {
                 Log.d(TAG, "Se esta buscando el estudiante");
                 studentNameText.setText(R.string.searching_student);
             }
 
             // cuando se encuentran los resultados, se muestran
-            else if(studentEvent instanceof Event.Success){
+            else if (studentEvent instanceof Event.Success) {
                 Log.d(TAG, "Se encontro la informacion del estudiante");
                 // se obtiene la info
                 studentInfo = ((Event.Success<StudentModel>) studentEvent).getData();
@@ -180,10 +207,10 @@ public class StudentFragment extends Fragment {
             }
 
             // en caso de error, se muestra al usuario
-            else if(studentEvent instanceof Event.Error){
+            else if (studentEvent instanceof Event.Error) {
                 Log.d(TAG, "Hubo algun error buscando la informacion del estudiante");
                 // se muestra el error mediante un mensaje toast
-                Toast.makeText(getActivity(),R.string.student_search_error,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.student_search_error, Toast.LENGTH_LONG).show();
             }
         };
 
@@ -192,13 +219,11 @@ public class StudentFragment extends Fragment {
     }
 
     // actualiza los datos del estudiante de la vista
-    private void updateScrollViewStudentInfo(StudentModel sm){
-        // foto de perfil del estudiante
-        Picasso.get()
-                .load(studentImage)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(studentProfileImage);
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    private void updateScrollViewStudentInfo(StudentModel sm) {
+
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentInfo.getProfileImage(), studentProfileImage);
 
         // nombre del estudiante
         studentNameText.setText(sm.getName() + " " + sm.getSurnames());
@@ -207,16 +232,25 @@ public class StudentFragment extends Fragment {
         studentBirthdayText.setText(getString(R.string.student_birthday_text, sm.getBirthday()));
 
         // peso
-        studentWeightText.setText(getString(R.string.student_weight_text, String.format("%.2f", sm.getWeight())));
+        if(sm.getWeight() <= 0) studentWeightText.setText(getString(R.string.student_weight_text,
+                ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentWeightText.setText(getString(R.string.student_weight_text, String.format("%.2f", sm.getWeight())));
 
         // altura
-        studentHeightText.setText(getString(R.string.student_height_text, String.format("%.2f", sm.getHeight())));
+        if(sm.getHeight() <= 0) studentHeightText.setText(getString(R.string.student_height_text,
+                ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentHeightText.setText(getString(R.string.student_height_text, String.format("%.2f", sm.getHeight())));
 
         // alergenos
-        studentAllergensText.setText(getString(R.string.student_allergens_text, sm.getAllergens()));
+        if(sm.getAllergens() == null || sm.getAllergens().isBlank()) studentAllergensText.
+                setText(getString(R.string.student_allergens_text, ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentAllergensText.setText(getString(R.string.student_allergens_text, sm.getAllergens()));
 
         // condiciones medicas
-        studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text, sm.getMedicalConditions()));
+        if(sm.getMedicalConditions() == null || sm.getMedicalConditions().isBlank())
+            studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text,
+                    ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text, sm.getMedicalConditions()));
 
         // direccion
         studentAddressText.setText(getString(R.string.student_address_text, sm.getAddress()));
@@ -225,35 +259,43 @@ public class StudentFragment extends Fragment {
         parentNameText.setText(getString(R.string.student_parent_name_text, parentsAtributesToString(sm.getParentsNames())));
 
         // telefono
-        parentPhoneText.setText(getString(R.string.student_phone_text, parentsAtributesToString(sm.getParentsPhones())));
+        parentPhoneText.setText(getString(R.string.student_primary_phone_text, sm.getQuickContact()));
+
+        // telefonos auxiliares
+        if(sm.getParentsPhones() == null || sm.getParentsPhones().isEmpty())
+            parentAuxiliaryPhonesText.setText(getString(R.string.student_phone_text,
+                    ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else parentAuxiliaryPhonesText.setText(getString(R.string.student_phone_text, parentsAtributesToString(sm.getParentsPhones())));
     }
 
     // convierte la lista de atributos de los padres a un string legible por la vista
-    private String parentsAtributesToString(List<String> names){
+    private String parentsAtributesToString(List<String> names) {
 
         // se crea un stringbuilder
         StringBuilder atributesBuilt = new StringBuilder();
 
         // por cada entrada de la lista, se agrega al stringbuilder en una nueva linea
-        for(String s : names) atributesBuilt.append('\n').append(s);
+        if (names != null) {
+            for (String s : names) atributesBuilt.append('\n').append(s);
+        }
 
         // se devuelve convertido a string
         return atributesBuilt.toString();
     }
 
     // inicializa el observador de la informacion del tutor
-    private void initParentInfoObserver(){
+    private void initParentInfoObserver() {
         // se declara el observador de la info del tutor
         final Observer<Event<UserModel>> parentStateObserver = parentEvent -> {
 
             // mientras se busca, se muestra el texto de cargando
-            if(parentEvent instanceof Event.Loading){
+            if (parentEvent instanceof Event.Loading) {
                 Log.d(TAG, "Se esta buscando la informacion del tutor del estudiante");
                 parentNameText.setText(R.string.searching_student_parent);
             }
 
             // cuando se encuentran los resultados, se muestran
-            else if(parentEvent instanceof Event.Success){
+            else if (parentEvent instanceof Event.Success) {
                 Log.d(TAG, "Se encontro la informacion del tutor del estudiante");
                 // se obtiene la info
                 parentInfo = ((Event.Success<UserModel>) parentEvent).getData();
@@ -263,10 +305,10 @@ public class StudentFragment extends Fragment {
             }
 
             // en caso de error, se muestra al usuario
-            else if(parentEvent instanceof Event.Error){
+            else if (parentEvent instanceof Event.Error) {
                 Log.d(TAG, "Hubo algun error buscando la informacion del tutor del estudiante");
                 // se muestra el error mediante un mensaje toast
-                Toast.makeText(getActivity(),R.string.students_parent_search_error,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.students_parent_search_error, Toast.LENGTH_LONG).show();
             }
         };
 
@@ -275,13 +317,13 @@ public class StudentFragment extends Fragment {
     }
 
     // actualiza los datos del estudiante de la vista
-    private void updateScrollViewParentInfo(UserModel um){
+    private void updateScrollViewParentInfo(UserModel um) {
         // correo electronico
         parentEmailText.setText(getString(R.string.student_email_text, um.getEmail()));
     }
 
     // se inicializan los listeners de los botones
-    private void initOnClickListeners(){
+    private void initOnClickListeners() {
 
         // inicia el chat
         sendMessageButton.setOnClickListener(listener -> {
@@ -298,7 +340,6 @@ public class StudentFragment extends Fragment {
 
             // se pasan los valores compartidos
             gradeMarkSharedViewModel.setStudentId(studentId);
-            gradeMarkSharedViewModel.setStudentProfileImage(studentImage);
 
             // se reemplaza el fragmento
             replaceFragment(GradeSubjectFragment.class);
@@ -310,7 +351,6 @@ public class StudentFragment extends Fragment {
 
             // se pasan los valores compartidos
             studentShowGradesSharedViewModel.setStudentId(studentId);
-            studentShowGradesSharedViewModel.setStudentProfileImage(studentImage);
 
             replaceFragment(ShowGradesFragment.class);
         });
@@ -323,7 +363,7 @@ public class StudentFragment extends Fragment {
     }
 
     // reemplaza este Fragment por el correspondiente segun el boton
-    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> fragment){
+    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> fragment) {
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.teacher_fragment_container_view, fragment, null)

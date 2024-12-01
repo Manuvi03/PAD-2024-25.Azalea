@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.createteacher;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -63,9 +65,22 @@ public class CreateTeacherFragment extends Fragment {
         return viewRoot;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse en ambas orientaciones
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     private void initListeners(){
-        createTeacherViewModel.getAuthenticateTeacherEvent().observe(requireActivity(),booleanEvent -> {
+        createTeacherViewModel.getAuthenticateTeacherEvent().observe(getViewLifecycleOwner(),booleanEvent -> {
             if(booleanEvent instanceof Event.Success){
                 //si confirmamos que no existe en la bd (no esta registrado) lo registramos
                 loadingView.setVisibility(View.GONE);
@@ -81,7 +96,7 @@ public class CreateTeacherFragment extends Fragment {
             }
         });
 
-        createTeacherViewModel.getCreateTeacherEvent().observe(requireActivity(),event ->{
+        createTeacherViewModel.getCreateTeacherEvent().observe(getViewLifecycleOwner(),event ->{
             if(event instanceof Event.Success){
                 loadingView.setVisibility(View.GONE);
                 Toast.makeText(requireActivity(),getString(R.string.ClassRoomName_successToast), Toast.LENGTH_LONG).show();
@@ -119,7 +134,7 @@ public class CreateTeacherFragment extends Fragment {
                         userdata.setGender(genderEditText.getText().toString());
                         userdata.setEmail(mailEditText.getText().toString());
                         userdata.setParent(false);
-                        createTeacherViewModel.setUserdata(userdata);
+                        createTeacherViewModel.setUserdata(userdata, requireActivity());
                         createTeacherViewModel.authenticateTeacher(userdata.getEmail(),userdata.getPassword());
                     }
                     else{
