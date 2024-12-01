@@ -35,11 +35,7 @@ public class StudentRepositoryImp implements StudentRepository {
 
     // referencia a un lugar de la BD
     private DatabaseReference studentReference = database.getReference("students");
-    public StudentRepositoryImp(){
-        Log.d(TAG,"se crea un nuevo repositorio Student");
-        studentReference.keepSynced(true);
 
-    }
 
     @Override
     public void create(StudentModel item, CallBack<StudentModel> cb){

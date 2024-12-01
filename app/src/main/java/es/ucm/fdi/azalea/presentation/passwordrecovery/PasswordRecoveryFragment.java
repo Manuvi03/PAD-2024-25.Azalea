@@ -72,7 +72,7 @@ public class PasswordRecoveryFragment extends Fragment {
             }
         });
 
-        viewModel.getRecoveryEvent().observe(requireActivity(), event->{
+        viewModel.getRecoveryEvent().observe(getViewLifecycleOwner(), event->{
             if(event instanceof Event.Success){
                 Toast.makeText(requireActivity(),getString(R.string.passwordRecovery_success),Toast.LENGTH_LONG).show();
             }else if(event instanceof Event.Error){

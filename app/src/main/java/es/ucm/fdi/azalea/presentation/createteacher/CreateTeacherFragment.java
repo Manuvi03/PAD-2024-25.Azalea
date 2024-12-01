@@ -80,7 +80,7 @@ public class CreateTeacherFragment extends Fragment {
     }
 
     private void initListeners(){
-        createTeacherViewModel.getAuthenticateTeacherEvent().observe(requireActivity(),booleanEvent -> {
+        createTeacherViewModel.getAuthenticateTeacherEvent().observe(getViewLifecycleOwner(),booleanEvent -> {
             if(booleanEvent instanceof Event.Success){
                 //si confirmamos que no existe en la bd (no esta registrado) lo registramos
                 loadingView.setVisibility(View.GONE);
@@ -96,7 +96,7 @@ public class CreateTeacherFragment extends Fragment {
             }
         });
 
-        createTeacherViewModel.getCreateTeacherEvent().observe(requireActivity(),event ->{
+        createTeacherViewModel.getCreateTeacherEvent().observe(getViewLifecycleOwner(),event ->{
             if(event instanceof Event.Success){
                 loadingView.setVisibility(View.GONE);
                 Toast.makeText(requireActivity(),getString(R.string.ClassRoomName_successToast), Toast.LENGTH_LONG).show();

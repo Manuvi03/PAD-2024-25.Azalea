@@ -67,7 +67,7 @@ public class EditStudentFragment extends Fragment {
 
     private void getStudentData(){
         String id = sharedViewModel.getIdStudent().getValue();
-        viewModel.getStudentDataEvent().observe(requireActivity(),event->{
+        viewModel.getStudentDataEvent().observe(getViewLifecycleOwner(),event->{
             if(event instanceof Event.Success){
                 loadinLayout.setVisibility(View.GONE);
                 sm = ((Event.Success<StudentModel>) event).getData();
@@ -131,6 +131,7 @@ public class EditStudentFragment extends Fragment {
                     List<String> listatelef = new ArrayList<>();
                     listatelef.add(telefaux1EditText.getText().toString());
                     listatelef.add(telefaux2EditText.getText().toString());
+                    sm.setParentsPhones(listatelef);
 
                     viewModel.updateStudent(sm);
                 }
@@ -138,7 +139,7 @@ public class EditStudentFragment extends Fragment {
 
             }
         });
-        viewModel.getUpdateDataEvent().observe(requireActivity(), event ->{
+        viewModel.getUpdateDataEvent().observe(getViewLifecycleOwner(), event ->{
             if(event instanceof Event.Success){
                 loadinLayout.setVisibility(View.GONE);
                 Toast.makeText(requireActivity(),getString(R.string.editstudent_successUpdate),Toast.LENGTH_LONG).show();
