@@ -13,20 +13,21 @@ public class RandomColor {
     // la semilla random solamente se crea una vez para que sea la misma
     private static Random r;
 
-    static private Random getRandom(){
-        if(r == null) r = new Random(11122004);
+    static private Random getRandom(int seed){
+        if(r == null) r = new Random(seed);
         return r;
     }
 
     private enum AppColors {
-        Cyclomen, French_Rose, Amaranth_Purple, Lapis_Lazuli
+        Cyclomen, French_Rose, Amaranth_Purple, Lapis_Lazuli, Light_Non_Photo_Blue, Salmon_Pink,
+        Caribbean_Current, Midnight_Green
     }
 
     // genera un color aleatorio de los seleccionados entre los de la app
-    static public String generateAppRandomColor(Context context){
+    static public String generateAppRandomColor(Context context, int seed){
 
         // se genera un numero aleatorio dentro del rango de colores de la app
-        int n = Math.abs(getRandom().nextInt() % AppColors.values().length);
+        int n = Math.abs(getRandom(seed).nextInt() % AppColors.values().length);
 
         // se devuelve el color en esa posicion
         return mapColorToHex(AppColors.values()[n], context);
@@ -45,8 +46,20 @@ public class RandomColor {
             case Amaranth_Purple:
                 colorHex = ContextCompat.getColor(context,R.color.Amaranth_Purple);
                 break;
+            case Light_Non_Photo_Blue:
+                colorHex = ContextCompat.getColor(context,R.color.Light_Non_Photo_Blue);
+                break;
             case Lapis_Lazuli:
                 colorHex = ContextCompat.getColor(context,R.color.Lapis_Lazuli);
+                break;
+            case Salmon_Pink:
+                colorHex = ContextCompat.getColor(context,R.color.Salmon_Pink);
+                break;
+            case Caribbean_Current:
+                colorHex = ContextCompat.getColor(context,R.color.Caribbean_Current);
+                break;
+            case Midnight_Green:
+                colorHex = ContextCompat.getColor(context,R.color.Midnight_Green);
                 break;
             default:
                 colorHex = ContextCompat.getColor(context,R.color.Cyclomen);

@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.showgrades;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +27,10 @@ import java.util.List;
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.MarkModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.parent.ParentShowGradesSharedViewModel;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 
 public class ShowGradesFragment extends Fragment {
 
@@ -48,9 +52,9 @@ public class ShowGradesFragment extends Fragment {
     private RecyclerView marksList;
 
     // info de la vista
+    private UserModel userInfo;
     private StudentModel studentInfo;
     private String studentId;
-    private String studentImage;
 
     // para la recyclerview
     private ShowGradesListAdapter showGradesAdapter;    // su adaptador
@@ -58,21 +62,25 @@ public class ShowGradesFragment extends Fragment {
 
     // para compartir la informacion necesaria en el entre el StudentFragment y el actual
     StudentShowGradesSharedViewModel showGradesSharedViewModel;
+    ParentShowGradesSharedViewModel parentShowGradesSharedViewModel;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // se genera el viewmodel compartido y se observan los valores que se necesitan pasar
+        // se generan los viewmodel compartidos y se observan los valores que se necesitan pasar
         showGradesSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(StudentShowGradesSharedViewModel.class);
         showGradesSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
             Log.d(TAG, "StudentId recibido");
             studentId = data;
         });
-        showGradesSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-            Log.d(TAG, "StudentImage recibido");
-            studentImage = data;
+
+        parentShowGradesSharedViewModel = new ViewModelProvider(requireActivity()).get(ParentShowGradesSharedViewModel.class);
+        parentShowGradesSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
+            Log.d(TAG, "StudentId recibido");
+            studentId = data;
         });
+
         // se obtiene el viewmodel
         showGradesViewModel = new ViewModelProvider(this).get(ShowGradesViewModel.class);
 
@@ -101,6 +109,20 @@ public class ShowGradesFragment extends Fragment {
     public void onDestroyView() {
         Log.d(TAG, "Se destruye el ShowGradesFragment");
         super.onDestroyView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse solo en vertical
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     // se enlazan los componentes de la vista
@@ -149,12 +171,8 @@ public class ShowGradesFragment extends Fragment {
     // actualiza la textview con el nombre del estudiante
     @SuppressLint("SetTextI18n")
     private void updateTextViewInfo(StudentModel sm){
-        // foto de perfil del estudiante
-        Picasso.get()
-                .load(studentImage)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(studentProfileImage);
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentInfo.getProfileImage(), studentProfileImage);
 
         // nombre del estudiante
         studentNameText.setText(sm.getName() + " " + sm.getSurnames());

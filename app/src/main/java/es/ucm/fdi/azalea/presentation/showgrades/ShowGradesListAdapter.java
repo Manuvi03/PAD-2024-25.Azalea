@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -25,11 +26,13 @@ public class ShowGradesListAdapter extends RecyclerView.Adapter<ShowGradesListAd
     // atributos
     private List<MarkModel> mMarksData;           // todas las notas del estudiante
     private final LayoutInflater mInflater;
+    private final Context context;
 
     public ShowGradesListAdapter(List<MarkModel> studentInfoList, Context context) {
         Log.d(TAG, "Se crea el ShowGradesListAdapter");
         this.mInflater = LayoutInflater.from(context);
         this.mMarksData = studentInfoList;
+        this.context = context;
     }
 
     public void setStudentsData(List<MarkModel> students) {
@@ -53,9 +56,9 @@ public class ShowGradesListAdapter extends RecyclerView.Adapter<ShowGradesListAd
         // la asignatura
         holder.subject.setText(markModel.getSubject());
 
-        // su calificacion todo poner colores mas bonitos acordes a la app
-        if ((markModel.getMark() < 5)) holder.mark.setTextColor(Color.RED);
-        else holder.mark.setTextColor(Color.GREEN);
+        // su calificacion
+        if ((markModel.getMark() < 5)) holder.mark.setTextColor(ContextCompat.getColor(context, R.color.Imperial_Red));
+        else holder.mark.setTextColor(ContextCompat.getColor(context, R.color.Persian_Green));
 
         holder.mark.setText(markModel.getMark() + "");
     }

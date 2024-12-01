@@ -2,6 +2,8 @@ package es.ucm.fdi.azalea.presentation.student;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -32,6 +36,7 @@ import es.ucm.fdi.azalea.presentation.editstudent.EditStudentFragment;
 import es.ucm.fdi.azalea.presentation.editstudent.editStudentSharedViewModel;
 import es.ucm.fdi.azalea.presentation.gradesubject.GradeSubjectFragment;
 import es.ucm.fdi.azalea.presentation.gradesubject.StudentGradeSubjectSharedViewModel;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment;
 import es.ucm.fdi.azalea.presentation.showgrades.StudentShowGradesSharedViewModel;
 
@@ -40,8 +45,6 @@ public class StudentFragment extends Fragment {
     // constantes
     private final String TAG = "StudentFragment";
     private final String STUDENT_ID_KEY = "studentId";
-    private final String STUDENT_IMAGE_KEY = "studentImage";
-
     // atributos
 
     // view
@@ -70,6 +73,7 @@ public class StudentFragment extends Fragment {
 
     private TextView parentNameText;
     private TextView parentPhoneText;
+    private TextView parentAuxiliaryPhonesText;
     private TextView parentEmailText;
     private TextView studentAddressText;
 
@@ -89,10 +93,9 @@ public class StudentFragment extends Fragment {
             Log.d(TAG, "StudentId recibido");
             studentId = data;
         });
-        classroomSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-            Log.d(TAG, "StudentImage recibido");
-            studentImage = data;
-        });
+
+        // se obtiene el id del estudiante si es que se ha guardado en el estado
+        if(savedInstanceState != null) studentId = savedInstanceState.getString(STUDENT_ID_KEY);
 
         // se obtiene el viewmodel
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
@@ -121,6 +124,28 @@ public class StudentFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse solo en vertical
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // se guarda el id del estudiante
+        outState.putString(STUDENT_ID_KEY, studentId);
+    }
+
     // enlaza los componentes de la vista con esta clase
     private void bindComponents() {
         studentProfileImage = view.findViewById(R.id.student_fragment_profile_image);
@@ -139,6 +164,7 @@ public class StudentFragment extends Fragment {
 
         parentNameText = view.findViewById(R.id.student_fragment_parent_name_textview);
         parentPhoneText = view.findViewById(R.id.student_fragment_parent_phone_textview);
+        parentAuxiliaryPhonesText = view.findViewById(R.id.student_fragment_auxiliary_phones_textview);
         parentEmailText = view.findViewById(R.id.student_fragment_parent_email_textview);
         studentAddressText = view.findViewById(R.id.student_fragment_address_textview);
     }
@@ -195,12 +221,9 @@ public class StudentFragment extends Fragment {
     // actualiza los datos del estudiante de la vista
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void updateScrollViewStudentInfo(StudentModel sm) {
-        // foto de perfil del estudiante
-        Picasso.get()
-                .load(studentImage)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(studentProfileImage);
+
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentInfo.getProfileImage(), studentProfileImage);
 
         // nombre del estudiante
         studentNameText.setText(sm.getName() + " " + sm.getSurnames());
@@ -209,16 +232,25 @@ public class StudentFragment extends Fragment {
         studentBirthdayText.setText(getString(R.string.student_birthday_text, sm.getBirthday()));
 
         // peso
-        studentWeightText.setText(getString(R.string.student_weight_text, String.format("%.2f", sm.getWeight())));
+        if(sm.getWeight() <= 0) studentWeightText.setText(getString(R.string.student_weight_text,
+                ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentWeightText.setText(getString(R.string.student_weight_text, String.format("%.2f", sm.getWeight())));
 
         // altura
-        studentHeightText.setText(getString(R.string.student_height_text, String.format("%.2f", sm.getHeight())));
+        if(sm.getHeight() <= 0) studentHeightText.setText(getString(R.string.student_height_text,
+                ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentHeightText.setText(getString(R.string.student_height_text, String.format("%.2f", sm.getHeight())));
 
         // alergenos
-        studentAllergensText.setText(getString(R.string.student_allergens_text, sm.getAllergens()));
+        if(sm.getAllergens() == null || sm.getAllergens().isBlank()) studentAllergensText.
+                setText(getString(R.string.student_allergens_text, ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentAllergensText.setText(getString(R.string.student_allergens_text, sm.getAllergens()));
 
         // condiciones medicas
-        studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text, sm.getMedicalConditions()));
+        if(sm.getMedicalConditions() == null || sm.getMedicalConditions().isBlank())
+            studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text,
+                    ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else studentMedicalConditionsText.setText(getString(R.string.student_medical_conditions_text, sm.getMedicalConditions()));
 
         // direccion
         studentAddressText.setText(getString(R.string.student_address_text, sm.getAddress()));
@@ -227,7 +259,13 @@ public class StudentFragment extends Fragment {
         parentNameText.setText(getString(R.string.student_parent_name_text, parentsAtributesToString(sm.getParentsNames())));
 
         // telefono
-        parentPhoneText.setText(getString(R.string.student_phone_text, parentsAtributesToString(sm.getParentsPhones())));
+        parentPhoneText.setText(getString(R.string.student_primary_phone_text, sm.getQuickContact()));
+
+        // telefonos auxiliares
+        if(sm.getParentsPhones() == null || sm.getParentsPhones().isEmpty())
+            parentAuxiliaryPhonesText.setText(getString(R.string.student_phone_text,
+                    ContextCompat.getString(requireContext(), R.string.student_no_data)));
+        else parentAuxiliaryPhonesText.setText(getString(R.string.student_phone_text, parentsAtributesToString(sm.getParentsPhones())));
     }
 
     // convierte la lista de atributos de los padres a un string legible por la vista
@@ -289,7 +327,6 @@ public class StudentFragment extends Fragment {
 
         // inicia el chat
         sendMessageButton.setOnClickListener(listener -> {
-            //todo?
             Intent intent = new Intent(getActivity(), chatActivity.class);
             startActivity(intent);
         });
@@ -300,7 +337,6 @@ public class StudentFragment extends Fragment {
 
             // se pasan los valores compartidos
             gradeMarkSharedViewModel.setStudentId(studentId);
-            gradeMarkSharedViewModel.setStudentProfileImage(studentImage);
 
             // se reemplaza el fragmento
             replaceFragment(GradeSubjectFragment.class);
@@ -312,7 +348,6 @@ public class StudentFragment extends Fragment {
 
             // se pasan los valores compartidos
             studentShowGradesSharedViewModel.setStudentId(studentId);
-            studentShowGradesSharedViewModel.setStudentProfileImage(studentImage);
 
             replaceFragment(ShowGradesFragment.class);
         });

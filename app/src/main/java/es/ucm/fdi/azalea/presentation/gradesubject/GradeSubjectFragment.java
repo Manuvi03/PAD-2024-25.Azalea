@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.gradesubject;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.MarkModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 
 public class GradeSubjectFragment extends Fragment {
     // constantes
@@ -70,10 +72,6 @@ public class GradeSubjectFragment extends Fragment {
             Log.d(TAG, "StudentId recibido");
             studentId = data;
         });
-        studentSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-            Log.d(TAG, "StudentImage recibido");
-            studentImage = data;
-        });
 
         // se obtiene el viewmodel
         gradeSubjectViewModel = new ViewModelProvider(this).get(GradeSubjectViewModel.class);
@@ -98,6 +96,19 @@ public class GradeSubjectFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse solo en vertical
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     // se obtienen los componentes de la vista
     private void bindComponents(){
@@ -157,12 +168,8 @@ public class GradeSubjectFragment extends Fragment {
 
     // actualiza la textview con el nombre del estudiante
     private void updateTextViewInfo(StudentModel sm){
-        // foto de perfil del estudiante
-        Picasso.get()
-                .load(studentImage)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(studentProfileImage);
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentInfo.getProfileImage(), studentProfileImage);
 
         // nombre del estudiante
         studentNameText.setText(sm.getName() + " " + sm.getSurnames());

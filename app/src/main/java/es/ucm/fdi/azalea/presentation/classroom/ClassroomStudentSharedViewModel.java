@@ -14,7 +14,6 @@ public class ClassroomStudentSharedViewModel extends ViewModel {
     // variables
     // datos compartidos entre ClassRoomFragment y StudentFragment
     private final MutableLiveData<String> studentId = new MutableLiveData<>();
-    private final MutableLiveData<String> studentImage = new MutableLiveData<>();
 
     public LiveData<String> getStudentId() {
         return studentId;
@@ -23,14 +22,5 @@ public class ClassroomStudentSharedViewModel extends ViewModel {
     public void setStudentId(String studentId) {
         Log.d(TAG, "StudentId cambiando valor");
         this.studentId.postValue(studentId);
-    }
-
-    public LiveData<String> getStudentProfileImage() {
-        return studentImage;
-    }
-
-    public void setStudentProfileImage(String profileImage) {
-        Log.d(TAG, "StudentImage cambiando valor");
-        this.studentImage.setValue(profileImage);
     }
 }

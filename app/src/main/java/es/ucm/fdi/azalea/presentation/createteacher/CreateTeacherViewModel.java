@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Random;
+
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
@@ -26,7 +28,8 @@ public class CreateTeacherViewModel extends ViewModel {
 
     public void setUserdata(UserModel user, Context context){
         // se genera la imagen de perfil del usuario
-        String color = RandomColor.generateAppRandomColor(context);
+        Random r = new Random();
+        String color = RandomColor.generateAppRandomColor(context, r.nextInt());
         String path = "https://ui-avatars.com/api/?name=" + user.getName() + "&background=" + color + "&length=1&rounded=true";
         user.setProfileImage(path);
 

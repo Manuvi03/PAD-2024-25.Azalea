@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.createteacher;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,6 +65,19 @@ public class CreateTeacherFragment extends Fragment {
         return viewRoot;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // el Fragment puede verse en ambas orientaciones
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // restablece la orientacion a la de la activity
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     private void initListeners(){
         createTeacherViewModel.getAuthenticateTeacherEvent().observe(requireActivity(),booleanEvent -> {
