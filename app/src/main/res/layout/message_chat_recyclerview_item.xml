@@ -22,11 +22,8 @@
             android:id="@+id/message_inputs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DEL STRING CREAR UN REFERENTE"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/French_Rose"
-            tools:text="WENAS" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- Layout horizontal para fecha y hora -->
 

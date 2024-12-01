@@ -9,5 +9,5 @@ import es.ucm.fdi.azalea.integration.CallBack;
 public interface MessageRepository {
     public void create(MessageModel model, CallBack<MessageModel> cb);
     public void findById(String id, CallBack<MessageModel> cb);
-    void readByChatId(String chatId, CallBack<List<MessageModel>> callBack);
+    public void readByChatId(String chatId, CallBack<List<MessageModel>> callBack);
 }

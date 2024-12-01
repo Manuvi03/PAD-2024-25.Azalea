@@ -54,20 +54,20 @@ public class chatActivity extends AppCompatActivity {
         setContentView(R.layout.chat_activity);
 
         chatViewModel = new chatViewModel();
-        //TODO hacer una func que devuelca el UserModel del getIntent();
         classId = getIntent().getStringExtra("classId"); //Cogemos el id de la clase pq forma parte del id del chat
         parentId = getIntent().getStringExtra("parentId"); //El id del padre tambien forma parte
 
         messageInput = findViewById(R.id.message_input);
         sendButton = findViewById(R.id.send_message_button);
         backButton = findViewById(R.id.back_button);
-        recyclerView = findViewById(R.id.chat_recycler_view);
         otherUserName = findViewById(R.id.Username);
         otherUserName.setText(getIntent().getStringExtra("parentName"));
 
+        initListeners();
+
         initRecycler();
 
-        initListeners();
+
     }
 
     private void initListeners(){
@@ -84,13 +84,12 @@ public class chatActivity extends AppCompatActivity {
             String message = messageInput.getText().toString().trim();
             if(message.isEmpty())
                 return;
-            //¿Devuelve el messageModel? chatViewModel.sendMessage(myUserId, otherUser.getId(), message);
-            //TODO mandamos el mensaje si no está vacío y en caso de mandarlo actualizamos el chat.
-            //chatViewModel.updateChat(myUserId, otherUser.getId(), ¿messageModel?)
 
+            messageInput.setText("");
+            initRecycler();
+            //Mandamos el mensaje si no está vacío y en caso de mandarlo actualizamos el chat.
         });
 
-        //chatViewModel.getChat(chatRoomId);
     }
 
     private void initRecycler() {
@@ -106,8 +105,10 @@ public class chatActivity extends AppCompatActivity {
 
         chatViewModel.readMessagesByChat(chatRoomId);
 
+        Log.d(TAG, "Hasta aqui llega bien");
         // se inicializa el observador
         initRecyclerViewObserver();
+        Log.d(TAG, "Hasta aqui llega bien2");
     }
 
     // inicializa el observador de la recyclerview
@@ -132,18 +133,19 @@ public class chatActivity extends AppCompatActivity {
 
                 // se actualiza la recyclerview
                 handleMessages(messages);
+
+                //En caso de no entrar en la pantalla avanzaria al ultimo mensaje
+                recyclerView.scrollToPosition(messages.size() -1);
             }
 
             // en caso de error, se muestra al usuario
             else if(listEvent instanceof Event.Error){
-                Log.d(TAG, "Hubo algun error buscando los estudiantes de la clase");
-                // se muestra el error mediante un mensaje toast
-                Toast.makeText(this,"R.string.classroom_search_error",Toast.LENGTH_LONG).show();//TODO cambiar mensaje de error
+                Log.d(TAG, "Hubo algun error buscando los mensajes en la BD");
             }
         };
 
         // se inicializa el observador
-        chatViewModel.getChatsState().observe(this, (Observer<? super Event<ChatModel>>) messagesStateObserver);
+        chatViewModel.getMessagesListState().observe(this, messagesStateObserver);
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.chat;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -67,26 +68,30 @@ public class MessagesChatAdapter extends RecyclerView.Adapter<MessagesChatAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            message = itemView.findViewById(R.id.message_input);
+            message = itemView.findViewById(R.id.message_inputs);
             cardView = itemView.findViewById(R.id.message_cardView);
         }
 
+        @SuppressLint("ResourceAsColor")
         public void bind(MessageModel messageModel){
 
             message.setText(messageModel.getMessage());
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) cardView.getLayoutParams();
 
             if(Objects.equals(messageModel.getSenderId(), Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
+                message.setTextColor(R.color.Dark_Green);
                 cardView.setCardBackgroundColor(
                         ContextCompat.getColor(itemView.getContext(), R.color.Misty_Rose));
-                layoutParams.setMarginStart(50); //Margen grande a la izquierda para mis mensajes
+                layoutParams.setMarginStart(500); //Margen grande a la izquierda para mis mensajes
                 layoutParams.setMarginEnd(15); //Margen pequeño a la derecha para mis mensajes
+
             }
             else{
+                message.setTextColor(R.color.Lapis_Lazuli);
                 cardView.setCardBackgroundColor(
                         ContextCompat.getColor(itemView.getContext(), R.color.Cyclomen));
                 layoutParams.setMarginStart(16); //Margen pequeño a la izquierda para sus mensajes
-                layoutParams.setMarginEnd(15); //Margen grande a la derecha para sus mensajes
+                layoutParams.setMarginEnd(55); //Margen grande a la derecha para sus mensajes
             }
 
         }

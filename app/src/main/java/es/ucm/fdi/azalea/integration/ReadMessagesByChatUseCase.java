@@ -9,18 +9,18 @@ import java.util.List;
 import es.ucm.fdi.azalea.business.BusinessFactory;
 import es.ucm.fdi.azalea.business.model.MessageModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
-import es.ucm.fdi.azalea.business.model.UserModel;
+
 
 public class ReadMessagesByChatUseCase {
-    private final String TAG= "ReadMessagesByChatUseCase";
+    private final String TAG = "ReadMessagesByChatUseCase";
 
     public void execute(String chatId, CallBack<List<MessageModel>> cb) {
         readMessagesByChat(chatId, cb);
     }
 
     private void readMessagesByChat(String chatId, CallBack<List<MessageModel>> cb) {
+        Log.d(TAG, "puta");
         BusinessFactory.getInstance().getMessageRepository().readByChatId(chatId, new CallBack<List<MessageModel>>(){
-
             @Override
             public void onSuccess(Event.Success<List<MessageModel>> success) {
                 cb.onSuccess(success);
@@ -28,6 +28,7 @@ public class ReadMessagesByChatUseCase {
 
             @Override
             public void onError(Event.Error<List<MessageModel>> error) {
+                Log.d(TAG, "mierda");
                 cb.onError(error);
             }
         });

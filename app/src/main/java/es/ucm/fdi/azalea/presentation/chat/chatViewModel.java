@@ -14,22 +14,41 @@ import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.ChatUseCase;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.ReadMessagesByChatUseCase;
+import es.ucm.fdi.azalea.integration.CreateMessageUseCase;
 
 public class chatViewModel extends ViewModel {
 
     private final String TAG = "ChatViewModel";
     private MutableLiveData<Event<ChatModel>> chatState;
-    private MutableLiveData<Event<List<MessageModel>>> messagesState;
+    private MutableLiveData<Event<MessageModel>> messageState;
+    private MutableLiveData<Event<List<MessageModel>>> messagesListState;
 
     public chatViewModel(){
         this.chatState = new MutableLiveData<>();
+        this.messageState = new MutableLiveData<>();
+        this.messagesListState = new MutableLiveData<>();
     }
 
     public LiveData<Event<ChatModel>> getChatsState(){
         if(chatState == null)
             chatState = new MutableLiveData<>();
-        return chatState;
-    }
+        return chatState;}
+
+    public MutableLiveData<Event<MessageModel>> getMessageState() {
+        if(messageState == null)
+            messageState = new MutableLiveData<>();
+        return messageState;}
+
+    public void setMessageState(MutableLiveData<Event<MessageModel>> messageState) {
+        this.messageState = messageState;}
+
+    public MutableLiveData<Event<List<MessageModel>>> getMessagesListState() {
+        if(messagesListState == null)
+            messagesListState = new MutableLiveData<>();
+        return messagesListState;}
+
+    public void setMessagesListState(MutableLiveData<Event<List<MessageModel>>> messagesListState) {
+        this.messagesListState = messagesListState;}
 
     public void getChat(String chatId){
         //Se asigna el estado a cargando.
@@ -55,11 +74,25 @@ public class chatViewModel extends ViewModel {
 
     }
 
-    public MessageModel sendMessage(String myUser, String otherUser, String message){
+    public void sendMessage(String chatId, String message){
         this.chatState.postValue(new Event.Loading<>());
+        CreateMessageUseCase useCase = new CreateMessageUseCase();
+        MessageModel model = new MessageModel();
+        model.setMessage(message);
+        model.setChatId(chatId);
 
+        useCase.execute(model, new CallBack<MessageModel>() {
+            @Override
+            public void onSuccess(Event.Success<MessageModel> success) {
+                messageState.postValue(success);
+            }
 
-        return null;
+            @Override
+            public void onError(Event.Error<MessageModel> error) {
+                messageState.postValue(error);
+            }
+        });
+
     }
 
     public String getChatId(String teacher, String parent){ //Construyo el id del chat con ambos ids
@@ -68,7 +101,7 @@ public class chatViewModel extends ViewModel {
 
     public void readMessagesByChat(String chatId) {
         // el valor de la informacion aun no se ha encontrado, por lo que se marca el evento como cargando
-        messagesState.postValue(new Event.Loading<>());
+        messagesListState.postValue(new Event.Loading<>());
 
         // se realiza el caso de uso
         ReadMessagesByChatUseCase useCase = new ReadMessagesByChatUseCase();
@@ -78,13 +111,13 @@ public class chatViewModel extends ViewModel {
             @Override
             public void onSuccess(Event.Success<List<MessageModel>> success) {
                 Log.d(TAG, "Los datos han llegado correctamente al ClassRoomViewModel en readStudentsByClassroom");
-                messagesState.postValue(success);
+                messagesListState.postValue(success);
             }
 
             @Override
             public void onError(Event.Error<List<MessageModel>> error) {
                 Log.d(TAG, "Los datos NO han llegado correctamente al ClassRoomViewModel en readStudentsByClassroom");
-                messagesState.postValue(error);
+                messagesListState.postValue(error);
             }
         });
     }

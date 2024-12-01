@@ -2,10 +2,14 @@ package es.ucm.fdi.azalea.business.Repositories.implementations;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +57,7 @@ public class MessageRepositoryImp implements MessageRepository {
     @Override
     public void readByChatId(String chatId, CallBack<List<MessageModel>> cb) {
         // lista de mensajes
+        Log.d(TAG, "llego hasta aqui");
         List<MessageModel> list = new ArrayList<>();
 
         // se genera la query que ordena los hijos del nodo mensajes por el id del chat
@@ -60,7 +65,27 @@ public class MessageRepositoryImp implements MessageRepository {
         Query readByChatIdQuery = messagesReference.orderByChild("chatId").equalTo(chatId);
 
         // se ejecuta la query, obteniendo una imagen unica de Firebase
-        readByChatIdQuery.get().addOnCompleteListener(task -> {
+        readByChatIdQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot messageSnapshot : snapshot.getChildren()){
+                    // por cada mensaje encontrado, si existe se anyade a la lista
+                    if(messageSnapshot.exists()) {
+                        list.add(messageSnapshot.getValue(MessageModel.class));
+                    }
+                }
+                Log.d(TAG, "Se devolvio una lista con " + list.size() + " mensajes en el chat " + chatId);
+                // se devuelve un exito y la informacion
+                cb.onSuccess(new Event.Success<>(list));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // si no se puede realizar la busqueda, se devuelve un error
+                Log.d(TAG,"Error recuperando los datos", error.toException());
+                cb.onError(new Event.Error<>(error.toException()));
+            }
+        }); /*{
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
                 Log.d(TAG,"Error recuperando los datos",task.getException());
@@ -78,6 +103,6 @@ public class MessageRepositoryImp implements MessageRepository {
                 // se devuelve un exito y la informacion
                 cb.onSuccess(new Event.Success<>(list));
             }
-        });
+        });*/
     }
 }
