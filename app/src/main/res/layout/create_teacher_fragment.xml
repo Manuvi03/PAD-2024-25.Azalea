@@ -48,7 +48,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_NameTextView"
-            app:layout_constraintEnd_toEndOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="@string/createteacher_nameText"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_nameEditText"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_textView" />
 
@@ -73,7 +73,7 @@
             android:autofillHints=""
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_surnameTextView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_NameTextView" />
 
@@ -85,7 +85,7 @@
             android:text="@string/createteacher_surnameText"
             android:layout_marginTop="30sp"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_surnamesEditText"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_nameEditText" />
 
@@ -100,7 +100,7 @@
             android:autofillHints=""
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_genderTextView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_surnameTextView" />
@@ -113,7 +113,7 @@
             android:text="@string/createteacher_genderText"
             android:layout_marginTop="30sp"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_genderEditText"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_surnamesEditText" />
 
@@ -128,7 +128,7 @@
             android:autofillHints=""
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_emailTextView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_genderTextView" />
 
@@ -140,7 +140,7 @@
             android:text="@string/createteacher_emailText"
             android:layout_marginTop="30sp"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_emailEditText"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_genderEditText" />
 
@@ -155,7 +155,7 @@
             android:layout_marginTop="3sp"
             android:autofillHints=""
             app:layout_constraintBottom_toTopOf="@+id/createteacher_passwordTextView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_emailTextView" />
 
@@ -182,7 +182,7 @@
             android:layout_marginTop="3sp"
             android:autofillHints=""
             app:layout_constraintBottom_toTopOf="@+id/createteacher_classRoomNameTextView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createteacher_passwordTextView" />
 
@@ -209,7 +209,7 @@
             android:autofillHints=""
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/createTeacher_button"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createteacher_classRoomNameTextView" />
@@ -221,7 +221,7 @@
             android:text="@string/createteacher_ButtonCreateTeacherText"
             android:layout_marginVertical="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/grade_subject_elements_guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/createTeacher_classRoomNameEditText" />
 
@@ -233,7 +233,7 @@
             app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
+            android:id="@+id/grade_subject_elements_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

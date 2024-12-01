@@ -42,11 +42,13 @@
                     android:id="@+id/teacher_classroom_student_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Licorice"
                     android:textSize="20sp"/>
                 <TextView
                     android:id="@+id/teacher_classroom_student_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Licorice"
                     android:textSize="14sp"/>
             </LinearLayout>
         </RelativeLayout>
