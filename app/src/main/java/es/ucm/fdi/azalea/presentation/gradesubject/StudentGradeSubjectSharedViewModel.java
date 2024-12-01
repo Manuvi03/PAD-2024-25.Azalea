@@ -24,12 +24,4 @@ public class StudentGradeSubjectSharedViewModel extends ViewModel {
         this.studentId.postValue(studentId);
     }
 
-    public LiveData<String> getStudentProfileImage() {
-        return studentImage;
-    }
-
-    public void setStudentProfileImage(String profileImage) {
-        Log.d(TAG, "StudentImage cambiando valor");
-        this.studentImage.setValue(profileImage);
-    }
 }

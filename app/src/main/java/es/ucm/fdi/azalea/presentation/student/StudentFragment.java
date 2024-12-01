@@ -32,6 +32,7 @@ import es.ucm.fdi.azalea.presentation.editstudent.EditStudentFragment;
 import es.ucm.fdi.azalea.presentation.editstudent.editStudentSharedViewModel;
 import es.ucm.fdi.azalea.presentation.gradesubject.GradeSubjectFragment;
 import es.ucm.fdi.azalea.presentation.gradesubject.StudentGradeSubjectSharedViewModel;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment;
 import es.ucm.fdi.azalea.presentation.showgrades.StudentShowGradesSharedViewModel;
 
@@ -70,6 +71,7 @@ public class StudentFragment extends Fragment {
 
     private TextView parentNameText;
     private TextView parentPhoneText;
+    private TextView parentAuxiliaryPhonesText;
     private TextView parentEmailText;
     private TextView studentAddressText;
 
@@ -88,10 +90,6 @@ public class StudentFragment extends Fragment {
         classroomSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
             Log.d(TAG, "StudentId recibido");
             studentId = data;
-        });
-        classroomSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-            Log.d(TAG, "StudentImage recibido");
-            studentImage = data;
         });
 
         // se obtiene el viewmodel
@@ -139,6 +137,7 @@ public class StudentFragment extends Fragment {
 
         parentNameText = view.findViewById(R.id.student_fragment_parent_name_textview);
         parentPhoneText = view.findViewById(R.id.student_fragment_parent_phone_textview);
+        parentAuxiliaryPhonesText = view.findViewById(R.id.student_fragment_auxiliary_phones_textview);
         parentEmailText = view.findViewById(R.id.student_fragment_parent_email_textview);
         studentAddressText = view.findViewById(R.id.student_fragment_address_textview);
     }
@@ -195,12 +194,9 @@ public class StudentFragment extends Fragment {
     // actualiza los datos del estudiante de la vista
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void updateScrollViewStudentInfo(StudentModel sm) {
-        // foto de perfil del estudiante
-        Picasso.get()
-                .load(studentImage)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(studentProfileImage);
+
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentInfo.getProfileImage(), studentProfileImage);
 
         // nombre del estudiante
         studentNameText.setText(sm.getName() + " " + sm.getSurnames());
@@ -227,7 +223,10 @@ public class StudentFragment extends Fragment {
         parentNameText.setText(getString(R.string.student_parent_name_text, parentsAtributesToString(sm.getParentsNames())));
 
         // telefono
-        parentPhoneText.setText(getString(R.string.student_phone_text, parentsAtributesToString(sm.getParentsPhones())));
+        parentPhoneText.setText(getString(R.string.student_primary_phone_text, sm.getQuickContact()));
+
+        // telefonos auxiliares
+        parentAuxiliaryPhonesText.setText(getString(R.string.student_phone_text, parentsAtributesToString(sm.getParentsPhones())));
     }
 
     // convierte la lista de atributos de los padres a un string legible por la vista
@@ -289,7 +288,6 @@ public class StudentFragment extends Fragment {
 
         // inicia el chat
         sendMessageButton.setOnClickListener(listener -> {
-            //todo?
             Intent intent = new Intent(getActivity(), chatActivity.class);
             startActivity(intent);
         });
@@ -300,7 +298,6 @@ public class StudentFragment extends Fragment {
 
             // se pasan los valores compartidos
             gradeMarkSharedViewModel.setStudentId(studentId);
-            gradeMarkSharedViewModel.setStudentProfileImage(studentImage);
 
             // se reemplaza el fragmento
             replaceFragment(GradeSubjectFragment.class);
@@ -312,7 +309,6 @@ public class StudentFragment extends Fragment {
 
             // se pasan los valores compartidos
             studentShowGradesSharedViewModel.setStudentId(studentId);
-            studentShowGradesSharedViewModel.setStudentProfileImage(studentImage);
 
             replaceFragment(ShowGradesFragment.class);
         });

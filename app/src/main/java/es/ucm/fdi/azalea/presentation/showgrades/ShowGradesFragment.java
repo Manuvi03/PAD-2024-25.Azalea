@@ -27,6 +27,7 @@ import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.MarkModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 
 public class ShowGradesFragment extends Fragment {
 
@@ -69,10 +70,7 @@ public class ShowGradesFragment extends Fragment {
             Log.d(TAG, "StudentId recibido");
             studentId = data;
         });
-        showGradesSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-            Log.d(TAG, "StudentImage recibido");
-            studentImage = data;
-        });
+
         // se obtiene el viewmodel
         showGradesViewModel = new ViewModelProvider(this).get(ShowGradesViewModel.class);
 
@@ -149,12 +147,8 @@ public class ShowGradesFragment extends Fragment {
     // actualiza la textview con el nombre del estudiante
     @SuppressLint("SetTextI18n")
     private void updateTextViewInfo(StudentModel sm){
-        // foto de perfil del estudiante
-        Picasso.get()
-                .load(studentImage)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(studentProfileImage);
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentInfo.getProfileImage(), studentProfileImage);
 
         // nombre del estudiante
         studentNameText.setText(sm.getName() + " " + sm.getSurnames());

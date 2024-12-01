@@ -20,6 +20,7 @@ import java.util.List;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.StudentModel;
+import es.ucm.fdi.azalea.presentation.profilepicture.PicassoSetter;
 import es.ucm.fdi.azalea.presentation.student.StudentFragment;
 
 public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdapter.ViewHolder>{
@@ -72,21 +73,14 @@ public class ClassroomListAdapter extends RecyclerView.Adapter<ClassroomListAdap
         holder.contact.setText(mInflater.getContext().getString(R.string.student_contact,
                 studentModel.getQuickContact()));
 
-        // se genera la URL con el nombre de usuario y se genera la foto de perfil
-        // TODO no me gustan los colores random que ponen en el background, deberiamos definir nosotros unos y luego buscarlos
-        String path = "https://ui-avatars.com/api/?name=" + studentModel.getName() + "&background=random&length=1&rounded=true";
-        Picasso.get()
-                .load(path)
-                .placeholder(R.drawable.teacher_classroom_student_image)
-                .error(R.drawable.teacher_classroom_student_image_error)
-                .into(holder.profileImage);
+        // se obtiene la imagen de perfil
+        PicassoSetter.setProfilePicture(studentModel.getProfileImage(), holder.profileImage);
 
         // listener para acceder a la informacion de cada alumno, abriendo el nuevo Fragment
         holder.itemView.setOnClickListener(view -> {
             Log.d(TAG, "Se cambia de fragment a StudentFragment");
 
             viewModel.setStudentId(studentModel.getId());
-            viewModel.setStudentProfileImage(path);
 
             // se crea el fragment
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
