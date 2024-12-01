@@ -2,10 +2,14 @@ package es.ucm.fdi.azalea.business.Repositories.implementations;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +65,30 @@ public class MarkRepositoryImp implements MarkRepository {
     public void findById(String id, CallBack<MarkModel> cb) {
 
         // se ejecuta la query, obteniendo una imagen unica de Firebase
+        marksReference.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Log.d(TAG, "MarkRepositoryImp devolvio la nota con id "  + id);
+
+                    // se devuelve un exito y la informacion, que es la nota
+                    cb.onSuccess(new Event.Success<>(snapshot.getValue(MarkModel.class)));
+                }else{
+                    Log.d(TAG, "No existe la nota con id: "  + id);
+                    cb.onError(new Event.Error<>());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // si no se puede realizar la busqueda, se devuelve un error
+                Log.d(TAG,"Error recuperando los datos de la nota", error.toException());
+                cb.onError(new Event.Error<>(error.toException()));
+            }
+        });
+
+        /*
         marksReference.child(id).get().addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
@@ -73,7 +101,7 @@ public class MarkRepositoryImp implements MarkRepository {
                 // se devuelve un exito y la informacion, que es la nota
                 cb.onSuccess(new Event.Success<>(task.getResult().getValue(MarkModel.class)));
             }
-        });
+        });*/
     }
 
     @Override
@@ -88,6 +116,29 @@ public class MarkRepositoryImp implements MarkRepository {
         Query readByStudentIdQuery = marksReference.orderByChild("studentId").equalTo(studentId);
 
         // se ejecuta la query, obteniendo una imagen unica de Firebase
+        readByStudentIdQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot markSnapshot : snapshot.getChildren()){
+                    // por cada alumno encontrado, si existe se anyade a la lista
+                    if(markSnapshot.exists()) {
+                        list.add(markSnapshot.getValue(MarkModel.class));
+                    }
+                }
+                Log.d(TAG, "MarkRepository devolvio una lista con " + list.size() + " resultados.");
+
+                // se devuelve un exito y la informacion
+                cb.onSuccess(new Event.Success<>(list));
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG,"Error recuperando los datos", error.toException());
+                cb.onError(new Event.Error<>(error.toException()));
+            }
+        });
+        /*
         readByStudentIdQuery.get().addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
@@ -106,6 +157,6 @@ public class MarkRepositoryImp implements MarkRepository {
                 // se devuelve un exito y la informacion
                 cb.onSuccess(new Event.Success<>(list));
             }
-        });
+        });*/
     }
 }

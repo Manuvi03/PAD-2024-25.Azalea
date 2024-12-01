@@ -42,7 +42,9 @@ public class TeacherActivity extends AppCompatActivity {
 
         // se implemente la barra de navegacion para cambiar de fragmento
         bottomNavigationView.setOnItemSelectedListener(item -> {
-
+            for(int i =0; i < getSupportFragmentManager().getBackStackEntryCount(); i++){
+                getSupportFragmentManager().popBackStack();
+            }
             // se reemplazan los fragmentos por los correspondientes
             if(item.getItemId() == R.id.teacher_navbar_home){
                 replaceFragment(TeacherHomeFragment.class);

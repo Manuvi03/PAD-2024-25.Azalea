@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import es.ucm.fdi.azalea.R;
@@ -42,6 +43,7 @@ import es.ucm.fdi.azalea.R;
         });
 
         FirebaseApp.initializeApp(this);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Log.d(TAG, "onCreate: ");
         AndroidThreeTen.init(this); //inicializacion de la libreria de fecha
         replaceFragment(LoginFragment.class);

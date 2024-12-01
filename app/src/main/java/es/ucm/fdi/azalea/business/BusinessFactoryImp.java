@@ -1,5 +1,7 @@
 package es.ucm.fdi.azalea.business;
 
+import android.util.Log;
+
 import es.ucm.fdi.azalea.business.Repositories.AuthRepository;
 import es.ucm.fdi.azalea.business.Repositories.ChatRepository;
 import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
@@ -23,7 +25,7 @@ import es.ucm.fdi.azalea.business.model.MessageModel;
 import es.ucm.fdi.azalea.business.model.StudentModel;
 
 public class BusinessFactoryImp extends BusinessFactory{
-
+    private static String TAG = "BusinessFactoryImp";
 
     @Override
     public StudentRepository getStudentRepository() {

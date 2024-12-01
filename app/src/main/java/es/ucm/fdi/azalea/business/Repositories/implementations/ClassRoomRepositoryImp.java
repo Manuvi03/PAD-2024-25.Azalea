@@ -2,8 +2,13 @@ package es.ucm.fdi.azalea.business.Repositories.implementations;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import es.ucm.fdi.azalea.business.Repositories.ClassRoomRepository;
 import es.ucm.fdi.azalea.business.model.ClassRoomModel;
@@ -65,6 +70,27 @@ public class ClassRoomRepositoryImp implements ClassRoomRepository {
     @Override
     public void readById(String id, CallBack<ClassRoomModel> cb) {
         // se ejecuta la query, obteniendo una imagen unica de Firebase
+        classRoomReference.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Log.d(TAG, "ClassRoomRepositoryImp devolvio la clase con id "  + id);
+
+                    // se devuelve un exito y la informacion, que es el estudiante
+                    cb.onSuccess(new Event.Success<>(snapshot.getValue(ClassRoomModel.class)));
+                }else{
+                    Log.d(TAG,"No existe la clase con id: " + id);
+                    cb.onError(new Event.Error<>());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG,"Error recuperando los datos de la clase", error.toException());
+                cb.onError(new Event.Error<>(error.toException()));
+            }
+        });
+        /*
         classRoomReference.child(id).get().addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 // si no se puede realizar la busqueda, se devuelve un error
@@ -77,6 +103,6 @@ public class ClassRoomRepositoryImp implements ClassRoomRepository {
                 // se devuelve un exito y la informacion, que es el estudiante
                 cb.onSuccess(new Event.Success<>(task.getResult().getValue(ClassRoomModel.class)));
             }
-        });
+        });*/
     }
 }
