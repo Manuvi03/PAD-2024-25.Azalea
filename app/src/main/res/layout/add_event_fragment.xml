@@ -7,14 +7,11 @@
 
     <TextView
         android:id="@+id/addEvent_string"
+        android:theme="@style/standard_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/addevent_string"
-        android:background="@drawable/circle_shape"
-        android:textColor="@color/Tyrian_Purple"
-        android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

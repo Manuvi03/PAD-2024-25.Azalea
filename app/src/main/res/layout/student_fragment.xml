@@ -223,6 +223,15 @@
                 android:layout_height="wrap_content"
                 android:gravity=""
                 android:layout_marginTop="5sp"
+                android:text="@string/student_primary_phone_text"/>
+
+            <TextView
+                android:id="@+id/student_fragment_auxiliary_phones_textview"
+                android:theme="@style/student_normal_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:layout_marginTop="5sp"
                 android:text="@string/student_phone_text"/>
 
             <TextView

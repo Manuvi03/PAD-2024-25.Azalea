@@ -98,7 +98,7 @@
     <string name="editstudent_condmedtextView">Introduzca las condiciones médicas</string>
     <string name="editstudent_nombretextView">Introduzca el nombre de el/la estudiante</string>
     <string name="editstudent_contactorapidotextView">Introduzca el contacto principal</string>
-    <string name="editstudent_apellidostextView">Introduzca los pellidos de el estudiante</string>
+    <string name="editstudent_apellidostextView">Introduzca los apellidos de el estudiante</string>
     <string name="editstudent_pesotextView">Introduzca el peso</string>
     <string name="editstudent_telefaux1textView">Introduzca un teléfono auxiliar</string>
     <string name="editstudent_telefaux2textView">Introduzca un teléfono auxiliar</string>
@@ -188,7 +188,8 @@
     <string name="student_medical_conditions_text">Condiciones médicas: %1$s</string>
     <string name="student_contact_info_text">Información de contacto </string>
     <string name="student_parent_name_text">Nombre(s) del/los tutor(es): %1$s</string>
-    <string name="student_phone_text">Teléfono(s): %1$s</string>
+    <string name="student_phone_text">Teléfono(s) auxiliar(es): %1$s</string>
+    <string name="student_primary_phone_text">Teléfono principal: %1$s</string>
     <string name="student_email_text">Correo electrónico: %1$s</string>
     <string name="student_address_text">Dirección: %1$s</string>
 

@@ -144,7 +144,8 @@
     <string name="student_medical_conditions_text">Medical conditions: %1$s</string>
     <string name="student_contact_info_text">Contact info</string>
     <string name="student_parent_name_text">Parent(s) name(s): %1$s</string>
-    <string name="student_phone_text">Phone(s): %1$s</string>
+    <string name="student_phone_text">Auxiliary phone(s): %1$s</string>
+    <string name="student_primary_phone_text">Main phone: %1$s</string>
     <string name="student_email_text">E-mail: %1$s</string>
     <string name="student_address_text">Address: %1$s</string>
     <string name="student_name_text">Student name</string>

@@ -14,6 +14,13 @@
         <item name="android:textColorPrimary">@color/Dark_Purple</item>
     </style>
 
+    <style name="standard_title_textView">
+        <item name="android:background">@drawable/circle_shape</item>
+        <item name="android:textColor">@color/Tyrian_Purple</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="standard_textView">
         <item name="android:textColor">@color/Dogwood_Rose</item>
         <item name="android:textColorHint">@color/Dogwood_Rose</item>
