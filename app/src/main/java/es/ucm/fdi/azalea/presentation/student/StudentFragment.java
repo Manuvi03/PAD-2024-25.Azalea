@@ -1,5 +1,6 @@
 package es.ucm.fdi.azalea.presentation.student;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,35 +79,35 @@ public class StudentFragment extends Fragment {
     private StudentModel studentInfo;
     private UserModel parentInfo;
 
-        @Override
-        public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-            // se genera el viewmodel compartido con classroom y se observan los valores que se reciben
-            classroomSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(ClassroomStudentSharedViewModel.class);
-            classroomSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
-                Log.d(TAG, "StudentId recibido");
-                studentId = data;
-            });
-            classroomSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
-                Log.d(TAG, "StudentImage recibido");
-                studentImage = data;
-            });
+        // se genera el viewmodel compartido con classroom y se observan los valores que se reciben
+        classroomSharedViewModel = new ViewModelProvider((FragmentActivity) view.getContext()).get(ClassroomStudentSharedViewModel.class);
+        classroomSharedViewModel.getStudentId().observe((FragmentActivity) view.getContext(), data -> {
+            Log.d(TAG, "StudentId recibido");
+            studentId = data;
+        });
+        classroomSharedViewModel.getStudentProfileImage().observe((FragmentActivity) view.getContext(), data -> {
+            Log.d(TAG, "StudentImage recibido");
+            studentImage = data;
+        });
 
-            // se obtiene el viewmodel
-            studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
+        // se obtiene el viewmodel
+        studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
-            // se obtienen los componentes de la vista necesarios
-            bindComponents();
+        // se obtienen los componentes de la vista necesarios
+        bindComponents();
 
-            // se obtiene el scrollview y se inicializa su observador
-            initScrollView();
+        // se obtiene el scrollview y se inicializa su observador
+        initScrollView();
 
-        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         // se enlaza la vista a la clase
         view = inflater.inflate(R.layout.student_fragment, container, false);
         Log.d(TAG, "Se ha creado el StudentFragment");
@@ -121,7 +122,7 @@ public class StudentFragment extends Fragment {
     }
 
     // enlaza los componentes de la vista con esta clase
-    private void bindComponents(){
+    private void bindComponents() {
         studentProfileImage = view.findViewById(R.id.student_fragment_profile_image);
         studentNameText = view.findViewById(R.id.student_fragment_name_textView);
 
@@ -143,7 +144,7 @@ public class StudentFragment extends Fragment {
     }
 
     // inicializa la scrollview
-    private void initScrollView(){
+    private void initScrollView() {
         // se obtiene la informacion del estudiante
         studentViewModel.readStudent(studentId);
 
@@ -159,18 +160,18 @@ public class StudentFragment extends Fragment {
     }
 
     // inicializa el observador de la informacion del estudiante
-    private void initStudentInfoObserver(){
+    private void initStudentInfoObserver() {
         // se declara el observador de la info del estudiante
         final Observer<Event<StudentModel>> studentInfoObserver = studentEvent -> {
 
             // mientras se busca, se muestra el texto de cargando
-            if(studentEvent instanceof Event.Loading){
+            if (studentEvent instanceof Event.Loading) {
                 Log.d(TAG, "Se esta buscando el estudiante");
                 studentNameText.setText(R.string.searching_student);
             }
 
             // cuando se encuentran los resultados, se muestran
-            else if(studentEvent instanceof Event.Success){
+            else if (studentEvent instanceof Event.Success) {
                 Log.d(TAG, "Se encontro la informacion del estudiante");
                 // se obtiene la info
                 studentInfo = ((Event.Success<StudentModel>) studentEvent).getData();
@@ -180,10 +181,10 @@ public class StudentFragment extends Fragment {
             }
 
             // en caso de error, se muestra al usuario
-            else if(studentEvent instanceof Event.Error){
+            else if (studentEvent instanceof Event.Error) {
                 Log.d(TAG, "Hubo algun error buscando la informacion del estudiante");
                 // se muestra el error mediante un mensaje toast
-                Toast.makeText(getActivity(),R.string.student_search_error,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.student_search_error, Toast.LENGTH_LONG).show();
             }
         };
 
@@ -192,7 +193,8 @@ public class StudentFragment extends Fragment {
     }
 
     // actualiza los datos del estudiante de la vista
-    private void updateScrollViewStudentInfo(StudentModel sm){
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    private void updateScrollViewStudentInfo(StudentModel sm) {
         // foto de perfil del estudiante
         Picasso.get()
                 .load(studentImage)
@@ -229,31 +231,33 @@ public class StudentFragment extends Fragment {
     }
 
     // convierte la lista de atributos de los padres a un string legible por la vista
-    private String parentsAtributesToString(List<String> names){
+    private String parentsAtributesToString(List<String> names) {
 
         // se crea un stringbuilder
         StringBuilder atributesBuilt = new StringBuilder();
 
         // por cada entrada de la lista, se agrega al stringbuilder en una nueva linea
-        for(String s : names) atributesBuilt.append('\n').append(s);
+        if (names != null) {
+            for (String s : names) atributesBuilt.append('\n').append(s);
+        }
 
         // se devuelve convertido a string
         return atributesBuilt.toString();
     }
 
     // inicializa el observador de la informacion del tutor
-    private void initParentInfoObserver(){
+    private void initParentInfoObserver() {
         // se declara el observador de la info del tutor
         final Observer<Event<UserModel>> parentStateObserver = parentEvent -> {
 
             // mientras se busca, se muestra el texto de cargando
-            if(parentEvent instanceof Event.Loading){
+            if (parentEvent instanceof Event.Loading) {
                 Log.d(TAG, "Se esta buscando la informacion del tutor del estudiante");
                 parentNameText.setText(R.string.searching_student_parent);
             }
 
             // cuando se encuentran los resultados, se muestran
-            else if(parentEvent instanceof Event.Success){
+            else if (parentEvent instanceof Event.Success) {
                 Log.d(TAG, "Se encontro la informacion del tutor del estudiante");
                 // se obtiene la info
                 parentInfo = ((Event.Success<UserModel>) parentEvent).getData();
@@ -263,10 +267,10 @@ public class StudentFragment extends Fragment {
             }
 
             // en caso de error, se muestra al usuario
-            else if(parentEvent instanceof Event.Error){
+            else if (parentEvent instanceof Event.Error) {
                 Log.d(TAG, "Hubo algun error buscando la informacion del tutor del estudiante");
                 // se muestra el error mediante un mensaje toast
-                Toast.makeText(getActivity(),R.string.students_parent_search_error,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.students_parent_search_error, Toast.LENGTH_LONG).show();
             }
         };
 
@@ -275,13 +279,13 @@ public class StudentFragment extends Fragment {
     }
 
     // actualiza los datos del estudiante de la vista
-    private void updateScrollViewParentInfo(UserModel um){
+    private void updateScrollViewParentInfo(UserModel um) {
         // correo electronico
         parentEmailText.setText(getString(R.string.student_email_text, um.getEmail()));
     }
 
     // se inicializan los listeners de los botones
-    private void initOnClickListeners(){
+    private void initOnClickListeners() {
 
         // inicia el chat
         sendMessageButton.setOnClickListener(listener -> {
@@ -321,7 +325,7 @@ public class StudentFragment extends Fragment {
     }
 
     // reemplaza este Fragment por el correspondiente segun el boton
-    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> fragment){
+    private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> fragment) {
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.teacher_fragment_container_view, fragment, null)
