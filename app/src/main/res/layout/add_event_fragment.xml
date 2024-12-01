@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Seashell"
     android:padding="16dp">
 
     <TextView
@@ -12,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/addevent_string"
-        android:textColor="@color/Dark_Purple"
-        android:textSize="24sp"
+        android:background="@drawable/circle_shape"
+        android:textColor="@color/Tyrian_Purple"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,14 +22,14 @@
 
     <EditText
         android:id="@+id/addEvent_title"
+        android:autofillHints=""
+        android:inputType="text"
+        android:theme="@style/standard_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addEvent_string"
-        android:backgroundTint="@color/Tickle_me_Pink"
         android:hint="@string/addevent_title"
         android:padding="12dp"
-        android:textColor="@color/Dark_Purple"
-        android:textColorHint="@color/Orchid_Pink"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -38,16 +38,15 @@
 
     <EditText
         android:id="@+id/addEvent_description"
+        android:autofillHints=""
+        android:theme="@style/standard_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addEvent_title"
-        android:backgroundTint="@color/Tickle_me_Pink"
         android:hint="@string/addevent_description"
         android:inputType="textMultiLine"
         android:minLines="3"
         android:padding="12dp"
-        android:textColor="@color/Dark_Purple"
-        android:textColorHint="@color/Orchid_Pink"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addEvent_location" />
@@ -66,13 +65,11 @@
 
     <TextView
         android:id="@+id/addEvent_date"
+        android:theme="@style/standard_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/addEvent_description"
-        android:backgroundTint="@color/Tickle_me_Pink"
         android:hint="@string/addevent_date"
-        android:textColor="@color/Dark_Purple"
-        android:textColorHint="@color/Orchid_Pink"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_time"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,13 +89,11 @@
 
     <TextView
         android:id="@+id/addEvent_time"
+        android:theme="@style/standard_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/addEvent_date"
-        android:backgroundTint="@color/Tickle_me_Pink"
         android:hint="@string/addevent_hour"
-        android:textColor="@color/Dark_Purple"
-        android:textColorHint="@color/Orchid_Pink"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_location"
         app:layout_constraintEnd_toEndOf="@+id/addEvent_date"
@@ -106,14 +101,14 @@
 
     <EditText
         android:id="@+id/addEvent_location"
+        android:autofillHints=""
+        android:inputType="text"
+        android:theme="@style/standard_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addEvent_time"
-        android:backgroundTint="@color/Tickle_me_Pink"
         android:hint="@string/addevent_location"
         android:padding="12dp"
-        android:textColor="@color/Dark_Purple"
-        android:textColorHint="@color/Orchid_Pink"
         app:layout_constraintBottom_toTopOf="@+id/addEvent_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,13 +116,12 @@
 
     <Button
         android:id="@+id/addEvent_button"
+        android:theme="@style/standard_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addEvent_location"
-        android:backgroundTint="@color/French_Rose"
         android:padding="12dp"
         android:text="@string/addevent_buttonString"
-        android:textColor="@color/Seashell"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
