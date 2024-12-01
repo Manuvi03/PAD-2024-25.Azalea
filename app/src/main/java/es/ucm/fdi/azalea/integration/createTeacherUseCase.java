@@ -2,6 +2,9 @@ package es.ucm.fdi.azalea.integration;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import es.ucm.fdi.azalea.business.BusinessFactory;
 import es.ucm.fdi.azalea.business.model.ClassRoomModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
@@ -10,6 +13,7 @@ import es.ucm.fdi.azalea.business.model.UserModel;
 //esta clase tiene dos funciones una para autenticar al profesor y otra para crear la clase y el usuario en la base de datos
 public class createTeacherUseCase {
     private static String TAG = "createTeacherUseCase";
+    private final static List<String> asignaturas = new ArrayList<String>(List.of("Matemáticas","Física","Química","Lengua","Inglés","Biología"));
     public void createTeacher(UserModel data,String className, CallBack<Boolean> cb){
         //Esta funcion crea una cadena de llamadas, primero se registra el usuario en Auth de firebase, Segundo se crea la clase con el id de
         // firebaseAuth y Tercero se crea el Usuario en realtime database
@@ -64,6 +68,7 @@ public class createTeacherUseCase {
             ClassRoomModel new_class = new ClassRoomModel();
             new_class.setIdTeacher(data.getId());
             new_class.setName(className);
+            new_class.setSubjects(asignaturas);
             BusinessFactory.getInstance().getClassRoomRepository().create(new_class, new CallBack<ClassRoomModel>() {
                 @Override
                 public void onSuccess(Event.Success<ClassRoomModel> success) {

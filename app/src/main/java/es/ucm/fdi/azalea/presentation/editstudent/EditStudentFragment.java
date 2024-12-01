@@ -64,8 +64,11 @@ public class EditStudentFragment extends Fragment {
                 nombreEditText.setText(sm.getName());
                 apellidosEditText.setText(sm.getSurnames());
                 conMedEditText.setText(sm.getMedicalConditions());
-                telefaux1EditText.setText(sm.getParentsPhones().get(0));
-                telefaux2EditText.setText(sm.getParentsPhones().get(1));
+                if(sm.getParentsPhones() != null){
+                    telefaux1EditText.setText(sm.getParentsPhones().get(0));
+                    telefaux2EditText.setText(sm.getParentsPhones().get(1));
+                }
+
 
 
 
