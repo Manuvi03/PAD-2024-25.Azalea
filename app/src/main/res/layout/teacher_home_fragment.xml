@@ -9,14 +9,16 @@
     <!-- CalendarView -->
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/teacherhomefragment_calendarView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
         app:daysLabelsColor="@color/Dark_Purple"
         app:headerColor="@color/Cyclomen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:pagesColor="@color/Misty_Rose"
+        app:pagesColor="@color/Orchid_Pink"
         app:selectionColor="@color/French_Rose"
         app:selectionLabelColor="@color/Cyclomen"
         app:todayLabelColor="@color/Amaranth_Purple" />
