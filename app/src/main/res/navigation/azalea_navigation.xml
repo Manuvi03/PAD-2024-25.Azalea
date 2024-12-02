@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/azalea_navigation"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="es.ucm.fdi.azalea.presentation.login.MainActivity"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+
+    <fragment
+        android:id="@+id/password_recovery_fragment"
+        android:name="es.ucm.fdi.azalea.presentation.passwordrecovery.PasswordRecoveryFragment"
+        android:label="Password Recovery Fragment"
+        tools:layout="@layout/password_recovery_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/create_teacher_layout"
+        android:name="es.ucm.fdi.azalea.presentation.createteacher.CreateTeacherFragment"
+        android:label="Create Teacher Fragment"
+        tools:layout="@layout/create_teacher_fragment">
+    </fragment>
+
+    <activity
+        android:id="@+id/parentActivity2"
+        android:name="es.ucm.fdi.azalea.presentation.parent.ParentActivity"
+        android:label="ParentActivity"
+        tools:layout="@layout/parent_activity"
+        />
+
+    <activity
+        android:id="@+id/teacherActivity"
+        android:name="es.ucm.fdi.azalea.presentation.teacher.TeacherActivity"
+        android:label="teacher_activity"
+        tools:layout="@layout/teacher_activity" />
+
+    <fragment
+        android:id="@+id/parentHomeFragment"
+        android:name="es.ucm.fdi.azalea.presentation.parent.ParentHomeFragmentActivity"
+        android:label="Parent Home Fragment"
+        tools:layout="@layout/parent_home_fragment">
+        <action
+            android:id="@+id/action_parentHomeFragment_to_showGradesFragment3"
+            app:destination="@id/showGradesFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_chat_activity"
+            app:destination="@id/chat_activity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/classroomFragment"
+        android:name="es.ucm.fdi.azalea.presentation.classroom.ClassroomFragment"
+        android:label="Teacher Classroom Fragment"
+        tools:layout="@layout/teacher_classroom_fragment" >
+        <action
+            android:id="@+id/action_classroomFragment_to_editProfileFragment3"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_classroomFragment_to_studentFragment"
+            app:destination="@id/studentFragment" />
+        <action
+            android:id="@+id/action_classroomFragment_to_add_student_fragment"
+            app:destination="@id/add_student_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teacher_home_fragment"
+        android:name="es.ucm.fdi.azalea.presentation.teacher.TeacherHomeFragment"
+        android:label="Teacher Home Fragment"
+        tools:layout="@layout/teacher_home_fragment" >
+        <action
+            android:id="@+id/action_teacher_home_fragment_to_classroomFragment2"
+            app:destination="@id/classroomFragment" />
+        <action
+            android:id="@+id/action_teacher_home_fragment_to_modify_event_fragment"
+            app:destination="@id/modify_event_fragment" />
+        <action
+            android:id="@+id/action_teacher_home_fragment_to_add_event_fragment"
+            app:destination="@id/add_event_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="es.ucm.fdi.azalea.presentation.editprofile.EditProfileFragment"
+        android:label="Edit Profile Fragment"
+        tools:layout="@layout/edit_profile_fragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_teacher_home_fragment3"
+            app:destination="@id/teacher_home_fragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_parentHomeFragment2"
+            app:destination="@id/parentHomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showGradesFragment"
+        android:name="es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment"
+        android:label="show_grades_fragment"
+        tools:layout="@layout/show_grades_fragment" >
+        <action
+            android:id="@+id/action_showGradesFragment_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_event_fragment"
+        android:name="es.ucm.fdi.azalea.presentation.addevent.AddEventFragment"
+        android:label="Add Event Fragment"
+        tools:layout="@layout/add_event_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/modify_event_fragment"
+        android:name="es.ucm.fdi.azalea.presentation.modifyevent.ModifyEventFragment"
+        android:label="Modify Event Fragment"
+        tools:layout="@layout/modify_event_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_student_fragment"
+        android:name="es.ucm.fdi.azalea.presentation.addstudent.AddStudentFragment"
+        android:label="Add Student Fragment"
+        tools:layout="@layout/add_student_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/studentFragment"
+        android:name="es.ucm.fdi.azalea.presentation.student.StudentFragment"
+        android:label="student_fragment"
+        tools:layout="@layout/student_fragment" >
+        <action
+            android:id="@+id/action_studentFragment_to_teacher_editStudent_scrollView"
+            app:destination="@id/teacher_editStudent_scrollView" />
+        <action
+            android:id="@+id/action_studentFragment_to_gradeSubjectFragment"
+            app:destination="@id/gradeSubjectFragment" />
+        <action
+            android:id="@+id/action_studentFragment_to_chat_activity"
+            app:destination="@id/chat_activity" />
+        <action
+            android:id="@+id/action_studentFragment_to_showGradesFragment"
+            app:destination="@id/showGradesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/gradeSubjectFragment"
+        android:name="es.ucm.fdi.azalea.presentation.gradesubject.GradeSubjectFragment"
+        android:label="grade_subject_fragment"
+        tools:layout="@layout/grade_subject_fragment" />
+
+    <fragment
+        android:id="@+id/teacher_editStudent_scrollView"
+        android:name="es.ucm.fdi.azalea.presentation.editstudent.EditStudentFragment"
+        android:label="Edit Student Fragment"
+        tools:layout="@layout/edit_student_fragment">
+    </fragment>
+
+    <activity
+        android:id="@+id/chat_activity"
+        android:name="es.ucm.fdi.azalea.presentation.chat.chatActivity"
+        android:label="chatActivity"
+        tools:layout="@layout/chat_activity">
+    </activity>
+
+    <fragment
+        android:id="@+id/main"
+        android:name="es.ucm.fdi.azalea.presentation.login.LoginFragment"
+        android:label="Log In Fragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_main_to_password_recovery_fragment"
+            app:destination="@id/password_recovery_fragment" />
+        <action
+            android:id="@+id/action_main_to_create_teacher_layout"
+            app:destination="@id/create_teacher_layout" />
+        <action
+            android:id="@+id/action_main_to_teacher_home_fragment"
+            app:destination="@id/teacher_home_fragment" />
+        <action
+            android:id="@+id/action_main_to_parentHomeFragment"
+            app:destination="@id/parentHomeFragment" />
+    </fragment>
+
+</navigation>
