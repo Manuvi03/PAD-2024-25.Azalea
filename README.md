@@ -45,6 +45,7 @@
 ---
 
 ### 👩🏻‍💻 **Tecnologías** 👩🏻‍💻
+- **Entorno de desarrollo**: ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84?style=flat&logo=AndroidStudio&logoColor=white)
 - **FrontEnd**: ![XML](https://img.shields.io/badge/XML-767C52?logo=xml&logoColor=fff)
 - **BackEnd**: ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 - **Base de Datos**: ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
