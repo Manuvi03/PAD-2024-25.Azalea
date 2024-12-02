@@ -9,21 +9,44 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import es.ucm.fdi.azalea.business.model.EventModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.GetEventsForDateUseCase;
 import es.ucm.fdi.azalea.integration.GetEventsFromClassroomUseCase;
+import es.ucm.fdi.azalea.integration.getCurrUserUseCase;
 
 public class ParentHomeFragmentViewModel extends ViewModel{
 
     private final String TAG = "ParentHomeFragmentViewModel";
     private final GetEventsForDateUseCase getEventsForDateUseCase;
     private final GetEventsFromClassroomUseCase getEventsFromClassroom;
+    private final getCurrUserUseCase getCurrUser;
     private final MutableLiveData<Event<List<EventModel>>> eventsDate = new MutableLiveData<>();
     private final MutableLiveData<Event<List<EventModel>>> eventsClassroom = new MutableLiveData<>();
+    private final MutableLiveData<Event<UserModel>> parentClassroom = new MutableLiveData<>();
+
     public ParentHomeFragmentViewModel() {
         this.getEventsForDateUseCase = new GetEventsForDateUseCase();
         this.getEventsFromClassroom = new GetEventsFromClassroomUseCase();
+        this.getCurrUser = new getCurrUserUseCase();
+    }
+
+    public LiveData<Event<UserModel>> getParentForClassroomLiveData(){return parentClassroom;}
+
+    public void getParentForClassroom(){
+        Log.i(TAG, "getParentForClassroom");
+        getCurrUser.getCurrentUser(new CallBack<UserModel>() {
+            @Override
+            public void onSuccess(Event.Success<UserModel> success) {
+                parentClassroom.postValue(success);
+            }
+
+            @Override
+            public void onError(Event.Error<UserModel> error) {
+                parentClassroom.postValue(error);
+            }
+        });
     }
 
     public LiveData<Event<List<EventModel>>>getEventsForDateLiveData() {

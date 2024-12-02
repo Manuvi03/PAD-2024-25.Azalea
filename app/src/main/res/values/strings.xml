@@ -214,5 +214,6 @@
     <string name="back_button_desc">Botón para volver atrás</string>
     <string name="hint_message_input">Escribe aquí el mensaje</string>
     <string name="send_message">Botón para enviar mensajes</string>
+    <string name="parent_home_fragment_button">Abrir Chat</string>
 
 </resources>

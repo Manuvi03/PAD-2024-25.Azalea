@@ -23,8 +23,6 @@
         app:selectionLabelColor="@color/Cyclomen"
         app:todayLabelColor="@color/Amaranth_Purple" />
 
-    <!-- TextField and Button (on the same horizontal line) -->
-
     <TextView
         android:id="@+id/teacherhomefragment_textResult"
         android:layout_width="0dp"

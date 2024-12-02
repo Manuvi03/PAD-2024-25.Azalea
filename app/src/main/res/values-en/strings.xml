@@ -199,6 +199,7 @@
     <string name="back_button_desc">Button to go back</string>
     <string name="hint_message_input">Write message here</string>
     <string name="send_message">Button to send messages</string>
+    <string name="parent_home_fragment_button">Open Chat</string>
 
 
 </resources>

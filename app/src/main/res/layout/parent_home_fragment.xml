@@ -32,16 +32,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parenthomefragment_textResult"
+        app:layout_constraintTop_toBottomOf="@+id/parenthomefragment_buttonChat"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/parenthomefragment_textResult"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/parent_recyclerView_result"
         android:textColor="@color/Licorice"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/parenthomefragment_recyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/parenthomefragment_buttonChat"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parenthomefragment_calendarView"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/parenthomefragment_buttonChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parent_home_fragment_button"
+        android:backgroundTint="@color/Amaranth_Purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/parenthomefragment_textResult"
         app:layout_constraintTop_toBottomOf="@+id/parenthomefragment_calendarView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

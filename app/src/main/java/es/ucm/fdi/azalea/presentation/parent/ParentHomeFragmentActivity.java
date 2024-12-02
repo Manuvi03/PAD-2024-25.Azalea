@@ -1,6 +1,7 @@
 package es.ucm.fdi.azalea.presentation.parent;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -30,7 +32,9 @@ import org.threeten.bp.format.DateTimeFormatter;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.EventModel;
+import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.presentation.chat.chatActivity;
 
 public class ParentHomeFragmentActivity extends Fragment  {
 
@@ -98,6 +102,24 @@ public class ParentHomeFragmentActivity extends Fragment  {
 
         parentHomeFragmentViewModel.getEventsForDate(formattedDate);
 
+        MaterialButton chatButton = view.findViewById(R.id.parenthomefragment_buttonChat);
+        chatButton.setOnClickListener(v -> {
+            parentHomeFragmentViewModel.getParentForClassroom();
+            parentHomeFragmentViewModel.getParentForClassroomLiveData().observe(getViewLifecycleOwner(), parent -> {
+                if (parent instanceof Event.Success) {
+                    UserModel parentInfo = ((Event.Success<UserModel>) parent).getData();
+                    Intent intent = new Intent(getActivity(), chatActivity.class);
+                    intent.putExtra("classId", parentInfo.getClassId());
+                    intent.putExtra("parentId", parentInfo.getId());
+                    intent.putExtra("parentName", parentInfo.getName());
+                    startActivity(intent);
+                }
+            });
+
+        });
+
+
+
         return view;
     }
 
@@ -152,7 +174,7 @@ public class ParentHomeFragmentActivity extends Fragment  {
             }
         }
 
-        selectedDay.setBackgroundResource(R.drawable.baseline_circle_24); // Asegúrate de tener un drawable llamado circle_background
+        selectedDay.setBackgroundResource(R.drawable.baseline_circle_24);
         List<CalendarDay> selectedDays = new ArrayList<>(eventDays); // Copiar los días con eventos
         selectedDays.add(selectedDay); // Añadir el día seleccionado
         calendarView.setCalendarDays(selectedDays);
