@@ -110,6 +110,8 @@
     <string name="login_create_teacher_text">Don\'t have a teacher account?</string>
     <string name="login_create_button">Create</string>
     <string name="login_error">Failed to log in, incorrect username or password</string>
+    <string name="conexion_perdida">Connection lost</string>
+    <string name="conexion_recuperada">Connection available</string>
 
     <!--Parent-->
     <string name="modifyevent_toastCorrect">Event modified successfully</string>

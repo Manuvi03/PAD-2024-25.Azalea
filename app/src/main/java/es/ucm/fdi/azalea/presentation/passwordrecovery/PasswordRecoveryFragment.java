@@ -32,7 +32,7 @@ public class PasswordRecoveryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = PasswordRecoveryFragmentBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
-        viewModel = new ViewModelProvider(requireActivity()).get(PasswordRecoveryViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PasswordRecoveryViewModel.class);
         mailEditText = binding.editTextTextEmailAddress;
         recoveryButton = binding.passwordRecoveryButton;
 

@@ -1,11 +1,21 @@
  package es.ucm.fdi.azalea.presentation.login;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -26,14 +36,7 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
 
      private final static String TAG = "MainActivity";
 
-     private LoginViewModel loginViewModel;
-
-
-     private EditText mailEditText;
-     private EditText passwordEditText;
-     private Button loginButton;
-     private TextView recoverPasswordText;
-     private Button createTeacherButton;
+     private boolean previousNetworkUpdate = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,23 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
             return insets;
         });
 
-//        Intent in = new Intent(this, TeacherActivity.class);
-//        startActivity(in);
+
 
         FirebaseApp.initializeApp(this);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Log.d(TAG, "onCreate: ");
         AndroidThreeTen.init(this); //inicializacion de la libreria de fecha
 
+
+
+        if (!Settings.System.canWrite(this)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
+        }
+
+        if(Settings.System.canWrite(this))
+            setupNetwork();
         // restaura el fragmento que estaba activo antes de cambiar de configuracion
         if (savedInstanceState != null) {
             Fragment restoredFragment = getSupportFragmentManager().getFragment(savedInstanceState, "currentFragment");
@@ -64,6 +76,7 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
                         .commit();
             }
         }
+
         else replaceFragment(LoginFragment.class);
 
 
@@ -77,6 +90,62 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
              getSupportFragmentManager().putFragment(outState, "currentFragment", currentFragment);
          }
      }
+     private void setupNetwork(){
+         NetworkRequest networkRequest = new NetworkRequest.Builder().addCapability(
+                 NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                         .build();
+         ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
+             @Override
+             public void onAvailable(@NonNull Network network) {
+                 super.onAvailable(network);
+                 Log.d(TAG,"Hay conexion");
+                 toggleNoInternetBar(true);
+
+             }
+
+             @Override
+             public void onLost(@NonNull Network network) {
+                 super.onLost(network);
+                 Log.d(TAG,"no hay conexion");
+                 toggleNoInternetBar(false);
+             }
+
+             @Override
+             public void onCapabilitiesChanged(@NonNull Network network, @NonNull NetworkCapabilities networkCapabilities) {
+                 super.onCapabilitiesChanged(network, networkCapabilities);
+                 final boolean unmetered = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
+             }
+         };
+
+         ConnectivityManager connectivityManager =
+                 (ConnectivityManager) getSystemService(ConnectivityManager.class);
+         connectivityManager.requestNetwork(networkRequest, networkCallback);
+     }
+
+     private void toggleNoInternetBar(boolean display){
+         if (display) {
+
+             runOnUiThread(() -> {
+                 // Actualiza la UI o realiza las acciones necesarias
+                 if(!previousNetworkUpdate){
+                     Toast.makeText(MainActivity.this, R.string.conexion_recuperada, Toast.LENGTH_SHORT).show();
+                 }
+                 previousNetworkUpdate = true;
+
+             });
+
+         } else {
+
+
+             runOnUiThread(() -> {
+                 Toast.makeText(this, R.string.conexion_perdida, Toast.LENGTH_SHORT).show();
+                 previousNetworkUpdate = false;
+             });
+         }
+
+     }
+
+
      private void replaceFragment(Class<? extends androidx.fragment.app.Fragment> c){
          getSupportFragmentManager().beginTransaction()
                  .setReorderingAllowed(true)
