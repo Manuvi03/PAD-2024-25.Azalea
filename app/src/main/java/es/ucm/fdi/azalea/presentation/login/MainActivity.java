@@ -82,7 +82,7 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
 
         else replaceFragment(LoginFragment.class);
 
-        generateFCMTokenFirst();
+        //generateFCMTokenFirst();
     }
      @Override
      protected void onSaveInstanceState(@NonNull Bundle outState) {

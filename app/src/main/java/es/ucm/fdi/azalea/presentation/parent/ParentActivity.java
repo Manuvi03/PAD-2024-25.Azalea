@@ -85,7 +85,7 @@ public class ParentActivity extends AppCompatActivity {
             return true;
         });
 
-        updateToken();
+        //updateToken();
     }
 
     private void updateToken() {

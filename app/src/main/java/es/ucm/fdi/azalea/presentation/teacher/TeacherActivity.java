@@ -74,7 +74,7 @@ public class TeacherActivity extends AppCompatActivity {
             return true;
         });
 
-        updateToken();
+      //  updateToken();
     }
 
     private void updateToken() {
