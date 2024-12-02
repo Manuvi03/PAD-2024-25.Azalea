@@ -208,4 +208,9 @@
     <string name="add_student_toast_class_error">No se ha podido acceder a la clase del usuario actual</string>
     <string name="add_student_toast_success">Estudiante creado con éxito</string>
 
+    <!-- Chat -->
+    <string name="back_button_desc">Botón para volver atrás</string>
+    <string name="hint_message_input">Escribe aquí el mensaje</string>
+    <string name="send_message">Botón para enviar mensajes</string>
+
 </resources>

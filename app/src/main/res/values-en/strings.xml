@@ -193,5 +193,10 @@
     <string name="add_student_toast_success">Student created successfully</string>
     <string name="add_parent_gender_hint">*Gender</string>
 
+    <!-- Chat -->
+    <string name="back_button_desc">Button to go back</string>
+    <string name="hint_message_input">Write message here</string>
+    <string name="send_message">Button to send messages</string>
+
 
 </resources>
