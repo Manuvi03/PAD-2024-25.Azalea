@@ -1,6 +1,6 @@
 # 🌸**AZALEA**🌸
 ---
-<p align="center", width="250", height="250">
+<p align="center", width="50", height="50">
   <img src="https://github.com/Manuvi03/PAD-2024-25.Azalea/blob/develop/app/src/main/res/drawable/logo.png" alt="Logo de Azalea"/>
 </p>
 
