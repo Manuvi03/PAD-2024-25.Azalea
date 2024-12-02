@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import es.ucm.fdi.azalea.R;
 import es.ucm.fdi.azalea.business.model.UserModel;
@@ -22,6 +23,7 @@ import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.presentation.editprofile.EditProfileFragment;
 import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesFragment;
 import es.ucm.fdi.azalea.presentation.showgrades.ShowGradesViewModel;
+import es.ucm.fdi.azalea.presentation.teacher.TeacherViewModel;
 
 public class ParentActivity extends AppCompatActivity {
 
@@ -81,6 +83,19 @@ public class ParentActivity extends AppCompatActivity {
                 replaceFragment(EditProfileFragment.class);
             }
             return true;
+        });
+
+        updateToken();
+    }
+
+    private void updateToken() {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                String token = task.getResult();
+                Log.i("IDTOKEN", token);
+                ParentViewModel parentViewModel = new ParentViewModel();
+                parentViewModel.updateToken(token);
+            }
         });
     }
 
