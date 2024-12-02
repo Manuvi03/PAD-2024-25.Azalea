@@ -15,6 +15,7 @@ import es.ucm.fdi.azalea.integration.ChatUseCase;
 import es.ucm.fdi.azalea.integration.Event;
 import es.ucm.fdi.azalea.integration.ReadMessagesByChatUseCase;
 import es.ucm.fdi.azalea.integration.CreateMessageUseCase;
+import es.ucm.fdi.azalea.integration.SendNotificationUseCase;
 
 public class chatViewModel extends ViewModel {
 
@@ -22,11 +23,13 @@ public class chatViewModel extends ViewModel {
     private MutableLiveData<Event<ChatModel>> chatState;
     private MutableLiveData<Event<MessageModel>> messageState;
     private MutableLiveData<Event<List<MessageModel>>> messagesListState;
+    private MutableLiveData<Event<Boolean>> notificationState;
 
     public chatViewModel(){
         this.chatState = new MutableLiveData<>();
         this.messageState = new MutableLiveData<>();
         this.messagesListState = new MutableLiveData<>();
+        this.notificationState = new MutableLiveData<>();
     }
 
     public LiveData<Event<ChatModel>> getChatsState(){
@@ -85,6 +88,7 @@ public class chatViewModel extends ViewModel {
             @Override
             public void onSuccess(Event.Success<MessageModel> success) {
                 messageState.postValue(success);
+                sendNotification(chatId, success.getData());
             }
 
             @Override
@@ -92,6 +96,26 @@ public class chatViewModel extends ViewModel {
                 messageState.postValue(error);
             }
         });
+
+    }
+
+    private void sendNotification(String chatId, MessageModel model) {
+        notificationState.postValue(new Event.Loading<>());
+
+        SendNotificationUseCase sendNotificationUseCase = new SendNotificationUseCase();
+
+        sendNotificationUseCase.execute(chatId, model, new CallBack<Boolean>() {
+            @Override
+            public void onSuccess(Event.Success<Boolean> success) {
+                notificationState.postValue(success);
+            }
+
+            @Override
+            public void onError(Event.Error<Boolean> error) {
+                notificationState.postValue(error);
+            }
+        });
+
 
     }
 

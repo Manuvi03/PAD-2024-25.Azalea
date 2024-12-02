@@ -38,4 +38,7 @@ public class TokenRepositoryImp implements TokenRepository {
             cb.onError(new Event.Error<>(e));
         });
     }
+
+    @Override
+    public void readByUserId(String idToSend, CallBack<TokenModel> tokenModelCallBack) {}
 }

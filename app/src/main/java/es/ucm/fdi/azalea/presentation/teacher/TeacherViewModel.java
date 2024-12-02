@@ -2,10 +2,8 @@ package es.ucm.fdi.azalea.presentation.teacher;
 
 import androidx.lifecycle.MutableLiveData;
 
-import es.ucm.fdi.azalea.business.model.TokenModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
-import es.ucm.fdi.azalea.integration.ReadTokenUseCase;
 import es.ucm.fdi.azalea.integration.UpdateTokenUseCase;
 
 
