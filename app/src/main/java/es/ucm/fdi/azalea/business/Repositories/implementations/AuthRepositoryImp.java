@@ -16,10 +16,19 @@ import es.ucm.fdi.azalea.integration.Event;
 
 public class AuthRepositoryImp implements AuthRepository {
     private static String TAG = "AuthRepository";
+    private FirebaseAuth instance;
 
+    public AuthRepositoryImp(){
+        instance = FirebaseAuth.getInstance();
+    }
+
+    //Constructor implementado para poder hacer pruebas con Mockito
+    public AuthRepositoryImp(FirebaseAuth firebaseAuth){
+        instance = firebaseAuth;
+    }
 
     public void login(String mail, String password, CallBack<UserModel> cb){
-       FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password).addOnCompleteListener(task ->{
+        instance.signInWithEmailAndPassword(mail,password).addOnCompleteListener(task ->{
            try{
             if(task.isSuccessful()){
                 Log.d(TAG,"Se ha podido hacer el log In con el usuario " +
@@ -45,7 +54,7 @@ public class AuthRepositoryImp implements AuthRepository {
     }
 
     public void register(String mail, String password, CallBack<UserModel> cb){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail,password).addOnCompleteListener(task -> {
+        instance.createUserWithEmailAndPassword(mail,password).addOnCompleteListener(task -> {
             try{
                 UserModel data = new UserModel();
                 if(task.isSuccessful()){
@@ -68,7 +77,7 @@ public class AuthRepositoryImp implements AuthRepository {
 
     public void updateCurrUserMail(String mail, CallBack<Boolean> cb){
         try{
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseUser user = instance.getCurrentUser();
 
             user.updateEmail(mail)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -91,7 +100,7 @@ public class AuthRepositoryImp implements AuthRepository {
 
     public void sendUpdatePasswordMail(String mail, CallBack<Boolean> cb){
         try{
-            FirebaseAuth.getInstance().sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            instance.sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
@@ -108,7 +117,7 @@ public class AuthRepositoryImp implements AuthRepository {
 
     public void updateCurrUserPassword(String password,CallBack<Boolean> cb){
         try{
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseUser user = instance.getCurrentUser();
 
             user.updatePassword(password)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -129,7 +138,7 @@ public class AuthRepositoryImp implements AuthRepository {
 
     public void getCurrUser(CallBack<FirebaseUser> cb){
         try {
-            FirebaseUser user_auth = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseUser user_auth = instance.getCurrentUser();
             if(user_auth == null){
                 cb.onError(new Event.Error<>());
             }else{
@@ -143,7 +152,7 @@ public class AuthRepositoryImp implements AuthRepository {
 
     public void logout(){
         try{
-            FirebaseAuth.getInstance().signOut();
+            instance.signOut();
         }catch (Exception e){
             e.printStackTrace();
         }
