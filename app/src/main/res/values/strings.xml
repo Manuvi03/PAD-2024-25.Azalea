@@ -215,5 +215,6 @@
     <string name="hint_message_input">Escribe aquí el mensaje</string>
     <string name="send_message">Botón para enviar mensajes</string>
     <string name="parent_home_fragment_button">Abrir Chat</string>
+    <string name="parent_no_chat">No se puede entrar al chat con el profesor</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ import es.ucm.fdi.azalea.presentation.chat.chatActivity;
 
 public class ParentHomeFragmentActivity extends Fragment  {
 
+    private UserModel parentInfo;
     private ParentHomeFragmentViewModel parentHomeFragmentViewModel;
     private EventsParentAdapter adapter;
     private TextView resultText;
@@ -103,18 +105,25 @@ public class ParentHomeFragmentActivity extends Fragment  {
         parentHomeFragmentViewModel.getEventsForDate(formattedDate);
 
         MaterialButton chatButton = view.findViewById(R.id.parenthomefragment_buttonChat);
+        parentHomeFragmentViewModel.getParentForClassroom();
+        parentHomeFragmentViewModel.getParentForClassroomLiveData().observe(getViewLifecycleOwner(), parent -> {
+            if (parent instanceof Event.Success) {
+                parentInfo = ((Event.Success<UserModel>) parent).getData();
+            }
+        });
+
+
         chatButton.setOnClickListener(v -> {
-            parentHomeFragmentViewModel.getParentForClassroom();
-            parentHomeFragmentViewModel.getParentForClassroomLiveData().observe(getViewLifecycleOwner(), parent -> {
-                if (parent instanceof Event.Success) {
-                    UserModel parentInfo = ((Event.Success<UserModel>) parent).getData();
+            if(parentInfo!=null){
                     Intent intent = new Intent(getActivity(), chatActivity.class);
                     intent.putExtra("classId", parentInfo.getClassId());
                     intent.putExtra("parentId", parentInfo.getId());
                     intent.putExtra("parentName", parentInfo.getName());
                     startActivity(intent);
-                }
-            });
+            }
+            else{
+                Toast.makeText(getActivity(), R.string.parent_no_chat, Toast.LENGTH_SHORT).show();
+            }
 
         });
 

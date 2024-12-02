@@ -200,6 +200,7 @@
     <string name="hint_message_input">Write message here</string>
     <string name="send_message">Button to send messages</string>
     <string name="parent_home_fragment_button">Open Chat</string>
+    <string name="parent_no_chat">Can\'t enter the chat with the teacher</string>
 
 
 </resources>
