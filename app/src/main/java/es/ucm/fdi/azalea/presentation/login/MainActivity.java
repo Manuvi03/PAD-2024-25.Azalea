@@ -1,6 +1,8 @@
  package es.ucm.fdi.azalea.presentation.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -27,6 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import es.ucm.fdi.azalea.R;
@@ -79,7 +82,7 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
 
         else replaceFragment(LoginFragment.class);
 
-
+        generateFCMTokenFirst();
     }
      @Override
      protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -153,6 +156,32 @@ import es.ucm.fdi.azalea.presentation.teacher.TeacherActivity;
 
      }
 
+    private void generateFCMTokenFirst() { //TODO si da tiempo preguntar aqui tambien por activar las notis
+        //SharedPreferences preferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
 
+        //Devuelve true si ya existe lo q se esta buscando
+        //boolean tokenGenerated = preferences.getBoolean("tokenGenerated", false);
+
+        //if(!tokenGenerated){
+            FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("FCM", "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+
+                    // Obtener el token generado
+                    String token = task.getResult();
+                    Log.d("IDTOKEN", "Token generado: " + token);
+
+                    // Aquí creamos la instancia del token en la RTDB
+                    LoginViewModel loginViewModel = new LoginViewModel();
+
+                    loginViewModel.createToken(token);
+
+                });
+
+
+    }
 
  }

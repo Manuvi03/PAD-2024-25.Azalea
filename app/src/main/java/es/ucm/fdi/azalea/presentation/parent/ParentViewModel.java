@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import es.ucm.fdi.azalea.business.model.UserModel;
 import es.ucm.fdi.azalea.integration.CallBack;
 import es.ucm.fdi.azalea.integration.Event;
+import es.ucm.fdi.azalea.integration.UpdateTokenUseCase;
 import es.ucm.fdi.azalea.integration.getCurrUserUseCase;
 
 public class ParentViewModel extends ViewModel {
@@ -17,6 +18,8 @@ public class ParentViewModel extends ViewModel {
 
     // atributo con la info del usuario actual que maneja el viewmodel
     private MutableLiveData<Event<UserModel>> userState = new MutableLiveData<>();
+    private MutableLiveData<Event<Boolean>> updateDataEvent = new MutableLiveData<>();
+    private UpdateTokenUseCase updateUsecase = new UpdateTokenUseCase();
 
     // devuelve un objeto inmodificable de la informacion sobre el usuario actual
     public LiveData<Event<UserModel>> getUserState(){
@@ -51,5 +54,19 @@ public class ParentViewModel extends ViewModel {
         });
     }
 
+    public void updateToken(String token) {
+        updateDataEvent.postValue(new Event.Loading<>());
+        updateUsecase.updateToken(token, new CallBack<Boolean>() {
+            @Override
+            public void onSuccess(Event.Success<Boolean> success) {
+                updateDataEvent.postValue(success);
+            }
+
+            @Override
+            public void onError(Event.Error<Boolean> error) {
+                updateDataEvent.postValue(error);
+            }
+        });
+    }
 }
 

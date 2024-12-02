@@ -74,10 +74,16 @@ public class TeacherActivity extends AppCompatActivity {
             return true;
         });
 
+        updateToken();
+    }
+
+    private void updateToken() {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 String token = task.getResult();
                 Log.i("IDTOKEN", token);
+                TeacherViewModel teacherViewModel = new TeacherViewModel();
+                teacherViewModel.updateToken(token);
             }
         });
     }
