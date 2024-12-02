@@ -82,7 +82,8 @@ public class EditStudentFragment extends Fragment {
                 conMedEditText.setText(sm.getMedicalConditions());
                 if(sm.getParentsPhones() != null){
                     telefaux1EditText.setText(sm.getParentsPhones().get(0));
-                    telefaux2EditText.setText(sm.getParentsPhones().get(1));
+                    if(sm.getParentsPhones().size() == 2)
+                        telefaux2EditText.setText(sm.getParentsPhones().get(1));
                 }
 
 
